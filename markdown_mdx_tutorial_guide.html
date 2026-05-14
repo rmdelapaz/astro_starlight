@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown and MDX Tutorial Guide</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Markdown and MDX Tutorial Guide</h1>
+    <p>A beginner-friendly guide to writing Markdown and MDX for lessons, documentation, world bible pages, and Astro/Starlight projects.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+      <p>This guide explains two related writing formats:</p>
+      <ul>
+        <li><strong>Markdown</strong>, often saved as <code>.md</code>, is a simple way to write formatted text using plain-text symbols.</li>
+        <li><strong>MDX</strong>, often saved as <code>.mdx</code>, is Markdown plus the ability to use components and JavaScript-style expressions.</li>
+      </ul>
+      <p>For Astro and Starlight projects, Markdown is usually best for normal pages. MDX is best when a page needs reusable visual components, interactive examples, cards, callouts, diagrams, or custom layouts.</p>
+    </section>
+
+    <section>
+      <h2>The Big Picture</h2>
+      <p>Think of Markdown as a clean notebook format. You write headings, paragraphs, links, images, lists, and code examples without needing to write full HTML.</p>
+      <pre><code>Markdown file
+  ↓
+Astro or Starlight processes it
+  ↓
+Website page is generated</code></pre>
+      <p>MDX adds one extra power: it lets your writing use components.</p>
+      <pre><code>MDX file
+  ↓
+Markdown text + imported components
+  ↓
+Astro or Starlight processes it
+  ↓
+Richer website page is generated</code></pre>
+    </section>
+
+    <section>
+      <h2>Markdown in Simple Terms</h2>
+      <p>Markdown is a lightweight writing syntax. Instead of writing this:</p>
+      <pre><code>&amp;lt;h2&amp;gt;Character Background&amp;lt;/h2&amp;gt;
+&amp;lt;p&amp;gt;Aurelian was raised far from the royal court.&amp;lt;/p&amp;gt;</code></pre>
+      <p>You can write this:</p>
+      <pre><code>## Character Background
+
+Aurelian was raised far from the royal court.</code></pre>
+      <p>Markdown is easier to read, easier to write, and easier to maintain when you are creating lots of content pages.</p>
+    </section>
+
+    <section>
+      <h2>Markdown Headings</h2>
+      <p>Headings are created with <code>#</code> symbols.</p>
+      <pre><code># Page Title
+
+## Major Section
+
+### Smaller Section
+
+#### Even Smaller Section</code></pre>
+      <p>Use headings like an outline. A page should usually have one main title, then organized sections below it.</p>
+    </section>
+
+    <section>
+      <h2>Paragraphs</h2>
+      <p>Paragraphs are just plain text. Leave a blank line between paragraphs.</p>
+      <pre><code>This is the first paragraph.
+
+This is the second paragraph.</code></pre>
+      <p>Do not indent normal paragraphs unless you intentionally want a code block.</p>
+    </section>
+
+    <section>
+      <h2>Bold, Italic, and Inline Code</h2>
+      <pre><code>**bold text**
+
+*italic text*
+
+`inline code`</code></pre>
+      <p>Rendered result:</p>
+      <ul>
+        <li><strong>bold text</strong></li>
+        <li><em>italic text</em></li>
+        <li><code>inline code</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Lists</h2>
+      <p>Use hyphens for unordered lists.</p>
+      <pre><code>- Geography
+- Government
+- Economy
+- Military
+- Transnational Issues</code></pre>
+      <p>Use numbers for ordered lists.</p>
+      <pre><code>1. Create the project.
+2. Add Starlight.
+3. Write Markdown pages.
+4. Build the site.
+5. Deploy the site.</code></pre>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <p>Markdown links use this pattern:</p>
+      <pre><code>[link text](destination)</code></pre>
+      <p>Example:</p>
+      <pre><code>[Astro Documentation](https://docs.astro.build)</code></pre>
+      <p>For internal Starlight pages, you might write:</p>
+      <pre><code>[Character Template](/worldbuilding/templates/character/)</code></pre>
+    </section>
+
+    <section>
+      <h2>Images</h2>
+      <p>Markdown images look like links with an exclamation mark at the beginning.</p>
+      <pre><code>![Map of the eastern seaboard](/images/eastern-seaboard-map.png)</code></pre>
+      <p>The text inside the brackets is alt text. It describes the image for accessibility and for cases where the image does not load.</p>
+    </section>
+
+    <section>
+      <h2>Code Blocks</h2>
+      <p>Use triple backticks for code blocks. You can name the language after the opening backticks.</p>
+      <pre><code>```js
+const siteName = "World Bible";
+console.log(siteName);
+```</code></pre>
+      <p>In an HTML tutorial file like this one, the backtick example is shown as text. In a real Markdown file, the code block would render with formatting.</p>
+    </section>
+
+    <section>
+      <h2>Blockquotes</h2>
+      <p>Use <code>&amp;gt;</code> for quoted or highlighted text.</p>
+      <pre><code>&gt; A world bible is not only a lore archive. It is a continuity tool.</code></pre>
+      <p>This is useful for key ideas, definitions, warnings, or memorable principles.</p>
+    </section>
+
+    <section>
+      <h2>Tables</h2>
+      <p>Markdown tables are useful for compact reference information.</p>
+      <pre><code>| Field | Example |
+|---|---|
+| Name | Veritas Miraculo |
+| Role | Rival heir apparent |
+| Region | Europe |
+| Status | Active |</code></pre>
+      <p>Tables are good for summaries, but long prose should usually stay in normal sections.</p>
+    </section>
+
+    <section>
+      <h2>Frontmatter</h2>
+      <p>Frontmatter is a YAML block at the top of a Markdown or MDX file. Astro and Starlight use it as page metadata.</p>
+      <pre><code>---
+title: "Character Sheet Template"
+description: "A reusable RPG-style character profile format"
+tags:
+  - characters
+  - worldbuilding
+  - template
+---</code></pre>
+      <p>The frontmatter describes the page. The Markdown below it becomes the visible page content.</p>
+      <pre><code>---
+title: "Character Sheet Template"
+---
+
+# Character Sheet Template
+
+## Identity
+
+## Attributes
+
+## Relationships</code></pre>
+    </section>
+
+    <section>
+      <h2>Markdown for a Lesson Page</h2>
+      <p>A lesson page can use frontmatter for course information and Markdown for the lesson body.</p>
+      <pre><code>---
+title: "Introduction to Deployment"
+description: "A beginner lesson on publishing web projects"
+course: "Web Development"
+level: "Beginner"
+order: 1
+---
+
+# Introduction to Deployment
+
+## What You Are Learning
+
+Deployment means putting your project online.
+
+## Why This Matters
+
+A project is not very useful if no one can visit it.
+
+## Practice Exercise
+
+Deploy a basic HTML page.</code></pre>
+    </section>
+
+    <section>
+      <h2>Markdown for a World Bible Page</h2>
+      <p>A world bible page can use frontmatter to identify the type of entry, then use Markdown sections for the content.</p>
+      <pre><code>---
+title: "New York Harbor, 2175"
+type: "location"
+region: "Atlantic Compact"
+tags:
+  - city
+  - harbor
+  - transportation
+---
+
+# New York Harbor, 2175
+
+## Overview
+
+## Historical Context
+
+## Political Importance
+
+## Technology Level
+
+## Story Hooks</code></pre>
+    </section>
+
+    <section>
+      <h2>Markdown for an RPG-Style Character Sheet</h2>
+      <p>For characters, use frontmatter for structured information and Markdown for detailed explanation.</p>
+      <pre><code>---
+title: "Example Character"
+type: "character"
+species: "Human"
+role: "Investigator"
+faction: "Independent"
+attributes:
+  strength: 10
+  dexterity: 13
+  constitution: 12
+  intelligence: 16
+  wisdom: 14
+  charisma: 11
+skills:
+  - Investigation
+  - Diplomacy
+  - Technology
+status: "Active"
+---
+
+# Example Character
+
+## Identity
+
+## Background
+
+## Personality
+
+## Goals
+
+## Flaws
+
+## Relationships
+
+## Story Arc</code></pre>
+    </section>
+
+    <section>
+      <h2>What MDX Adds</h2>
+      <p>MDX is like Markdown with a toolbox attached. In normal Markdown, you mostly write text. In MDX, you can also import and use components.</p>
+      <pre><code>---
+title: "Character Page with a Stat Card"
+---
+
+import CharacterStats from "../../components/CharacterStats.astro";
+
+# Veritas Miraculo
+
+&lt;CharacterStats
+  strength={10}
+  dexterity={14}
+  constitution={12}
+  intelligence={16}
+  wisdom={15}
+  charisma={18}
+/&gt;
+
+## Background
+
+Veritas is publicly cultured and privately ruthless.</code></pre>
+      <p>This lets you mix prose with reusable interface pieces.</p>
+    </section>
+
+    <section>
+      <h2>When to Use Markdown vs MDX</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Need</th>
+            <th>Use</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Simple article or lesson</td>
+            <td><code>.md</code></td>
+            <td>Cleaner and easier to maintain</td>
+          </tr>
+          <tr>
+            <td>World bible reference page</td>
+            <td><code>.md</code></td>
+            <td>Mostly structured writing</td>
+          </tr>
+          <tr>
+            <td>Page with custom cards</td>
+            <td><code>.mdx</code></td>
+            <td>Needs components</td>
+          </tr>
+          <tr>
+            <td>Interactive example</td>
+            <td><code>.mdx</code></td>
+            <td>Can use UI components</td>
+          </tr>
+          <tr>
+            <td>Reusable quiz or widget</td>
+            <td><code>.mdx</code></td>
+            <td>Component-based page content</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Installing MDX in Astro</h2>
+      <p>Astro supports Markdown by default. MDX is added as an integration.</p>
+      <pre><code>npx astro add mdx</code></pre>
+      <p>After that, you can create files ending in <code>.mdx</code> and use MDX features. Astro's official MDX integration supports frontmatter and lets MDX files import Astro components and UI framework components.</p>
+    </section>
+
+    <section>
+      <h2>MDX Component Example</h2>
+      <p>Imagine you have this Astro component:</p>
+      <pre><code>// src/components/InfoBox.astro
+---
+const { title } = Astro.props;
+---
+
+&lt;aside class="info-box"&gt;
+  &lt;h2&gt;{title}&lt;/h2&gt;
+  &lt;slot /&gt;
+&lt;/aside&gt;</code></pre>
+      <p>You could use it in an MDX file like this:</p>
+      <pre><code>---
+title: "Using Info Boxes"
+---
+
+import InfoBox from "../../components/InfoBox.astro";
+
+# Using Info Boxes
+
+&lt;InfoBox title="Remember"&gt;
+Markdown is for writing. MDX is for writing plus components.
+&lt;/InfoBox&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>MDX Expressions</h2>
+      <p>MDX can use JavaScript-style expressions inside curly braces.</p>
+      <pre><code>export const characterName = "Aurelian Rassendyll";
+
+# {characterName}
+
+This page is about {characterName}.</code></pre>
+      <p>This is useful, but do not overuse it. Too many expressions can make content harder to read.</p>
+    </section>
+
+    <section>
+      <h2>Using Frontmatter Variables in MDX</h2>
+      <p>In MDX, frontmatter values can be used inside the page.</p>
+      <pre><code>---
+title: "Aurelian Rassendyll"
+role: "Protagonist / Double"
+---
+
+# {frontmatter.title}
+
+Role: {frontmatter.role}</code></pre>
+      <p>This is one of the major advantages of MDX over plain Markdown. Plain Markdown does not normally use frontmatter values directly inside the body without extra tooling.</p>
+    </section>
+
+    <section>
+      <h2>Markdown, MDX, and Starlight</h2>
+      <p>Starlight is designed for documentation-style sites. It uses Markdown and MDX pages well because lesson pages, guide pages, and reference pages are usually text-heavy.</p>
+      <p>A Starlight docs folder often looks like this:</p>
+      <pre><code>src/
+  content/
+    docs/
+      index.md
+      getting-started.md
+      worldbuilding/
+        character-template.md
+        region-template.md
+      lessons/
+        markdown-basics.md
+        mdx-basics.mdx</code></pre>
+      <p>Use Markdown for most pages. Use MDX when the page needs components.</p>
+    </section>
+
+    <section>
+      <h2>Recommended File Naming</h2>
+      <p>Use simple lowercase filenames. Avoid spaces.</p>
+      <pre><code>good:
+character_sheet_template.md
+world_bible_overview.md
+markdown_basics.md
+
+also good for web routes:
+character-sheet-template.md
+world-bible-overview.md
+markdown-basics.md
+
+avoid:
+Character Sheet Template Final FINAL.md</code></pre>
+      <p>For web projects, consistency matters more than which naming style you choose.</p>
+    </section>
+
+    <section>
+      <h2>Common Markdown Mistakes</h2>
+      <h3>Missing blank lines</h3>
+      <pre><code>Bad:
+## Heading
+- item one
+- item two
+
+Better:
+## Heading
+
+- item one
+- item two</code></pre>
+
+      <h3>Using HTML when Markdown is enough</h3>
+      <pre><code>Too much:
+&lt;strong&gt;Important&lt;/strong&gt;
+
+Simpler:
+**Important**</code></pre>
+
+      <h3>Broken links</h3>
+      <pre><code>Check that this path exists:
+[Map](/images/map.png)</code></pre>
+    </section>
+
+    <section>
+      <h2>Common MDX Mistakes</h2>
+      <h3>Forgetting to import a component</h3>
+      <pre><code>Bad:
+&lt;CharacterCard name="Veritas" /&gt;
+
+Better:
+import CharacterCard from "../../components/CharacterCard.astro";
+
+&lt;CharacterCard name="Veritas" /&gt;</code></pre>
+
+      <h3>Using JSX-style comments inside component-heavy areas</h3>
+      <pre><code>{/* This is a comment */}</code></pre>
+
+      <h3>Using components when normal Markdown would be better</h3>
+      <p>MDX is powerful, but a simple content page should stay simple. Use MDX when the extra power helps.</p>
+    </section>
+
+    <section>
+      <h2>Best Practice for World Bible Projects</h2>
+      <p>Use Markdown for most reference pages:</p>
+      <pre><code>characters/veritas_miraculo.md
+regions/europe_2175.md
+locations/new_york_harbor.md</code></pre>
+      <p>Use MDX for pages that need special visual elements:</p>
+      <pre><code>timelines/master_timeline.mdx
+characters/character_dashboard.mdx
+maps/eastern_seaboard_interactive.mdx</code></pre>
+    </section>
+
+    <section>
+      <h2>Best Practice for Lesson Sites</h2>
+      <p>Use Markdown for normal lessons:</p>
+      <pre><code>lessons/html_basics.md
+lessons/vercel_deployment.md
+lessons/yaml_frontmatter.md</code></pre>
+      <p>Use MDX for lessons with embedded demos:</p>
+      <pre><code>lessons/react_state_demo.mdx
+lessons/interactive_quiz.mdx
+lessons/svg_diagram_demo.mdx</code></pre>
+    </section>
+
+    <section>
+      <h2>Mini Project: Create a Markdown Lesson Page</h2>
+      <p>Create this file:</p>
+      <pre><code>src/content/docs/lessons/markdown_basics.md</code></pre>
+      <p>Add this content:</p>
+      <pre><code>---
+title: "Markdown Basics"
+description: "A beginner lesson on writing Markdown pages"
+---
+
+# Markdown Basics
+
+## What Markdown Is
+
+Markdown is a plain-text writing format.
+
+## Why It Matters
+
+It lets you write website content without writing full HTML.
+
+## Practice
+
+Create a heading, a list, a link, and a code block.</code></pre>
+    </section>
+
+    <section>
+      <h2>Mini Project: Create an MDX Character Page</h2>
+      <p>Create this file:</p>
+      <pre><code>src/content/docs/characters/example_character.mdx</code></pre>
+      <p>Add this content:</p>
+      <pre><code>---
+title: "Example Character"
+description: "A character page using MDX"
+---
+
+import InfoBox from "../../../components/InfoBox.astro";
+
+# {frontmatter.title}
+
+&lt;InfoBox title="Character Note"&gt;
+This character page uses MDX because it includes a reusable component.
+&lt;/InfoBox&gt;
+
+## Identity
+
+## Attributes
+
+## Story Role</code></pre>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Markdown / MDX Syntax</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Heading</td>
+            <td><code>## Heading</code></td>
+          </tr>
+          <tr>
+            <td>Bold</td>
+            <td><code>**text**</code></td>
+          </tr>
+          <tr>
+            <td>Italic</td>
+            <td><code>*text*</code></td>
+          </tr>
+          <tr>
+            <td>Inline code</td>
+            <td><code>`code`</code></td>
+          </tr>
+          <tr>
+            <td>Link</td>
+            <td><code>[text](url)</code></td>
+          </tr>
+          <tr>
+            <td>Image</td>
+            <td><code>![alt text](image-path)</code></td>
+          </tr>
+          <tr>
+            <td>Unordered list</td>
+            <td><code>- item</code></td>
+          </tr>
+          <tr>
+            <td>Ordered list</td>
+            <td><code>1. item</code></td>
+          </tr>
+          <tr>
+            <td>Code block</td>
+            <td><code>```js</code></td>
+          </tr>
+          <tr>
+            <td>Frontmatter</td>
+            <td><code>--- title: "Page Title" ---</code></td>
+          </tr>
+          <tr>
+            <td>MDX import</td>
+            <td><code>import Card from "../components/Card.astro";</code></td>
+          </tr>
+          <tr>
+            <td>MDX component</td>
+            <td><code>&lt;Card title="Example" /&gt;</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <p>Use this decision rule:</p>
+      <pre><code>If the page is mostly writing:
+  use Markdown.
+
+If the page needs components:
+  use MDX.
+
+If the page needs full custom layout and logic:
+  use an Astro component.</code></pre>
+    </section>
+
+    <section>
+      <h2>Related Topics to Learn Next</h2>
+      <ul>
+        <li>YAML frontmatter</li>
+        <li>Astro content collections</li>
+        <li>Starlight sidebar navigation</li>
+        <li>MDX components</li>
+        <li>Remark and rehype plugins</li>
+        <li>Code block syntax highlighting</li>
+        <li>Deploying Astro projects to Vercel or Netlify</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

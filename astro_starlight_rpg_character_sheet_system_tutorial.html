@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Starlight RPG Character Sheet System Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Starlight RPG Character Sheet System Tutorial</h1>
+    <p>A practical guide to building RPG-style character sheets in Astro and Starlight using YAML frontmatter, Markdown/MDX pages, schemas, reusable components, and generated indexes.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Building</h2>
+      <p>This tutorial shows how to build a character-sheet system for a world bible, campaign guide, fiction project, or RPG-inspired setting.</p>
+      <p>The system includes:</p>
+      <ul>
+        <li>Structured character metadata in YAML frontmatter.</li>
+        <li>RPG-style attributes and skills.</li>
+        <li>Character prose sections.</li>
+        <li>A character schema for validation.</li>
+        <li>A reusable character stat component.</li>
+        <li>A character index page.</li>
+        <li>Filters by role, faction, region, or status.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>The Big Picture</h2>
+      <pre><code>Character Markdown or MDX file
+  ↓
+YAML frontmatter stores structured sheet data
+  ↓
+Markdown body stores biography and story details
+  ↓
+Astro schema validates the data
+  ↓
+Components render stat blocks and cards
+  ↓
+Indexes list and filter characters</code></pre>
+      <p>The main idea is to separate structured data from prose. Stats, roles, factions, tags, and status belong in frontmatter. Background, personality, relationships, and arc belong in the page body.</p>
+    </section>
+
+    <section>
+      <h2>Recommended Character File Structure</h2>
+      <pre><code>src/content/characters/
+  character-template.md
+  example-character.md
+  veritas-miraculo.md
+  aurelian-rassendyll.md
+
+src/pages/characters/
+  index.astro
+  [...slug].astro
+
+src/components/
+  CharacterCard.astro
+  CharacterStats.astro
+  CharacterSheet.astro</code></pre>
+    </section>
+
+    <section>
+      <h2>Basic Character Frontmatter</h2>
+      <pre><code>---
+title: "Example Character"
+description: "A sample character used to test the character sheet system."
+type: "character"
+role: "Investigator"
+region: "Atlantic Compact"
+faction: "Independent"
+species: "Human"
+status: "active"
+tags:
+  - investigator
+  - example
+  - character
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>RPG-Style Attribute Frontmatter</h2>
+      <pre><code>---
+title: "Example Character"
+role: "Investigator"
+region: "Atlantic Compact"
+faction: "Independent"
+status: "active"
+attributes:
+  strength: 10
+  dexterity: 13
+  constitution: 12
+  intelligence: 16
+  wisdom: 14
+  charisma: 11
+skills:
+  - Investigation
+  - Diplomacy
+  - Technology
+  - Research
+---</code></pre>
+      <p>This uses a familiar six-attribute structure, but you can rename or replace the attributes for your own system.</p>
+    </section>
+
+    <section>
+      <h2>Character Page Body Template</h2>
+      <pre><code># Example Character
+
+## Identity
+
+## Appearance
+
+## Background
+
+## Role in the Setting
+
+## Personality
+
+## Goals
+
+## Flaws
+
+## Relationships
+
+## Secrets
+
+## Abilities and Equipment
+
+## Story Arc
+
+## Notes</code></pre>
+      <p>The frontmatter is the sheet data. The body is the character article.</p>
+    </section>
+
+    <section>
+      <h2>Character Schema</h2>
+      <p>Create or edit:</p>
+      <pre><code>src/content.config.ts</code></pre>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const characters = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    type: z.literal('character').default('character'),
+    role: z.string(),
+    region: z.string(),
+    faction: z.string().optional(),
+    species: z.string().optional(),
+    status: z.enum(['active', 'missing', 'dead', 'retired', 'unknown']).default('active'),
+    attributes: z.object({
+      strength: z.number(),
+      dexterity: z.number(),
+      constitution: z.number(),
+      intelligence: z.number(),
+      wisdom: z.number(),
+      charisma: z.number(),
+    }).optional(),
+    skills: z.array(z.string()).default([]),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { characters };</code></pre>
+      <p>The schema catches missing or incorrectly typed character data.</p>
+    </section>
+
+    <section>
+      <h2>CharacterStats Component</h2>
+      <p>Create:</p>
+      <pre><code>src/components/CharacterStats.astro</code></pre>
+      <pre><code>---
+const { attributes } = Astro.props;
+---
+
+{attributes && (
+  &lt;section class="character-stats"&gt;
+    &lt;h2&gt;Attributes&lt;/h2&gt;
+    &lt;dl class="stat-grid"&gt;
+      &lt;dt&gt;Strength&lt;/dt&gt;
+      &lt;dd&gt;{attributes.strength}&lt;/dd&gt;
+      &lt;dt&gt;Dexterity&lt;/dt&gt;
+      &lt;dd&gt;{attributes.dexterity}&lt;/dd&gt;
+      &lt;dt&gt;Constitution&lt;/dt&gt;
+      &lt;dd&gt;{attributes.constitution}&lt;/dd&gt;
+      &lt;dt&gt;Intelligence&lt;/dt&gt;
+      &lt;dd&gt;{attributes.intelligence}&lt;/dd&gt;
+      &lt;dt&gt;Wisdom&lt;/dt&gt;
+      &lt;dd&gt;{attributes.wisdom}&lt;/dd&gt;
+      &lt;dt&gt;Charisma&lt;/dt&gt;
+      &lt;dd&gt;{attributes.charisma}&lt;/dd&gt;
+    &lt;/dl&gt;
+  &lt;/section&gt;
+)}</code></pre>
+    </section>
+
+    <section>
+      <h2>CharacterCard Component</h2>
+      <p>Create:</p>
+      <pre><code>src/components/CharacterCard.astro</code></pre>
+      <pre><code>---
+const { character, href } = Astro.props;
+---
+
+&lt;article class="character-card"&gt;
+  &lt;h2&gt;&lt;a href={href}&gt;{character.data.title}&lt;/a&gt;&lt;/h2&gt;
+  {character.data.description && &lt;p&gt;{character.data.description}&lt;/p&gt;}
+  &lt;dl&gt;
+    &lt;dt&gt;Role&lt;/dt&gt;
+    &lt;dd&gt;{character.data.role}&lt;/dd&gt;
+    &lt;dt&gt;Region&lt;/dt&gt;
+    &lt;dd&gt;{character.data.region}&lt;/dd&gt;
+    &lt;dt&gt;Status&lt;/dt&gt;
+    &lt;dd&gt;{character.data.status}&lt;/dd&gt;
+  &lt;/dl&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Dynamic Character Page</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/characters/[...slug].astro</code></pre>
+      <pre><code>---
+import { getCollection, render } from 'astro:content';
+import CharacterStats from '../../components/CharacterStats.astro';
+
+export async function getStaticPaths() {
+  const characters = await getCollection('characters');
+
+  return characters.map((character) =&gt; ({
+    params: { slug: character.id },
+    props: { character },
+  }));
+}
+
+const { character } = Astro.props;
+const { Content } = await render(character);
+---
+
+&lt;article&gt;
+  &lt;h1&gt;{character.data.title}&lt;/h1&gt;
+  {character.data.description && &lt;p&gt;{character.data.description}&lt;/p&gt;}
+
+  &lt;section&gt;
+    &lt;h2&gt;Sheet Summary&lt;/h2&gt;
+    &lt;dl&gt;
+      &lt;dt&gt;Role&lt;/dt&gt;
+      &lt;dd&gt;{character.data.role}&lt;/dd&gt;
+      &lt;dt&gt;Region&lt;/dt&gt;
+      &lt;dd&gt;{character.data.region}&lt;/dd&gt;
+      &lt;dt&gt;Faction&lt;/dt&gt;
+      &lt;dd&gt;{character.data.faction ?? 'None listed'}&lt;/dd&gt;
+      &lt;dt&gt;Status&lt;/dt&gt;
+      &lt;dd&gt;{character.data.status}&lt;/dd&gt;
+    &lt;/dl&gt;
+  &lt;/section&gt;
+
+  &lt;CharacterStats attributes={character.data.attributes} /&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;Skills&lt;/h2&gt;
+    &lt;ul&gt;
+      {character.data.skills.map((skill) =&gt; &lt;li&gt;{skill}&lt;/li&gt;)}
+    &lt;/ul&gt;
+  &lt;/section&gt;
+
+  &lt;Content /&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Character Index Page</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/characters/index.astro</code></pre>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+import CharacterCard from '../../components/CharacterCard.astro';
+
+const characters = await getCollection('characters');
+const sortedCharacters = characters.sort((a, b) =&gt; {
+  return a.data.title.localeCompare(b.data.title);
+});
+---
+
+&lt;h1&gt;Characters&lt;/h1&gt;
+
+&lt;div class="character-grid"&gt;
+  {sortedCharacters.map((character) =&gt; (
+    &lt;CharacterCard
+      character={character}
+      href={`/characters/${character.id}/`}
+    /&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Filtering Characters</h2>
+      <p>Filter by region:</p>
+      <pre><code>const europeCharacters = characters.filter((character) =&gt; {
+  return character.data.region === 'Europe';
+});</code></pre>
+      <p>Filter by faction:</p>
+      <pre><code>const houseCharacters = characters.filter((character) =&gt; {
+  return character.data.faction === 'House Valoire';
+});</code></pre>
+      <p>Filter by status:</p>
+      <pre><code>const activeCharacters = characters.filter((character) =&gt; {
+  return character.data.status === 'active';
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>CSS for Character Sheets</h2>
+      <pre><code>.character-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.character-card,
+.character-stats {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--sl-color-bg-nav);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Optional Derived Stats</h2>
+      <p>You can calculate derived values in a component.</p>
+      <pre><code>---
+const { attributes } = Astro.props;
+const toughness = attributes ? Math.floor((attributes.constitution - 10) / 2) + 10 : null;
+const initiative = attributes ? Math.floor((attributes.dexterity - 10) / 2) : null;
+---</code></pre>
+      <p>Derived stats are useful for RPG-inspired sheets, but keep the rules simple and well documented.</p>
+    </section>
+
+    <section>
+      <h2>Character Relationships</h2>
+      <p>For simple projects, relationships can be prose:</p>
+      <pre><code>## Relationships
+
+- Ally: Example Ally
+- Rival: Example Rival
+- Patron: Example Patron</code></pre>
+      <p>For structured projects, add relationship fields:</p>
+      <pre><code>relationships:
+  allies:
+    - "Example Ally"
+  rivals:
+    - "Example Rival"
+  enemies:
+    - "Example Enemy"</code></pre>
+    </section>
+
+    <section>
+      <h2>Build Checklist</h2>
+      <pre><code>[ ] Character collection exists
+[ ] Character schema validates required fields
+[ ] Character template exists
+[ ] CharacterStats component exists
+[ ] CharacterCard component exists
+[ ] Dynamic character route works
+[ ] Character index page works
+[ ] CSS supports cards and stat blocks
+[ ] Filters work by region, faction, or status
+[ ] npm run build succeeds</code></pre>
+    </section>
+
+    <section>
+      <h2>Common Mistakes</h2>
+      <h3>Putting everything in the body</h3>
+      <p>Stats, tags, roles, regions, and statuses are better in frontmatter so they can be sorted and filtered.</p>
+
+      <h3>Overcomplicating the first schema</h3>
+      <p>Start with a simple schema. Add fields once you know you will use them.</p>
+
+      <h3>Mixing similar field names</h3>
+      <p>Do not use <code>house</code>, <code>faction</code>, <code>group</code>, and <code>organization</code> randomly if they mean the same thing.</p>
+
+      <h3>No index page</h3>
+      <p>The character system becomes much more useful when readers can browse all characters in one place.</p>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>Use frontmatter for sheet data.
+Use Markdown body for story and personality.
+Use schemas for consistency.
+Use components for repeated visual blocks.
+Use indexes for browsing.
+Use filters for worldbuilding scale.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Dynamic Routes and Collection Indexes Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Dynamic Routes and Collection Indexes Tutorial</h1>
+    <p>A practical guide to generating pages and indexes from Astro Content Collections using <code>getCollection()</code>, <code>getStaticPaths()</code>, and <code>render()</code>.</p>
+  </header>
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+      <p>This tutorial explains how to move from hand-written pages to generated pages and indexes.</p>
+      <ul>
+        <li>Load content entries with <code>getCollection()</code>.</li>
+        <li>Generate one page per entry with <code>getStaticPaths()</code>.</li>
+        <li>Render Markdown/MDX body content with <code>render()</code>.</li>
+        <li>Create collection index pages.</li>
+        <li>Sort and filter entries.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Why Dynamic Routes Matter</h2>
+      <p>If you only have five pages, writing each page by hand is fine. If you have dozens or hundreds of lessons, characters, regions, or reference entries, dynamic routes help you generate consistent pages from content files.</p>
+      <pre><code>Content files
+  ↓
+Collection schema
+  ↓
+Dynamic route
+  ↓
+Generated pages
+  ↓
+Index pages and filters</code></pre>
+    </section>
+
+    <section>
+      <h2>Example Content Structure</h2>
+      <pre><code>src/content/
+  lessons/
+    markdown-basics.md
+    mdx-basics.md
+    content-collections.md
+  characters/
+    example-character.md
+    rival-heir.md
+  regions/
+    europe.md
+    austral-confluence.md</code></pre>
+    </section>
+
+    <section>
+      <h2>Example content.config.ts</h2>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const lessons = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    level: z.enum(['beginner', 'intermediate', 'advanced']),
+    order: z.number(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+const characters = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    role: z.string(),
+    region: z.string(),
+    faction: z.string().optional(),
+    status: z.enum(['active', 'missing', 'dead', 'unknown']).default('active'),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = {
+  lessons,
+  characters,
+};</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Lesson Entry</h2>
+      <pre><code>src/content/lessons/markdown-basics.md</code></pre>
+      <pre><code>---
+title: "Markdown Basics"
+description: "Learn headings, lists, links, and code blocks."
+level: "beginner"
+order: 1
+tags:
+  - markdown
+  - writing
+draft: false
+---
+
+# Markdown Basics
+
+Markdown is a simple writing format for structured content.</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Lesson Index Page</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/lessons/index.astro</code></pre>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const lessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.draft !== true;
+});
+
+const sortedLessons = lessons.sort((a, b) =&gt; {
+  return a.data.order - b.data.order;
+});
+---
+
+&lt;h1&gt;Lessons&lt;/h1&gt;
+
+&lt;ul&gt;
+  {sortedLessons.map((lesson) =&gt; (
+    &lt;li&gt;
+      &lt;a href={`/lessons/${lesson.id}/`}&gt;
+        {lesson.data.title}
+      &lt;/a&gt;
+      &lt;p&gt;{lesson.data.description}&lt;/p&gt;
+    &lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Create Dynamic Lesson Pages</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/lessons/[...slug].astro</code></pre>
+      <pre><code>---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons', ({ data }) =&gt; {
+    return data.draft !== true;
+  });
+
+  return lessons.map((lesson) =&gt; ({
+    params: { slug: lesson.id },
+    props: { lesson },
+  }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+---
+
+&lt;article&gt;
+  &lt;h1&gt;{lesson.data.title}&lt;/h1&gt;
+  &lt;p&gt;{lesson.data.description}&lt;/p&gt;
+  &lt;Content /&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>How getStaticPaths Works</h2>
+      <p><code>getStaticPaths()</code> tells Astro which pages to create at build time.</p>
+      <pre><code>return lessons.map((lesson) =&gt; ({
+  params: { slug: lesson.id },
+  props: { lesson },
+}));</code></pre>
+      <p>The <code>params</code> define the URL. The <code>props</code> pass the entry into the page template.</p>
+    </section>
+
+    <section>
+      <h2>Understanding [...slug].astro</h2>
+      <p>The file name <code>[...slug].astro</code> creates a dynamic route that can handle nested paths.</p>
+      <pre><code>src/content/lessons/markdown-basics.md
+  → /lessons/markdown-basics/
+
+src/content/lessons/beginner/yaml-basics.md
+  → /lessons/beginner/yaml-basics/</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Character Index Page</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/characters/index.astro</code></pre>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const characters = await getCollection('characters');
+
+const activeCharacters = characters
+  .filter((character) =&gt; character.data.status === 'active')
+  .sort((a, b) =&gt; a.data.title.localeCompare(b.data.title));
+---
+
+&lt;h1&gt;Characters&lt;/h1&gt;
+
+&lt;div class="card-grid"&gt;
+  {activeCharacters.map((character) =&gt; (
+    &lt;article class="card"&gt;
+      &lt;h2&gt;
+        &lt;a href={`/characters/${character.id}/`}&gt;
+          {character.data.title}
+        &lt;/a&gt;
+      &lt;/h2&gt;
+      &lt;p&gt;{character.data.description}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Role:&lt;/strong&gt; {character.data.role}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Region:&lt;/strong&gt; {character.data.region}&lt;/p&gt;
+    &lt;/article&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Create Dynamic Character Pages</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/characters/[...slug].astro</code></pre>
+      <pre><code>---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const characters = await getCollection('characters');
+
+  return characters.map((character) =&gt; ({
+    params: { slug: character.id },
+    props: { character },
+  }));
+}
+
+const { character } = Astro.props;
+const { Content } = await render(character);
+---
+
+&lt;article&gt;
+  &lt;h1&gt;{character.data.title}&lt;/h1&gt;
+  {character.data.description && &lt;p&gt;{character.data.description}&lt;/p&gt;}
+
+  &lt;dl&gt;
+    &lt;dt&gt;Role&lt;/dt&gt;
+    &lt;dd&gt;{character.data.role}&lt;/dd&gt;
+    &lt;dt&gt;Region&lt;/dt&gt;
+    &lt;dd&gt;{character.data.region}&lt;/dd&gt;
+    &lt;dt&gt;Status&lt;/dt&gt;
+    &lt;dd&gt;{character.data.status}&lt;/dd&gt;
+  &lt;/dl&gt;
+
+  &lt;Content /&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Sorting and Filtering Entries</h2>
+      <pre><code>// Sort lessons by order
+const sortedLessons = lessons.sort((a, b) =&gt; a.data.order - b.data.order);
+
+// Sort characters alphabetically
+const sortedCharacters = characters.sort((a, b) =&gt; {
+  return a.data.title.localeCompare(b.data.title);
+});
+
+// Filter by difficulty level
+const beginnerLessons = lessons.filter((lesson) =&gt; lesson.data.level === 'beginner');
+
+// Filter by tag
+const markdownLessons = lessons.filter((lesson) =&gt; lesson.data.tags.includes('markdown'));</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Tag Index</h2>
+      <pre><code>const lessons = await getCollection('lessons');
+
+const tags = [...new Set(
+  lessons.flatMap((lesson) =&gt; lesson.data.tags)
+)].sort();</code></pre>
+      <p>Then render a tag list:</p>
+      <pre><code>&lt;ul&gt;
+  {tags.map((tag) =&gt; (
+    &lt;li&gt;
+      &lt;a href={`/tags/${tag}/`}&gt;{tag}&lt;/a&gt;
+    &lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Generate Tag Pages</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/tags/[tag].astro</code></pre>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons');
+
+  const tags = [...new Set(
+    lessons.flatMap((lesson) =&gt; lesson.data.tags)
+  )];
+
+  return tags.map((tag) =&gt; ({
+    params: { tag },
+    props: { tag },
+  }));
+}
+
+const { tag } = Astro.props;
+
+const lessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.tags.includes(tag);
+});
+---
+
+&lt;h1&gt;Tag: {tag}&lt;/h1&gt;
+
+&lt;ul&gt;
+  {lessons.map((lesson) =&gt; (
+    &lt;li&gt;
+      &lt;a href={`/lessons/${lesson.id}/`}&gt;
+        {lesson.data.title}
+      &lt;/a&gt;
+    &lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Dynamic Routes and Starlight</h2>
+      <p>Starlight documentation pages normally live in <code>src/content/docs/</code>. Custom dynamic routes live in <code>src/pages/</code>. You can use both in the same project.</p>
+      <pre><code>src/content/docs/
+  getting-started.md
+  guides/sidebar.md
+
+src/content/characters/
+  example-character.md
+
+src/pages/characters/
+  index.astro
+  [...slug].astro</code></pre>
+    </section>
+
+    <section>
+      <h2>Common Mistakes</h2>
+      <h3>Wrong collection name</h3>
+      <pre><code>Bad:
+getCollection('lesson')
+
+Good:
+getCollection('lessons')</code></pre>
+      <h3>Forgetting render()</h3>
+      <pre><code>Use render(entry) when you need to display the Markdown/MDX body.</code></pre>
+      <h3>Broken generated links</h3>
+      <pre><code>Check that your href matches the route created by your dynamic page.</code></pre>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <table>
+        <thead><tr><th>Need</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td>Load entries</td><td><code>getCollection()</code></td></tr>
+          <tr><td>Generate routes</td><td><code>getStaticPaths()</code></td></tr>
+          <tr><td>Render entry body</td><td><code>render(entry)</code></td></tr>
+          <tr><td>Nested dynamic routes</td><td><code>[...slug].astro</code></td></tr>
+          <tr><td>Sort entries</td><td><code>.sort()</code></td></tr>
+          <tr><td>Filter entries</td><td><code>.filter()</code></td></tr>
+          <tr><td>Unique tags</td><td><code>new Set()</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>Use collections for repeated content.
+Use index pages to list entries.
+Use dynamic routes to generate entry pages.
+Use schemas to keep data consistent.
+Use filters for categories and tags.
+Use render() to display Markdown/MDX body content.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

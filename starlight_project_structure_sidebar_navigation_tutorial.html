@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Project Structure and Sidebar Navigation Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Starlight Project Structure and Sidebar Navigation</h1>
+    <p>A practical tutorial for understanding how Astro Starlight projects are organized and how to build clear sidebar navigation for documentation, lessons, and world bible sites.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+      <p>This tutorial focuses on two important parts of an Astro Starlight project:</p>
+      <ul>
+        <li><strong>Project structure</strong>: where files go and what the major folders do.</li>
+        <li><strong>Sidebar navigation</strong>: how Starlight decides what appears in the navigation sidebar.</li>
+      </ul>
+      <p>These two topics matter because Starlight sites are usually content-heavy. Once you have many lesson pages, worldbuilding pages, character files, reference notes, or technical guides, structure and navigation become the difference between a useful site and a confusing pile of pages.</p>
+    </section>
+
+    <section>
+      <h2>The Big Picture</h2>
+      <p>Starlight is an Astro integration for documentation-style websites. Astro handles the site build system, routing, assets, and page rendering. Starlight adds documentation features such as a sidebar, search, page layout, table of contents, and Markdown/MDX-friendly authoring.</p>
+      <pre><code>Astro project
+  ↓
+Starlight integration
+  ↓
+Markdown and MDX documentation pages
+  ↓
+Sidebar, search, page layout, and static site output</code></pre>
+      <p>For most projects, your everyday work will happen in these places:</p>
+      <pre><code>src/content/docs/     documentation pages
+src/components/       reusable components
+src/assets/           source-managed images and assets
+public/               static files copied directly to the final site
+astro.config.mjs      main Astro and Starlight configuration</code></pre>
+    </section>
+
+    <section>
+      <h2>Starting Point: Create a Starlight Project</h2>
+      <p>The common setup command is:</p>
+      <pre><code>npm create astro@latest</code></pre>
+      <p>During setup, choose a documentation/Starlight starter if offered. Another common approach is to create an Astro project first, then add Starlight:</p>
+      <pre><code>npx astro add starlight</code></pre>
+      <p>Then run the development server:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>Build the production site with:</p>
+      <pre><code>npm run build</code></pre>
+      <p>The finished static site is usually generated into:</p>
+      <pre><code>dist/</code></pre>
+    </section>
+
+    <section>
+      <h2>Typical Starlight Project Structure</h2>
+      <p>A small Starlight project may look like this:</p>
+      <pre><code>my-starlight-site/
+  public/
+    favicon.svg
+  src/
+    assets/
+    content/
+      docs/
+        index.md
+        getting-started.md
+    components/
+  astro.config.mjs
+  package.json
+  tsconfig.json</code></pre>
+      <p>A larger project might look like this:</p>
+      <pre><code>my-starlight-site/
+  public/
+    favicon.png
+    images/
+      maps/
+      diagrams/
+  src/
+    assets/
+      logo.svg
+    components/
+      CharacterCard.astro
+      InfoBox.astro
+      LessonObjectives.astro
+    content/
+      docs/
+        index.md
+        getting-started.md
+        worldbuilding/
+          index.md
+          regions/
+            europe.md
+            austral-confluence.md
+          characters/
+            character-template.md
+            example-character.md
+        lessons/
+          index.md
+          markdown-basics.md
+          mdx-basics.mdx
+        reference/
+          yaml.md
+          deployment.md
+    styles/
+      custom.css
+  astro.config.mjs
+  package.json
+  tsconfig.json</code></pre>
+      <p>The main idea is simple: <strong>content goes in <code>src/content/docs/</code></strong>. The folder structure inside <code>docs</code> often becomes your site structure and sidebar structure.</p>
+    </section>
+
+    <section>
+      <h2>The public Folder</h2>
+      <p>The <code>public/</code> folder is for static files that should be copied directly to the final website without being processed by Astro.</p>
+      <pre><code>public/
+  favicon.png
+  images/
+    map.png
+    character-portrait.png
+  downloads/
+    world-bible-template.pdf</code></pre>
+      <p>Files in <code>public/</code> are referenced from the site root.</p>
+      <pre><code>![World Map](/images/map.png)</code></pre>
+      <p>Use <code>public/</code> for simple static assets such as favicons, downloadable files, screenshots, and images you want to reference by direct path.</p>
+    </section>
+
+    <section>
+      <h2>The src/assets Folder</h2>
+      <p>The <code>src/assets/</code> folder is for assets managed by Astro's build pipeline. This is often useful for logos, imported images, or files used directly by components.</p>
+      <pre><code>src/
+  assets/
+    logo.svg
+    hero-image.png</code></pre>
+      <p>For beginner documentation sites, you can often start with <code>public/</code>. As the site grows, <code>src/assets/</code> becomes more useful for optimized or component-driven assets.</p>
+    </section>
+
+    <section>
+      <h2>The src/content/docs Folder</h2>
+      <p>This is the heart of a Starlight site. Documentation pages live in:</p>
+      <pre><code>src/content/docs/</code></pre>
+      <p>Example:</p>
+      <pre><code>src/content/docs/index.md
+src/content/docs/getting-started.md
+src/content/docs/lessons/markdown-basics.md
+src/content/docs/worldbuilding/character-template.md</code></pre>
+      <p>Each Markdown or MDX file becomes a page in the docs site.</p>
+      <pre><code>src/content/docs/index.md
+  → /
+
+src/content/docs/getting-started.md
+  → /getting-started/
+
+src/content/docs/lessons/markdown-basics.md
+  → /lessons/markdown-basics/
+
+src/content/docs/worldbuilding/character-template.md
+  → /worldbuilding/character-template/</code></pre>
+    </section>
+
+    <section>
+      <h2>Markdown and MDX Files</h2>
+      <p>Most pages can be plain Markdown:</p>
+      <pre><code>example-page.md</code></pre>
+      <p>Use MDX when the page needs components:</p>
+      <pre><code>interactive-example.mdx</code></pre>
+      <p>Markdown is best for normal writing. MDX is best for pages that need custom cards, stat blocks, callouts, tabs, visual components, or interactive examples.</p>
+    </section>
+
+    <section>
+      <h2>Basic Page Frontmatter</h2>
+      <p>Every Starlight page usually begins with frontmatter. Frontmatter is YAML metadata at the top of a Markdown or MDX file.</p>
+      <pre><code>---
+title: "Getting Started"
+description: "Learn how this documentation site is organized."
+---
+
+# Getting Started
+
+This page introduces the project.</code></pre>
+      <p>The <code>title</code> is especially important because Starlight can use it for page headings, browser metadata, and sidebar labels.</p>
+    </section>
+
+    <section>
+      <h2>The astro.config.mjs File</h2>
+      <p>The main Starlight configuration lives in <code>astro.config.mjs</code>.</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Documentation Site',
+    }),
+  ],
+});</code></pre>
+      <p>This is where you configure the site title, logo, sidebar, social links, custom CSS, table of contents behavior, plugins, and other Starlight options.</p>
+    </section>
+
+    <section>
+      <h2>Adding Custom CSS</h2>
+      <p>For simple customization, create a CSS file:</p>
+      <pre><code>src/styles/custom.css</code></pre>
+      <p>Then register it in <code>astro.config.mjs</code>:</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Documentation Site',
+      customCss: ['./src/styles/custom.css'],
+    }),
+  ],
+});</code></pre>
+      <p>This keeps custom styling separate from your Markdown content.</p>
+    </section>
+
+    <section>
+      <h2>How Starlight Sidebar Navigation Works</h2>
+      <p>Starlight can build sidebar navigation in two main ways:</p>
+      <ul>
+        <li><strong>Autogenerated sidebar</strong>: Starlight builds the sidebar from your folder structure.</li>
+        <li><strong>Manual sidebar</strong>: You define sidebar groups and items yourself in <code>astro.config.mjs</code>.</li>
+      </ul>
+      <p>For small or early projects, autogenerated navigation is often enough. For larger lesson libraries, world bibles, or professional docs, manual navigation gives more control.</p>
+    </section>
+
+    <section>
+      <h2>Autogenerated Sidebar</h2>
+      <p>By default, Starlight can generate the sidebar based on files and folders in <code>src/content/docs/</code>. For example:</p>
+      <pre><code>src/content/docs/
+  index.md
+  getting-started.md
+  lessons/
+    markdown-basics.md
+    mdx-basics.md
+  worldbuilding/
+    character-template.md
+    region-template.md</code></pre>
+      <p>This can create a sidebar similar to:</p>
+      <pre><code>Getting Started
+Lessons
+  Markdown Basics
+  MDX Basics
+Worldbuilding
+  Character Template
+  Region Template</code></pre>
+      <p>The advantage is speed. You add files and Starlight finds them.</p>
+      <p>The disadvantage is that folder names, file names, and page titles need to be carefully managed or the sidebar can become messy.</p>
+    </section>
+
+    <section>
+      <h2>Manual Sidebar</h2>
+      <p>Manual sidebar navigation is configured in <code>astro.config.mjs</code>.</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Documentation Site',
+      sidebar: [
+        {
+          label: 'Start Here',
+          items: [
+            { label: 'Introduction', slug: 'intro' },
+            { label: 'Getting Started', slug: 'getting-started' },
+          ],
+        },
+        {
+          label: 'Lessons',
+          items: [
+            { label: 'Markdown Basics', slug: 'lessons/markdown-basics' },
+            { label: 'MDX Basics', slug: 'lessons/mdx-basics' },
+          ],
+        },
+      ],
+    }),
+  ],
+});</code></pre>
+      <p>The <code>label</code> is what appears in the sidebar. The <code>slug</code> points to the page route.</p>
+    </section>
+
+    <section>
+      <h2>Slug Basics</h2>
+      <p>A slug is the URL path to a page without the leading slash.</p>
+      <pre><code>src/content/docs/getting-started.md
+  slug: 'getting-started'
+
+src/content/docs/lessons/markdown-basics.md
+  slug: 'lessons/markdown-basics'
+
+src/content/docs/worldbuilding/characters/example-character.md
+  slug: 'worldbuilding/characters/example-character'</code></pre>
+      <p>If a sidebar item points to the wrong slug, the link will be broken.</p>
+    </section>
+
+    <section>
+      <h2>Sidebar Groups</h2>
+      <p>A sidebar group collects related pages under a heading.</p>
+      <pre><code>sidebar: [
+  {
+    label: 'Worldbuilding',
+    items: [
+      { label: 'World Bible Overview', slug: 'worldbuilding/overview' },
+      { label: 'Character Template', slug: 'worldbuilding/character-template' },
+      { label: 'Region Template', slug: 'worldbuilding/region-template' },
+    ],
+  },
+]</code></pre>
+      <p>For lesson sites, groups could be courses or difficulty levels.</p>
+      <pre><code>Beginner Lessons
+Intermediate Lessons
+Advanced Lessons
+Reference</code></pre>
+      <p>For worldbuilding sites, groups could be content categories.</p>
+      <pre><code>World Overview
+Regions
+Characters
+Factions
+Locations
+Storylines
+Timeline
+Reference</code></pre>
+    </section>
+
+    <section>
+      <h2>Nested Sidebar Groups</h2>
+      <p>For larger sites, groups can be nested.</p>
+      <pre><code>sidebar: [
+  {
+    label: 'Worldbuilding',
+    items: [
+      {
+        label: 'Regions',
+        items: [
+          { label: 'Europe', slug: 'worldbuilding/regions/europe' },
+          { label: 'Austral Confluence', slug: 'worldbuilding/regions/austral-confluence' },
+        ],
+      },
+      {
+        label: 'Characters',
+        items: [
+          { label: 'Character Template', slug: 'worldbuilding/characters/template' },
+          { label: 'Example Character', slug: 'worldbuilding/characters/example-character' },
+        ],
+      },
+    ],
+  },
+]</code></pre>
+      <p>Nested groups are powerful, but too many levels can make the sidebar harder to use. Two levels is usually comfortable. Three levels should be used carefully.</p>
+    </section>
+
+    <section>
+      <h2>Autogenerated Groups Inside Manual Sidebar</h2>
+      <p>A useful middle path is to define the major groups manually, but let Starlight autogenerate the pages inside a folder.</p>
+      <pre><code>sidebar: [
+  {
+    label: 'Lessons',
+    autogenerate: { directory: 'lessons' },
+  },
+  {
+    label: 'Worldbuilding',
+    autogenerate: { directory: 'worldbuilding' },
+  },
+]</code></pre>
+      <p>This gives you control over the big categories while avoiding the need to manually list every page.</p>
+    </section>
+
+    <section>
+      <h2>Recommended Structure for a Lesson Site</h2>
+      <p>For a lesson library, use folders that match how a learner thinks.</p>
+      <pre><code>src/content/docs/
+  index.md
+  lessons/
+    index.md
+    beginner/
+      html-basics.md
+      css-basics.md
+      javascript-basics.md
+    intermediate/
+      markdown-mdx.md
+      astro-components.md
+      starlight-sidebar.md
+    advanced/
+      content-collections.md
+      custom-components.mdx
+      deployment-workflow.md
+  reference/
+    glossary.md
+    commands.md
+    troubleshooting.md</code></pre>
+      <p>Possible sidebar:</p>
+      <pre><code>sidebar: [
+  {
+    label: 'Start Here',
+    items: [
+      { label: 'Home', slug: '' },
+      { label: 'How to Use This Site', slug: 'lessons' },
+    ],
+  },
+  {
+    label: 'Beginner Lessons',
+    autogenerate: { directory: 'lessons/beginner' },
+  },
+  {
+    label: 'Intermediate Lessons',
+    autogenerate: { directory: 'lessons/intermediate' },
+  },
+  {
+    label: 'Advanced Lessons',
+    autogenerate: { directory: 'lessons/advanced' },
+  },
+  {
+    label: 'Reference',
+    autogenerate: { directory: 'reference' },
+  },
+]</code></pre>
+    </section>
+
+    <section>
+      <h2>Recommended Structure for a World Bible Site</h2>
+      <p>For a world bible, use folders that match the types of entries you will create again and again.</p>
+      <pre><code>src/content/docs/
+  index.md
+  world/
+    overview.md
+    timeline.md
+    technology.md
+  regions/
+    index.md
+    europe.md
+    austral-confluence.md
+    atlantic-compact.md
+  characters/
+    index.md
+    character-template.md
+    example-character.md
+  factions/
+    index.md
+    faction-template.md
+  locations/
+    index.md
+    location-template.md
+  storylines/
+    index.md
+    storyline-template.md
+  reference/
+    glossary.md
+    naming-conventions.md</code></pre>
+      <p>Possible sidebar:</p>
+      <pre><code>sidebar: [
+  {
+    label: 'World Overview',
+    items: [
+      { label: 'Home', slug: '' },
+      { label: 'Overview', slug: 'world/overview' },
+      { label: 'Timeline', slug: 'world/timeline' },
+      { label: 'Technology', slug: 'world/technology' },
+    ],
+  },
+  {
+    label: 'Regions',
+    autogenerate: { directory: 'regions' },
+  },
+  {
+    label: 'Characters',
+    autogenerate: { directory: 'characters' },
+  },
+  {
+    label: 'Factions',
+    autogenerate: { directory: 'factions' },
+  },
+  {
+    label: 'Locations',
+    autogenerate: { directory: 'locations' },
+  },
+  {
+    label: 'Storylines',
+    autogenerate: { directory: 'storylines' },
+  },
+  {
+    label: 'Reference',
+    autogenerate: { directory: 'reference' },
+  },
+]</code></pre>
+    </section>
+
+    <section>
+      <h2>Page Ordering</h2>
+      <p>Navigation order matters. A sidebar should teach the reader where to start and what to read next.</p>
+      <p>For manual sidebars, the order is the order you write in <code>astro.config.mjs</code>.</p>
+      <pre><code>items: [
+  { label: 'Introduction', slug: 'intro' },
+  { label: 'Installation', slug: 'installation' },
+  { label: 'Project Structure', slug: 'project-structure' },
+  { label: 'Sidebar Navigation', slug: 'sidebar-navigation' },
+]</code></pre>
+      <p>For autogenerated sidebars, file and folder names become more important. If you need strict ordering, manual sidebar configuration is usually clearer.</p>
+    </section>
+
+    <section>
+      <h2>Index Pages</h2>
+      <p>Each major folder should usually have an <code>index.md</code> page.</p>
+      <pre><code>src/content/docs/lessons/index.md
+src/content/docs/worldbuilding/index.md
+src/content/docs/characters/index.md</code></pre>
+      <p>An index page acts like a section landing page. It can explain what the section contains and link to important pages.</p>
+      <pre><code>---
+title: "Characters"
+description: "Character profiles, character templates, and major figures."
+---
+
+# Characters
+
+This section contains character profiles and reusable templates.
+
+## Start Here
+
+- [Character Template](/characters/character-template/)
+- [Example Character](/characters/example-character/)</code></pre>
+    </section>
+
+    <section>
+      <h2>Good Sidebar Labels</h2>
+      <p>Good sidebar labels are short, clear, and predictable.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Weak Label</th>
+            <th>Better Label</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stuff</td>
+            <td>Reference</td>
+          </tr>
+          <tr>
+            <td>People Things</td>
+            <td>Characters</td>
+          </tr>
+          <tr>
+            <td>Places and Such</td>
+            <td>Locations</td>
+          </tr>
+          <tr>
+            <td>How It All Works Maybe</td>
+            <td>System Rules</td>
+          </tr>
+          <tr>
+            <td>Misc Notes</td>
+            <td>Glossary</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Manual vs Autogenerated Sidebar</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Best For</th>
+            <th>Tradeoff</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Autogenerated</td>
+            <td>Small sites, quick starts, simple folder structures</td>
+            <td>Less precise control</td>
+          </tr>
+          <tr>
+            <td>Manual</td>
+            <td>Polished docs, lesson paths, curated world bibles</td>
+            <td>More maintenance</td>
+          </tr>
+          <tr>
+            <td>Hybrid</td>
+            <td>Growing sites with large categories</td>
+            <td>Requires thoughtful folder structure</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>For most serious projects, the hybrid approach is the best long-term choice.</p>
+    </section>
+
+    <section>
+      <h2>Hybrid Sidebar Pattern</h2>
+      <p>This pattern works well when you want major categories in a deliberate order but do not want to manually list every page.</p>
+      <pre><code>sidebar: [
+  {
+    label: 'Start Here',
+    items: [
+      { label: 'Introduction', slug: '' },
+      { label: 'How to Use This Site', slug: 'getting-started' },
+    ],
+  },
+  {
+    label: 'Lessons',
+    autogenerate: { directory: 'lessons' },
+  },
+  {
+    label: 'World Bible',
+    autogenerate: { directory: 'worldbuilding' },
+  },
+  {
+    label: 'Reference',
+    autogenerate: { directory: 'reference' },
+  },
+]</code></pre>
+      <p>This is usually easier to maintain than a fully manual sidebar.</p>
+    </section>
+
+    <section>
+      <h2>Example: Complete astro.config.mjs</h2>
+      <p>Here is a practical example for a combined lesson and world bible site:</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  site: 'https://example.com',
+  integrations: [
+    starlight({
+      title: 'World Bible and Lessons',
+      customCss: ['./src/styles/custom.css'],
+      sidebar: [
+        {
+          label: 'Start Here',
+          items: [
+            { label: 'Home', slug: '' },
+            { label: 'Getting Started', slug: 'getting-started' },
+          ],
+        },
+        {
+          label: 'Lessons',
+          autogenerate: { directory: 'lessons' },
+        },
+        {
+          label: 'World Bible',
+          items: [
+            { label: 'Overview', slug: 'world/overview' },
+            { label: 'Timeline', slug: 'world/timeline' },
+            {
+              label: 'Reference Sections',
+              items: [
+                { label: 'Regions', slug: 'regions' },
+                { label: 'Characters', slug: 'characters' },
+                { label: 'Factions', slug: 'factions' },
+                { label: 'Locations', slug: 'locations' },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Reference',
+          autogenerate: { directory: 'reference' },
+        },
+      ],
+    }),
+  ],
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>Common Sidebar Mistakes</h2>
+      <h3>Broken slugs</h3>
+      <p>A sidebar item must point to an existing page.</p>
+      <pre><code>Bad:
+{ label: 'Markdown Basics', slug: 'markdown-basics' }
+
+If the real file is:
+src/content/docs/lessons/markdown-basics.md
+
+Better:
+{ label: 'Markdown Basics', slug: 'lessons/markdown-basics' }</code></pre>
+
+      <h3>Too many top-level groups</h3>
+      <p>If everything is top-level, nothing feels organized. Group related pages together.</p>
+
+      <h3>Too much nesting</h3>
+      <p>If a reader has to open four levels of navigation to find a page, the site is probably too deeply nested.</p>
+
+      <h3>Vague labels</h3>
+      <p>Labels should tell the reader exactly what section they are entering.</p>
+    </section>
+
+    <section>
+      <h2>Common Project Structure Mistakes</h2>
+      <h3>Putting docs pages in the wrong folder</h3>
+      <pre><code>Wrong:
+src/pages/lesson-one.md
+
+Usually correct for Starlight docs:
+src/content/docs/lesson-one.md</code></pre>
+
+      <h3>Mixing unrelated content in one folder</h3>
+      <pre><code>Messy:
+src/content/docs/
+  europe.md
+  markdown-basics.md
+  veritas.md
+  css-basics.md
+  glossary.md
+
+Better:
+src/content/docs/
+  regions/europe.md
+  lessons/markdown-basics.md
+  characters/veritas.md
+  lessons/css-basics.md
+  reference/glossary.md</code></pre>
+
+      <h3>Skipping index pages</h3>
+      <p>Folders without index pages can feel like drawers without labels. Add a section landing page for each major folder.</p>
+    </section>
+
+    <section>
+      <h2>Practical Build Plan</h2>
+      <p>When starting a new Starlight site, build in this order:</p>
+      <ol>
+        <li>Create the project.</li>
+        <li>Add or confirm Starlight.</li>
+        <li>Create the major folders under <code>src/content/docs/</code>.</li>
+        <li>Add <code>index.md</code> pages for each major section.</li>
+        <li>Add a few sample pages.</li>
+        <li>Use autogenerated sidebar first.</li>
+        <li>Switch to manual or hybrid sidebar when the structure becomes clear.</li>
+        <li>Add custom CSS only after the content structure works.</li>
+        <li>Run <code>npm run build</code> to catch broken links or configuration problems.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Practice Exercise: Create a Lesson Section</h2>
+      <p>Create this folder structure:</p>
+      <pre><code>src/content/docs/
+  lessons/
+    index.md
+    markdown-basics.md
+    mdx-basics.md</code></pre>
+      <p>Create <code>lessons/index.md</code>:</p>
+      <pre><code>---
+title: "Lessons"
+description: "Tutorials and learning paths."
+---
+
+# Lessons
+
+This section contains tutorials and learning guides.
+
+## Start Here
+
+- [Markdown Basics](/lessons/markdown-basics/)
+- [MDX Basics](/lessons/mdx-basics/)</code></pre>
+      <p>Add this sidebar group:</p>
+      <pre><code>{
+  label: 'Lessons',
+  autogenerate: { directory: 'lessons' },
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Practice Exercise: Create a World Bible Section</h2>
+      <p>Create this folder structure:</p>
+      <pre><code>src/content/docs/
+  world/
+    overview.md
+    timeline.md
+  characters/
+    index.md
+    character-template.md
+  regions/
+    index.md
+    region-template.md</code></pre>
+      <p>Add this sidebar configuration:</p>
+      <pre><code>sidebar: [
+  {
+    label: 'World',
+    items: [
+      { label: 'Overview', slug: 'world/overview' },
+      { label: 'Timeline', slug: 'world/timeline' },
+    ],
+  },
+  {
+    label: 'Characters',
+    autogenerate: { directory: 'characters' },
+  },
+  {
+    label: 'Regions',
+    autogenerate: { directory: 'regions' },
+  },
+]</code></pre>
+    </section>
+
+    <section>
+      <h2>Troubleshooting</h2>
+      <h3>The page exists but does not appear in the sidebar</h3>
+      <p>Check whether you are using a manual sidebar. If the sidebar is manual, Starlight will not automatically show every new page unless you add it or use an autogenerated group.</p>
+
+      <h3>The sidebar link goes to a 404 page</h3>
+      <p>Check the slug. The slug should match the route created by the file path under <code>src/content/docs/</code>.</p>
+
+      <h3>The sidebar order is wrong</h3>
+      <p>Use a manual sidebar for strict order. Autogenerated sidebars are convenient, but manual sidebars are better for carefully designed reading paths.</p>
+
+      <h3>The site builds locally but assets are missing</h3>
+      <p>Check whether the files are in <code>public/</code> and referenced with root paths like <code>/images/example.png</code>.</p>
+    </section>
+
+    <section>
+      <h2>Recommended Naming Conventions</h2>
+      <p>Pick one naming style and stay consistent.</p>
+      <pre><code>Good:
+markdown-basics.md
+character-template.md
+world-bible-overview.md
+
+Also acceptable:
+markdown_basics.md
+character_template.md
+world_bible_overview.md
+
+Avoid:
+Markdown Basics FINAL New.md
+character template copy 2.md</code></pre>
+      <p>For web routes, hyphenated names are common because they produce readable URLs.</p>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Thing</th>
+            <th>Where It Usually Goes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Documentation page</td>
+            <td><code>src/content/docs/</code></td>
+          </tr>
+          <tr>
+            <td>Markdown page</td>
+            <td><code>src/content/docs/example.md</code></td>
+          </tr>
+          <tr>
+            <td>MDX page</td>
+            <td><code>src/content/docs/example.mdx</code></td>
+          </tr>
+          <tr>
+            <td>Reusable component</td>
+            <td><code>src/components/</code></td>
+          </tr>
+          <tr>
+            <td>Custom CSS</td>
+            <td><code>src/styles/custom.css</code></td>
+          </tr>
+          <tr>
+            <td>Static images/downloads</td>
+            <td><code>public/</code></td>
+          </tr>
+          <tr>
+            <td>Main Starlight config</td>
+            <td><code>astro.config.mjs</code></td>
+          </tr>
+          <tr>
+            <td>Production output</td>
+            <td><code>dist/</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>Use folders to organize meaning.
+Use frontmatter to describe pages.
+Use the sidebar to guide readers.
+Use manual navigation when order matters.
+Use autogenerated navigation when volume matters.
+Use index pages to explain each section.</code></pre>
+    </section>
+
+    <section>
+      <h2>What to Learn Next</h2>
+      <ul>
+        <li>Starlight customization and custom CSS</li>
+        <li>MDX components in Starlight pages</li>
+        <li>Astro content collections and schemas</li>
+        <li>Starlight search and page metadata</li>
+        <li>Mermaid diagrams inside Astro/Starlight</li>
+        <li>Deploying Starlight to Vercel, Netlify, or Cloudflare Pages</li>
+        <li>Building a full world bible structure</li>
+        <li>Building a full lesson library structure</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

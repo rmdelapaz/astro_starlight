@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Content Collections and Schemas Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Content Collections and Schemas</h1>
+    <p>A practical tutorial for using Astro Content Collections and schemas to organize lessons, world bible pages, character sheets, factions, regions, locations, and reference entries.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+      <p>This tutorial explains how to use <strong>Astro Content Collections</strong> and <strong>schemas</strong>.</p>
+      <p>Content Collections let you organize Markdown, MDX, and other content into named groups. Schemas let you define what frontmatter fields each content type is expected to have.</p>
+      <pre><code>Markdown/MDX files
+  ↓
+Content Collection
+  ↓
+Schema validation
+  ↓
+Safe, organized content data
+  ↓
+Pages, indexes, cards, filters, and related links</code></pre>
+    </section>
+
+    <section>
+      <h2>Why Content Collections Matter</h2>
+      <p>Without schemas, each page can accidentally use different frontmatter.</p>
+      <pre><code>---
+title: "Veritas Miraculo"
+faction: "House Miraculo"
+---</code></pre>
+      <pre><code>---
+name: "Aurelian Rassendyll"
+house: "Valoire"
+---</code></pre>
+      <p>Both examples describe characters, but they use different field names. That becomes hard to search, sort, display, or reuse.</p>
+      <p>With a schema, you can require consistent fields:</p>
+      <pre><code>title
+description
+type
+region
+faction
+status
+tags</code></pre>
+      <p>This helps Astro catch mistakes before the site is built.</p>
+    </section>
+
+    <section>
+      <h2>Basic Terms</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Collection</td>
+            <td>A named group of content files, such as lessons, characters, regions, or posts.</td>
+          </tr>
+          <tr>
+            <td>Entry</td>
+            <td>One content file inside a collection.</td>
+          </tr>
+          <tr>
+            <td>Frontmatter</td>
+            <td>The YAML metadata block at the top of a Markdown or MDX file.</td>
+          </tr>
+          <tr>
+            <td>Schema</td>
+            <td>A rule set that defines which frontmatter fields are allowed or required.</td>
+          </tr>
+          <tr>
+            <td>Zod</td>
+            <td>The validation library Astro uses for schemas.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Project Folder Structure</h2>
+      <p>A common Astro content structure looks like this:</p>
+      <pre><code>src/
+  content/
+    lessons/
+      markdown-basics.md
+      mdx-basics.md
+    characters/
+      veritas-miraculo.md
+      aurelian-rassendyll.md
+    regions/
+      europe.md
+      austral-confluence.md
+  content.config.ts</code></pre>
+      <p>Each folder inside <code>src/content/</code> can become a collection.</p>
+      <pre><code>src/content/lessons/     → lessons collection
+src/content/characters/  → characters collection
+src/content/regions/     → regions collection</code></pre>
+      <p>The configuration file is usually:</p>
+      <pre><code>src/content.config.ts</code></pre>
+    </section>
+
+    <section>
+      <h2>Important Note for Starlight</h2>
+      <p>Starlight documentation pages usually live in:</p>
+      <pre><code>src/content/docs/</code></pre>
+      <p>That <code>docs</code> collection is special to Starlight. You can still create other collections beside it:</p>
+      <pre><code>src/content/
+  docs/
+    index.md
+    guides/
+      getting-started.md
+  characters/
+    veritas-miraculo.md
+  lessons/
+    markdown-basics.md
+  regions/
+    europe.md</code></pre>
+      <p>A practical Starlight site might use <code>docs</code> for normal documentation pages and separate collections for structured data like characters, regions, lessons, or factions.</p>
+    </section>
+
+    <section>
+      <h2>Create a Basic Content Config File</h2>
+      <p>Create this file:</p>
+      <pre><code>src/content.config.ts</code></pre>
+      <p>Add a simple collection:</p>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const lessons = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    level: z.enum(['beginner', 'intermediate', 'advanced']),
+    order: z.number(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = {
+  lessons,
+};</code></pre>
+      <p>This says that every lesson entry should have a title, description, level, order number, and tags list.</p>
+    </section>
+
+    <section>
+      <h2>Create a Lesson Entry</h2>
+      <p>Create this file:</p>
+      <pre><code>src/content/lessons/markdown-basics.md</code></pre>
+      <p>Add this content:</p>
+      <pre><code>---
+title: "Markdown Basics"
+description: "Learn how to write headings, lists, links, and code blocks."
+level: "beginner"
+order: 1
+tags:
+  - markdown
+  - writing
+  - docs
+---
+
+# Markdown Basics
+
+Markdown is a plain-text format for writing structured content.</code></pre>
+      <p>If you forget a required field, Astro can report a validation error during development or build.</p>
+    </section>
+
+    <section>
+      <h2>Common Zod Field Types</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Schema Type</th>
+            <th>Use For</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>z.string()</code></td>
+            <td>Text</td>
+            <td>Title, description, role</td>
+          </tr>
+          <tr>
+            <td><code>z.number()</code></td>
+            <td>Numbers</td>
+            <td>Order, level, rating</td>
+          </tr>
+          <tr>
+            <td><code>z.boolean()</code></td>
+            <td>True/false values</td>
+            <td>Draft, featured, spoiler</td>
+          </tr>
+          <tr>
+            <td><code>z.array(z.string())</code></td>
+            <td>Lists of text</td>
+            <td>Tags, skills, aliases</td>
+          </tr>
+          <tr>
+            <td><code>z.enum([...])</code></td>
+            <td>Controlled choices</td>
+            <td>Status, difficulty, region type</td>
+          </tr>
+          <tr>
+            <td><code>z.object({...})</code></td>
+            <td>Nested data</td>
+            <td>Attributes, coordinates, stats</td>
+          </tr>
+          <tr>
+            <td><code>z.coerce.date()</code></td>
+            <td>Dates from frontmatter</td>
+            <td>Published date, updated date</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Required, Optional, and Default Fields</h2>
+      <p>A normal field is required:</p>
+      <pre><code>title: z.string()</code></pre>
+      <p>An optional field can be left out:</p>
+      <pre><code>subtitle: z.string().optional()</code></pre>
+      <p>A default field gets a fallback value:</p>
+      <pre><code>tags: z.array(z.string()).default([])</code></pre>
+      <p>Use defaults when you want the data to always be present, even if the author does not type it.</p>
+    </section>
+
+    <section>
+      <h2>Lesson Schema Example</h2>
+      <p>This schema works well for a tutorial or curriculum site:</p>
+      <pre><code>const lessons = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    course: z.string(),
+    level: z.enum(['beginner', 'intermediate', 'advanced']),
+    order: z.number(),
+    estimatedTime: z.string().optional(),
+    hasExercise: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  }),
+});</code></pre>
+      <p>Example lesson frontmatter:</p>
+      <pre><code>---
+title: "Starlight Sidebar Navigation"
+description: "Learn how to organize sidebar groups and links."
+course: "Astro Starlight"
+level: "intermediate"
+order: 4
+estimatedTime: "35 minutes"
+hasExercise: true
+tags:
+  - astro
+  - starlight
+  - navigation
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Character Schema Example</h2>
+      <p>This schema works for RPG-style character pages or world bible character entries:</p>
+      <pre><code>const characters = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    type: z.literal('character'),
+    role: z.string(),
+    region: z.string(),
+    faction: z.string().optional(),
+    status: z.enum(['active', 'missing', 'dead', 'unknown']).default('active'),
+    attributes: z.object({
+      strength: z.number(),
+      dexterity: z.number(),
+      constitution: z.number(),
+      intelligence: z.number(),
+      wisdom: z.number(),
+      charisma: z.number(),
+    }).optional(),
+    skills: z.array(z.string()).default([]),
+    tags: z.array(z.string()).default([]),
+  }),
+});</code></pre>
+      <p>Example character frontmatter:</p>
+      <pre><code>---
+title: "Veritas Miraculo"
+description: "Heir apparent of House Miraculo and dangerous political rival."
+type: "character"
+role: "Rival heir apparent"
+region: "Europe"
+faction: "House Miraculo"
+status: "active"
+attributes:
+  strength: 10
+  dexterity: 14
+  constitution: 12
+  intelligence: 16
+  wisdom: 15
+  charisma: 18
+skills:
+  - Diplomacy
+  - Strategy
+  - Court politics
+tags:
+  - Europe
+  - House Miraculo
+  - Rival
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Region Schema Example</h2>
+      <pre><code>const regions = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.literal('region'),
+    parentRegion: z.string().optional(),
+    governmentType: z.string().optional(),
+    technologyLevel: z.string().optional(),
+    magicLevel: z.string().optional(),
+    population: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+  }),
+});</code></pre>
+      <p>Example region frontmatter:</p>
+      <pre><code>---
+title: "Austral Confluence"
+description: "A vast spatial anomaly where magic and geography behave differently."
+type: "region"
+governmentType: "Mixed local powers and external interests"
+technologyLevel: "Variable"
+magicLevel: "High"
+population: "Unknown"
+tags:
+  - confluence
+  - magic
+  - frontier
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Faction Schema Example</h2>
+      <pre><code>const factions = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.literal('faction'),
+    region: z.string().optional(),
+    alignment: z.enum(['heroic', 'neutral', 'villainous', 'mixed', 'unknown']).default('unknown'),
+    scope: z.enum(['local', 'regional', 'global', 'interregional']).default('local'),
+    publicStatus: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+  }),
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>Location Schema Example</h2>
+      <pre><code>const locations = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.literal('location'),
+    region: z.string(),
+    locationType: z.enum([
+      'city',
+      'district',
+      'facility',
+      'wilderness',
+      'landmark',
+      'portal',
+      'settlement',
+      'other'
+    ]),
+    securityLevel: z.enum(['low', 'moderate', 'high', 'restricted', 'unknown']).default('unknown'),
+    tags: z.array(z.string()).default([]),
+  }),
+});</code></pre>
+      <p>Controlled choices are useful because they prevent accidental variants such as <code>High</code>, <code>high security</code>, <code>HIGH</code>, and <code>secure</code> all meaning the same thing.</p>
+    </section>
+
+    <section>
+      <h2>Complete content.config.ts Example</h2>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const lessons = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    course: z.string(),
+    level: z.enum(['beginner', 'intermediate', 'advanced']),
+    order: z.number(),
+    estimatedTime: z.string().optional(),
+    hasExercise: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+const characters = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    type: z.literal('character'),
+    role: z.string(),
+    region: z.string(),
+    faction: z.string().optional(),
+    status: z.enum(['active', 'missing', 'dead', 'unknown']).default('active'),
+    skills: z.array(z.string()).default([]),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+const regions = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.literal('region'),
+    parentRegion: z.string().optional(),
+    governmentType: z.string().optional(),
+    technologyLevel: z.string().optional(),
+    magicLevel: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = {
+  lessons,
+  characters,
+  regions,
+};</code></pre>
+    </section>
+
+    <section>
+      <h2>Reading a Collection with getCollection()</h2>
+      <p>Inside an Astro page, you can load collection entries.</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const lessons = await getCollection('lessons');
+
+const sortedLessons = lessons.sort((a, b) => {
+  return a.data.order - b.data.order;
+});
+---
+
+&lt;h1&gt;Lessons&lt;/h1&gt;
+
+&lt;ul&gt;
+  {sortedLessons.map((lesson) =&gt; (
+    &lt;li&gt;
+      &lt;a href={`/lessons/${lesson.id}/`}&gt;
+        {lesson.data.title}
+      &lt;/a&gt;
+    &lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+      <p>The <code>data</code> property contains the validated frontmatter.</p>
+    </section>
+
+    <section>
+      <h2>Filtering Entries</h2>
+      <p>You can filter entries by frontmatter values.</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const beginnerLessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.level === 'beginner';
+});
+---</code></pre>
+      <p>This is useful for creating course pages, tag pages, region pages, faction pages, or character lists.</p>
+    </section>
+
+    <section>
+      <h2>Generating Pages from a Collection</h2>
+      <p>To generate one page per entry, create a dynamic route.</p>
+      <pre><code>src/pages/lessons/[...slug].astro</code></pre>
+      <p>Example:</p>
+      <pre><code>---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons');
+
+  return lessons.map((lesson) =&gt; ({
+    params: { slug: lesson.id },
+    props: { lesson },
+  }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+---
+
+&lt;article&gt;
+  &lt;h1&gt;{lesson.data.title}&lt;/h1&gt;
+  &lt;p&gt;{lesson.data.description}&lt;/p&gt;
+  &lt;Content /&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Using Collection Data for Cards</h2>
+      <p>Collection metadata is useful for index pages.</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const characters = await getCollection('characters');
+---
+
+&lt;h1&gt;Characters&lt;/h1&gt;
+
+&lt;div class="card-grid"&gt;
+  {characters.map((character) =&gt; (
+    &lt;article class="card"&gt;
+      &lt;h2&gt;{character.data.title}&lt;/h2&gt;
+      &lt;p&gt;{character.data.description}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Role:&lt;/strong&gt; {character.data.role}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Region:&lt;/strong&gt; {character.data.region}&lt;/p&gt;
+    &lt;/article&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+      <p>This is why consistent schemas matter. If every character has the same fields, you can create reliable character cards.</p>
+    </section>
+
+    <section>
+      <h2>Reusable Schema Pieces</h2>
+      <p>If several collections use the same fields, create reusable schema pieces.</p>
+      <pre><code>const baseEntry = {
+  title: z.string(),
+  description: z.string().optional(),
+  tags: z.array(z.string()).default([]),
+};
+
+const characters = defineCollection({
+  schema: z.object({
+    ...baseEntry,
+    type: z.literal('character'),
+    role: z.string(),
+    region: z.string(),
+  }),
+});
+
+const regions = defineCollection({
+  schema: z.object({
+    ...baseEntry,
+    type: z.literal('region'),
+    governmentType: z.string().optional(),
+  }),
+});</code></pre>
+      <p>This keeps your schema file shorter and more consistent.</p>
+    </section>
+
+    <section>
+      <h2>Drafts and Publishing</h2>
+      <p>Add a draft field if you want to hide unfinished entries.</p>
+      <pre><code>draft: z.boolean().default(false)</code></pre>
+      <p>Then filter drafts out:</p>
+      <pre><code>const lessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.draft !== true;
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>Dates</h2>
+      <p>Use dates for posts, changelogs, updates, or published lessons.</p>
+      <pre><code>publishedDate: z.coerce.date(),
+updatedDate: z.coerce.date().optional(),</code></pre>
+      <p>Example frontmatter:</p>
+      <pre><code>---
+title: "Astro Content Collections"
+publishedDate: 2026-05-13
+updatedDate: 2026-05-13
+---</code></pre>
+      <p><code>z.coerce.date()</code> is helpful because frontmatter dates often begin as strings.</p>
+    </section>
+
+    <section>
+      <h2>Images</h2>
+      <p>Astro schemas can also work with image helpers for local images. This is useful for thumbnails, portraits, maps, and lesson screenshots.</p>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const characters = defineCollection({
+  schema: ({ image }) =&gt; z.object({
+    title: z.string(),
+    portrait: image().optional(),
+  }),
+});</code></pre>
+      <p>Use image fields when you want Astro to understand an image as part of structured content.</p>
+    </section>
+
+    <section>
+      <h2>References Between Entries</h2>
+      <p>Astro supports references between collections. This can be useful when one type of content points to another.</p>
+      <pre><code>import { defineCollection, reference, z } from 'astro:content';
+
+const characters = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    homeRegion: reference('regions').optional(),
+  }),
+});
+
+const regions = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
+export const collections = {
+  characters,
+  regions,
+};</code></pre>
+      <p>References are useful for relationships such as character-to-region, character-to-faction, location-to-region, and storyline-to-character.</p>
+    </section>
+
+    <section>
+      <h2>Common Content Collection Errors</h2>
+      <h3>Wrong config file location</h3>
+      <pre><code>Correct:
+src/content.config.ts
+
+Usually wrong:
+src/content/content.config.ts</code></pre>
+
+      <h3>Collection name does not match folder name</h3>
+      <pre><code>Folder:
+src/content/characters/
+
+Config:
+export const collections = {
+  characterProfiles,
+};
+
+Problem:
+The collection key should usually match the folder you intend to query.</code></pre>
+
+      <h3>Missing required frontmatter</h3>
+      <pre><code>Schema requires:
+title: z.string()
+
+But entry has no title.</code></pre>
+
+      <h3>Wrong type</h3>
+      <pre><code>Schema expects:
+order: z.number()
+
+But frontmatter has:
+order: "first"</code></pre>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Start with simple schemas and add complexity later.</li>
+        <li>Use <code>z.enum()</code> for controlled categories such as level, status, type, and security level.</li>
+        <li>Use <code>.optional()</code> for fields that genuinely may not exist.</li>
+        <li>Use <code>.default()</code> for fields you want to safely use everywhere.</li>
+        <li>Keep names consistent: <code>region</code> should not also be <code>area</code>, <code>realm</code>, and <code>locationRegion</code> unless they mean different things.</li>
+        <li>Do not overbuild the schema before you understand the content.</li>
+        <li>Use separate collections when different content types need very different metadata.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommended Collections for a Lesson Site</h2>
+      <pre><code>src/content/
+  lessons/
+  courses/
+  exercises/
+  references/
+  cheatsheets/</code></pre>
+      <p>Suggested schema fields:</p>
+      <pre><code>lessons:
+  title
+  description
+  course
+  level
+  order
+  estimatedTime
+  hasExercise
+  tags
+
+courses:
+  title
+  description
+  level
+  order
+  status
+  tags
+
+exercises:
+  title
+  lesson
+  difficulty
+  starterCode
+  solutionAvailable
+  tags</code></pre>
+    </section>
+
+    <section>
+      <h2>Recommended Collections for a World Bible Site</h2>
+      <pre><code>src/content/
+  regions/
+  characters/
+  factions/
+  locations/
+  storylines/
+  timelines/
+  references/</code></pre>
+      <p>Suggested schema fields:</p>
+      <pre><code>characters:
+  title
+  type
+  role
+  region
+  faction
+  status
+  skills
+  tags
+
+regions:
+  title
+  type
+  parentRegion
+  governmentType
+  technologyLevel
+  magicLevel
+  tags
+
+factions:
+  title
+  type
+  region
+  alignment
+  scope
+  publicStatus
+  tags
+
+locations:
+  title
+  type
+  region
+  locationType
+  securityLevel
+  tags
+
+storylines:
+  title
+  type
+  region
+  status
+  mainCharacters
+  themes
+  tags</code></pre>
+    </section>
+
+    <section>
+      <h2>Mini Project: Build a Character Collection</h2>
+      <p>Create this folder:</p>
+      <pre><code>src/content/characters/</code></pre>
+      <p>Create this config:</p>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const characters = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    role: z.string(),
+    region: z.string(),
+    status: z.enum(['active', 'missing', 'dead', 'unknown']).default('active'),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = {
+  characters,
+};</code></pre>
+      <p>Create this entry:</p>
+      <pre><code>---
+title: "Example Character"
+description: "A sample character for testing the schema."
+role: "Investigator"
+region: "Atlantic Compact"
+status: "active"
+tags:
+  - sample
+  - character
+---
+
+# Example Character
+
+## Identity
+
+## Background
+
+## Story Role</code></pre>
+      <p>Then create an index page that loads and displays the character collection.</p>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Need</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Define a collection</td>
+            <td><code>defineCollection()</code></td>
+          </tr>
+          <tr>
+            <td>Create a schema</td>
+            <td><code>z.object({...})</code></td>
+          </tr>
+          <tr>
+            <td>Required text</td>
+            <td><code>z.string()</code></td>
+          </tr>
+          <tr>
+            <td>Optional text</td>
+            <td><code>z.string().optional()</code></td>
+          </tr>
+          <tr>
+            <td>Default list</td>
+            <td><code>z.array(z.string()).default([])</code></td>
+          </tr>
+          <tr>
+            <td>Controlled choices</td>
+            <td><code>z.enum(['one', 'two'])</code></td>
+          </tr>
+          <tr>
+            <td>Read all entries</td>
+            <td><code>getCollection('name')</code></td>
+          </tr>
+          <tr>
+            <td>Render entry body</td>
+            <td><code>render(entry)</code></td>
+          </tr>
+          <tr>
+            <td>Generate pages</td>
+            <td><code>getStaticPaths()</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>If the page is one of many similar pages:
+  use a collection.
+
+If the frontmatter should follow rules:
+  use a schema.
+
+If you need index pages, cards, filters, sorting, or related links:
+  use collection data.
+
+If the page is a one-off landing page:
+  a normal Astro page may be enough.</code></pre>
+    </section>
+
+    <section>
+      <h2>What to Learn Next</h2>
+      <ul>
+        <li>Dynamic routes with collection entries</li>
+        <li>Filtering and sorting collection data</li>
+        <li>Cross-collection references</li>
+        <li>Building character cards from schema data</li>
+        <li>Building course indexes from lesson collections</li>
+        <li>Adding images to content schemas</li>
+        <li>Using Starlight with structured collections</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vercel Basic How-To Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Vercel Basic How-To Tutorial</h1>
+    <p>A beginner-friendly guide to deploying websites and web apps with Vercel.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What Vercel Is</h2>
+      <p>
+        Vercel is a deployment and hosting platform for modern web projects. It is especially popular for
+        frontend projects such as React, Vite, Astro, Next.js, and static HTML/CSS/JavaScript sites.
+      </p>
+      <p>
+        A simple way to think about it is this:
+      </p>
+      <pre><code>GitHub stores your code.
+Vercel builds and publishes your website.</code></pre>
+      <p>
+        When you connect a GitHub repository to Vercel, Vercel can automatically deploy your project every
+        time you push new code.
+      </p>
+    </section>
+
+    <section>
+      <h2>Why Use Vercel?</h2>
+      <p>Vercel is useful when you want to:</p>
+      <ul>
+        <li>Put a website online quickly.</li>
+        <li>Deploy directly from GitHub, GitLab, or Bitbucket.</li>
+        <li>Create preview deployments before making changes live.</li>
+        <li>Host static websites, React apps, Vite apps, Astro sites, and Next.js apps.</li>
+        <li>Add custom domains such as <code>yourdomain.com</code>.</li>
+        <li>Manage environment variables for API keys and configuration values.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>The Basic Vercel Workflow</h2>
+      <p>The standard Vercel workflow looks like this:</p>
+      <pre><code>Write code locally
+      ↓
+Push code to GitHub
+      ↓
+Import the project into Vercel
+      ↓
+Vercel builds the project
+      ↓
+Vercel gives you a live URL
+      ↓
+Every new Git push creates a new deployment</code></pre>
+      <p>
+        This makes Vercel feel like a publish button connected to your Git repository.
+      </p>
+    </section>
+
+    <section>
+      <h2>Before You Deploy</h2>
+      <p>
+        Before sending your project to Vercel, make sure it works on your own computer.
+      </p>
+      <p>For many JavaScript projects, you should run:</p>
+      <pre><code>npm install
+npm run dev</code></pre>
+      <p>Then test the production build:</p>
+      <pre><code>npm run build</code></pre>
+      <p>
+        If <code>npm run build</code> fails locally, it will probably fail on Vercel too. Fix the local build first.
+      </p>
+    </section>
+
+    <section>
+      <h2>Common Build Settings</h2>
+      <p>
+        Vercel usually detects your framework automatically, but it helps to understand the common settings.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Project Type</th>
+            <th>Build Command</th>
+            <th>Output Directory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Plain HTML/CSS/JavaScript</td>
+            <td>None / leave blank</td>
+            <td><code>.</code> or project root</td>
+          </tr>
+          <tr>
+            <td>Vite</td>
+            <td><code>npm run build</code></td>
+            <td><code>dist</code></td>
+          </tr>
+          <tr>
+            <td>Astro</td>
+            <td><code>npm run build</code></td>
+            <td><code>dist</code></td>
+          </tr>
+          <tr>
+            <td>Create React App</td>
+            <td><code>npm run build</code></td>
+            <td><code>build</code></td>
+          </tr>
+          <tr>
+            <td>Next.js</td>
+            <td>Usually automatic</td>
+            <td>Usually automatic</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Push Your Project to GitHub</h2>
+      <p>
+        Vercel works best when your project is stored in a Git repository. If your project is not already on GitHub,
+        you can create a repository and push your code.
+      </p>
+      <pre><code>git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin YOUR_GITHUB_REPO_URL
+git push -u origin main</code></pre>
+      <p>
+        Replace <code>YOUR_GITHUB_REPO_URL</code> with the actual repository URL from GitHub.
+      </p>
+    </section>
+
+    <section>
+      <h2>Create a Vercel Account</h2>
+      <p>
+        Go to the Vercel website and create an account. The easiest option for most beginners is to sign in with GitHub.
+      </p>
+      <pre><code>Sign in with GitHub</code></pre>
+      <p>
+        This allows Vercel to see your repositories and import the one you want to deploy.
+      </p>
+    </section>
+
+    <section>
+      <h2>Import Your Project</h2>
+      <p>Inside the Vercel dashboard, follow this path:</p>
+      <pre><code>Add New...
+      ↓
+Project
+      ↓
+Import your GitHub repository</code></pre>
+      <p>
+        Vercel will inspect your project and try to detect the framework. Review the settings before deploying.
+      </p>
+    </section>
+
+    <section>
+      <h2>Deploy Your Project</h2>
+      <p>
+        After the project is imported and the settings look correct, click:
+      </p>
+      <pre><code>Deploy</code></pre>
+      <p>Vercel will then:</p>
+      <ul>
+        <li>Install your dependencies.</li>
+        <li>Run your build command.</li>
+        <li>Create a deployment.</li>
+        <li>Give you a live website URL.</li>
+      </ul>
+      <p>The first live URL usually looks something like this:</p>
+      <pre><code>your-project-name.vercel.app</code></pre>
+    </section>
+
+    <section>
+      <h2>Update Your Website</h2>
+      <p>
+        After your project is connected to Vercel, updating the live site is usually as simple as pushing new code.
+      </p>
+      <pre><code>git add .
+git commit -m "Update homepage"
+git push</code></pre>
+      <p>
+        Vercel will automatically notice the Git push and create a new deployment.
+      </p>
+    </section>
+
+    <section>
+      <h2>Production Deployments and Preview Deployments</h2>
+      <p>
+        Vercel commonly creates two important kinds of deployments.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Deployment Type</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Production</td>
+            <td>The main live version of your site, usually connected to the <code>main</code> branch.</td>
+          </tr>
+          <tr>
+            <td>Preview</td>
+            <td>A temporary version created from another branch or pull request.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Preview deployments are useful because they let you test changes before making them live.
+      </p>
+      <pre><code>main branch       → production website
+feature branch    → preview website</code></pre>
+    </section>
+
+    <section>
+      <h2>Environment Variables</h2>
+      <p>
+        Environment variables are values stored outside your source code. They are often used for API keys,
+        database URLs, and secret configuration values.
+      </p>
+      <p>Example:</p>
+      <pre><code>API_KEY=abc123</code></pre>
+      <p>In Vercel, environment variables are added here:</p>
+      <pre><code>Project
+  ↓
+Settings
+  ↓
+Environment Variables</code></pre>
+      <p>
+        Important rule: do not hard-code secret API keys directly into your frontend code.
+      </p>
+      <p>
+        Some frontend tools require public environment variables to use a specific prefix.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Public Environment Variable Prefix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Vite</td>
+            <td><code>VITE_</code></td>
+          </tr>
+          <tr>
+            <td>Next.js</td>
+            <td><code>NEXT_PUBLIC_</code></td>
+          </tr>
+          <tr>
+            <td>Create React App</td>
+            <td><code>REACT_APP_</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Custom Domains</h2>
+      <p>
+        Vercel gives your project a free <code>.vercel.app</code> URL, but you can also connect your own domain.
+      </p>
+      <pre><code>Project
+  ↓
+Settings
+  ↓
+Domains
+  ↓
+Add Domain</code></pre>
+      <p>
+        After you add the domain, Vercel will show DNS instructions. You will usually need to update DNS records
+        wherever your domain was purchased.
+      </p>
+    </section>
+
+    <section>
+      <h2>Deploying a Plain HTML Site</h2>
+      <p>For a simple project like this:</p>
+      <pre><code>my-site/
+  index.html
+  about.html
+  styles/
+    main.css
+  scripts/
+    app.js</code></pre>
+      <p>Use these Vercel settings:</p>
+      <pre><code>Framework Preset: Other
+Build Command: leave blank
+Output Directory: .</code></pre>
+      <p>
+        This is the simplest possible deployment style.
+      </p>
+    </section>
+
+    <section>
+      <h2>Deploying a Vite Project</h2>
+      <p>Create or open your Vite project:</p>
+      <pre><code>npm create vite@latest my-app
+cd my-app
+npm install
+npm run dev</code></pre>
+      <p>Test the production build:</p>
+      <pre><code>npm run build</code></pre>
+      <p>Common Vercel settings:</p>
+      <pre><code>Framework Preset: Vite
+Build Command: npm run build
+Output Directory: dist</code></pre>
+    </section>
+
+    <section>
+      <h2>Deploying an Astro Project</h2>
+      <p>Create or open your Astro project:</p>
+      <pre><code>npm create astro@latest
+npm install
+npm run dev
+npm run build</code></pre>
+      <p>Common Vercel settings:</p>
+      <pre><code>Framework Preset: Astro
+Build Command: npm run build
+Output Directory: dist</code></pre>
+      <p>
+        Astro is a strong option for documentation sites, worldbuilding sites, tutorial sites, and content-heavy projects.
+      </p>
+    </section>
+
+    <section>
+      <h2>Optional: Basic vercel.json File</h2>
+      <p>
+        Most beginner projects do not need a <code>vercel.json</code> file. However, it can be useful when you want to customize behavior.
+      </p>
+      <p>Example:</p>
+      <pre><code>{
+  "cleanUrls": true
+}</code></pre>
+      <p>
+        This can make URLs cleaner by removing <code>.html</code> from displayed routes.
+      </p>
+    </section>
+
+    <section>
+      <h2>Common Problems and Fixes</h2>
+
+      <h3>Build Failed</h3>
+      <p>Check these questions:</p>
+      <ul>
+        <li>Does <code>npm run build</code> work locally?</li>
+        <li>Are all dependencies listed in <code>package.json</code>?</li>
+        <li>Are any files missing from the repository?</li>
+        <li>Are required environment variables missing?</li>
+      </ul>
+
+      <h3>Page Not Found</h3>
+      <p>Common causes include:</p>
+      <ul>
+        <li>The output directory is wrong.</li>
+        <li>The project is missing an <code>index.html</code> file.</li>
+        <li>A single-page app has a routing configuration issue.</li>
+        <li>The wrong framework preset was selected.</li>
+      </ul>
+
+      <h3>Environment Variable Is Undefined</h3>
+      <p>Check:</p>
+      <ul>
+        <li>Did you add it in Vercel Project Settings?</li>
+        <li>Did you redeploy after adding it?</li>
+        <li>Did you use the correct public prefix for your framework?</li>
+        <li>Are you trying to expose a server-only secret in browser code?</li>
+      </ul>
+
+      <h3>Images or Assets Are Broken</h3>
+      <p>
+        Make sure your image paths point to files inside the project, not your local computer.
+      </p>
+      <p>Good:</p>
+      <pre><code>&lt;img src="/images/logo.png" alt="Logo"&gt;</code></pre>
+      <p>Bad:</p>
+      <pre><code>&lt;img src="C:\Users\Ray\Desktop\logo.png" alt="Logo"&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Test your project locally before deploying.</li>
+        <li>Run <code>npm run build</code> before pushing major changes.</li>
+        <li>Keep secret values in environment variables.</li>
+        <li>Use preview deployments for large changes.</li>
+        <li>Keep project folders organized.</li>
+        <li>Write clear Git commit messages.</li>
+      </ul>
+      <p>Example project structure for a simple static site:</p>
+      <pre><code>project/
+  index.html
+  styles/
+    main.css
+  scripts/
+    app.js
+  images/
+    logo.png</code></pre>
+    </section>
+
+    <section>
+      <h2>Simple Mental Model</h2>
+      <p>
+        Vercel is like a restaurant kitchen for your website.
+      </p>
+      <pre><code>Your code       = ingredients
+GitHub          = pantry/storage
+Vercel build    = kitchen preparation
+Deployment      = finished meal served to visitors
+Custom domain   = restaurant sign out front</code></pre>
+      <p>
+        You do not usually upload files manually. You push your code to GitHub, and Vercel handles the publishing process.
+      </p>
+    </section>
+
+    <section>
+      <h2>Beginner Checklist</h2>
+      <ul>
+        <li>The project runs locally.</li>
+        <li>The project builds locally.</li>
+        <li>The code is pushed to GitHub.</li>
+        <li>The repository is imported into Vercel.</li>
+        <li>The framework preset is correct.</li>
+        <li>The build command is correct.</li>
+        <li>The output directory is correct.</li>
+        <li>Environment variables are added if needed.</li>
+        <li>The deployment succeeds.</li>
+        <li>The live URL works.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Quick Practice Project</h2>
+      <p>Create a folder called <code>vercel_practice_site</code> with this structure:</p>
+      <pre><code>vercel_practice_site/
+  index.html
+  styles/
+    main.css</code></pre>
+      <p>Use this basic <code>index.html</code> file:</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My First Vercel Site&lt;/title&gt;
+  &lt;link rel="stylesheet" href="/styles/main.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, Vercel!&lt;/h1&gt;
+  &lt;p&gt;This site is deployed online.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p>Deploy settings:</p>
+      <pre><code>Framework Preset: Other
+Build Command: leave blank
+Output Directory: .</code></pre>
+      <p>
+        After deployment, open the live URL and confirm that your page appears.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>End of tutorial.</p>
+  </footer>
+</body>
+</html>

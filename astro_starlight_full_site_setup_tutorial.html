@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Starlight Full Site Setup Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Starlight Full Site Setup Tutorial</h1>
+    <p>A complete beginner-to-intermediate guide for creating a real Astro Starlight tutorial site from scratch, adding pages, organizing folders, configuring navigation, customizing styles, building the project, and preparing it for deployment.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Building</h2>
+      <p>In this tutorial, you will build a working Astro Starlight documentation site that can be used as a tutorial library, world bible, course site, reference manual, or project documentation site.</p>
+      <p>The finished project will include:</p>
+      <ul>
+        <li>A new Astro project with Starlight installed.</li>
+        <li>A clean folder structure for tutorial pages.</li>
+        <li>Markdown pages for lessons and guides.</li>
+        <li>A configured sidebar.</li>
+        <li>A custom CSS file.</li>
+        <li>A basic homepage.</li>
+        <li>A local development workflow.</li>
+        <li>A production build workflow.</li>
+        <li>A deployment-ready <code>dist/</code> folder.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Big Picture Mental Model</h2>
+      <p>Astro is the site builder. Starlight is the documentation theme. Markdown and MDX are the writing formats. Vercel, Netlify, Cloudflare Pages, or another host can publish the final site.</p>
+      <pre><code>Markdown / MDX content
+  ↓
+Astro + Starlight
+  ↓
+Static website build
+  ↓
+dist/ folder
+  ↓
+Deploy online</code></pre>
+      <p>Think of the project like a publishing workshop:</p>
+      <ul>
+        <li><strong>Markdown files</strong> are the manuscript pages.</li>
+        <li><strong>Starlight</strong> is the book layout system.</li>
+        <li><strong>Astro</strong> is the printing press.</li>
+        <li><strong>The <code>dist/</code> folder</strong> is the final printed book ready to ship.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What You Need Before Starting</h2>
+      <p>You should have:</p>
+      <ul>
+        <li>Node.js installed.</li>
+        <li>A terminal or command line.</li>
+        <li>A code editor such as VS Code.</li>
+        <li>Basic comfort with folders and files.</li>
+        <li>Optional but recommended: a GitHub account.</li>
+      </ul>
+      <p>Check Node and npm:</p>
+      <pre><code>node -v
+npm -v</code></pre>
+      <p>If those commands show version numbers, you are ready to continue.</p>
+    </section>
+
+    <section>
+      <h2>Create the Astro Project</h2>
+      <p>Run this command in the folder where you keep your projects:</p>
+      <pre><code>npm create astro@latest</code></pre>
+      <p>The setup tool will ask questions. A practical beginner setup is:</p>
+      <pre><code>Project name:
+  astro-starlight-tutorial-site
+
+Template:
+  Starlight / Documentation starter if available
+
+Install dependencies:
+  Yes
+
+Initialize git repository:
+  Yes
+
+TypeScript:
+  Yes, recommended</code></pre>
+      <p>If the setup tool does not offer Starlight as a starter, choose a basic Astro starter and add Starlight in the next step.</p>
+    </section>
+
+    <section>
+      <h2>Add Starlight to an Existing Astro Project</h2>
+      <p>If your Astro project does not already include Starlight, go into the project folder:</p>
+      <pre><code>cd astro-starlight-tutorial-site</code></pre>
+      <p>Then add Starlight:</p>
+      <pre><code>npx astro add starlight</code></pre>
+      <p>This installs the Starlight integration and updates your project configuration.</p>
+    </section>
+
+    <section>
+      <h2>Start the Development Server</h2>
+      <p>Run:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>Astro will start a local development server. The local URL is commonly:</p>
+      <pre><code>http://localhost:4321/</code></pre>
+      <p>Open that URL in your browser. You should see your Starlight site.</p>
+    </section>
+
+    <section>
+      <h2>Understand the Basic Project Structure</h2>
+      <p>A basic Starlight project may look like this:</p>
+      <pre><code>astro-starlight-tutorial-site/
+  public/
+  src/
+    assets/
+    content/
+      docs/
+        index.md
+    components/
+  astro.config.mjs
+  package.json
+  tsconfig.json</code></pre>
+      <p>The most important files and folders are:</p>
+      <table>
+        <thead>
+          <tr><th>File or Folder</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>src/content/docs/</code></td><td>Starlight documentation pages.</td></tr>
+          <tr><td><code>src/components/</code></td><td>Reusable Astro components.</td></tr>
+          <tr><td><code>src/assets/</code></td><td>Images and assets imported by Astro components.</td></tr>
+          <tr><td><code>public/</code></td><td>Static files copied directly to the final site.</td></tr>
+          <tr><td><code>astro.config.mjs</code></td><td>Main Astro and Starlight configuration file.</td></tr>
+          <tr><td><code>package.json</code></td><td>Project scripts and dependencies.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Create a Useful Site Structure</h2>
+      <p>For a tutorial site, create folders like this inside <code>src/content/docs/</code>:</p>
+      <pre><code>src/content/docs/
+  index.md
+  getting-started.md
+  lessons/
+    index.md
+    beginner/
+      index.md
+      markdown-basics.md
+      yaml-basics.md
+    intermediate/
+      index.md
+      mdx-components.md
+      starlight-sidebar.md
+    advanced/
+      index.md
+      content-collections.md
+      component-overrides.md
+  reference/
+    index.md
+    commands.md
+    troubleshooting.md</code></pre>
+      <p>This structure creates a clear learning path:</p>
+      <pre><code>Start Here
+  Getting Started
+
+Lessons
+  Beginner
+  Intermediate
+  Advanced
+
+Reference
+  Commands
+  Troubleshooting</code></pre>
+    </section>
+
+    <section>
+      <h2>Create the Homepage</h2>
+      <p>Edit or create:</p>
+      <pre><code>src/content/docs/index.md</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: "Astro Starlight Tutorial Site"
+description: "A tutorial library for learning Astro, Starlight, Markdown, MDX, content collections, and deployment."
+template: splash
+hero:
+  title: "Astro Starlight Tutorial Site"
+  tagline: "Build fast documentation, lesson, and world bible sites with Astro and Starlight."
+  actions:
+    - text: "Start Learning"
+      link: "/getting-started/"
+      icon: "right-arrow"
+    - text: "View Lessons"
+      link: "/lessons/"
+      icon: "open-book"
+---
+
+## What This Site Covers
+
+This site teaches how to build and maintain an Astro Starlight documentation project.
+
+## Learning Paths
+
+- Beginner setup
+- Markdown and YAML
+- MDX and custom components
+- Sidebar navigation
+- Content collections
+- Styling and customization
+- Deployment workflow</code></pre>
+      <p>The <code>template: splash</code> frontmatter creates a more landing-page-style home page in Starlight.</p>
+    </section>
+
+    <section>
+      <h2>Create a Getting Started Page</h2>
+      <p>Create:</p>
+      <pre><code>src/content/docs/getting-started.md</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: "Getting Started"
+description: "Start here to learn how this tutorial site is organized."
+---
+
+# Getting Started
+
+This tutorial site is organized into beginner, intermediate, advanced, and reference sections.
+
+## Recommended Order
+
+1. Learn the project structure.
+2. Learn Markdown and YAML.
+3. Learn MDX components.
+4. Learn Starlight sidebar navigation.
+5. Learn content collections.
+6. Customize and deploy the site.</code></pre>
+    </section>
+
+    <section>
+      <h2>Create Lesson Index Pages</h2>
+      <p>Create:</p>
+      <pre><code>src/content/docs/lessons/index.md</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: "Lessons"
+description: "Browse beginner, intermediate, and advanced Astro Starlight lessons."
+---
+
+# Lessons
+
+Use this section to learn Astro and Starlight step by step.
+
+## Sections
+
+- [Beginner Lessons](/lessons/beginner/)
+- [Intermediate Lessons](/lessons/intermediate/)
+- [Advanced Lessons](/lessons/advanced/)</code></pre>
+      <p>Create similar <code>index.md</code> pages for <code>lessons/beginner/</code>, <code>lessons/intermediate/</code>, and <code>lessons/advanced/</code>.</p>
+    </section>
+
+    <section>
+      <h2>Create a Sample Lesson Page</h2>
+      <p>Create:</p>
+      <pre><code>src/content/docs/lessons/beginner/markdown-basics.md</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: "Markdown Basics"
+description: "Learn how Markdown pages work in a Starlight site."
+---
+
+# Markdown Basics
+
+Markdown is a plain-text format for writing structured content.
+
+## Headings
+
+Use number signs for headings.
+
+```md
+# Page Title
+## Major Section
+### Smaller Section
+```
+
+## Lists
+
+```md
+- One item
+- Another item
+- A third item
+```
+
+## Summary
+
+Markdown is the main writing format for most Starlight pages.</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Reference Section</h2>
+      <p>Create:</p>
+      <pre><code>src/content/docs/reference/index.md</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: "Reference"
+description: "Quick references, commands, and troubleshooting notes."
+---
+
+# Reference
+
+This section contains quick lookup pages.
+
+- [Commands](/reference/commands/)
+- [Troubleshooting](/reference/troubleshooting/)</code></pre>
+      <p>Create:</p>
+      <pre><code>src/content/docs/reference/commands.md</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: "Common Commands"
+description: "Common Astro and Starlight project commands."
+---
+
+# Common Commands
+
+## Start the local dev server
+
+```bash
+npm run dev
+```
+
+## Build the production site
+
+```bash
+npm run build
+```
+
+## Preview the production build locally
+
+```bash
+npm run preview
+```</code></pre>
+    </section>
+
+    <section>
+      <h2>Configure the Starlight Sidebar</h2>
+      <p>Open:</p>
+      <pre><code>astro.config.mjs</code></pre>
+      <p>A basic Starlight configuration looks like this:</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'Astro Starlight Tutorial Site',
+    }),
+  ],
+});</code></pre>
+      <p>Now add a sidebar:</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'Astro Starlight Tutorial Site',
+      sidebar: [
+        {
+          label: 'Start Here',
+          items: [
+            { label: 'Home', slug: '' },
+            { label: 'Getting Started', slug: 'getting-started' },
+          ],
+        },
+        {
+          label: 'Lessons',
+          items: [
+            { label: 'Lesson Overview', slug: 'lessons' },
+            {
+              label: 'Beginner',
+              autogenerate: { directory: 'lessons/beginner' },
+            },
+            {
+              label: 'Intermediate',
+              autogenerate: { directory: 'lessons/intermediate' },
+            },
+            {
+              label: 'Advanced',
+              autogenerate: { directory: 'lessons/advanced' },
+            },
+          ],
+        },
+        {
+          label: 'Reference',
+          autogenerate: { directory: 'reference' },
+        },
+      ],
+    }),
+  ],
+});</code></pre>
+      <p>This is a hybrid sidebar. The big sections are manual, while the lesson pages inside folders can be autogenerated.</p>
+    </section>
+
+    <section>
+      <h2>Add Custom CSS</h2>
+      <p>Create:</p>
+      <pre><code>src/styles/custom.css</code></pre>
+      <p>Add simple custom styles:</p>
+      <pre><code>:root {
+  --sl-content-width: 52rem;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.lesson-card {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}</code></pre>
+      <p>Then register the CSS file in <code>astro.config.mjs</code>:</p>
+      <pre><code>export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'Astro Starlight Tutorial Site',
+      customCss: ['./src/styles/custom.css'],
+      sidebar: [
+        // sidebar items here
+      ],
+    }),
+  ],
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>Add Static Assets</h2>
+      <p>For simple static assets, use the <code>public/</code> folder:</p>
+      <pre><code>public/
+  favicon.png
+  images/
+    site-logo.png
+    screenshots/
+    diagrams/
+  downloads/</code></pre>
+      <p>Reference public images with root-relative paths:</p>
+      <pre><code>![Site Logo](/images/site-logo.png)</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Simple MDX Page</h2>
+      <p>Markdown is enough for most pages. Use MDX when you need components.</p>
+      <p>Add MDX support if needed:</p>
+      <pre><code>npx astro add mdx</code></pre>
+      <p>Create:</p>
+      <pre><code>src/content/docs/lessons/intermediate/example-mdx-page.mdx</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: "Example MDX Page"
+description: "A Starlight page that can use components."
+---
+
+# Example MDX Page
+
+This page uses MDX.
+
+&lt;div className="lesson-card"&gt;
+  &lt;h2&gt;MDX Card Example&lt;/h2&gt;
+  &lt;p&gt;MDX lets you mix Markdown with component-style markup.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Add a Reusable Astro Component</h2>
+      <p>Create:</p>
+      <pre><code>src/components/LessonCallout.astro</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+const { title = 'Lesson Note' } = Astro.props;
+---
+
+&lt;aside class="lesson-card"&gt;
+  &lt;h2&gt;{title}&lt;/h2&gt;
+  &lt;slot /&gt;
+&lt;/aside&gt;</code></pre>
+      <p>Use it inside an MDX file:</p>
+      <pre><code>---
+title: "Using Components in MDX"
+description: "A lesson using a reusable Astro component."
+---
+
+import LessonCallout from "../../../components/LessonCallout.astro";
+
+# Using Components in MDX
+
+&lt;LessonCallout title="Remember"&gt;
+Markdown is for writing. MDX is for writing plus components.
+&lt;/LessonCallout&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Check the Site Locally</h2>
+      <p>Run:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>Check these things in the browser:</p>
+      <ul>
+        <li>The homepage loads.</li>
+        <li>The sidebar shows the expected sections.</li>
+        <li>Markdown pages render correctly.</li>
+        <li>MDX pages work if you added MDX.</li>
+        <li>Links point to the right pages.</li>
+        <li>Images and assets load correctly.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Build the Production Site</h2>
+      <p>Run:</p>
+      <pre><code>npm run build</code></pre>
+      <p>If the build succeeds, Astro creates a production-ready output folder:</p>
+      <pre><code>dist/</code></pre>
+      <p>This folder is what static hosts publish online.</p>
+    </section>
+
+    <section>
+      <h2>Preview the Production Build</h2>
+      <p>Run:</p>
+      <pre><code>npm run preview</code></pre>
+      <p>This serves the built <code>dist/</code> version locally. This is useful because sometimes a site works in development but has broken links, paths, or assets after building.</p>
+    </section>
+
+    <section>
+      <h2>Prepare for Deployment</h2>
+      <p>Before deploying, check:</p>
+      <ul>
+        <li><code>npm run build</code> works.</li>
+        <li><code>npm run preview</code> works.</li>
+        <li>The output folder is <code>dist</code>.</li>
+        <li>The project is committed to Git.</li>
+        <li>The remote repository is pushed to GitHub, GitLab, or Bitbucket.</li>
+      </ul>
+      <p>Typical static deployment settings:</p>
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Build command</td><td><code>npm run build</code></td></tr>
+          <tr><td>Output directory</td><td><code>dist</code></td></tr>
+          <tr><td>Install command</td><td><code>npm install</code> or automatic default</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Git Workflow</h2>
+      <p>Initialize Git if you did not do so during project setup:</p>
+      <pre><code>git init
+git add .
+git commit -m "Initial Astro Starlight tutorial site"</code></pre>
+      <p>Add your GitHub remote:</p>
+      <pre><code>git remote add origin YOUR_REPOSITORY_URL
+git branch -M main
+git push -u origin main</code></pre>
+      <p>After the site is connected to a host such as Vercel or Netlify, future updates usually follow this pattern:</p>
+      <pre><code>git add .
+git commit -m "Add new lesson"
+git push</code></pre>
+    </section>
+
+    <section>
+      <h2>Recommended Tutorial Site Table of Contents</h2>
+      <pre><code>Start Here
+  Home
+  Getting Started
+
+Core Tools
+  YAML
+  Markdown
+  MDX
+  Astro Basics
+  Starlight Basics
+
+Project Structure
+  Folder Structure
+  Sidebar Navigation
+  Assets and Images
+  Custom CSS
+
+Components
+  Components in MDX
+  Callout Components
+  Character Cards
+  Lesson Cards
+
+Content Architecture
+  Content Collections
+  Schemas
+  Dynamic Routes
+  Tags and Categories
+
+Customization
+  Styling
+  Homepage Design
+  Component Overrides
+
+Deployment
+  Build and Preview
+  Vercel
+  Netlify
+  Cloudflare Pages
+  Troubleshooting</code></pre>
+    </section>
+
+    <section>
+      <h2>Recommended Folder Structure for a Full Tutorial Site</h2>
+      <pre><code>src/content/docs/
+  index.md
+  getting-started.md
+
+  core-tools/
+    index.md
+    yaml.md
+    markdown.md
+    mdx.md
+
+  project-structure/
+    index.md
+    folders.md
+    sidebar.md
+    assets.md
+
+  components/
+    index.md
+    mdx-components.md
+    callouts.md
+    cards.md
+
+  content-architecture/
+    index.md
+    content-collections.md
+    schemas.md
+    dynamic-routes.md
+    tags.md
+
+  customization/
+    index.md
+    styling.md
+    homepage.md
+    overrides.md
+
+  deployment/
+    index.md
+    build-preview.md
+    vercel.md
+    netlify.md
+    troubleshooting.md</code></pre>
+    </section>
+
+    <section>
+      <h2>Common Problems and Fixes</h2>
+
+      <h3>Problem: The sidebar link goes to a 404 page</h3>
+      <p>Check the slug. A file at:</p>
+      <pre><code>src/content/docs/lessons/beginner/markdown-basics.md</code></pre>
+      <p>usually maps to:</p>
+      <pre><code>lessons/beginner/markdown-basics</code></pre>
+
+      <h3>Problem: A new page does not appear in the sidebar</h3>
+      <p>If you are using a manual sidebar, you must add the new page manually or use an autogenerated group.</p>
+
+      <h3>Problem: Images do not load</h3>
+      <p>If the image is in <code>public/images/</code>, reference it like this:</p>
+      <pre><code>![Example Image](/images/example.png)</code></pre>
+
+      <h3>Problem: Build fails after adding MDX</h3>
+      <p>Check that the MDX file has valid JSX-style syntax and that imported components use the correct relative paths.</p>
+
+      <h3>Problem: Site works in dev but not after build</h3>
+      <p>Run:</p>
+      <pre><code>npm run build
+npm run preview</code></pre>
+      <p>Then test the built site locally before deploying.</p>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Start with Markdown before adding MDX.</li>
+        <li>Use MDX only when the page needs components.</li>
+        <li>Use folders that match reader expectations.</li>
+        <li>Add <code>index.md</code> pages to important folders.</li>
+        <li>Use a hybrid sidebar for growing sites.</li>
+        <li>Keep CSS in a custom CSS file, not scattered through content pages.</li>
+        <li>Build and preview before deploying.</li>
+        <li>Commit small changes often.</li>
+        <li>Keep page titles and descriptions clear for search.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Mini Project Checklist</h2>
+      <pre><code>[ ] Project created
+[ ] Starlight installed
+[ ] Dev server runs
+[ ] Homepage created
+[ ] Getting started page created
+[ ] Lesson folders created
+[ ] Reference section created
+[ ] Sidebar configured
+[ ] Custom CSS connected
+[ ] Sample Markdown lesson added
+[ ] Optional MDX lesson added
+[ ] Build succeeds
+[ ] Preview succeeds
+[ ] Git repository created
+[ ] Project pushed to GitHub
+[ ] Deployment settings ready</code></pre>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>Use Astro for the build system.
+Use Starlight for the docs experience.
+Use Markdown for normal pages.
+Use MDX for component-rich pages.
+Use src/content/docs/ for docs content.
+Use astro.config.mjs for site configuration.
+Use npm run build before deployment.
+Use dist/ as the static output folder.</code></pre>
+    </section>
+
+    <section>
+      <h2>What to Learn Next</h2>
+      <ul>
+        <li>Starlight homepage and landing page design.</li>
+        <li>Starlight styling and theme customization.</li>
+        <li>Asset management for maps, images, and downloads.</li>
+        <li>Mermaid diagrams in Astro/Starlight.</li>
+        <li>Content collections and schemas.</li>
+        <li>Dynamic routes and generated indexes.</li>
+        <li>Tags, categories, and filtering.</li>
+        <li>Deployment to Vercel, Netlify, and Cloudflare Pages.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

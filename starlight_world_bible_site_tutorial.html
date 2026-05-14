@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight World Bible Site Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Starlight World Bible Site Tutorial</h1>
+    <p>A practical capstone tutorial for building a searchable world bible, lore encyclopedia, setting guide, or campaign reference site with Astro and Starlight.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Building</h2>
+      <p>In this tutorial, you will build the structure for a full world bible site. The goal is to organize fictional setting information so it is easy to browse, search, expand, and maintain.</p>
+      <p>The site can support:</p>
+      <ul>
+        <li>World overview pages.</li>
+        <li>Regions and nations.</li>
+        <li>Characters.</li>
+        <li>Factions and organizations.</li>
+        <li>Locations and points of interest.</li>
+        <li>Storylines and timelines.</li>
+        <li>Technology, magic, powers, and rules.</li>
+        <li>Glossary and reference pages.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>The Big Picture</h2>
+      <pre><code>World overview
+  ↓
+Regions and powers
+  ↓
+Characters, factions, locations
+  ↓
+Storylines and timelines
+  ↓
+Reference pages and glossary</code></pre>
+      <p>A world bible is not just lore storage. It is a continuity system. It helps you remember what exists, where it belongs, who is involved, and how different pieces connect.</p>
+    </section>
+
+    <section>
+      <h2>Recommended Folder Structure</h2>
+      <pre><code>src/content/docs/
+  index.md
+  start-here.md
+
+  world/
+    index.md
+    overview.md
+    timeline.md
+    technology.md
+    social-order.md
+    major-conflicts.md
+
+  regions/
+    index.md
+    region-template.md
+    europe.md
+    austral-confluence.md
+    atlantic-compact.md
+
+  characters/
+    index.md
+    character-template.md
+    example-character.md
+
+  factions/
+    index.md
+    faction-template.md
+    example-faction.md
+
+  locations/
+    index.md
+    location-template.md
+    example-location.md
+
+  storylines/
+    index.md
+    storyline-template.md
+    example-storyline.md
+
+  reference/
+    index.md
+    glossary.md
+    naming-conventions.md
+    calendar.md
+    tags.md</code></pre>
+    </section>
+
+    <section>
+      <h2>Homepage Example</h2>
+      <p>Create or edit:</p>
+      <pre><code>src/content/docs/index.md</code></pre>
+      <pre><code>---
+title: "World Bible"
+description: "A searchable reference guide for the setting, characters, factions, locations, and storylines."
+template: splash
+hero:
+  title: "World Bible"
+  tagline: "Explore the setting through regions, characters, factions, locations, timelines, and storylines."
+  actions:
+    - text: "Start Here"
+      link: "/start-here/"
+      icon: "right-arrow"
+    - text: "Explore Regions"
+      link: "/regions/"
+      icon: "map"
+    - text: "View Characters"
+      link: "/characters/"
+      icon: "user"
+      variant: "minimal"
+---
+
+## Explore the Setting
+
+- [World Overview](/world/overview/)
+- [Regions](/regions/)
+- [Characters](/characters/)
+- [Factions](/factions/)
+- [Locations](/locations/)
+- [Storylines](/storylines/)
+- [Timeline](/world/timeline/)
+- [Glossary](/reference/glossary/)</code></pre>
+    </section>
+
+    <section>
+      <h2>World Overview Template</h2>
+      <pre><code>---
+title: "World Overview"
+description: "The central summary of the setting."
+---
+
+# World Overview
+
+## Premise
+
+## Tone and Themes
+
+## Timeline
+
+## Major Regions
+
+## Recognized Powers
+
+## Technology
+
+## Magic or Supernatural Rules
+
+## Social Order
+
+## Key Tensions
+
+## Story Architecture</code></pre>
+    </section>
+
+    <section>
+      <h2>Region Template</h2>
+      <pre><code>---
+title: "Region Template"
+description: "Reusable template for regions, nations, and major territories."
+type: "region"
+tags:
+  - template
+  - region
+---
+
+# Region Template
+
+## Overview
+
+## Historical Development
+
+## Political Structure
+
+## Economy and Infrastructure
+
+## Society and Class
+
+## Technology Level
+
+## Magic or Supernatural Presence
+
+## Major Factions
+
+## Key Locations
+
+## Current Flashpoints
+
+## Narrative Use</code></pre>
+    </section>
+
+    <section>
+      <h2>Character Template</h2>
+      <pre><code>---
+title: "Character Template"
+description: "Reusable template for major and minor characters."
+type: "character"
+role: "TBD"
+region: "TBD"
+status: "active"
+tags:
+  - template
+  - character
+---
+
+# Character Template
+
+## Identity
+
+## Background
+
+## Role in the Setting
+
+## Personality
+
+## Goals
+
+## Flaws
+
+## Relationships
+
+## Secrets
+
+## Arc
+
+## Notes</code></pre>
+    </section>
+
+    <section>
+      <h2>Faction Template</h2>
+      <pre><code>---
+title: "Faction Template"
+description: "Reusable template for organizations, houses, governments, companies, orders, and movements."
+type: "faction"
+alignment: "mixed"
+scope: "regional"
+tags:
+  - template
+  - faction
+---
+
+# Faction Template
+
+## Overview
+
+## Public Face
+
+## Private Reality
+
+## Leadership
+
+## Resources
+
+## Territory or Influence
+
+## Allies
+
+## Rivals and Enemies
+
+## Methods
+
+## Story Use</code></pre>
+    </section>
+
+    <section>
+      <h2>Location Template</h2>
+      <pre><code>---
+title: "Location Template"
+description: "Reusable template for cities, districts, facilities, landmarks, and points of interest."
+type: "location"
+region: "TBD"
+locationType: "other"
+tags:
+  - template
+  - location
+---
+
+# Location Template
+
+## Overview
+
+## Location Type
+
+## Region
+
+## Historical Context
+
+## Political Importance
+
+## Social Importance
+
+## Technology Level
+
+## Security Profile
+
+## Key Groups Present
+
+## Narrative Uses
+
+## Story Hooks</code></pre>
+    </section>
+
+    <section>
+      <h2>Storyline Template</h2>
+      <pre><code>---
+title: "Storyline Template"
+description: "Reusable template for plots, arcs, seasons, and major narrative threads."
+type: "storyline"
+status: "planning"
+tags:
+  - template
+  - storyline
+---
+
+# Storyline Template
+
+## Premise
+
+## Scope
+
+## Region
+
+## Main Cast
+
+## Supporting Cast
+
+## Central Conflict
+
+## Themes
+
+## Act Structure
+
+## World Connections
+
+## Open Plot Questions</code></pre>
+    </section>
+
+    <section>
+      <h2>Sidebar Configuration</h2>
+      <pre><code>sidebar: [
+  {
+    label: 'Start Here',
+    items: [
+      { label: 'Home', slug: '' },
+      { label: 'Start Here', slug: 'start-here' },
+      { label: 'World Overview', slug: 'world/overview' },
+    ],
+  },
+  {
+    label: 'World',
+    autogenerate: { directory: 'world' },
+  },
+  {
+    label: 'Regions',
+    autogenerate: { directory: 'regions' },
+  },
+  {
+    label: 'Characters',
+    autogenerate: { directory: 'characters' },
+  },
+  {
+    label: 'Factions',
+    autogenerate: { directory: 'factions' },
+  },
+  {
+    label: 'Locations',
+    autogenerate: { directory: 'locations' },
+  },
+  {
+    label: 'Storylines',
+    autogenerate: { directory: 'storylines' },
+  },
+  {
+    label: 'Reference',
+    autogenerate: { directory: 'reference' },
+  },
+]</code></pre>
+    </section>
+
+    <section>
+      <h2>Optional Content Collections</h2>
+      <p>For a simple Starlight world bible, regular pages inside <code>src/content/docs/</code> are enough. For structured cards, filters, and generated indexes, create separate collections.</p>
+      <pre><code>src/content/
+  docs/
+  characters/
+  regions/
+  factions/
+  locations/
+  storylines/</code></pre>
+      <p>This lets you create dynamic character indexes, region filters, faction lists, and related-entry sections.</p>
+    </section>
+
+    <section>
+      <h2>World Bible Schema Example</h2>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const characters = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    role: z.string(),
+    region: z.string(),
+    faction: z.string().optional(),
+    status: z.enum(['active', 'missing', 'dead', 'unknown']).default('active'),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+const regions = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.literal('region'),
+    technologyLevel: z.string().optional(),
+    magicLevel: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { characters, regions };</code></pre>
+    </section>
+
+    <section>
+      <h2>Related Links Pattern</h2>
+      <p>At the bottom of major entries, add related pages.</p>
+      <pre><code>## Related Pages
+
+- [Europe](/regions/europe/)
+- [House Valoire](/factions/house-valoire/)
+- [Main Timeline](/world/timeline/)
+- [Glossary](/reference/glossary/)</code></pre>
+      <p>World bible pages become much more useful when they cross-link to related people, places, groups, and storylines.</p>
+    </section>
+
+    <section>
+      <h2>Recommended Tags</h2>
+      <pre><code>entry type:
+  character
+  region
+  faction
+  location
+  storyline
+  reference
+
+story use:
+  protagonist
+  antagonist
+  ally
+  rival
+  mystery
+  flashpoint
+
+world category:
+  politics
+  technology
+  magic
+  economy
+  military
+  culture
+  religion
+  transportation</code></pre>
+    </section>
+
+    <section>
+      <h2>Asset Structure</h2>
+      <pre><code>public/images/
+  maps/
+  characters/
+  factions/
+  locations/
+  timelines/
+  diagrams/
+
+public/downloads/
+  character-template.pdf
+  region-template.pdf
+  faction-template.pdf</code></pre>
+    </section>
+
+    <section>
+      <h2>Build Checklist</h2>
+      <pre><code>[ ] Homepage explains the setting
+[ ] Start Here page exists
+[ ] World overview exists
+[ ] Major folders exist
+[ ] Every major folder has an index.md page
+[ ] Templates exist for repeated page types
+[ ] Sidebar is organized by world category
+[ ] Important entries cross-link to related pages
+[ ] Glossary exists
+[ ] Timeline exists
+[ ] Maps and assets are organized
+[ ] npm run build succeeds</code></pre>
+    </section>
+
+    <section>
+      <h2>Common Mistakes</h2>
+      <h3>No templates</h3>
+      <p>Without templates, every page grows in a different direction. Templates keep entries comparable.</p>
+
+      <h3>No related links</h3>
+      <p>World bible entries should connect to each other. A character should link to their region, faction, storyline, and major relationships.</p>
+
+      <h3>Too much lore on the homepage</h3>
+      <p>The homepage should guide readers. Put detailed lore in the actual world pages.</p>
+
+      <h3>Inconsistent names</h3>
+      <p>Use a naming conventions page to track spelling, titles, factions, places, and terminology.</p>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>Use Starlight for the encyclopedia shell.
+Use templates for repeated page types.
+Use tags for grouping.
+Use related links for continuity.
+Use maps and diagrams for orientation.
+Use indexes to make the world browsable.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

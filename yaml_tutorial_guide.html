@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAML Tutorial Guide</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <main>
+    <h1>YAML Tutorial Guide</h1>
+
+    <section>
+      <h2>What Is YAML?</h2>
+      <p>YAML is a plain-text format for storing structured information. It is often used for configuration files, metadata, settings, and content frontmatter.</p>
+      <p>YAML is designed to be easier for humans to read than formats like JSON or XML. It uses indentation, colons, dashes, and simple key-value pairs.</p>
+      <p>A helpful way to think about YAML:</p>
+      <pre><code>YAML is like a clean notebook page for structured facts.</code></pre>
+      <p>Instead of writing everything as a paragraph, you organize information into labels and values.</p>
+    </section>
+
+    <section>
+      <h2>Why YAML Matters</h2>
+      <p>YAML shows up in many modern web development tools and documentation systems. You may see it in:</p>
+      <ul>
+        <li>Astro and Starlight frontmatter</li>
+        <li>Markdown and MDX page metadata</li>
+        <li>GitHub Actions workflows</li>
+        <li>Docker Compose files</li>
+        <li>Static site generators</li>
+        <li>Configuration files for development tools</li>
+        <li>Worldbuilding, documentation, and content-management projects</li>
+      </ul>
+      <p>For Astro and Starlight, YAML is especially useful because it can store page information at the top of Markdown files.</p>
+    </section>
+
+    <section>
+      <h2>The Basic Shape of YAML</h2>
+      <p>The most basic YAML structure is a key and a value.</p>
+      <pre><code>title: "YAML Tutorial Guide"
+level: "Beginner"
+topic: "Astro and Starlight frontmatter"</code></pre>
+      <p>The word before the colon is the <strong>key</strong>. The information after the colon is the <strong>value</strong>.</p>
+      <pre><code>key: value</code></pre>
+      <p>You can read this like a label on a form.</p>
+      <pre><code>title: "YAML Tutorial Guide"</code></pre>
+      <p>This means:</p>
+      <pre><code>The title is YAML Tutorial Guide.</code></pre>
+    </section>
+
+    <section>
+      <h2>YAML Frontmatter</h2>
+      <p>In Astro, Starlight, Markdown, and MDX files, YAML often appears inside a frontmatter block.</p>
+      <p>Frontmatter is placed at the very top of the file between three dashes:</p>
+      <pre><code>---
+title: "Introduction to Vercel"
+description: "A beginner guide to deploying a website with Vercel"
+---
+
+# Introduction to Vercel
+
+This is the visible page content.</code></pre>
+      <p>The YAML section gives the page metadata. The Markdown section gives the page content.</p>
+      <pre><code>Frontmatter = information about the page
+Markdown = the content of the page</code></pre>
+    </section>
+
+    <section>
+      <h2>YAML in an Astro or Starlight Lesson</h2>
+      <p>A lesson page might begin like this:</p>
+      <pre><code>---
+title: "Using Astro and Starlight"
+description: "Learn how to build a documentation site with Astro and Starlight."
+sidebar:
+  order: 3
+level: "Beginner"
+tags:
+  - Astro
+  - Starlight
+  - Markdown
+  - Web Development
+---
+
+# Using Astro and Starlight
+
+This lesson explains how to create and organize a documentation site.</code></pre>
+      <p>Notice that the page has a title, description, sidebar order, difficulty level, and tags.</p>
+      <p>This information can be used by the site to organize pages, create navigation, display labels, or build indexes.</p>
+    </section>
+
+    <section>
+      <h2>Strings</h2>
+      <p>A string is text.</p>
+      <pre><code>name: "Aurelian Rassendyll"
+role: "Protagonist"
+region: "Europe"</code></pre>
+      <p>Quotes are not always required, but they are often helpful because they make the value clear.</p>
+      <pre><code>name: Aurelian Rassendyll</code></pre>
+      <p>This can work, but quoted strings are safer when your text contains punctuation, special characters, or words that could be misunderstood.</p>
+    </section>
+
+    <section>
+      <h2>Numbers</h2>
+      <p>Numbers do not usually need quotes.</p>
+      <pre><code>strength: 12
+dexterity: 15
+constitution: 13
+level: 5</code></pre>
+      <p>If the value is meant to behave like a number, leave it unquoted.</p>
+      <p>If the value is more like a label, code, or identifier, quotes may be better.</p>
+      <pre><code>year: 2175
+id: "character-001"</code></pre>
+    </section>
+
+    <section>
+      <h2>Booleans</h2>
+      <p>A boolean is a true-or-false value.</p>
+      <pre><code>published: true
+featured: false
+hasMagic: true
+hasSpoilers: false</code></pre>
+      <p>These are useful for turning options on or off.</p>
+    </section>
+
+    <section>
+      <h2>Lists</h2>
+      <p>YAML lists use dashes.</p>
+      <pre><code>tags:
+  - Worldbuilding
+  - Characters
+  - Astro
+  - Starlight</code></pre>
+      <p>This means the key <code>tags</code> has multiple values.</p>
+      <p>You can read it like this:</p>
+      <pre><code>tags include Worldbuilding, Characters, Astro, and Starlight.</code></pre>
+    </section>
+
+    <section>
+      <h2>Nested Information</h2>
+      <p>YAML uses indentation to show that information belongs inside other information.</p>
+      <pre><code>character:
+  name: "Veritas Miraculo"
+  house: "House Miraculo"
+  role: "Heir Apparent"
+  status: "Active"</code></pre>
+      <p>Here, name, house, role, and status are all inside character.</p>
+      <p>Indentation matters. Use spaces, not tabs.</p>
+    </section>
+
+    <section>
+      <h2>Objects</h2>
+      <p>An object is a group of related key-value pairs.</p>
+      <pre><code>attributes:
+  strength: 10
+  dexterity: 14
+  constitution: 12
+  intelligence: 16
+  wisdom: 15
+  charisma: 18</code></pre>
+      <p>This is useful for RPG-style character sheets because the stats belong together under one category.</p>
+    </section>
+
+    <section>
+      <h2>Lists of Objects</h2>
+      <p>You can also create a list where each item has multiple fields.</p>
+      <pre><code>relationships:
+  - name: "Aurelian Valoire VI"
+    type: "True ruler"
+    status: "Hidden"
+  - name: "Elisande Serrat"
+    type: "Political connection"
+    status: "Active"
+  - name: "Veritas Miraculo"
+    type: "Rival"
+    status: "Dangerous"</code></pre>
+      <p>Each dash begins a new relationship. The indented lines describe that relationship.</p>
+    </section>
+
+    <section>
+      <h2>YAML for a World Bible Character Sheet</h2>
+      <p>Here is a practical YAML frontmatter example for a fictional character page.</p>
+      <pre><code>---
+title: "Veritas Miraculo"
+type: "character"
+setting: "2175"
+region: "Europe"
+house: "House Miraculo"
+role: "Heir Apparent / Rival"
+status: "Active"
+
+attributes:
+  strength: 10
+  dexterity: 14
+  constitution: 12
+  intelligence: 16
+  wisdom: 15
+  charisma: 18
+
+skills:
+  - Diplomacy
+  - Strategy
+  - Court Politics
+  - Investigation
+  - Deception
+
+relationships:
+  - name: "Aurelian Valoire VI"
+    type: "Political target"
+    status: "Suspicious"
+  - name: "Aurelian Rassendyll"
+    type: "Potential impostor"
+    status: "Under investigation"
+
+story:
+  firstAppearance: "Europe storyline"
+  arc: "Discovers the ruler may not be who he claims to be."
+  secret: "She is more ruthless than her public image suggests."
+---
+
+# Veritas Miraculo
+
+## Identity
+
+## Background
+
+## Role in the Story
+
+## Personality
+
+## Goals
+
+## Secrets
+
+## Arc</code></pre>
+      <p>The YAML stores the structured sheet. The Markdown below it stores the readable character article.</p>
+    </section>
+
+    <section>
+      <h2>YAML for a Location Page</h2>
+      <pre><code>---
+title: "Manhattan Harbor"
+type: "location"
+setting: "2175"
+region: "North America"
+category: "Urban / Maritime / Political"
+importance: "Major"
+
+features:
+  - Suborbital transit access
+  - Harbor security grid
+  - Diplomatic arrival corridors
+  - Corporate towers
+
+storyUses:
+  - Political meetings
+  - Smuggling routes
+  - High-society gatherings
+  - Surveillance scenes
+---
+
+# Manhattan Harbor
+
+## Overview
+
+## History
+
+## Current Role
+
+## Narrative Uses</code></pre>
+    </section>
+
+    <section>
+      <h2>YAML for a Lesson Page</h2>
+      <pre><code>---
+title: "JavaScript Array Reduce"
+type: "lesson"
+course: "JavaScript Fundamentals"
+level: "Intermediate"
+order: 12
+estimatedTime: "45 minutes"
+
+objectives:
+  - Explain what reduce does
+  - Trace the accumulator and current value
+  - Build a sum function
+  - Build a grouped object from an array
+
+prerequisites:
+  - Arrays
+  - Callback functions
+  - Loops
+
+resources:
+  - title: "MDN reduce documentation"
+    type: "reference"
+  - title: "Practice challenge"
+    type: "exercise"
+---
+
+# JavaScript Array Reduce
+
+## What You Are Learning
+
+## Why It Matters
+
+## Step-by-Step Explanation
+
+## Practice</code></pre>
+    </section>
+
+    <section>
+      <h2>Indentation Rules</h2>
+      <p>YAML depends on indentation. This is one of the most important rules.</p>
+      <p>Good:</p>
+      <pre><code>attributes:
+  strength: 12
+  dexterity: 14
+  constitution: 13</code></pre>
+      <p>Bad:</p>
+      <pre><code>attributes:
+strength: 12
+  dexterity: 14
+ constitution: 13</code></pre>
+      <p>Use consistent spaces. Two spaces is common.</p>
+      <pre><code>Use spaces.
+Do not use tabs.
+Keep indentation consistent.</code></pre>
+    </section>
+
+    <section>
+      <h2>Common YAML Mistakes</h2>
+      <h3>Missing Space After a Colon</h3>
+      <p>Bad:</p>
+      <pre><code>title:"My Page"</code></pre>
+      <p>Good:</p>
+      <pre><code>title: "My Page"</code></pre>
+
+      <h3>Inconsistent Indentation</h3>
+      <p>Bad:</p>
+      <pre><code>stats:
+  strength: 12
+   dexterity: 14</code></pre>
+      <p>Good:</p>
+      <pre><code>stats:
+  strength: 12
+  dexterity: 14</code></pre>
+
+      <h3>Forgetting Quotes Around Complicated Text</h3>
+      <p>Safer:</p>
+      <pre><code>description: "A political rival: charming, strategic, and dangerous."</code></pre>
+
+      <h3>Using Tabs</h3>
+      <p>Bad idea:</p>
+      <pre><code>character:
+	name: "Example"</code></pre>
+      <p>Use spaces instead.</p>
+    </section>
+
+    <section>
+      <h2>YAML Compared to JSON</h2>
+      <p>YAML and JSON can store similar kinds of data. YAML is usually easier to read. JSON is stricter and more common when computers exchange data.</p>
+      <p>YAML:</p>
+      <pre><code>title: "Character Sheet"
+stats:
+  strength: 12
+  dexterity: 14
+tags:
+  - RPG
+  - Worldbuilding</code></pre>
+      <p>JSON:</p>
+      <pre><code>{
+  "title": "Character Sheet",
+  "stats": {
+    "strength": 12,
+    "dexterity": 14
+  },
+  "tags": ["RPG", "Worldbuilding"]
+}</code></pre>
+      <p>Both describe the same kind of information, but YAML is often cleaner for humans to edit inside content files.</p>
+    </section>
+
+    <section>
+      <h2>When to Use YAML</h2>
+      <p>Use YAML when you want structured information that humans can edit easily.</p>
+      <ul>
+        <li>Page titles and descriptions</li>
+        <li>Lesson order and course metadata</li>
+        <li>Character stats and story roles</li>
+        <li>Location categories and tags</li>
+        <li>Site navigation</li>
+        <li>Configuration files</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>When Not to Use YAML</h2>
+      <p>YAML is not always the best choice.</p>
+      <ul>
+        <li>Do not use YAML for long prose. Use Markdown for that.</li>
+        <li>Do not use YAML for large databases. Use a database or JSON/CSV depending on the project.</li>
+        <li>Do not use YAML when indentation errors would create too many problems for your team.</li>
+        <li>Do not store secret API keys in public YAML frontmatter.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Astro and Starlight Mental Model</h2>
+      <p>For Astro and Starlight, think of each content page as two layers:</p>
+      <pre><code>YAML frontmatter = the page's data card
+Markdown body = the page's readable article</code></pre>
+      <p>Example:</p>
+      <pre><code>---
+title: "The Kingdom of Example"
+type: "region"
+tags:
+  - Geography
+  - Government
+  - Economy
+---
+
+# The Kingdom of Example
+
+This is the article about the region.</code></pre>
+    </section>
+
+    <section>
+      <h2>Practice Exercise</h2>
+      <p>Create YAML frontmatter for a fictional RPG character.</p>
+      <p>Include:</p>
+      <ul>
+        <li>title</li>
+        <li>type</li>
+        <li>role</li>
+        <li>level</li>
+        <li>attributes</li>
+        <li>skills</li>
+        <li>equipment</li>
+        <li>relationships</li>
+      </ul>
+      <p>Starter:</p>
+      <pre><code>---
+title: ""
+type: "character"
+role: ""
+level: 1
+
+attributes:
+  strength: 10
+  dexterity: 10
+  constitution: 10
+  intelligence: 10
+  wisdom: 10
+  charisma: 10
+
+skills:
+  - 
+  - 
+  - 
+
+equipment:
+  - 
+  - 
+  - 
+
+relationships:
+  - name: ""
+    type: ""
+    status: ""
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Practice Solution Example</h2>
+      <pre><code>---
+title: "Mira Ashvale"
+type: "character"
+role: "Scout / Reluctant Diplomat"
+level: 3
+status: "Active"
+
+attributes:
+  strength: 9
+  dexterity: 16
+  constitution: 12
+  intelligence: 13
+  wisdom: 15
+  charisma: 11
+
+skills:
+  - Stealth
+  - Survival
+  - Archery
+  - Negotiation
+
+equipment:
+  - Recurve bow
+  - Weather cloak
+  - Field journal
+  - Signal mirror
+
+relationships:
+  - name: "Captain Orin Vale"
+    type: "Mentor"
+    status: "Trusted"
+  - name: "The Glass Court"
+    type: "Political threat"
+    status: "Hostile"
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <pre><code># Key-value pair
+title: "My Page"
+
+# Number
+level: 5
+
+# Boolean
+published: true
+
+# List
+tags:
+  - One
+  - Two
+  - Three
+
+# Nested object
+attributes:
+  strength: 12
+  dexterity: 14
+
+# List of objects
+relationships:
+  - name: "Character One"
+    type: "Ally"
+  - name: "Character Two"
+    type: "Rival"
+
+# Frontmatter block
+---
+title: "My Markdown Page"
+description: "A page with YAML metadata."
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Summary</h2>
+      <p>YAML is a readable way to store structured information. In Astro and Starlight, it is commonly used as frontmatter at the top of Markdown and MDX files.</p>
+      <p>For a world bible, YAML can hold the character sheet, location metadata, faction details, story role, tags, and page organization. Markdown can hold the longer explanation, backstory, and narrative notes.</p>
+      <p>The most important YAML habits are:</p>
+      <ul>
+        <li>Use a space after each colon.</li>
+        <li>Use spaces, not tabs.</li>
+        <li>Keep indentation consistent.</li>
+        <li>Use quotes around text when in doubt.</li>
+        <li>Use lists for multiple values.</li>
+        <li>Use nested objects for grouped information.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

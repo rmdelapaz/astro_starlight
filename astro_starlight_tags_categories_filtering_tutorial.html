@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Starlight Tags Categories and Filtering Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Starlight Tags Categories and Filtering</h1>
+    <p>A practical tutorial for adding tags, categories, difficulty levels, regions, factions, and filtering pages to an Astro Starlight project.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Building</h2>
+      <p>This tutorial shows how to organize a growing Astro Starlight site with tags, categories, and filtered index pages.</p>
+      <p>You will learn how to create:</p>
+      <ul>
+        <li>Tag fields in frontmatter.</li>
+        <li>Category and level fields in schemas.</li>
+        <li>Filtered lesson indexes.</li>
+        <li>Filtered world bible indexes.</li>
+        <li>Tag landing pages.</li>
+        <li>Category pages for lessons, characters, regions, factions, and topics.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Big Picture Mental Model</h2>
+      <p>Tags and categories are labels that help readers find related content.</p>
+      <pre><code>Content page
+  ↓
+Frontmatter metadata
+  ↓
+Collection schema
+  ↓
+Filtering and sorting
+  ↓
+Index pages, tag pages, category pages, related links</code></pre>
+      <p>Think of tags like sticky notes and categories like shelves. A book usually belongs on one main shelf, but it can have many sticky notes.</p>
+    </section>
+
+    <section>
+      <h2>Tags vs Categories</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Concept</th>
+            <th>Meaning</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Category</td>
+            <td>A primary grouping.</td>
+            <td>Beginner, Intermediate, Advanced</td>
+          </tr>
+          <tr>
+            <td>Tag</td>
+            <td>A flexible label that can apply across groups.</td>
+            <td>markdown, deployment, worldbuilding</td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td>The kind of entry.</td>
+            <td>lesson, character, region, faction</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>The state of the entry.</td>
+            <td>draft, active, archived</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Frontmatter Example</h2>
+      <p>A lesson page might use frontmatter like this:</p>
+      <pre><code>---
+title: "Markdown Basics"
+description: "Learn headings, lists, links, and code blocks."
+type: "lesson"
+category: "core-tools"
+level: "beginner"
+tags:
+  - markdown
+  - writing
+  - starlight
+---</code></pre>
+      <p>A world bible character page might use:</p>
+      <pre><code>---
+title: "Example Character"
+description: "A sample world bible character entry."
+type: "character"
+category: "characters"
+region: "Atlantic Compact"
+faction: "Independent"
+tags:
+  - investigator
+  - diplomacy
+  - worldbuilding
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Recommended Metadata Fields for Lessons</h2>
+      <pre><code>title
+description
+type
+category
+level
+order
+tags
+draft</code></pre>
+      <p>Example:</p>
+      <pre><code>---
+title: "Content Collections and Schemas"
+description: "Learn how to validate frontmatter and organize structured content."
+type: "lesson"
+category: "content-architecture"
+level: "advanced"
+order: 7
+draft: false
+tags:
+  - astro
+  - content-collections
+  - schema
+  - zod
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Recommended Metadata Fields for World Bible Entries</h2>
+      <pre><code>title
+description
+type
+category
+region
+faction
+status
+tags</code></pre>
+      <p>Example:</p>
+      <pre><code>---
+title: "Austral Confluence"
+description: "A spatially expanded region where outside technology becomes unreliable."
+type: "region"
+category: "regions"
+region: "Austral Confluence"
+status: "active"
+tags:
+  - confluence
+  - magic
+  - frontier
+  - world-bible
+---</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Content Collection Schema</h2>
+      <p>Create or edit:</p>
+      <pre><code>src/content.config.ts</code></pre>
+      <p>Add a lesson collection:</p>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const lessons = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.literal('lesson'),
+    category: z.string(),
+    level: z.enum(['beginner', 'intermediate', 'advanced']),
+    order: z.number().default(999),
+    draft: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = {
+  lessons,
+};</code></pre>
+      <p>This ensures all lesson entries use consistent metadata.</p>
+    </section>
+
+    <section>
+      <h2>Add a World Bible Collection</h2>
+      <pre><code>import { defineCollection, z } from 'astro:content';
+
+const world = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    type: z.enum(['region', 'character', 'faction', 'location', 'storyline', 'reference']),
+    category: z.string(),
+    region: z.string().optional(),
+    faction: z.string().optional(),
+    status: z.enum(['active', 'draft', 'archived', 'unknown']).default('active'),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = {
+  world,
+};</code></pre>
+      <p>For a large project, separate collections such as <code>characters</code>, <code>regions</code>, and <code>factions</code> may be better. For a smaller project, one <code>world</code> collection can be enough.</p>
+    </section>
+
+    <section>
+      <h2>Folder Structure for Collection-Based Content</h2>
+      <p>A collection-based lesson system might look like this:</p>
+      <pre><code>src/content/
+  lessons/
+    markdown-basics.md
+    yaml-basics.md
+    content-collections.md</code></pre>
+      <p>A collection-based world bible might look like this:</p>
+      <pre><code>src/content/
+  world/
+    regions/europe.md
+    regions/austral-confluence.md
+    characters/example-character.md
+    factions/example-faction.md</code></pre>
+      <p>Starlight's normal docs pages live in <code>src/content/docs/</code>. Custom collection pages can be rendered with Astro pages under <code>src/pages/</code>.</p>
+    </section>
+
+    <section>
+      <h2>Read and Filter a Collection</h2>
+      <p>Use <code>getCollection()</code> in an Astro page.</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const lessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.draft !== true;
+});
+
+const beginnerLessons = lessons.filter((lesson) =&gt; {
+  return lesson.data.level === 'beginner';
+});
+
+const sortedLessons = beginnerLessons.sort((a, b) =&gt; {
+  return a.data.order - b.data.order;
+});
+---
+
+&lt;h1&gt;Beginner Lessons&lt;/h1&gt;
+
+&lt;ul&gt;
+  {sortedLessons.map((lesson) =&gt; (
+    &lt;li&gt;{lesson.data.title}&lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Beginner Lessons Index</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/lessons/beginner.astro</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const lessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.level === 'beginner' &amp;&amp; data.draft !== true;
+});
+
+lessons.sort((a, b) =&gt; a.data.order - b.data.order);
+---
+
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Beginner Lessons&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Beginner Lessons&lt;/h1&gt;
+    &lt;ul&gt;
+      {lessons.map((lesson) =&gt; (
+        &lt;li&gt;
+          &lt;a href={`/lessons/${lesson.id}/`}&gt;{lesson.data.title}&lt;/a&gt;
+          &lt;p&gt;{lesson.data.description}&lt;/p&gt;
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p>This is a simple Astro page, not a Starlight docs page. You can later wrap it in a layout to make it match the rest of the site.</p>
+    </section>
+
+    <section>
+      <h2>Generate Lesson Pages from a Collection</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/lessons/[...slug].astro</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons', ({ data }) =&gt; data.draft !== true);
+
+  return lessons.map((lesson) =&gt; ({
+    params: { slug: lesson.id },
+    props: { lesson },
+  }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+---
+
+&lt;article&gt;
+  &lt;h1&gt;{lesson.data.title}&lt;/h1&gt;
+  &lt;p&gt;{lesson.data.description}&lt;/p&gt;
+  &lt;Content /&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Find All Tags</h2>
+      <p>To build a tag index, collect every tag from every entry.</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+const lessons = await getCollection('lessons', ({ data }) =&gt; data.draft !== true);
+
+const tagSet = new Set();
+
+for (const lesson of lessons) {
+  for (const tag of lesson.data.tags) {
+    tagSet.add(tag);
+  }
+}
+
+const tags = Array.from(tagSet).sort();
+---
+
+&lt;h1&gt;Tags&lt;/h1&gt;
+
+&lt;ul&gt;
+  {tags.map((tag) =&gt; (
+    &lt;li&gt;&lt;a href={`/tags/${tag}/`}&gt;{tag}&lt;/a&gt;&lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Create Dynamic Tag Pages</h2>
+      <p>Create:</p>
+      <pre><code>src/pages/tags/[tag].astro</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons', ({ data }) =&gt; data.draft !== true);
+  const tagSet = new Set();
+
+  for (const lesson of lessons) {
+    for (const tag of lesson.data.tags) {
+      tagSet.add(tag);
+    }
+  }
+
+  return Array.from(tagSet).map((tag) =&gt; ({
+    params: { tag },
+  }));
+}
+
+const { tag } = Astro.params;
+const lessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.draft !== true &amp;&amp; data.tags.includes(tag);
+});
+---
+
+&lt;h1&gt;Tag: {tag}&lt;/h1&gt;
+
+&lt;ul&gt;
+  {lessons.map((lesson) =&gt; (
+    &lt;li&gt;
+      &lt;a href={`/lessons/${lesson.id}/`}&gt;{lesson.data.title}&lt;/a&gt;
+      &lt;p&gt;{lesson.data.description}&lt;/p&gt;
+    &lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Create Category Pages</h2>
+      <p>Categories work like tags, but each page usually has one main category.</p>
+      <pre><code>---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons');
+  const categories = new Set(lessons.map((lesson) =&gt; lesson.data.category));
+
+  return Array.from(categories).map((category) =&gt; ({
+    params: { category },
+  }));
+}
+
+const { category } = Astro.params;
+const lessons = await getCollection('lessons', ({ data }) =&gt; {
+  return data.category === category &amp;&amp; data.draft !== true;
+});
+---
+
+&lt;h1&gt;Category: {category}&lt;/h1&gt;
+
+&lt;ul&gt;
+  {lessons.map((lesson) =&gt; (
+    &lt;li&gt;{lesson.data.title}&lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>World Bible Filtering Examples</h2>
+      <p>Filter by type:</p>
+      <pre><code>const characters = await getCollection('world', ({ data }) =&gt; {
+  return data.type === 'character' &amp;&amp; data.status !== 'draft';
+});</code></pre>
+      <p>Filter by region:</p>
+      <pre><code>const europeEntries = await getCollection('world', ({ data }) =&gt; {
+  return data.region === 'Europe' &amp;&amp; data.status !== 'draft';
+});</code></pre>
+      <p>Filter by faction:</p>
+      <pre><code>const factionEntries = await getCollection('world', ({ data }) =&gt; {
+  return data.faction === 'House Miraculo';
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>Create Related Content</h2>
+      <p>Related content can be found by matching tags.</p>
+      <pre><code>const currentTags = entry.data.tags;
+
+const related = allEntries.filter((candidate) =&gt; {
+  if (candidate.id === entry.id) return false;
+  return candidate.data.tags.some((tag) =&gt; currentTags.includes(tag));
+});</code></pre>
+      <p>This works well for related lessons, characters in the same region, factions connected by theme, or reference pages that share a topic.</p>
+    </section>
+
+    <section>
+      <h2>Designing a Good Tag System</h2>
+      <p>Use consistent lowercase tag names.</p>
+      <pre><code>Good:
+markdown
+mdx
+content-collections
+worldbuilding
+characters
+regions
+
+Avoid:
+Markdown
+markdown basics
+MDX Stuff
+content collections tutorial</code></pre>
+      <p>Tags should be short labels, not full sentences.</p>
+    </section>
+
+    <section>
+      <h2>Recommended Tags for an Astro Tutorial Site</h2>
+      <pre><code>astro
+starlight
+markdown
+mdx
+yaml
+frontmatter
+components
+sidebar
+navigation
+content-collections
+schemas
+deployment
+vercel
+netlify
+cloudflare
+troubleshooting</code></pre>
+    </section>
+
+    <section>
+      <h2>Recommended Tags for a World Bible Site</h2>
+      <pre><code>characters
+regions
+factions
+locations
+storylines
+timeline
+technology
+magic
+politics
+military
+economy
+religion
+culture
+superhuman
+synthetic
+uplifted</code></pre>
+    </section>
+
+    <section>
+      <h2>Tag Display Component</h2>
+      <p>Create:</p>
+      <pre><code>src/components/TagList.astro</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+const { tags = [] } = Astro.props;
+---
+
+{tags.length &gt; 0 &amp;&amp; (
+  &lt;ul class="tag-list"&gt;
+    {tags.map((tag) =&gt; (
+      &lt;li&gt;&lt;a href={`/tags/${tag}/`}&gt;{tag}&lt;/a&gt;&lt;/li&gt;
+    ))}
+  &lt;/ul&gt;
+)}</code></pre>
+      <p>Add CSS:</p>
+      <pre><code>.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.tag-list a {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  text-decoration: none;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Filtering Strategy for Starlight Docs Pages</h2>
+      <p>Starlight documentation pages can use frontmatter and sidebar controls, but generated filtering pages are usually easiest to build with Astro pages and content collections.</p>
+      <p>A good pattern is:</p>
+      <pre><code>src/content/docs/
+  normal Starlight documentation pages
+
+src/content/lessons/
+  structured collection entries
+
+src/pages/tags/[tag].astro
+  generated tag pages
+
+src/pages/categories/[category].astro
+  generated category pages</code></pre>
+      <p>This keeps Starlight good at documentation while letting Astro handle generated indexes and filtered pages.</p>
+    </section>
+
+    <section>
+      <h2>Common Mistakes</h2>
+      <h3>Too many tags</h3>
+      <p>If every page has ten tags, the tag system becomes noisy. Use the few tags that are truly useful.</p>
+
+      <h3>Inconsistent spelling</h3>
+      <pre><code>Bad:
+content collection
+content-collection
+content-collections
+Content Collections</code></pre>
+      <p>Pick one version and reuse it.</p>
+
+      <h3>Using categories as tags</h3>
+      <p>If every lesson has <code>beginner</code>, <code>intermediate</code>, or <code>advanced</code>, that should probably be a <code>level</code> field, not only a tag.</p>
+
+      <h3>Forgetting to filter drafts</h3>
+      <p>If you use <code>draft: true</code>, make sure public indexes exclude drafts.</p>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use categories for primary organization.</li>
+        <li>Use tags for cross-links and related topics.</li>
+        <li>Use enums for controlled fields such as level, type, status, and difficulty.</li>
+        <li>Use lowercase hyphenated tags.</li>
+        <li>Create tag pages only when tags help readers navigate.</li>
+        <li>Filter out drafts from public pages.</li>
+        <li>Sort lessons by order, and sort reference entries alphabetically.</li>
+        <li>Use related-content blocks sparingly.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Mini Project Checklist</h2>
+      <pre><code>[ ] Add tags to lesson frontmatter
+[ ] Add category to lesson frontmatter
+[ ] Add level to lesson frontmatter
+[ ] Create or update content schema
+[ ] Create a filtered beginner lesson page
+[ ] Create a tag index page
+[ ] Create dynamic tag pages
+[ ] Add a TagList component
+[ ] Filter out draft pages
+[ ] Run npm run build</code></pre>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Need</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Flexible labels</td>
+            <td><code>tags: z.array(z.string()).default([])</code></td>
+          </tr>
+          <tr>
+            <td>Main grouping</td>
+            <td><code>category: z.string()</code></td>
+          </tr>
+          <tr>
+            <td>Difficulty level</td>
+            <td><code>level: z.enum([...])</code></td>
+          </tr>
+          <tr>
+            <td>Hide unfinished pages</td>
+            <td><code>draft: z.boolean().default(false)</code></td>
+          </tr>
+          <tr>
+            <td>Read entries</td>
+            <td><code>getCollection()</code></td>
+          </tr>
+          <tr>
+            <td>Generate tag pages</td>
+            <td><code>getStaticPaths()</code></td>
+          </tr>
+          <tr>
+            <td>Filter by tag</td>
+            <td><code>data.tags.includes(tag)</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>Use categories for shelves.
+Use tags for cross-links.
+Use schemas for consistency.
+Use filtered indexes for navigation.
+Use generated tag pages only when they help readers.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Starlight World Factbook World Bible Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Starlight World Factbook World Bible Tutorial</h1>
+    <p>A practical intermediate tutorial for creating an Astro + Starlight documentation site that uses the CIA World Factbook as a guide for organizing a fictional world bible.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Building</h2>
+      <p>In this tutorial, you will create a documentation-style world bible using Astro and Starlight. The structure will be inspired by the CIA World Factbook: each fictional country, region, polity, territory, city-state, colony, or realm gets a consistent reference profile.</p>
+      <p>The final project will work like a lightweight encyclopedia:</p>
+      <pre><code>world-bible/
+  src/
+    content/
+      docs/
+        index.mdx
+        getting-started.mdx
+        regions/
+        countries/
+        organizations/
+        timelines/
+        references/
+  astro.config.mjs
+  package.json</code></pre>
+      <p>Each entry can include categories such as background, geography, people, society, government, economy, energy, communications, transportation, military, security, environment, and transnational issues.</p>
+    </section>
+
+    <section>
+      <h2>Why Use Astro and Starlight?</h2>
+      <p>Astro is designed for content-driven websites. That makes it a natural fit for a world bible because most pages are structured information, not complex app screens.</p>
+      <p>Starlight is Astro's official documentation framework. It gives you a ready-made documentation site with navigation, sidebar structure, Markdown/MDX pages, search, dark mode, and page organization.</p>
+      <p>Instead of manually copying complete HTML files for every country or region, you write world entries in Markdown or MDX and let Starlight handle the site shell.</p>
+    </section>
+
+    <section>
+      <h2>The CIA World Factbook as a Model</h2>
+      <p>The CIA World Factbook was a country reference resource that organized basic information about world entities. Its major categories are a useful model for fictional worldbuilding because they force you to think beyond plot and character.</p>
+      <p>For a world bible, the Factbook-style approach encourages questions like:</p>
+      <ul>
+        <li>Where is this nation or region located?</li>
+        <li>What is its terrain, climate, and resource base?</li>
+        <li>Who lives there?</li>
+        <li>How is it governed?</li>
+        <li>What does its economy depend on?</li>
+        <li>How do people communicate and travel?</li>
+        <li>What military or security systems exist?</li>
+        <li>What disputes, borders, crises, or external pressures shape it?</li>
+      </ul>
+      <p>This is not about copying real-world data. It is about borrowing the organizational logic: a repeatable reference profile for each place.</p>
+    </section>
+
+    <section>
+      <h2>World Bible Categories Based on the Factbook</h2>
+      <p>Use these categories as your starting template:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Factbook-Inspired Category</th>
+            <th>World Bible Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Introduction / Background</td>
+            <td>Short history, origin, mythic background, colonial history, founding event, or major turning point.</td>
+          </tr>
+          <tr>
+            <td>Geography</td>
+            <td>Location, climate, terrain, borders, maps, important regions, natural barriers, resources.</td>
+          </tr>
+          <tr>
+            <td>People and Society</td>
+            <td>Population groups, languages, religions, education, class structure, health, culture, customs.</td>
+          </tr>
+          <tr>
+            <td>Government</td>
+            <td>Political system, capital, administrative divisions, ruling institutions, laws, legitimacy.</td>
+          </tr>
+          <tr>
+            <td>Economy</td>
+            <td>Industries, agriculture, trade, labor, currency, inequality, black markets, resource dependencies.</td>
+          </tr>
+          <tr>
+            <td>Energy</td>
+            <td>Power sources, fuel, magical energy, zero-point systems, crystals, reactors, divine power, scarcity.</td>
+          </tr>
+          <tr>
+            <td>Communications</td>
+            <td>Languages, internet equivalents, courier systems, radio, telepathy networks, printing, censorship.</td>
+          </tr>
+          <tr>
+            <td>Transportation</td>
+            <td>Roads, ports, rail, air, sea lanes, teleport gates, caravans, orbital access, magical transit.</td>
+          </tr>
+          <tr>
+            <td>Military and Security</td>
+            <td>Armed forces, police, intelligence, militias, knightly orders, superhero groups, monster defense.</td>
+          </tr>
+          <tr>
+            <td>Transnational Issues</td>
+            <td>Border conflicts, refugees, smuggling, piracy, invasive species, magical contamination, diplomatic disputes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Install Astro</h2>
+      <p>Create a new Astro project:</p>
+      <pre><code>npm create astro@latest world-bible</code></pre>
+      <p>When prompted, choose a minimal or empty starter. Then move into the project folder:</p>
+      <pre><code>cd world-bible
+npm install</code></pre>
+      <p>Start the development server:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>Your local site will usually open at:</p>
+      <pre><code>http://localhost:4321</code></pre>
+    </section>
+
+    <section>
+      <h2>Add Starlight</h2>
+      <p>Add the Starlight integration:</p>
+      <pre><code>npx astro add starlight</code></pre>
+      <p>This updates your Astro configuration and gives the project documentation-site behavior.</p>
+      <p>After Starlight is installed, your important content folder is usually:</p>
+      <pre><code>src/content/docs/</code></pre>
+      <p>That is where your Markdown and MDX world bible pages will live.</p>
+    </section>
+
+    <section>
+      <h2>Basic Starlight Configuration</h2>
+      <p>Open <code>astro.config.mjs</code>. A basic Starlight setup may look like this:</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'World Bible',
+      description: 'A fictional world reference archive',
+      sidebar: [
+        {
+          label: 'Start Here',
+          items: [
+            { label: 'Overview', slug: 'index' },
+            { label: 'How to Use This Bible', slug: 'getting-started' }
+          ]
+        },
+        {
+          label: 'Countries and Regions',
+          autogenerate: { directory: 'countries' }
+        },
+        {
+          label: 'Organizations',
+          autogenerate: { directory: 'organizations' }
+        },
+        {
+          label: 'Timelines',
+          autogenerate: { directory: 'timelines' }
+        },
+        {
+          label: 'Reference',
+          autogenerate: { directory: 'references' }
+        }
+      ]
+    })
+  ]
+});</code></pre>
+      <p>The <code>sidebar</code> controls how users navigate the documentation site. The <code>autogenerate</code> option can automatically create sidebar entries from folders.</p>
+    </section>
+
+    <section>
+      <h2>Create the Main World Bible Index</h2>
+      <p>Create this file:</p>
+      <pre><code>src/content/docs/index.mdx</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: World Bible Overview
+description: The central reference guide for the setting.
+---
+
+# World Bible Overview
+
+This world bible uses a Factbook-inspired structure to organize the setting.
+
+## Major Sections
+
+- Countries and regions
+- People and society
+- Governments
+- Economies
+- Infrastructure
+- Military and security
+- Transnational issues
+- Story hooks
+
+## How to Use This Site
+
+Use this site as the reference layer for stories, campaigns, lessons, maps, and continuity.</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Reusable Country Template Page</h2>
+      <p>Create a folder:</p>
+      <pre><code>src/content/docs/countries/</code></pre>
+      <p>Then create an example country file:</p>
+      <pre><code>src/content/docs/countries/example-republic.mdx</code></pre>
+      <p>Add the following template:</p>
+      <pre><code>---
+title: Example Republic
+description: A Factbook-style country profile for the Example Republic.
+---
+
+# Example Republic
+
+## Overview
+
+A short summary of the country, its role in the setting, and why it matters.
+
+## Introduction and Background
+
+Describe the founding, historical turning points, major wars, migrations, myths, disasters, revolutions, or dynastic changes.
+
+## Geography
+
+### Location
+
+Where is this country located relative to other important places?
+
+### Terrain
+
+Mountains, deserts, coasts, forests, rivers, islands, underground regions, orbital habitats, or magical zones.
+
+### Climate
+
+Weather patterns, seasons, climate problems, magical weather, artificial climate control, or environmental hazards.
+
+### Natural Resources
+
+Food, water, minerals, energy sources, rare materials, sacred sites, magical substances, or strategic resources.
+
+## People and Society
+
+### Population
+
+How many people live here? How are they distributed?
+
+### Languages
+
+Official languages, trade languages, minority languages, ritual languages, machine languages, or magical speech.
+
+### Culture
+
+Values, customs, social expectations, education, festivals, taboos, family structures, and daily life.
+
+### Social Classes
+
+Elites, workers, citizens, noncitizens, castes, guilds, clans, houses, uplifted beings, synthetics, or outsiders.
+
+## Government
+
+### Government Type
+
+Republic, monarchy, corporate state, city-state, federation, theocracy, council, empire, tribal confederation, artificial intelligence administration, or hybrid system.
+
+### Capital
+
+Name the capital and explain why it matters.
+
+### Administrative Divisions
+
+Provinces, states, wards, colonies, districts, orbitals, territories, noble domains, or autonomous zones.
+
+### Legal System
+
+What is legal authority based on: constitution, religion, custom, royal decree, corporate contract, magical pact, or machine law?
+
+## Economy
+
+### Overview
+
+What does this place produce, import, and export?
+
+### Major Industries
+
+Agriculture, mining, finance, manufacturing, biotech, magical crafting, tourism, extraction, military production, or data services.
+
+### Trade
+
+Who are the major trading partners? What are the bottlenecks or vulnerabilities?
+
+### Inequality and Labor
+
+Who benefits? Who is exploited? What labor systems exist?
+
+## Energy
+
+### Power Sources
+
+Solar, fusion, zero-point energy, oil, coal, wind, magical crystals, divine power, geothermal, antimatter, or biological sources.
+
+### Energy Problems
+
+Shortages, monopolies, sabotage, environmental damage, dependence on foreign supply, or unstable magical reactors.
+
+## Communications
+
+### Media and Information
+
+News, propaganda, public archives, rumor networks, couriers, net systems, magical messages, telepathy, signal towers, or censorship.
+
+### Communications Infrastructure
+
+Satellites, cables, printing presses, carrier birds, relay towers, quantum networks, or local mesh systems.
+
+## Transportation
+
+### Internal Transportation
+
+Roads, trains, ports, canals, walking routes, airships, grav vehicles, riding animals, teleport nodes, or maglev corridors.
+
+### External Connections
+
+Borders, sea lanes, airports, starports, gates, bridges, tunnels, portals, or orbital elevators.
+
+## Military and Security
+
+### Armed Forces
+
+Army, navy, air force, space force, city guard, knightly order, militia, mercenary companies, drones, superhero units, or magical defenders.
+
+### Internal Security
+
+Police, intelligence services, secret police, civic watch, corporate security, temple guards, or automated enforcement.
+
+### Threats
+
+Insurgency, invasion, piracy, terrorism, monsters, rogue machines, magical corruption, organized crime, or succession conflict.
+
+## Environment
+
+### Environmental Issues
+
+Pollution, desertification, flooding, climate engineering, cursed land, invasive species, resource depletion, or terraforming failure.
+
+### Protected Areas
+
+Parks, sacred groves, wildlife preserves, restricted zones, ancient ruins, military exclusion zones, or magical sanctuaries.
+
+## Transnational Issues
+
+### Border Disputes
+
+Who contests the borders and why?
+
+### Refugees and Migration
+
+Who is moving in, out, or through the region?
+
+### Smuggling and Crime
+
+What illegal trade crosses the borders?
+
+### Diplomatic Pressure
+
+Which larger powers influence or threaten this place?
+
+## Story Uses
+
+Explain how this place can be used in stories, campaigns, lessons, or plot arcs.
+
+## Story Hooks
+
+- A crisis exposes a weakness in the government.
+- A border dispute becomes a proxy conflict.
+- A rare resource attracts foreign powers.
+- A reform movement threatens the ruling class.
+- A disaster reveals a hidden historical truth.
+
+## Related Pages
+
+- Neighboring country
+- Major faction
+- Historical event
+- Trade route
+- Timeline entry</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Region Template</h2>
+      <p>Countries are not the only useful world bible entries. You may also need regions, frontiers, seas, planets, dimensions, trade zones, or cultural spheres.</p>
+      <p>Create:</p>
+      <pre><code>src/content/docs/regions/central-sea.mdx</code></pre>
+      <p>Use this structure:</p>
+      <pre><code>---
+title: Central Sea Region
+description: A regional profile for the Central Sea and surrounding powers.
+---
+
+# Central Sea Region
+
+## Overview
+
+## Geography
+
+## Climate and Environment
+
+## Countries and Powers
+
+## Peoples and Cultures
+
+## Trade and Economy
+
+## Transportation Routes
+
+## Military Importance
+
+## Transnational Issues
+
+## Historical Conflicts
+
+## Current Flashpoints
+
+## Story Uses
+
+## Related Pages</code></pre>
+    </section>
+
+    <section>
+      <h2>Create a Reference Page for Standard Fields</h2>
+      <p>A world bible becomes easier to maintain when you define what each field means.</p>
+      <p>Create:</p>
+      <pre><code>src/content/docs/references/factbook-style-fields.mdx</code></pre>
+      <p>Add:</p>
+      <pre><code>---
+title: Factbook-Style Fields
+description: Definitions for the recurring categories used in country and region profiles.
+---
+
+# Factbook-Style Fields
+
+## Introduction and Background
+
+Historical summary and origin context.
+
+## Geography
+
+Physical location, landforms, climate, and resources.
+
+## People and Society
+
+Population, languages, culture, class, education, health, and social structure.
+
+## Government
+
+Political authority, law, administration, institutions, and legitimacy.
+
+## Economy
+
+Production, trade, labor, wealth, scarcity, and strategic industries.
+
+## Energy
+
+Power sources and energy vulnerabilities.
+
+## Communications
+
+Information systems, media, language networks, and censorship.
+
+## Transportation
+
+Movement of people, goods, armies, messages, and resources.
+
+## Military and Security
+
+Defense, policing, intelligence, threats, and internal stability.
+
+## Environment
+
+Ecological systems, hazards, conservation, and environmental damage.
+
+## Transnational Issues
+
+Problems crossing borders: war, refugees, smuggling, disease, piracy, diplomacy, or magical contamination.</code></pre>
+    </section>
+
+    <section>
+      <h2>Add a Worldbuilding Workflow</h2>
+      <p>Use this workflow whenever you create a new country or region.</p>
+      <ol>
+        <li>Create the page in <code>src/content/docs/countries/</code> or <code>src/content/docs/regions/</code>.</li>
+        <li>Fill in the overview first.</li>
+        <li>Add geography and resources second.</li>
+        <li>Add people and society third.</li>
+        <li>Add government and economy fourth.</li>
+        <li>Add infrastructure categories: energy, communications, transportation.</li>
+        <li>Add security and transnational issues.</li>
+        <li>Finish with story uses and story hooks.</li>
+      </ol>
+      <p>This order works because geography and resources shape culture, politics, economy, and conflict.</p>
+    </section>
+
+    <section>
+      <h2>Suggested Folder Structure</h2>
+      <p>A useful structure for a Factbook-style world bible is:</p>
+      <pre><code>src/content/docs/
+  index.mdx
+  getting-started.mdx
+  countries/
+    example-republic.mdx
+    northern-kingdom.mdx
+    river-coalition.mdx
+  regions/
+    central-sea.mdx
+    western-frontier.mdx
+    old-empire-heartland.mdx
+  organizations/
+    trade-league.mdx
+    royal-navy.mdx
+    border-commission.mdx
+  timelines/
+    master-timeline.mdx
+    age-of-expansion.mdx
+  references/
+    factbook-style-fields.mdx
+    naming-conventions.mdx
+    technology-scale.mdx
+    government-types.mdx
+    economic-systems.mdx</code></pre>
+    </section>
+
+    <section>
+      <h2>Use MDX for Richer Entries</h2>
+      <p>Markdown is enough for basic pages. MDX is better when you want to include reusable components, such as warning boxes, cards, maps, timelines, or diagrams.</p>
+      <p>For example, a country page might eventually include:</p>
+      <pre><code>&lt;CountryStats
+  population="42 million"
+  capital="Harbor Crown"
+  government="Constitutional monarchy"
+  majorResource="Rare earth metals"
+/&gt;</code></pre>
+      <p>That requires creating an Astro component and importing it into the MDX page. Start simple with plain headings first, then add components after the information architecture is stable.</p>
+    </section>
+
+    <section>
+      <h2>Add Country Comparison Pages</h2>
+      <p>The World Factbook is useful because it makes entries comparable. Your world bible can do the same.</p>
+      <p>Create:</p>
+      <pre><code>src/content/docs/references/country-comparison-table.mdx</code></pre>
+      <p>Example table:</p>
+      <pre><code>| Country | Government | Major Resource | Major Conflict | Story Use |
+|---|---|---|---|---|
+| Example Republic | Federal republic | Grain and river trade | Border dispute | Political thriller |
+| Northern Kingdom | Hereditary monarchy | Iron and timber | Succession crisis | Court intrigue |
+| River Coalition | Merchant league | Shipping and finance | Pirate raids | Trade war |</code></pre>
+      <p>Comparison pages help you quickly see differences and avoid making every nation feel the same.</p>
+    </section>
+
+    <section>
+      <h2>Add Story Hooks to Every Profile</h2>
+      <p>A real-world reference source is descriptive. A world bible should be descriptive and dramatic. Each entry should include story hooks.</p>
+      <p>Good story hooks usually come from pressure points:</p>
+      <ul>
+        <li>A scarce resource</li>
+        <li>A contested border</li>
+        <li>A legitimacy crisis</li>
+        <li>A new technology</li>
+        <li>A hidden population</li>
+        <li>A transport bottleneck</li>
+        <li>A military imbalance</li>
+        <li>A cultural taboo</li>
+        <li>An environmental hazard</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>## Story Hooks
+
+- The capital depends on water from a rival state.
+- A census reveals that the official population numbers are impossible.
+- A new rail corridor threatens an old smuggling network.
+- The military claims a border incursion, but merchants say it never happened.
+- A sacred mountain also contains the country's most valuable mineral deposit.</code></pre>
+    </section>
+
+    <section>
+      <h2>Run and Build the Project</h2>
+      <p>Start the local development server:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>Create a production build:</p>
+      <pre><code>npm run build</code></pre>
+      <p>Preview the production build:</p>
+      <pre><code>npm run preview</code></pre>
+      <p>Astro's production output usually goes into:</p>
+      <pre><code>dist/</code></pre>
+    </section>
+
+    <section>
+      <h2>Deploy to Netlify or Vercel</h2>
+      <p>For most static Astro/Starlight projects, the deploy settings are straightforward.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Build command</td>
+            <td><code>npm run build</code></td>
+          </tr>
+          <tr>
+            <td>Publish / Output directory</td>
+            <td><code>dist</code></td>
+          </tr>
+          <tr>
+            <td>Install command</td>
+            <td><code>npm install</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The basic deployment flow is:</p>
+      <pre><code>git add .
+git commit -m "Create Astro Starlight world bible"
+git push</code></pre>
+      <p>Then connect the repository to Netlify, Vercel, or another static hosting provider.</p>
+    </section>
+
+    <section>
+      <h2>Common Mistakes</h2>
+      <h3>Using Too Many Categories Too Soon</h3>
+      <p>Start with the core categories first: overview, geography, people, government, economy, security, and story hooks. Add energy, communications, transportation, and transnational issues as the setting grows.</p>
+
+      <h3>Creating Pages Without Comparison</h3>
+      <p>If every country has a monarchy, a mountain range, elite soldiers, and rare minerals, the setting will feel repetitive. Use comparison tables to create contrast.</p>
+
+      <h3>Writing Only Lore, Not Story Pressure</h3>
+      <p>A world bible should help stories happen. Every country or region should have unresolved tensions.</p>
+
+      <h3>Forgetting Navigation</h3>
+      <p>When the site grows, navigation matters as much as content. Keep folders consistent and update the sidebar structure as the world expands.</p>
+
+      <h3>Overbuilding Components Before the Content Exists</h3>
+      <p>Do not build a complex component system first. Create several plain Markdown pages first. Once patterns become obvious, turn those patterns into components.</p>
+    </section>
+
+    <section>
+      <h2>Practice Project</h2>
+      <p>Create three fictional countries using the template:</p>
+      <ol>
+        <li>A wealthy island trade republic.</li>
+        <li>A landlocked mountain monarchy.</li>
+        <li>A frontier federation with unstable borders.</li>
+      </ol>
+      <p>For each one, fill in:</p>
+      <ul>
+        <li>Overview</li>
+        <li>Geography</li>
+        <li>People and society</li>
+        <li>Government</li>
+        <li>Economy</li>
+        <li>Transportation</li>
+        <li>Military and security</li>
+        <li>Transnational issues</li>
+        <li>Story hooks</li>
+      </ul>
+      <p>Then make a comparison table showing how the three countries differ.</p>
+    </section>
+
+    <section>
+      <h2>Suggested Next Improvements</h2>
+      <ul>
+        <li>Add a country stats component for quick facts.</li>
+        <li>Add region maps to each entry.</li>
+        <li>Create a timeline section for major historical periods.</li>
+        <li>Create a glossary of political, magical, technological, or cultural terms.</li>
+        <li>Add relationship pages for alliances, trade routes, and conflicts.</li>
+        <li>Add tags for countries, regions, factions, storylines, and eras.</li>
+        <li>Create a checklist so each country profile has the same minimum fields.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Summary</h2>
+      <p>Astro and Starlight are useful for a world bible because they let you build a structured documentation site from Markdown and MDX files. The CIA World Factbook is useful as a guide because it provides a repeatable way to think about countries and territories.</p>
+      <p>The key idea is simple:</p>
+      <pre><code>Astro provides the site.
+Starlight provides the documentation structure.
+Markdown provides the content.
+The Factbook provides the organizational model.
+Your story world provides the imagination.</code></pre>
+    </section>
+
+    <section>
+      <h2>Source Notes</h2>
+      <p>This tutorial is based on the current Astro and Starlight workflow and the general organizational categories historically used by the CIA World Factbook. The World Factbook category model is adapted here as a fictional worldbuilding structure, not as a source of fictional content.</p>
+      <ul>
+        <li>Astro is a content-driven web framework that can be started with <code>npm create astro@latest</code>.</li>
+        <li>Starlight is Astro's documentation framework/integration for building docs sites.</li>
+        <li>The CIA World Factbook historically organized country information into categories such as background, geography, people, government, economy, communications, transportation, military, and transnational issues, with later descriptions also including energy, environment, terrorism, and related topics.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

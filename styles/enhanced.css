@@ -1,0 +1,1423 @@
+/* Enhanced CSS for Python Course - Responsive, Accessible, and Modern */
+
+/* ===========================
+   Import existing base styles
+   =========================== */
+@import url('main.css');
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+/* Container for responsive content */
+.responsive-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Responsive Canvas/SVG wrapper */
+.canvas-wrapper, .svg-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.responsive-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Mobile-first responsive breakpoints */
+@media (max-width: 768px) {
+    body {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+        padding: 0.75rem;
+        margin: 0.5rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    
+    pre {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 12px;
+        overflow-x: auto;
+    }
+    
+    p {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    
+    /* Hide canvas on mobile, show mobile message */
+    /* !important is required to beat per-canvas inline `display: inline-block`/`display: block` */
+    /* attributes that some lessons set for layout. Without it, those canvases stay visible */
+    /* on mobile and the .canvas-fallback figures render as duplicate content. */
+    canvas {
+        display: none !important;
+    }
+    
+    .mobile-diagram-note {
+        display: block;
+        padding: 15px;
+        background: #e8f4f8;
+        border-radius: 5px;
+        text-align: center;
+        color: #2c3e50;
+        margin: 20px 10px;
+    }
+    
+    /* Stack navigation elements vertically on mobile */
+    .lesson-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .lesson-nav a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-diagram-note {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Even smaller screens */
+    blockquote {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+}
+
+/* ===========================
+   Accessibility Improvements
+   =========================== */
+
+/* Skip to main content link */
+.skip-to-main {
+    position: absolute;
+    left: -10000px;
+    top: 30px;
+    z-index: 999;
+    padding: 10px;
+    background: rgb(59, 130, 246);
+    color: white;
+    text-decoration: none;
+    border-radius: 0 5px 5px 0;
+}
+
+.skip-to-main:focus {
+    left: 0;
+}
+
+/* Focus indicators */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid rgb(59, 130, 246);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    body {
+        background-color: white;
+        color: black;
+    }
+    
+    h1, h2, h3, h4 {
+        background-color: black;
+        color: white;
+    }
+    
+    a {
+        color: blue;
+        text-decoration: underline;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Improve link visibility */
+a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* ===========================
+   Code Highlighting (Prism.js compatible)
+   =========================== */
+
+/* Better code block styling */
+pre[class*="language-"],
+code[class*="language-"] {
+    color: #383a42;
+    background: #fafafa;
+    font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    tab-size: 4;
+    hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: 1em 0;
+    overflow: auto;
+    border-radius: 8px;
+    border: 1px solid #e1e4e8;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em .3em;
+    border-radius: .3em;
+    white-space: normal;
+    background: #f6f8fa;
+}
+
+/* Line numbers */
+.line-numbers {
+    position: relative;
+    padding-left: 3.8em !important;
+    counter-reset: linenumber;
+}
+
+.line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em;
+    letter-spacing: -1px;
+    border-right: 1px solid #e1e4e8;
+    user-select: none;
+}
+
+.line-numbers-rows > span {
+    display: block;
+    counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: #6a737d;
+    display: block;
+    padding-right: 0.8em;
+    text-align: right;
+}
+
+/* Token colors for syntax highlighting */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #6a737d;
+    font-style: italic;
+}
+
+.token.punctuation {
+    color: #383a42;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #e45649;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #50a14f;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #a626a4;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #4078f2;
+}
+
+.token.function,
+.token.class-name {
+    color: #c18401;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e06c75;
+}
+
+/* Override the green color that's hard to read */
+code, pre {
+    color: #383a42 !important;
+    background-color: #f6f8fa !important;
+}
+
+/* Python-specific highlighting when not using Prism */
+.python-code {
+    background: #f6f8fa !important;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+}
+
+/* ===========================
+   Navigation Improvements
+   =========================== */
+
+/* Lesson navigation */
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e4e8;
+}
+
+.lesson-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgb(59, 130, 246);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.lesson-nav a:hover {
+    background: rgb(37, 99, 235);
+    text-decoration: none;
+}
+
+.lesson-nav a:focus {
+    outline: 3px solid rgb(37, 99, 235);
+    outline-offset: 2px;
+}
+
+.lesson-nav .prev-lesson::before {
+    content: "← ";
+    margin-right: 5px;
+}
+
+.lesson-nav .next-lesson::after {
+    content: " →";
+    margin-left: 5px;
+}
+
+.lesson-nav .current-lesson {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Breadcrumb navigation */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: rgb(59, 130, 246);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb .separator {
+    margin: 0 10px;
+    color: #6a737d;
+}
+
+.breadcrumb .current {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* Reading time indicator */
+.reading-time {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #e8f4f8;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #2c3e50;
+    margin: 10px 0;
+}
+
+.reading-time::before {
+    content: "⏱️ ";
+    margin-right: 5px;
+}
+
+/* Progress indicator */
+.progress-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #e1e4e8;
+    z-index: 1000;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, rgb(59, 130, 246), rgb(37, 99, 235));
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+/* ===========================
+   Enhanced Exercise Cards
+   =========================== */
+
+.exercise-card {
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.exercise-header h3 {
+    margin: 0;
+    padding: 0;
+    background: none;
+    color: #2c3e50;
+}
+
+.difficulty-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.difficulty-badge.easy {
+    background: #d4edda;
+    color: #155724;
+}
+
+.difficulty-badge.medium {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.difficulty-badge.hard {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.time-estimate {
+    font-size: 12px;
+    color: #6a737d;
+}
+
+.exercise-body {
+    padding: 15px;
+}
+
+.exercise-actions {
+    padding: 15px;
+    background: #f8f9fa;
+    border-top: 1px solid #e1e4e8;
+    display: flex;
+    gap: 10px;
+}
+
+.exercise-actions button {
+    padding: 8px 16px;
+    border: 1px solid #e1e4e8;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.exercise-actions button:hover {
+    background: #f8f9fa;
+    border-color: rgb(59, 130, 246);
+}
+
+/* ===========================
+   Print Styles
+   =========================== */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .lesson-nav,
+    .progress-indicator,
+    .skip-to-main,
+    canvas,
+    .mobile-diagram-note {
+        display: none !important;
+    }
+    
+    h1, h2, h3, h4 {
+        background: none !important;
+        color: black !important;
+        border-bottom: 2px solid black;
+    }
+    
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+    
+    pre {
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+}
+
+/* ===========================
+   Dark Mode Support
+   Applies when the OS prefers dark AND the user has not manually picked light
+   via the data-theme attribute. The manual [data-theme="dark"] block below
+   mirrors these rules for explicit user choice.
+   =========================== */
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+    }
+    :root:not([data-theme="light"]) h1,
+    :root:not([data-theme="light"]) h2,
+    :root:not([data-theme="light"]) h3,
+    :root:not([data-theme="light"]) h4 {
+        background-color: #2d53a3;
+    }
+    :root:not([data-theme="light"]) pre,
+    :root:not([data-theme="light"]) code {
+        background-color: #2d2d30 !important;
+        color: #d4d4d4 !important;
+        border-color: #3e3e42;
+    }
+    :root:not([data-theme="light"]) .lesson-nav,
+    :root:not([data-theme="light"]) .breadcrumb,
+    :root:not([data-theme="light"]) .exercise-header,
+    :root:not([data-theme="light"]) .exercise-actions {
+        background: #2d2d30;
+        border-color: #3e3e42;
+    }
+    :root:not([data-theme="light"]) a {
+        color: #569cd6;
+    }
+    :root:not([data-theme="light"]) blockquote {
+        background-color: #2d2d30;
+        color: #d4d4d4;
+    }
+}
+
+/* ===========================
+   Theme System (added 2026)
+   CSS variables + manual dark/light toggle via data-theme on <html>
+   - data-theme="dark"  → force dark (overrides OS preference)
+   - data-theme="light" → force light (overrides OS preference)
+   - no attribute       → fall through to @media (prefers-color-scheme: dark) above
+   =========================== */
+
+:root {
+    --bg-color: rgb(248, 250, 252);
+    --card-bg: #ffffff;
+    --nav-bg: #ffffff;
+    --text-color: rgb(51, 65, 85);
+    --text-light: #6a737d;
+    --border-color: #e1e4e8;
+    --primary-color: rgb(59, 130, 246);
+    --primary-hover: rgb(37, 99, 235);
+    --primary-light: rgba(59, 130, 246, 0.08);
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    color-scheme: light dark;
+}
+
+/* Variable overrides when OS prefers dark and user hasn't chosen light */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-color: #1e1e1e;
+        --card-bg: #2d2d30;
+        --nav-bg: #2d2d30;
+        --text-color: #d4d4d4;
+        --text-light: #b0b0b0;
+        --border-color: #3e3e42;
+        --primary-color: #569cd6;
+        --primary-hover: #75b3d6;
+        --primary-light: rgba(86, 156, 214, 0.15);
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.3);
+    }
+}
+
+/* Variable overrides for explicit dark mode */
+:root[data-theme="dark"] {
+    --bg-color: #1e1e1e;
+    --card-bg: #2d2d30;
+    --nav-bg: #2d2d30;
+    --text-color: #d4d4d4;
+    --text-light: #b0b0b0;
+    --border-color: #3e3e42;
+    --primary-color: #569cd6;
+    --primary-hover: #75b3d6;
+    --primary-light: rgba(86, 156, 214, 0.15);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.3);
+}
+
+/* Apply manual dark theme to existing content (mirror of @media block) */
+:root[data-theme="dark"] body {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+}
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4 {
+    background-color: #2d53a3;
+}
+:root[data-theme="dark"] pre,
+:root[data-theme="dark"] code {
+    background-color: #2d2d30 !important;
+    color: #d4d4d4 !important;
+    border-color: #3e3e42;
+}
+:root[data-theme="dark"] .lesson-nav,
+:root[data-theme="dark"] .breadcrumb,
+:root[data-theme="dark"] .exercise-header,
+:root[data-theme="dark"] .exercise-actions {
+    background: #2d2d30;
+    border-color: #3e3e42;
+}
+:root[data-theme="dark"] a { color: #569cd6; }
+:root[data-theme="dark"] blockquote {
+    background-color: #2d2d30;
+    color: #d4d4d4;
+}
+
+/* ===========================
+   Sticky Top Navigation (added 2026)
+   Sits inside body's existing left/right margins (30–40px desktop, 10px mobile).
+   Uses negative margins to span the body's content area edge-to-edge so the
+   sticky header reads as a real bar.
+   =========================== */
+
+.main-nav {
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-sm) var(--spacing-md);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin: 0 -40px var(--spacing-md) -30px;
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        margin: 0 -10px var(--spacing-md) -10px;
+    }
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 var(--spacing-md);
+}
+
+.nav-logo {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+.nav-logo:hover { text-decoration: none; }
+
+.main-nav .nav-links {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav .nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: color 0.2s, background-color 0.2s;
+}
+.main-nav .nav-links a:hover {
+    color: var(--primary-color);
+    background-color: var(--primary-light);
+    text-decoration: none;
+}
+
+.main-nav .nav-divider {
+    width: 1px;
+    height: 1.2rem;
+    background-color: var(--border-color);
+    flex-shrink: 0;
+}
+
+#theme-toggle {
+    background: var(--primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    color: var(--text-color);
+    transition: background-color 0.2s, transform 0.2s;
+    line-height: 1;
+}
+#theme-toggle:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    padding: var(--spacing-xs);
+    line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle { display: block; }
+
+    .main-nav .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+        padding: var(--spacing-md);
+        box-shadow: var(--shadow-md);
+        z-index: 300;
+    }
+    .main-nav .nav-links.active { display: flex; }
+    .main-nav .nav-divider { display: none; }
+}
+
+/* ===========================
+   Phase 3 — Dark Mode Polish (added 2026)
+   Overrides for hard-coded light backgrounds that don't flip with the theme:
+     - Inline-styled boxes: #f0f8ff (info), #fff5f5 (note), #f9f9f9 (neutral)
+     - Class-based: .canvas-wrapper, .svg-wrapper, .reading-time, .mobile-diagram-note
+     - Mermaid container/node/text overrides (main.css uses !important on text fills)
+   Each rule is duplicated under [data-theme="dark"] AND under
+   @media (prefers-color-scheme: dark) :root:not([data-theme="light"]) so the
+   styling holds during the brief pre-JS render on dark-OS systems and after
+   the user manually picks dark.
+   =========================== */
+
+/* ---- Inline-style info boxes (#f0f8ff) ---- */
+:root[data-theme="dark"] [style*="background-color: #f0f8ff" i],
+:root[data-theme="dark"] [style*="background-color:#f0f8ff" i],
+:root[data-theme="dark"] [style*="background: #f0f8ff" i],
+:root[data-theme="dark"] [style*="background:#f0f8ff" i] {
+    background-color: rgba(86, 156, 214, 0.15) !important;
+    color: #d4d4d4 !important;
+}
+
+/* ---- Inline-style note/analogy boxes (#fff5f5) ---- */
+:root[data-theme="dark"] [style*="background-color: #fff5f5" i],
+:root[data-theme="dark"] [style*="background-color:#fff5f5" i],
+:root[data-theme="dark"] [style*="background: #fff5f5" i],
+:root[data-theme="dark"] [style*="background:#fff5f5" i] {
+    background-color: rgba(239, 68, 68, 0.12) !important;
+    color: #d4d4d4 !important;
+}
+
+/* ---- Inline-style neutral boxes (#f9f9f9) ---- */
+:root[data-theme="dark"] [style*="background-color: #f9f9f9" i],
+:root[data-theme="dark"] [style*="background-color:#f9f9f9" i],
+:root[data-theme="dark"] [style*="background: #f9f9f9" i],
+:root[data-theme="dark"] [style*="background:#f9f9f9" i] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #d4d4d4 !important;
+}
+
+/* ---- Class-based light backgrounds ---- */
+:root[data-theme="dark"] .canvas-wrapper,
+:root[data-theme="dark"] .svg-wrapper {
+    background: #2d2d30;
+    border: 1px solid #3e3e42;
+}
+:root[data-theme="dark"] .reading-time {
+    background: rgba(86, 156, 214, 0.2);
+    color: #d4d4d4;
+}
+:root[data-theme="dark"] .mobile-diagram-note {
+    background: #2d2d30;
+    color: #d4d4d4;
+}
+
+/* ---- Mermaid container & node overrides ---- */
+:root[data-theme="dark"] .mermaid_container,
+:root[data-theme="dark"] .mermaid-diagram,
+:root[data-theme="dark"] .mermaid {
+    background-color: #2d2d30;
+    color: #d4d4d4;
+    border-color: #3e3e42;
+}
+:root[data-theme="dark"] .mermaid .node rect,
+:root[data-theme="dark"] .mermaid .node circle,
+:root[data-theme="dark"] .mermaid .node ellipse,
+:root[data-theme="dark"] .mermaid .node polygon,
+:root[data-theme="dark"] .mermaid .node path {
+    fill: #1e1e1e;
+    stroke: #569cd6;
+}
+:root[data-theme="dark"] .mermaid .edgePath .path {
+    stroke: #94a3b8;
+}
+:root[data-theme="dark"] .mermaid .cluster rect {
+    fill: #1e1e1e;
+    stroke: #569cd6;
+}
+/* main.css forces these to dark text via !important; need !important to win */
+:root[data-theme="dark"] .mermaid .label text,
+:root[data-theme="dark"] .mermaid text,
+:root[data-theme="dark"] .mermaid .flowchart-label text,
+:root[data-theme="dark"] .mermaid .mindmap-node text,
+:root[data-theme="dark"] .mermaid .mindmap-node .nodeText,
+:root[data-theme="dark"] .mermaid .nodeLabel {
+    fill: #d4d4d4 !important;
+    color: #d4d4d4 !important;
+}
+:root[data-theme="dark"] .mermaid .label {
+    color: #d4d4d4;
+    fill: #d4d4d4;
+}
+
+/* ---- Same overrides during pre-JS render on dark-OS systems ---- */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) [style*="background-color: #f0f8ff" i],
+    :root:not([data-theme="light"]) [style*="background-color:#f0f8ff" i],
+    :root:not([data-theme="light"]) [style*="background: #f0f8ff" i],
+    :root:not([data-theme="light"]) [style*="background:#f0f8ff" i] {
+        background-color: rgba(86, 156, 214, 0.15) !important;
+        color: #d4d4d4 !important;
+    }
+    :root:not([data-theme="light"]) [style*="background-color: #fff5f5" i],
+    :root:not([data-theme="light"]) [style*="background-color:#fff5f5" i],
+    :root:not([data-theme="light"]) [style*="background: #fff5f5" i],
+    :root:not([data-theme="light"]) [style*="background:#fff5f5" i] {
+        background-color: rgba(239, 68, 68, 0.12) !important;
+        color: #d4d4d4 !important;
+    }
+    :root:not([data-theme="light"]) [style*="background-color: #f9f9f9" i],
+    :root:not([data-theme="light"]) [style*="background-color:#f9f9f9" i],
+    :root:not([data-theme="light"]) [style*="background: #f9f9f9" i],
+    :root:not([data-theme="light"]) [style*="background:#f9f9f9" i] {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: #d4d4d4 !important;
+    }
+    :root:not([data-theme="light"]) .canvas-wrapper,
+    :root:not([data-theme="light"]) .svg-wrapper {
+        background: #2d2d30;
+        border: 1px solid #3e3e42;
+    }
+    :root:not([data-theme="light"]) .reading-time {
+        background: rgba(86, 156, 214, 0.2);
+        color: #d4d4d4;
+    }
+    :root:not([data-theme="light"]) .mobile-diagram-note {
+        background: #2d2d30;
+        color: #d4d4d4;
+    }
+    :root:not([data-theme="light"]) .mermaid_container,
+    :root:not([data-theme="light"]) .mermaid-diagram,
+    :root:not([data-theme="light"]) .mermaid {
+        background-color: #2d2d30;
+        color: #d4d4d4;
+        border-color: #3e3e42;
+    }
+    :root:not([data-theme="light"]) .mermaid .node rect,
+    :root:not([data-theme="light"]) .mermaid .node circle,
+    :root:not([data-theme="light"]) .mermaid .node ellipse,
+    :root:not([data-theme="light"]) .mermaid .node polygon,
+    :root:not([data-theme="light"]) .mermaid .node path {
+        fill: #1e1e1e;
+        stroke: #569cd6;
+    }
+    :root:not([data-theme="light"]) .mermaid .edgePath .path {
+        stroke: #94a3b8;
+    }
+    :root:not([data-theme="light"]) .mermaid .cluster rect {
+        fill: #1e1e1e;
+        stroke: #569cd6;
+    }
+    :root:not([data-theme="light"]) .mermaid .label text,
+    :root:not([data-theme="light"]) .mermaid text,
+    :root:not([data-theme="light"]) .mermaid .flowchart-label text,
+    :root:not([data-theme="light"]) .mermaid .mindmap-node text,
+    :root:not([data-theme="light"]) .mermaid .mindmap-node .nodeText,
+    :root:not([data-theme="light"]) .mermaid .nodeLabel {
+        fill: #d4d4d4 !important;
+        color: #d4d4d4 !important;
+    }
+    :root:not([data-theme="light"]) .mermaid .label {
+        color: #d4d4d4;
+        fill: #d4d4d4;
+    }
+}
+
+/* ===========================
+   Phase 5 — Auto-TOC (added 2026)
+   Built at runtime by nav-enhancements.js / initAutoTOC() from <h2 id> elements.
+   Open: full sticky card under the main-nav.
+   Closed: 44px circular FAB in upper-left, just below the main-nav.
+   =========================== */
+
+.toc-card.auto-toc {
+    position: sticky;
+    top: calc(60px + env(safe-area-inset-top));
+    z-index: 100;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    margin: 0 0 var(--spacing-lg) 0;
+    padding: 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Hide native disclosure marker — we render our own chevron */
+.toc-card.auto-toc summary { list-style: none; }
+.toc-card.auto-toc summary::-webkit-details-marker { display: none; }
+.toc-card.auto-toc summary::marker { content: ''; }
+
+.toc-card.auto-toc summary {
+    cursor: pointer;
+    padding: var(--spacing-sm) var(--spacing-md);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: transparent;
+    color: var(--text-color);
+}
+.toc-card.auto-toc .toc-icon { font-size: 1.25rem; line-height: 1; }
+.toc-card.auto-toc .toc-label { font-size: 1.1rem; font-weight: 700; }
+.toc-card.auto-toc .toc-chevron {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    transition: transform 0.3s ease;
+}
+.toc-card.auto-toc[open] .toc-chevron { transform: rotate(180deg); }
+
+.toc-card.auto-toc nav {
+    padding: 0 var(--spacing-md) var(--spacing-md);
+}
+.toc-card.auto-toc ol {
+    list-style: decimal;
+    padding-left: var(--spacing-xl);
+    margin: 0;
+}
+.toc-card.auto-toc li {
+    padding: 2px 0;
+    margin: 0;
+}
+.toc-card.auto-toc .toc-link {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: inline-block;
+    padding: 2px 0;
+}
+.toc-card.auto-toc .toc-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+.toc-card.auto-toc .toc-link.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ---- Collapsed state: floating action button in upper-left ----
+   Sits just below the sticky main-nav (~60px tall) at left: spacing-lg.
+   --- */
+.toc-card.auto-toc:not([open]) {
+    position: fixed;
+    top: calc(70px + env(safe-area-inset-top));
+    left: var(--spacing-lg);
+    bottom: auto;
+    right: auto;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    z-index: 150;
+    overflow: hidden;
+}
+.toc-card.auto-toc:not([open]):hover {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-lg);
+    filter: brightness(1.1);
+}
+.toc-card.auto-toc:not([open]) summary {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    justify-content: center;
+    color: #fff;
+}
+.toc-card.auto-toc:not([open]) .toc-icon {
+    font-size: 1.25rem;
+    color: #fff;
+}
+.toc-card.auto-toc:not([open]) .toc-label,
+.toc-card.auto-toc:not([open]) .toc-chevron {
+    /* Visually hidden but still accessible to screen readers via summary */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* On small screens, hug the left edge a bit tighter */
+@media (max-width: 768px) {
+    .toc-card.auto-toc:not([open]) {
+        top: calc(62px + env(safe-area-inset-top));
+        left: var(--spacing-md);
+        width: 40px;
+        height: 40px;
+    }
+    .toc-card.auto-toc:not([open]) .toc-icon { font-size: 1.1rem; }
+}
+
+/* ===========================
+   Phase 8 — Pedagogy Upgrade (added 2026)
+   Practice Exercise card + Quick Quiz interactive card.
+
+   Ported from python_intro precedent (chat-37 M1 audit). Adds three new
+   semantic classes to python_gamedev:
+     - .lesson-section  (outer wrapper around an exercise + quiz pair)
+     - .card / .card-info  (matches python_intro design-system shape;
+                            previously only .exercise-card existed here)
+     - .quiz-container / .quiz-question / .quiz-options /
+       .quiz-option / .quiz-feedback  (interactive quiz block)
+
+   Markup pattern:
+
+     <section class="lesson-section">
+       <h2>🏋️ Practice Exercise: …</h2>
+       <div class="card card-info">
+         <h3>Exercise N: …</h3>
+         <p><strong>Objective:</strong> …</p>
+         <h4>Instructions:</h4>
+         <ol>…</ol>
+         <details><summary>💡 Hint</summary>…</details>
+         <details><summary>✅ Example Solution</summary><pre><code>…</code></pre></details>
+       </div>
+       <div class="card quiz-container">
+         <h3>🎯 Quick Quiz</h3>
+         <div class="quiz-question">
+           <p><strong>Question N:</strong> …</p>
+           <div class="quiz-options">
+             <button class="quiz-option" data-correct="true|false"
+                     data-hint="…" data-explanation="…">A) …</button>
+             …
+           </div>
+           <div class="quiz-feedback"></div>
+         </div>
+         …
+       </div>
+     </section>
+
+   JS hook in nav-enhancements.js / initQuizInteractivity() (Phase 8).
+   Success/danger colours hardcoded here (these CSS-variables aren't in
+   python_gamedev's :root; can be promoted to vars in a future Phase-9 lint).
+   =========================== */
+
+.lesson-section {
+    margin: var(--spacing-xl) 0;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md) 0;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.card:hover { box-shadow: var(--shadow-md); }
+
+.card-info {
+    background: #eff6ff;
+    border-left: 4px solid #3b82f6;
+}
+:root[data-theme="dark"] .card-info {
+    background: rgba(86, 156, 214, 0.10);
+    border-left-color: #569cd6;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .card-info {
+        background: rgba(86, 156, 214, 0.10);
+        border-left-color: #569cd6;
+    }
+}
+
+.card-info h3,
+.card-info h4 {
+    background: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--text-color);
+    border: none;
+}
+.card-info p { margin-bottom: var(--spacing-sm); }
+.card-info ol {
+    margin: var(--spacing-sm) 0 var(--spacing-md) var(--spacing-lg);
+    padding-left: var(--spacing-md);
+}
+.card-info ol li { margin-bottom: var(--spacing-xs); }
+.card-info details {
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+}
+.card-info details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+    padding: var(--spacing-xs) 0;
+}
+.card-info details[open] summary { margin-bottom: var(--spacing-sm); }
+.card-info details pre {
+    margin: var(--spacing-sm) 0 0;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    overflow-x: auto;
+}
+
+/* Quiz container + question shell */
+.quiz-container { padding: var(--spacing-lg); }
+.quiz-container h3 {
+    background: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-md) 0;
+    color: var(--text-color);
+    border: none;
+}
+.quiz-question {
+    margin: var(--spacing-md) 0;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+.quiz-question:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.quiz-question p { margin-bottom: var(--spacing-sm); }
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+}
+
+/* Quiz options — buttons. Override the global button styling deliberately:
+   the global .button/button rules paint primary-blue + white; quiz options
+   need to look like neutral selectable cards until clicked. */
+.quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.quiz-option:hover {
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+    color: var(--text-color);
+    transform: none;
+    box-shadow: none;
+}
+.quiz-option.correct {
+    border-color: #22c55e;
+    background-color: #f0fdf4;
+    color: #14532d;
+}
+.quiz-option.incorrect {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+    color: #7f1d1d;
+}
+:root[data-theme="dark"] .quiz-option.correct {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: #86efac;
+    border-color: #22c55e;
+}
+:root[data-theme="dark"] .quiz-option.incorrect {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+    border-color: #ef4444;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .quiz-option.correct {
+        background-color: rgba(34, 197, 94, 0.15);
+        color: #86efac;
+        border-color: #22c55e;
+    }
+    :root:not([data-theme="light"]) .quiz-option.incorrect {
+        background-color: rgba(239, 68, 68, 0.15);
+        color: #fca5a5;
+        border-color: #ef4444;
+    }
+}
+
+/* Quiz feedback — surfaces hint or explanation after a click. */
+.quiz-feedback {
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    min-height: 1.5em;
+    transition: background-color 0.2s, color 0.2s;
+}
+.quiz-feedback.correct {
+    color: #14532d;
+    background-color: #f0fdf4;
+}
+.quiz-feedback.incorrect {
+    color: #7f1d1d;
+    background-color: #fef2f2;
+}
+:root[data-theme="dark"] .quiz-feedback.correct {
+    color: #86efac;
+    background-color: rgba(34, 197, 94, 0.12);
+}
+:root[data-theme="dark"] .quiz-feedback.incorrect {
+    color: #fca5a5;
+    background-color: rgba(239, 68, 68, 0.12);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .quiz-feedback.correct {
+        color: #86efac;
+        background-color: rgba(34, 197, 94, 0.12);
+    }
+    :root:not([data-theme="light"]) .quiz-feedback.incorrect {
+        color: #fca5a5;
+        background-color: rgba(239, 68, 68, 0.12);
+    }
+}
+
+/* ===========================
+   Phase 7 — Mobile Canvas Fallbacks (added 2026)
+   On viewports where canvas is hidden by the existing
+     @media (max-width: 768px) { canvas { display: none; } }
+   rule, show a static SVG fallback inside the same .canvas-wrapper.
+
+   Markup pattern (injected by wrap_canvas_fallbacks.py per the catalog at
+   phase7-canvas-fallback-catalog.json):
+
+     <div class="canvas-wrapper">
+       <canvas id="…" …></canvas>
+       <figure class="canvas-fallback">
+         <img class="responsive-svg" src="/images/components/….svg" alt="…" loading="lazy">
+         <figcaption>…</figcaption>
+       </figure>
+     </div>
+
+   Hidden by default on desktop. Only flips visible at ≤ 768px so it never
+   competes with the live canvas demo. Theming inherits from .canvas-wrapper
+   (Phase 3 already polishes that for dark mode).
+   =========================== */
+
+.canvas-fallback {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .canvas-fallback {
+        display: block;
+        text-align: center;
+        margin: 0;
+    }
+    .canvas-fallback .responsive-svg {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        margin: 0 auto;
+    }
+    .canvas-fallback figcaption {
+        font-size: 0.92rem;
+        color: var(--text-light);
+        margin-top: 0.5rem;
+        font-style: italic;
+        padding: 0 0.5rem;
+        text-align: center;
+        line-height: 1.45;
+    }
+}
+
+/* Print: hide fallbacks (canvas is already hidden in print) */
+@media print {
+    .canvas-fallback { display: none !important; }
+}

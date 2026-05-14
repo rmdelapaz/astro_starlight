@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Styling and Theme Customization Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Starlight Styling and Theme Customization Tutorial</h1>
+    <p>A practical guide to safely customizing the visual design of an Astro Starlight site with custom CSS, theme variables, colors, typography, spacing, cards, dark mode, and layout adjustments.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+      <p>This tutorial teaches how to customize the look and feel of an Astro Starlight site without immediately replacing Starlight's built-in components.</p>
+      <p>You will learn how to:</p>
+      <ul>
+        <li>Add a custom CSS file to a Starlight project.</li>
+        <li>Change colors using Starlight CSS variables.</li>
+        <li>Adjust typography, spacing, and content width.</li>
+        <li>Style homepage cards, lesson cards, callouts, and world bible panels.</li>
+        <li>Handle light mode and dark mode safely.</li>
+        <li>Know when CSS is enough and when component overrides are needed.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>The Big Idea</h2>
+      <p>Starlight already provides a complete documentation design system: layout, sidebar, search, typography, content width, code blocks, headings, colors, dark mode, and page structure.</p>
+      <p>The safest customization path is:</p>
+      <pre><code>Start with default Starlight
+  ↓
+Add custom CSS
+  ↓
+Adjust theme variables
+  ↓
+Add custom utility classes
+  ↓
+Create reusable components
+  ↓
+Override built-in components only when necessary</code></pre>
+      <p>Do not jump directly to component overrides for basic visual changes. Most theme changes should start with CSS.</p>
+    </section>
+
+    <section>
+      <h2>Where Custom Styling Lives</h2>
+      <p>Create a custom CSS file inside the <code>src/</code> folder:</p>
+      <pre><code>src/styles/custom.css</code></pre>
+      <p>Then register it in <code>astro.config.mjs</code> using Starlight's <code>customCss</code> option.</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Starlight Site',
+      customCss: ['./src/styles/custom.css'],
+    }),
+  ],
+});</code></pre>
+      <p>This keeps custom design work in one predictable place.</p>
+    </section>
+
+    <section>
+      <h2>Why Use customCss Instead of Random Style Tags?</h2>
+      <p>A Starlight site can grow into dozens or hundreds of pages. If each page has its own random styles, the site becomes difficult to maintain.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>One custom CSS file</td>
+            <td>Consistent, maintainable styling.</td>
+          </tr>
+          <tr>
+            <td>Inline styles on many pages</td>
+            <td>Hard to update and easy to break.</td>
+          </tr>
+          <tr>
+            <td>Component-level styles</td>
+            <td>Good for reusable components.</td>
+          </tr>
+          <tr>
+            <td>Component overrides</td>
+            <td>Powerful, but heavier and more fragile.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Basic Custom CSS Starter</h2>
+      <p>Create:</p>
+      <pre><code>src/styles/custom.css</code></pre>
+      <p>Add a safe starter stylesheet:</p>
+      <pre><code>:root {
+  --sl-content-width: 52rem;
+}
+
+.hero-note {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--sl-color-bg-nav);
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.card {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--sl-color-bg-nav);
+}</code></pre>
+      <p>This gives you a starting point for card layouts, callouts, and homepage sections.</p>
+    </section>
+
+    <section>
+      <h2>Understanding Starlight CSS Variables</h2>
+      <p>Starlight exposes many design values as CSS custom properties, also called CSS variables. These variables control things like colors, text sizes, spacing, and layout width.</p>
+      <p>A CSS variable looks like this:</p>
+      <pre><code>--sl-content-width: 52rem;</code></pre>
+      <p>You can use a CSS variable like this:</p>
+      <pre><code>max-width: var(--sl-content-width);</code></pre>
+      <p>CSS variables are useful because they let you customize Starlight without rewriting the whole theme.</p>
+    </section>
+
+    <section>
+      <h2>Change the Main Content Width</h2>
+      <p>For tutorial and worldbuilding pages, you may want slightly wider content than the default.</p>
+      <pre><code>:root {
+  --sl-content-width: 56rem;
+}</code></pre>
+      <p>Use this carefully. If the text column is too wide, reading becomes harder. A good content width usually supports comfortable reading, not maximum screen usage.</p>
+    </section>
+
+    <section>
+      <h2>Change Typography Size</h2>
+      <p>You can adjust Starlight typography variables. For example:</p>
+      <pre><code>:root {
+  --sl-text-5xl: 3.25rem;
+  --sl-text-4xl: 2.5rem;
+  --sl-text-3xl: 2rem;
+}</code></pre>
+      <p>Use moderate changes. Very large headings can make documentation feel less readable, especially on smaller screens.</p>
+    </section>
+
+    <section>
+      <h2>Theme Colors</h2>
+      <p>Starlight uses color variables for its interface and accents. A common safe customization is changing the accent colors.</p>
+      <pre><code>:root {
+  --sl-color-accent-low: #e0f2fe;
+  --sl-color-accent: #0284c7;
+  --sl-color-accent-high: #0c4a6e;
+}</code></pre>
+      <p>The general pattern is:</p>
+      <ul>
+        <li><code>accent-low</code>: soft background or subtle emphasis.</li>
+        <li><code>accent</code>: main accent color.</li>
+        <li><code>accent-high</code>: stronger contrast color.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Dark Mode Colors</h2>
+      <p>Starlight supports light and dark themes. If you customize colors, check both modes.</p>
+      <p>You can target dark mode using Starlight's dark theme selector:</p>
+      <pre><code>:root[data-theme='dark'] {
+  --sl-color-accent-low: #082f49;
+  --sl-color-accent: #38bdf8;
+  --sl-color-accent-high: #e0f2fe;
+}</code></pre>
+      <p>The same color that works well in light mode may be too bright or too low-contrast in dark mode.</p>
+    </section>
+
+    <section>
+      <h2>Light Mode Colors</h2>
+      <p>You can also target light mode directly:</p>
+      <pre><code>:root[data-theme='light'] {
+  --sl-color-accent-low: #e0f2fe;
+  --sl-color-accent: #0284c7;
+  --sl-color-accent-high: #0c4a6e;
+}</code></pre>
+      <p>When possible, test your site with the Starlight theme switcher to confirm that both appearances are readable.</p>
+    </section>
+
+    <section>
+      <h2>Color Safety Checklist</h2>
+      <p>When changing colors, check:</p>
+      <ul>
+        <li>Links are still easy to identify.</li>
+        <li>Text has enough contrast against backgrounds.</li>
+        <li>Code blocks remain readable.</li>
+        <li>Sidebar text remains readable.</li>
+        <li>Focus outlines are still visible.</li>
+        <li>Dark mode is not too bright.</li>
+        <li>Light mode is not too washed out.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Custom Homepage Cards</h2>
+      <p>Homepage cards are useful for tutorial paths, world bible categories, and documentation sections.</p>
+      <p>Markdown or MDX page content:</p>
+      <pre><code>&lt;div class="home-card-grid"&gt;
+
+&lt;article class="home-card"&gt;
+  &lt;h2&gt;Beginner Lessons&lt;/h2&gt;
+  &lt;p&gt;Start with Astro, Starlight, Markdown, and YAML.&lt;/p&gt;
+  &lt;a href="/lessons/beginner/"&gt;Start beginner lessons&lt;/a&gt;
+&lt;/article&gt;
+
+&lt;article class="home-card"&gt;
+  &lt;h2&gt;World Bible Setup&lt;/h2&gt;
+  &lt;p&gt;Create regions, factions, characters, locations, and timelines.&lt;/p&gt;
+  &lt;a href="/worldbuilding/"&gt;Build a world bible&lt;/a&gt;
+&lt;/article&gt;
+
+&lt;/div&gt;</code></pre>
+      <p>Custom CSS:</p>
+      <pre><code>.home-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  margin-block: 2rem;
+}
+
+.home-card {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: var(--sl-color-bg-nav);
+}
+
+.home-card h2 {
+  margin-top: 0;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Lesson Callout Styling</h2>
+      <p>Callouts are useful for explanations, warnings, reminders, and analogies.</p>
+      <pre><code>.lesson-callout {
+  border-inline-start: 0.35rem solid var(--sl-color-accent);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-accent-high);
+}
+
+.lesson-callout h2,
+.lesson-callout h3 {
+  margin-top: 0;
+}</code></pre>
+      <p>Usage in Markdown or MDX:</p>
+      <pre><code>&lt;aside class="lesson-callout"&gt;
+  &lt;h2&gt;Remember&lt;/h2&gt;
+  &lt;p&gt;Markdown is for writing. MDX is for writing plus components.&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>World Bible Panel Styling</h2>
+      <p>For worldbuilding pages, use panels for fast reference information.</p>
+      <pre><code>.world-panel {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: linear-gradient(
+    180deg,
+    var(--sl-color-bg-nav),
+    var(--sl-color-bg)
+  );
+}
+
+.world-panel dl {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.world-panel dt {
+  font-weight: 700;
+}
+
+.world-panel dd {
+  margin: 0;
+}</code></pre>
+      <p>Usage:</p>
+      <pre><code>&lt;aside class="world-panel"&gt;
+  &lt;h2&gt;Region Summary&lt;/h2&gt;
+  &lt;dl&gt;
+    &lt;dt&gt;Region&lt;/dt&gt;
+    &lt;dd&gt;Austral Confluence&lt;/dd&gt;
+    &lt;dt&gt;Magic Level&lt;/dt&gt;
+    &lt;dd&gt;High&lt;/dd&gt;
+    &lt;dt&gt;Technology Level&lt;/dt&gt;
+    &lt;dd&gt;Variable&lt;/dd&gt;
+  &lt;/dl&gt;
+&lt;/aside&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>RPG Character Stat Block Styling</h2>
+      <p>For character sheets, create a stat grid.</p>
+      <pre><code>.stat-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+}
+
+.stat-box {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  text-align: center;
+  background: var(--sl-color-bg-nav);
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 1.5rem;
+}</code></pre>
+      <p>Usage:</p>
+      <pre><code>&lt;div class="stat-grid"&gt;
+  &lt;div class="stat-box"&gt;&lt;strong&gt;14&lt;/strong&gt;DEX&lt;/div&gt;
+  &lt;div class="stat-box"&gt;&lt;strong&gt;16&lt;/strong&gt;INT&lt;/div&gt;
+  &lt;div class="stat-box"&gt;&lt;strong&gt;18&lt;/strong&gt;CHA&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Style Code Blocks Carefully</h2>
+      <p>Starlight already styles code blocks well. Avoid heavy customization unless needed.</p>
+      <p>A light touch is safer:</p>
+      <pre><code>pre {
+  border-radius: 0.75rem;
+}</code></pre>
+      <p>Avoid changing code block text color, background color, or syntax highlighting colors unless you test carefully in both light and dark mode.</p>
+    </section>
+
+    <section>
+      <h2>Custom Link Styles</h2>
+      <p>Links should be easy to see. You can make content links slightly stronger:</p>
+      <pre><code>.sl-markdown-content a {
+  text-underline-offset: 0.2em;
+}
+
+.sl-markdown-content a:hover {
+  text-decoration-thickness: 0.15em;
+}</code></pre>
+      <p>Do not remove underlines from body links unless another clear visual signal remains.</p>
+    </section>
+
+    <section>
+      <h2>Spacing Improvements</h2>
+      <p>For long tutorial pages, spacing helps readability.</p>
+      <pre><code>.sl-markdown-content section,
+.sl-markdown-content .tutorial-section {
+  margin-block: 2rem;
+}
+
+.sl-markdown-content h2 {
+  margin-top: 2.5rem;
+}</code></pre>
+      <p>Use spacing to separate ideas. Avoid making pages feel cramped.</p>
+    </section>
+
+    <section>
+      <h2>Using CSS Classes in Markdown</h2>
+      <p>Markdown supports regular HTML. You can add custom classes where needed.</p>
+      <pre><code>&lt;div class="lesson-callout"&gt;
+  &lt;h2&gt;Key Idea&lt;/h2&gt;
+  &lt;p&gt;Use CSS variables first before overriding Starlight components.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <p>This is useful for simple visual blocks. If the pattern appears often, consider making a reusable Astro component.</p>
+    </section>
+
+    <section>
+      <h2>When to Make a Component Instead</h2>
+      <p>Use a component when a styled pattern needs repeated structure.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>Best Choice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>One custom box on one page</td>
+            <td>HTML plus CSS class</td>
+          </tr>
+          <tr>
+            <td>Same callout appears across many pages</td>
+            <td>Reusable Astro component</td>
+          </tr>
+          <tr>
+            <td>Need props like title, type, icon, or status</td>
+            <td>Reusable Astro component</td>
+          </tr>
+          <tr>
+            <td>Need to change Starlight's header or sidebar</td>
+            <td>Component override</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Custom Fonts</h2>
+      <p>Starlight uses system fonts by default, which is fast and reliable. Custom fonts can make a site feel more branded, but they add maintenance and performance concerns.</p>
+      <p>If you add a font package, register it through <code>customCss</code> along with your stylesheet:</p>
+      <pre><code>starlight({
+  title: 'My Starlight Site',
+  customCss: [
+    '@fontsource/inter',
+    './src/styles/custom.css',
+  ],
+})</code></pre>
+      <p>Then use the font in CSS:</p>
+      <pre><code>:root {
+  --sl-font: 'Inter', system-ui, sans-serif;
+}</code></pre>
+      <p>Do not overuse decorative fonts in documentation. Readability matters more than flair.</p>
+    </section>
+
+    <section>
+      <h2>Using Tailwind CSS</h2>
+      <p>Starlight can be used with Tailwind CSS, but for many documentation sites, normal CSS is simpler and less fragile.</p>
+      <p>Use Tailwind if:</p>
+      <ul>
+        <li>Your project already uses Tailwind.</li>
+        <li>You are building many custom components.</li>
+        <li>You are comfortable with Tailwind conventions.</li>
+      </ul>
+      <p>Use regular CSS if:</p>
+      <ul>
+        <li>You mainly need theme colors, spacing, cards, and callouts.</li>
+        <li>You want the simplest possible customization path.</li>
+        <li>You are building a mostly Markdown documentation site.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Safe Theme Customization Example</h2>
+      <p>Here is a complete starter <code>custom.css</code> file:</p>
+      <pre><code>:root {
+  --sl-content-width: 54rem;
+  --sl-color-accent-low: #e0f2fe;
+  --sl-color-accent: #0284c7;
+  --sl-color-accent-high: #0c4a6e;
+}
+
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #082f49;
+  --sl-color-accent: #38bdf8;
+  --sl-color-accent-high: #e0f2fe;
+}
+
+.home-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  margin-block: 2rem;
+}
+
+.home-card,
+.lesson-card,
+.world-panel {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--sl-color-bg-nav);
+}
+
+.lesson-callout {
+  border-inline-start: 0.35rem solid var(--sl-color-accent);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-accent-high);
+}
+
+.stat-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+}
+
+.stat-box {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  text-align: center;
+  background: var(--sl-color-bg-nav);
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Testing Your Styling</h2>
+      <p>Run the development server:</p>
+      <pre><code>npm run dev</code></pre>
+      <p>Then check:</p>
+      <ul>
+        <li>Homepage layout.</li>
+        <li>Normal documentation pages.</li>
+        <li>Long tutorial pages.</li>
+        <li>Code blocks.</li>
+        <li>Sidebar readability.</li>
+        <li>Mobile layout.</li>
+        <li>Light mode.</li>
+        <li>Dark mode.</li>
+      </ul>
+      <p>Then run:</p>
+      <pre><code>npm run build
+npm run preview</code></pre>
+      <p>Preview the built version before deploying.</p>
+    </section>
+
+    <section>
+      <h2>Common Styling Mistakes</h2>
+      <h3>Changing too much too early</h3>
+      <p>Start small. Change the accent color, content width, and a few custom card styles first.</p>
+
+      <h3>Ignoring dark mode</h3>
+      <p>A color that looks good in light mode may be unreadable in dark mode.</p>
+
+      <h3>Overriding Starlight internals unnecessarily</h3>
+      <p>If a CSS variable or simple class works, use that before replacing components.</p>
+
+      <h3>Using low-contrast backgrounds</h3>
+      <p>Documentation must be readable. Avoid dark text on dark backgrounds or bright text on bright backgrounds.</p>
+
+      <h3>Making content too wide</h3>
+      <p>Wide layouts can look impressive, but long lines are harder to read.</p>
+    </section>
+
+    <section>
+      <h2>When CSS Is Not Enough</h2>
+      <p>Use component overrides only when you need to change the structure or behavior of a built-in Starlight component.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Goal</th>
+            <th>Use CSS?</th>
+            <th>Use Override?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Change accent colors</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Make content column wider</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Add card styles</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Replace the header layout</td>
+            <td>Maybe</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Add custom content to every page footer</td>
+            <td>Maybe</td>
+            <td>Often yes</td>
+          </tr>
+          <tr>
+            <td>Change sidebar behavior</td>
+            <td>Maybe</td>
+            <td>Often yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Mini Project: Create a Custom Theme Layer</h2>
+      <ol>
+        <li>Create <code>src/styles/custom.css</code>.</li>
+        <li>Add content width and accent color variables.</li>
+        <li>Add dark mode accent colors.</li>
+        <li>Add homepage card styles.</li>
+        <li>Add a lesson callout style.</li>
+        <li>Register the file with <code>customCss</code>.</li>
+        <li>Add a card grid to your homepage.</li>
+        <li>Add a callout to one lesson page.</li>
+        <li>Test light mode and dark mode.</li>
+        <li>Run <code>npm run build</code>.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Need</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Add site-wide CSS</td>
+            <td><code>customCss</code></td>
+          </tr>
+          <tr>
+            <td>Change content width</td>
+            <td><code>--sl-content-width</code></td>
+          </tr>
+          <tr>
+            <td>Change accent colors</td>
+            <td><code>--sl-color-accent</code></td>
+          </tr>
+          <tr>
+            <td>Target dark mode</td>
+            <td><code>:root[data-theme='dark']</code></td>
+          </tr>
+          <tr>
+            <td>Target light mode</td>
+            <td><code>:root[data-theme='light']</code></td>
+          </tr>
+          <tr>
+            <td>Style homepage cards</td>
+            <td>Custom classes in Markdown/MDX</td>
+          </tr>
+          <tr>
+            <td>Repeat a styled pattern</td>
+            <td>Astro component</td>
+          </tr>
+          <tr>
+            <td>Change built-in layout structure</td>
+            <td>Component override</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>Use CSS variables for theme changes.
+Use custom classes for cards and callouts.
+Use components for repeated visual patterns.
+Use component overrides only for structural changes.
+Always test light mode, dark mode, mobile, and build output.</code></pre>
+    </section>
+
+    <section>
+      <h2>What to Learn Next</h2>
+      <ul>
+        <li>Asset management for images, maps, and downloads.</li>
+        <li>Custom MDX components for card grids and callouts.</li>
+        <li>Component overrides for headers, footers, and page structure.</li>
+        <li>Content collection indexes with styled cards.</li>
+        <li>Mermaid diagrams in Astro/Starlight.</li>
+        <li>Deployment testing for styled Starlight sites.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

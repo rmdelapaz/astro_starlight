@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Starlight Deployment Workflow Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Starlight Deployment Workflow</h1>
+    <p>A practical guide to building, previewing, and deploying an Astro Starlight site to Vercel, Netlify, Cloudflare Pages, or a simple static host.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+      <p>This tutorial explains the deployment workflow for an Astro Starlight site.</p>
+      <p>You will learn how to:</p>
+      <ul>
+        <li>Build the site locally.</li>
+        <li>Preview the production build.</li>
+        <li>Understand the <code>dist/</code> output folder.</li>
+        <li>Deploy to Vercel.</li>
+        <li>Deploy to Netlify.</li>
+        <li>Deploy to Cloudflare Pages or Workers.</li>
+        <li>Use environment variables safely.</li>
+        <li>Fix common build and deployment errors.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Big Picture Mental Model</h2>
+      <p>Deployment means turning your source code into a published website.</p>
+      <pre><code>Source files
+  ↓
+npm install
+  ↓
+npm run build
+  ↓
+dist/ folder
+  ↓
+Hosting platform
+  ↓
+Live website URL</code></pre>
+      <p>For a mostly static Astro Starlight site, the most important settings are usually:</p>
+      <pre><code>Build command: npm run build
+Output directory: dist</code></pre>
+    </section>
+
+    <section>
+      <h2>Deployment Vocabulary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Build</td>
+            <td>The process of generating production files from source files.</td>
+          </tr>
+          <tr>
+            <td>Output directory</td>
+            <td>The folder that contains the final site files. For Astro, this is usually <code>dist</code>.</td>
+          </tr>
+          <tr>
+            <td>Static site</td>
+            <td>A site that can be served as HTML, CSS, JavaScript, and assets without a custom server.</td>
+          </tr>
+          <tr>
+            <td>Preview deployment</td>
+            <td>A test deployment usually created from a branch or pull request.</td>
+          </tr>
+          <tr>
+            <td>Production deployment</td>
+            <td>The main public version of the site.</td>
+          </tr>
+          <tr>
+            <td>Environment variable</td>
+            <td>A setting or secret stored outside your source code.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Check Your Scripts</h2>
+      <p>Open:</p>
+      <pre><code>package.json</code></pre>
+      <p>You should see scripts like:</p>
+      <pre><code>{
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  }
+}</code></pre>
+      <p>These scripts are the foundation of the workflow:</p>
+      <pre><code>npm run dev      local development
+npm run build    production build
+npm run preview  preview production build locally</code></pre>
+    </section>
+
+    <section>
+      <h2>Build Locally Before Deploying</h2>
+      <p>Run:</p>
+      <pre><code>npm install
+npm run build</code></pre>
+      <p>If the build succeeds, Astro creates:</p>
+      <pre><code>dist/</code></pre>
+      <p>Do not skip this step. A site can work in development but fail in production because of broken imports, invalid MDX, incorrect image paths, or missing environment variables.</p>
+    </section>
+
+    <section>
+      <h2>Preview the Production Build</h2>
+      <p>Run:</p>
+      <pre><code>npm run preview</code></pre>
+      <p>This serves the built site locally. Use this to check:</p>
+      <ul>
+        <li>Home page loads.</li>
+        <li>Sidebar links work.</li>
+        <li>Images load.</li>
+        <li>MDX components render.</li>
+        <li>Custom CSS is applied.</li>
+        <li>No routes are missing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Git Workflow Before Deployment</h2>
+      <p>Most platforms deploy from GitHub, GitLab, or Bitbucket.</p>
+      <pre><code>git status
+git add .
+git commit -m "Prepare Astro Starlight site for deployment"
+git push</code></pre>
+      <p>After you connect the repository to a host, future pushes usually trigger new deployments automatically.</p>
+    </section>
+
+    <section>
+      <h2>General Static Deployment Settings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Build command</td>
+            <td><code>npm run build</code></td>
+          </tr>
+          <tr>
+            <td>Output directory</td>
+            <td><code>dist</code></td>
+          </tr>
+          <tr>
+            <td>Install command</td>
+            <td><code>npm install</code> or platform default</td>
+          </tr>
+          <tr>
+            <td>Node version</td>
+            <td>Use a current supported Node version compatible with Astro.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Deploy to Vercel</h2>
+      <p>Vercel works well for Astro and Starlight sites.</p>
+      <ol>
+        <li>Push your project to GitHub, GitLab, or Bitbucket.</li>
+        <li>Sign in to Vercel.</li>
+        <li>Create a new project.</li>
+        <li>Import the repository.</li>
+        <li>Confirm the project settings.</li>
+        <li>Deploy.</li>
+      </ol>
+      <p>Common settings:</p>
+      <pre><code>Framework preset: Astro
+Build command: npm run build
+Output directory: dist</code></pre>
+      <p>Vercel usually detects Astro automatically, but always check the build command and output directory.</p>
+    </section>
+
+    <section>
+      <h2>Deploy to Netlify</h2>
+      <p>Netlify is also a strong choice for static Astro/Starlight sites.</p>
+      <ol>
+        <li>Push your project to GitHub, GitLab, or Bitbucket.</li>
+        <li>Sign in to Netlify.</li>
+        <li>Create a new site from Git.</li>
+        <li>Select the repository.</li>
+        <li>Set build options.</li>
+        <li>Deploy.</li>
+      </ol>
+      <p>Common settings:</p>
+      <pre><code>Build command: npm run build
+Publish directory: dist</code></pre>
+      <p>You can also create a <code>netlify.toml</code> file:</p>
+      <pre><code>[build]
+  command = "npm run build"
+  publish = "dist"</code></pre>
+    </section>
+
+    <section>
+      <h2>Deploy to Cloudflare Pages</h2>
+      <p>For a static Astro Starlight site, Cloudflare Pages can deploy from a Git repository.</p>
+      <ol>
+        <li>Push your project to a Git provider.</li>
+        <li>Open Cloudflare dashboard.</li>
+        <li>Create a Pages project.</li>
+        <li>Connect your repository.</li>
+        <li>Set the build command and output directory.</li>
+        <li>Deploy.</li>
+      </ol>
+      <p>Common static settings:</p>
+      <pre><code>Build command: npm run build
+Output directory: dist</code></pre>
+      <p>Some newer Cloudflare workflows use Workers and Wrangler. For a basic static documentation site, Pages-style Git deployment is usually simpler.</p>
+    </section>
+
+    <section>
+      <h2>Deploy to Cloudflare Workers with Wrangler</h2>
+      <p>Cloudflare also supports deploying Astro output with Wrangler, especially when using Workers-oriented workflows.</p>
+      <p>Install Wrangler:</p>
+      <pre><code>npm install wrangler@latest --save-dev</code></pre>
+      <p>A static <code>wrangler.jsonc</code> can point to the <code>dist</code> folder:</p>
+      <pre><code>{
+  "name": "my-astro-starlight-site",
+  "compatibility_date": "2026-05-13",
+  "assets": {
+    "directory": "./dist"
+  }
+}</code></pre>
+      <p>Preview and deploy:</p>
+      <pre><code>npx astro build &amp;&amp; npx wrangler dev
+npx astro build &amp;&amp; npx wrangler deploy</code></pre>
+      <p>Use this route when you specifically want Cloudflare Workers features or a Wrangler-based workflow.</p>
+    </section>
+
+    <section>
+      <h2>Environment Variables</h2>
+      <p>Environment variables store settings outside your source code.</p>
+      <pre><code>PUBLIC_SITE_NAME="Astro Starlight Tutorial Site"
+PUBLIC_ANALYTICS_ID="example-id"
+SECRET_API_KEY="do-not-expose-this"</code></pre>
+      <p>Astro exposes environment variables prefixed with <code>PUBLIC_</code> to browser code. Do not put secrets in public variables.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable Type</th>
+            <th>Use For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>PUBLIC_</code> variables</td>
+            <td>Safe values the browser can see.</td>
+          </tr>
+          <tr>
+            <td>Secret variables</td>
+            <td>Server-only API keys and private tokens.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Static Site vs Server Features</h2>
+      <p>Most Starlight documentation sites can be deployed as static sites. That means no custom adapter is needed.</p>
+      <pre><code>Static docs site:
+  npm run build
+  output: dist
+  deploy dist</code></pre>
+      <p>If you add server-rendered routes, API routes, authentication, or runtime database calls, you may need an adapter for the hosting platform.</p>
+      <pre><code>Mostly content and docs:
+  static output is usually best
+
+Runtime server features:
+  consider an adapter</code></pre>
+    </section>
+
+    <section>
+      <h2>Base URL and Site URL</h2>
+      <p>If your site is deployed at the root of a domain, the default setup is usually fine:</p>
+      <pre><code>https://example.com/</code></pre>
+      <p>If your site is deployed under a subpath, such as GitHub Pages, you may need a <code>base</code> setting:</p>
+      <pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  site: 'https://example.com',
+  base: '/my-docs/',
+  integrations: [
+    starlight({
+      title: 'My Docs',
+    }),
+  ],
+});</code></pre>
+      <p>For Vercel, Netlify, and Cloudflare Pages custom domains, you usually do not need <code>base</code>.</p>
+    </section>
+
+    <section>
+      <h2>Custom Domains</h2>
+      <p>After deployment, most platforms let you add a custom domain.</p>
+      <pre><code>example.com
+www.example.com
+docs.example.com</code></pre>
+      <p>General process:</p>
+      <ol>
+        <li>Add the domain in the hosting platform dashboard.</li>
+        <li>Update DNS records at the domain registrar.</li>
+        <li>Wait for DNS propagation.</li>
+        <li>Confirm HTTPS is active.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Deployment Checklist</h2>
+      <pre><code>[ ] npm install works
+[ ] npm run dev works
+[ ] npm run build works
+[ ] npm run preview works
+[ ] dist folder is created
+[ ] Homepage loads
+[ ] Sidebar links work
+[ ] Images load
+[ ] Custom CSS loads
+[ ] Environment variables are configured
+[ ] Repository is pushed to GitHub/GitLab/Bitbucket
+[ ] Hosting platform build command is correct
+[ ] Hosting platform output directory is dist</code></pre>
+    </section>
+
+    <section>
+      <h2>Common Problem: Build Fails Locally</h2>
+      <p>Run:</p>
+      <pre><code>npm install
+npm run build</code></pre>
+      <p>Common causes:</p>
+      <ul>
+        <li>Invalid Markdown or MDX.</li>
+        <li>Broken component import path.</li>
+        <li>Missing package.</li>
+        <li>Invalid frontmatter.</li>
+        <li>Schema validation error.</li>
+      </ul>
+      <p>Fix the local build before trying to deploy.</p>
+    </section>
+
+    <section>
+      <h2>Common Problem: Deployment Builds but Site Is Blank</h2>
+      <p>Check:</p>
+      <ul>
+        <li>Output directory is <code>dist</code>.</li>
+        <li>Build command is <code>npm run build</code>.</li>
+        <li>The homepage exists.</li>
+        <li>There is no incorrect <code>base</code> setting.</li>
+        <li>Assets are referenced with correct paths.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Common Problem: Images Missing After Deployment</h2>
+      <p>If images are in <code>public/images/</code>, reference them like this:</p>
+      <pre><code>![Map](/images/map.png)</code></pre>
+      <p>Do not reference local computer paths:</p>
+      <pre><code>Bad:
+C:\Users\Name\Desktop\map.png
+
+Good:
+/images/map.png</code></pre>
+    </section>
+
+    <section>
+      <h2>Common Problem: Environment Variable Undefined</h2>
+      <p>Check:</p>
+      <ul>
+        <li>The variable exists in the hosting platform settings.</li>
+        <li>The variable name matches exactly.</li>
+        <li>You redeployed after adding the variable.</li>
+        <li>Browser-visible variables use the <code>PUBLIC_</code> prefix.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Common Problem: Wrong Node Version</h2>
+      <p>If a platform uses an old Node version, the build may fail. You can specify a Node version in <code>package.json</code>:</p>
+      <pre><code>{
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}</code></pre>
+      <p>Use a Node version supported by your current Astro version and hosting platform.</p>
+    </section>
+
+    <section>
+      <h2>Preview Deployments</h2>
+      <p>Preview deployments are temporary builds usually made from branches or pull requests.</p>
+      <pre><code>main branch
+  → production deployment
+
+feature branch
+  → preview deployment</code></pre>
+      <p>Use preview deployments to test:</p>
+      <ul>
+        <li>New lessons.</li>
+        <li>Sidebar changes.</li>
+        <li>Theme changes.</li>
+        <li>Content collection changes.</li>
+        <li>Large world bible restructures.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommended Workflow for Ongoing Updates</h2>
+      <pre><code>1. Create or edit content locally.
+2. Run npm run dev.
+3. Check pages in the browser.
+4. Run npm run build.
+5. Run npm run preview.
+6. Commit changes.
+7. Push to GitHub.
+8. Check preview deployment.
+9. Merge or push to main.
+10. Check production deployment.</code></pre>
+    </section>
+
+    <section>
+      <h2>Which Platform Should You Use?</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Good For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Vercel</td>
+            <td>Simple Git-based deploys, frontend projects, preview deployments.</td>
+          </tr>
+          <tr>
+            <td>Netlify</td>
+            <td>Static sites, forms, redirects, simple project dashboards.</td>
+          </tr>
+          <tr>
+            <td>Cloudflare Pages</td>
+            <td>Fast static hosting, global edge network, Cloudflare ecosystem.</td>
+          </tr>
+          <tr>
+            <td>Cloudflare Workers</td>
+            <td>More advanced edge/server workflows with Wrangler.</td>
+          </tr>
+          <tr>
+            <td>Traditional web host</td>
+            <td>Manual upload of the <code>dist</code> folder.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>For a beginner Astro Starlight site, Vercel or Netlify are usually the easiest. Cloudflare Pages is also excellent, especially if you already use Cloudflare DNS.</p>
+    </section>
+
+    <section>
+      <h2>Manual Deployment</h2>
+      <p>You can also deploy manually by uploading the built files.</p>
+      <pre><code>npm run build</code></pre>
+      <p>Then upload the contents of:</p>
+      <pre><code>dist/</code></pre>
+      <p>Use this method if your host only supports traditional file upload. Do not upload the project source files unless your host expects them.</p>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Always run <code>npm run build</code> before deploying important changes.</li>
+        <li>Use <code>npm run preview</code> to test the production build locally.</li>
+        <li>Keep deployment settings simple for static Starlight sites.</li>
+        <li>Use <code>dist</code> as the output directory unless your project is intentionally configured otherwise.</li>
+        <li>Do not commit secrets to Git.</li>
+        <li>Use preview deployments for large changes.</li>
+        <li>Check custom domains after DNS changes.</li>
+        <li>Keep dependencies updated, but test builds after updates.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Mini Project: Deploy a Starlight Site</h2>
+      <ol>
+        <li>Run <code>npm install</code>.</li>
+        <li>Run <code>npm run dev</code>.</li>
+        <li>Check the site locally.</li>
+        <li>Run <code>npm run build</code>.</li>
+        <li>Run <code>npm run preview</code>.</li>
+        <li>Commit your changes.</li>
+        <li>Push to GitHub.</li>
+        <li>Import the repo into Vercel, Netlify, or Cloudflare Pages.</li>
+        <li>Set build command to <code>npm run build</code>.</li>
+        <li>Set output directory to <code>dist</code>.</li>
+        <li>Deploy.</li>
+        <li>Open the live URL and test the site.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Cheat Sheet</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Command or Setting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Install dependencies</td>
+            <td><code>npm install</code></td>
+          </tr>
+          <tr>
+            <td>Local development</td>
+            <td><code>npm run dev</code></td>
+          </tr>
+          <tr>
+            <td>Build production site</td>
+            <td><code>npm run build</code></td>
+          </tr>
+          <tr>
+            <td>Preview production build</td>
+            <td><code>npm run preview</code></td>
+          </tr>
+          <tr>
+            <td>Output directory</td>
+            <td><code>dist</code></td>
+          </tr>
+          <tr>
+            <td>Vercel build command</td>
+            <td><code>npm run build</code></td>
+          </tr>
+          <tr>
+            <td>Netlify publish directory</td>
+            <td><code>dist</code></td>
+          </tr>
+          <tr>
+            <td>Cloudflare Pages output</td>
+            <td><code>dist</code></td>
+          </tr>
+          <tr>
+            <td>Wrangler deploy</td>
+            <td><code>npx astro build &amp;&amp; npx wrangler deploy</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+      <pre><code>If it is a normal Starlight docs site:
+  build with npm run build
+  deploy the dist folder
+
+If it needs server features:
+  check whether your host needs an Astro adapter
+
+If something breaks after deployment:
+  test npm run build and npm run preview locally first</code></pre>
+    </section>
+  </main>
+</body>
+</html>
