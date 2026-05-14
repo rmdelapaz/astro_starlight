@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Starlight Plugins Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Astro Starlight Plugins Tutorial</h1>
+    <p>A beginner-friendly guide to understanding Starlight plugins, when to use them, and how to avoid plugin overload.</p>
+  </header>
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+<p>This tutorial explains what Starlight plugins are and how they fit into an Astro Starlight project.</p>
+<ul>
+<li>What plugins do.</li>
+<li>Where plugins are configured.</li>
+<li>How to evaluate official and community plugins.</li>
+<li>When not to use a plugin.</li>
+<li>How to keep a plugin-based site maintainable.</li>
+</ul>
+    </section>
+    <section>
+      <h2>The Big Picture</h2>
+<pre><code>Starlight core
+  ↓
+Project configuration
+  ↓
+Optional plugins
+  ↓
+Extra behavior or UI features</code></pre>
+<p>Plugins can add features, but every plugin is also another dependency to maintain.</p>
+    </section>
+    <section>
+      <h2>Where Plugins Go</h2>
+<pre><code>import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Docs',
+      plugins: [
+        // plugins go here
+      ],
+    }),
+  ],
+});</code></pre>
+    </section>
+    <section>
+      <h2>Official vs Community Plugins</h2>
+<table><thead><tr><th>Type</th><th>Best For</th><th>Risk</th></tr></thead><tbody>
+<tr><td>Official</td><td>Common supported features</td><td>Usually lower risk</td></tr>
+<tr><td>Community</td><td>Specialized features</td><td>Check maintenance and compatibility</td></tr>
+<tr><td>Custom</td><td>Your own advanced site behavior</td><td>Requires more technical skill</td></tr>
+</tbody></table>
+    </section>
+    <section>
+      <h2>When to Use a Plugin</h2>
+<pre><code>Use a plugin when:
+- The feature is repeated across the site
+- The plugin solves a real maintenance problem
+- The feature is difficult to build safely yourself
+- The plugin is maintained and documented</code></pre>
+    </section>
+    <section>
+      <h2>When Not to Use a Plugin</h2>
+<pre><code>Avoid plugins when:
+- A few lines of Markdown or CSS solve the problem
+- The plugin is abandoned
+- The plugin changes too much of the default UI
+- You do not understand what problem it solves
+- You are still learning the basics</code></pre>
+    </section>
+    <section>
+      <h2>Plugin Evaluation Checklist</h2>
+<pre><code>[ ] Does it support your current Starlight version?
+[ ] Is it documented?
+[ ] Is it actively maintained?
+[ ] Does it solve a real problem?
+[ ] Can the site still build without it?
+[ ] Does it affect accessibility?
+[ ] Does it make future upgrades harder?</code></pre>
+    </section>
+    <section>
+      <h2>Example Plugin Use Cases</h2>
+<ul>
+<li>Search enhancements.</li>
+<li>Automatic sidebar organization.</li>
+<li>Generated page navigation.</li>
+<li>Additional UI blocks.</li>
+<li>Version selectors.</li>
+<li>Link previews.</li>
+<li>Site analytics integrations.</li>
+</ul>
+    </section>
+    <section>
+      <h2>Safe Plugin Workflow</h2>
+<ol>
+<li>Commit your working site before adding a plugin.</li>
+<li>Install one plugin at a time.</li>
+<li>Run <code>npm run dev</code>.</li>
+<li>Run <code>npm run build</code>.</li>
+<li>Test navigation and search.</li>
+<li>Document why the plugin was added.</li>
+</ol>
+    </section>
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+<pre><code>Start with Starlight core.
+Add custom CSS only when needed.
+Add components when content repeats.
+Add plugins when site-wide behavior is needed.
+Do not add plugins just because they exist.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

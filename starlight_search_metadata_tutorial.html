@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Search and Metadata Tutorial</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="icon" href="/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Starlight Search and Metadata Tutorial</h1>
+    <p>A practical guide to making Astro Starlight pages easier to find, understand, preview, and search.</p>
+  </header>
+  <main>
+    <section>
+      <h2>What You Are Learning</h2>
+<p>This tutorial covers search and metadata for a Starlight documentation site. You will learn how page titles, descriptions, headings, frontmatter, and search-friendly writing help readers find what they need.</p>
+<ul>
+<li>How Starlight search fits into a documentation site.</li>
+<li>How to write useful titles and descriptions.</li>
+<li>How headings affect search and readability.</li>
+<li>How metadata improves previews and site structure.</li>
+<li>When external search such as Algolia DocSearch may be useful.</li>
+</ul>
+    </section>
+    <section>
+      <h2>The Big Picture</h2>
+<pre><code>Page content
+  ↓
+Frontmatter metadata
+  ↓
+Headings and links
+  ↓
+Search and navigation
+  ↓
+Reader finds the right page</code></pre>
+<p>Search is not only a technical feature. Search quality depends on how clearly the content is written and organized.</p>
+    </section>
+    <section>
+      <h2>Basic Page Metadata</h2>
+<pre><code>---
+title: "Content Collections and Schemas"
+description: "Learn how to organize Astro content with typed frontmatter schemas."
+---</code></pre>
+<p>The title should identify the page. The description should explain why the page exists.</p>
+    </section>
+    <section>
+      <h2>Weak vs Strong Titles</h2>
+<table><thead><tr><th>Weak</th><th>Better</th></tr></thead><tbody>
+<tr><td>Stuff</td><td>Astro Project Structure</td></tr>
+<tr><td>Advanced Things</td><td>Content Collections and Schemas</td></tr>
+<tr><td>Images</td><td>Asset Management for Starlight Sites</td></tr>
+<tr><td>Errors</td><td>Troubleshooting Astro Build Errors</td></tr>
+</tbody></table>
+    </section>
+    <section>
+      <h2>Search-Friendly Headings</h2>
+<pre><code>Good:
+## Deploying to Vercel
+## Fixing Broken Image Paths
+## Creating a Character Collection
+
+Less useful:
+## Step Three
+## More Stuff
+## Important Notes</code></pre>
+<p>Use descriptive section headings so both humans and search tools can understand the page.</p>
+    </section>
+    <section>
+      <h2>Tags and Categories</h2>
+<pre><code>---
+title: "Mermaid Diagrams"
+description: "Create flowcharts and diagrams in Astro Starlight."
+category: "Special Features"
+tags:
+  - mermaid
+  - diagrams
+  - markdown
+  - starlight
+---</code></pre>
+<p>Use tags for topics. Use categories for broad sections.</p>
+    </section>
+    <section>
+      <h2>Search Writing Tips</h2>
+<ul>
+<li>Use the actual tool or topic name in the title.</li>
+<li>Repeat important terms naturally in headings and opening paragraphs.</li>
+<li>Include synonyms when useful, such as “deployment” and “publish online.”</li>
+<li>Avoid clever labels that hide the meaning of a page.</li>
+<li>Add glossary pages for repeated terms.</li>
+</ul>
+    </section>
+    <section>
+      <h2>Built-In Search vs External Search</h2>
+<p>Built-in search is usually enough for small and medium tutorial sites, world bible sites, and internal documentation projects. External search can be useful when a public site grows to hundreds or thousands of pages.</p>
+<pre><code>Built-in search:
+- Small and medium sites
+- Personal docs
+- Lesson libraries
+- World bible references
+
+External search:
+- Large public docs
+- Heavily used support sites
+- Advanced ranking needs</code></pre>
+    </section>
+    <section>
+      <h2>Metadata Checklist</h2>
+<pre><code>[ ] Every page has a clear title
+[ ] Important pages have descriptions
+[ ] Section headings use searchable terms
+[ ] Tags are consistent
+[ ] Categories are not too broad
+[ ] Links use descriptive text
+[ ] Glossary terms are defined
+[ ] Index pages summarize each section</code></pre>
+    </section>
+    <section>
+      <h2>Simple Rule of Thumb</h2>
+<pre><code>Good search starts with good writing.
+Use clear titles.
+Use descriptive headings.
+Use consistent tags.
+Use index pages.
+Write for the reader first.</code></pre>
+    </section>
+  </main>
+</body>
+</html>
