@@ -1,20 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astro Starlight Troubleshooting Build Errors Tutorial</title>
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="icon" href="/favicon.png">
-</head>
-<body>
-  <header>
-    <h1>Astro Starlight Troubleshooting Build Errors Tutorial</h1>
-    <p>A practical guide to diagnosing common Astro and Starlight errors in development, build, preview, and deployment.</p>
-  </header>
-  <main>
-    <section>
-      <h2>What You Are Learning</h2>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Astro Starlight Troubleshooting Build Errors Tutorial</title>
+<link href="/styles/main.css" rel="stylesheet"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
+<body><header class="site-header" data-scaffold="header">
+<div class="site-header__inner">
+<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
+<nav class="site-header__nav">
+<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
+</nav>
+</div>
+</header>
+<header>
+<h1>Astro Starlight Troubleshooting Build Errors Tutorial</h1>
+<p>A practical guide to diagnosing common Astro and Starlight errors in development, build, preview, and deployment.</p>
+</header>
+<main>
+<section>
+<h2>What You Are Learning</h2>
 <p>This tutorial helps you troubleshoot common Astro/Starlight problems.</p>
 <ul>
 <li>Install errors.</li>
@@ -25,9 +34,9 @@
 <li>Image and asset path errors.</li>
 <li>Deployment build failures.</li>
 </ul>
-    </section>
-    <section>
-      <h2>The Debugging Workflow</h2>
+</section>
+<section>
+<h2>The Debugging Workflow</h2>
 <pre><code>Read the error message
   ↓
 Find the file mentioned
@@ -41,17 +50,17 @@ Run build
 Preview build
   ↓
 Deploy after it works</code></pre>
-    </section>
-    <section>
-      <h2>Core Commands</h2>
+</section>
+<section>
+<h2>Core Commands</h2>
 <pre><code>npm install
 npm run dev
 npm run build
 npm run preview</code></pre>
 <p><code>npm run build</code> is the most important command before deployment because it catches many issues that development mode may not fully reveal.</p>
-    </section>
-    <section>
-      <h2>Wrong Project Folder</h2>
+</section>
+<section>
+<h2>Wrong Project Folder</h2>
 <pre><code>Problem:
 npm run dev says there is no package.json.
 
@@ -61,18 +70,18 @@ You are not inside the Astro project folder.
 Fix:
 cd your-project-folder
 npm run dev</code></pre>
-    </section>
-    <section>
-      <h2>MDX Parsing Errors</h2>
+</section>
+<section>
+<h2>MDX Parsing Errors</h2>
 <pre><code>Common causes:
 - Unclosed JSX tag
 - Incorrect component import path
 - Raw HTML that MDX dislikes
 - Curly braces used accidentally
 - Component name starts with lowercase letter</code></pre>
-    </section>
-    <section>
-      <h2>Broken Component Imports</h2>
+</section>
+<section>
+<h2>Broken Component Imports</h2>
 <pre><code>Problem:
 Cannot find module '../../components/Card.astro'
 
@@ -81,9 +90,9 @@ Check:
 - Is the relative path correct?
 - Is the capitalization exact?
 - Are you importing from the right folder?</code></pre>
-    </section>
-    <section>
-      <h2>Content Collection Schema Errors</h2>
+</section>
+<section>
+<h2>Content Collection Schema Errors</h2>
 <pre><code>Schema expects:
 order: z.number()
 
@@ -92,9 +101,9 @@ order: "first"
 
 Fix:
 order: 1</code></pre>
-    </section>
-    <section>
-      <h2>Missing Required Frontmatter</h2>
+</section>
+<section>
+<h2>Missing Required Frontmatter</h2>
 <pre><code>Schema requires:
 title: z.string()
 description: z.string()
@@ -106,18 +115,18 @@ title: "Markdown Basics"
 
 Fix:
 Add description.</code></pre>
-    </section>
-    <section>
-      <h2>Sidebar Slug Errors</h2>
+</section>
+<section>
+<h2>Sidebar Slug Errors</h2>
 <pre><code>File:
 src/content/docs/lessons/markdown-basics.md
 
 Sidebar slug:
 lessons/markdown-basics</code></pre>
 <p>If the slug is wrong, the sidebar link may lead to a 404.</p>
-    </section>
-    <section>
-      <h2>Image Path Errors</h2>
+</section>
+<section>
+<h2>Image Path Errors</h2>
 <pre><code>File:
 public/images/map.png
 
@@ -127,9 +136,9 @@ Good:
 Bad:
 ![Map](/public/images/map.png)
 ![Map](C:\Users\Ray\Desktop\map.png)</code></pre>
-    </section>
-    <section>
-      <h2>Build Works Locally but Fails Online</h2>
+</section>
+<section>
+<h2>Build Works Locally but Fails Online</h2>
 <pre><code>Check:
 - File name capitalization
 - Missing committed files
@@ -137,17 +146,17 @@ Bad:
 - Build command
 - Output directory
 - Node version</code></pre>
-    </section>
-    <section>
-      <h2>Deployment Settings</h2>
+</section>
+<section>
+<h2>Deployment Settings</h2>
 <table><thead><tr><th>Setting</th><th>Typical Astro Value</th></tr></thead><tbody>
 <tr><td>Build command</td><td><code>npm run build</code></td></tr>
 <tr><td>Output directory</td><td><code>dist</code></td></tr>
 <tr><td>Install command</td><td><code>npm install</code></td></tr>
 </tbody></table>
-    </section>
-    <section>
-      <h2>Troubleshooting Checklist</h2>
+</section>
+<section>
+<h2>Troubleshooting Checklist</h2>
 <pre><code>[ ] Am I in the correct folder?
 [ ] Did I run npm install?
 [ ] Does npm run dev work?
@@ -158,14 +167,14 @@ Bad:
 [ ] Are sidebar slugs correct?
 [ ] Are MDX tags closed?
 [ ] Does frontmatter match the schema?</code></pre>
-    </section>
-    <section>
-      <h2>Simple Rule of Thumb</h2>
+</section>
+<section>
+<h2>Simple Rule of Thumb</h2>
 <pre><code>Fix local build first.
 Then preview the built site.
 Then deploy.
 Do not debug deployment before the local build works.</code></pre>
-    </section>
-  </main>
+</section>
+<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
 </body>
 </html>

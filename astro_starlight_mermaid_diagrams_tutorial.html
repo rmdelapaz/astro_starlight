@@ -1,100 +1,103 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astro Starlight Mermaid Diagrams Tutorial</title>
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="icon" href="/favicon.png">
-</head>
-<body>
-  <header>
-    <h1>Astro Starlight Mermaid Diagrams Tutorial</h1>
-    <p>A practical guide to adding Mermaid diagrams to Astro and Starlight pages, with safe syntax patterns for lesson flowcharts, worldbuilding relationships, timelines, and troubleshooting.</p>
-  </header>
-  <main>
-    <section>
-      <h2>What You Are Learning</h2>
-      <p>Mermaid is a text-based diagram tool. You write diagram code, and Mermaid renders it as a visual diagram.</p>
-      <ul>
-        <li>How Mermaid fits into Astro/Starlight documentation.</li>
-        <li>Safe diagram syntax for Markdown and MDX.</li>
-        <li>Flowcharts, timelines, sequence diagrams, and relationship diagrams.</li>
-        <li>Common syntax problems and how to avoid them.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Why Use Mermaid?</h2>
-      <p>Mermaid is useful when you want diagrams that are easy to edit as text.</p>
-      <pre><code>Text diagram source
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Astro Starlight Mermaid Diagrams Tutorial</title>
+<link href="/styles/main.css" rel="stylesheet"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
+<body><header class="site-header" data-scaffold="header">
+<div class="site-header__inner">
+<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
+<nav class="site-header__nav">
+<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
+</nav>
+</div>
+</header>
+<header>
+<h1>Astro Starlight Mermaid Diagrams Tutorial</h1>
+<p>A practical guide to adding Mermaid diagrams to Astro and Starlight pages, with safe syntax patterns for lesson flowcharts, worldbuilding relationships, timelines, and troubleshooting.</p>
+</header>
+<main>
+<section>
+<h2>What You Are Learning</h2>
+<p>Mermaid is a text-based diagram tool. You write diagram code, and Mermaid renders it as a visual diagram.</p>
+<ul>
+<li>How Mermaid fits into Astro/Starlight documentation.</li>
+<li>Safe diagram syntax for Markdown and MDX.</li>
+<li>Flowcharts, timelines, sequence diagrams, and relationship diagrams.</li>
+<li>Common syntax problems and how to avoid them.</li>
+</ul>
+</section>
+<section>
+<h2>Why Use Mermaid?</h2>
+<p>Mermaid is useful when you want diagrams that are easy to edit as text.</p>
+<pre><code>Text diagram source
   ↓
 Mermaid renderer
   ↓
 Visual flowchart, timeline, or relationship map</code></pre>
-      <p>For tutorial sites, Mermaid can explain workflows. For world bible sites, Mermaid can show factions, relationships, timelines, and political structures.</p>
-    </section>
-
-    <section>
-      <h2>Basic Setup Option</h2>
-      <p>A simple way to support Mermaid is to load Mermaid on pages where you need diagrams.</p>
-      <pre><code>&lt;script type="module"&gt;
+<p>For tutorial sites, Mermaid can explain workflows. For world bible sites, Mermaid can show factions, relationships, timelines, and political structures.</p>
+</section>
+<section>
+<h2>Basic Setup Option</h2>
+<p>A simple way to support Mermaid is to load Mermaid on pages where you need diagrams.</p>
+<pre><code>&lt;script type="module"&gt;
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 &lt;/script&gt;</code></pre>
-      <p>Then use a Mermaid block:</p>
-      <pre><code>&lt;div class="mermaid"&gt;
+<p>Then use a Mermaid block:</p>
+<pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Start] --&gt; B[Write Markdown]
   B --&gt; C[Build Site]
   C --&gt; D[Deploy]
 &lt;/div&gt;</code></pre>
-      <p>For a production Starlight site, consider moving the setup into a reusable component or layout.</p>
-    </section>
-
-    <section>
-      <h2>Basic Flowchart</h2>
-      <p>Use <code>graph TD</code> for a vertical top-down chart.</p>
-      <pre><code>&lt;div class="mermaid"&gt;
+<p>For a production Starlight site, consider moving the setup into a reusable component or layout.</p>
+</section>
+<section>
+<h2>Basic Flowchart</h2>
+<p>Use <code>graph TD</code> for a vertical top-down chart.</p>
+<pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Create Astro Project] --&gt; B[Add Starlight]
   B --&gt; C[Write Docs]
   C --&gt; D[Build]
   D --&gt; E[Deploy]
 &lt;/div&gt;</code></pre>
-      <p>Use <code>graph LR</code> for a left-to-right chart.</p>
-      <pre><code>&lt;div class="mermaid"&gt;
+<p>Use <code>graph LR</code> for a left-to-right chart.</p>
+<pre><code>&lt;div class="mermaid"&gt;
 graph LR
   A[Markdown] --&gt; B[Astro]
   B --&gt; C[Static HTML]
 &lt;/div&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Vertical vs Horizontal</h2>
-      <table>
-        <thead><tr><th>Direction</th><th>Syntax</th><th>Best For</th></tr></thead>
-        <tbody>
-          <tr><td>Top to bottom</td><td><code>graph TD</code></td><td>Step-by-step workflows, tutorials, decision trees.</td></tr>
-          <tr><td>Left to right</td><td><code>graph LR</code></td><td>Process pipelines, data flow, relationship chains.</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>Safe Node Text</h2>
-      <p>Mermaid can break when node text contains complex HTML, quotes, or special characters. Keep node text simple.</p>
-      <pre><code>Safer:
+</section>
+<section>
+<h2>Vertical vs Horizontal</h2>
+<table>
+<thead><tr><th>Direction</th><th>Syntax</th><th>Best For</th></tr></thead>
+<tbody>
+<tr><td>Top to bottom</td><td><code>graph TD</code></td><td>Step-by-step workflows, tutorials, decision trees.</td></tr>
+<tr><td>Left to right</td><td><code>graph LR</code></td><td>Process pipelines, data flow, relationship chains.</td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Safe Node Text</h2>
+<p>Mermaid can break when node text contains complex HTML, quotes, or special characters. Keep node text simple.</p>
+<pre><code>Safer:
 A[Check dependency array]
 
 Riskier:
 A[Check "dependency array" with &lt;br/&gt; HTML]</code></pre>
-      <p>If a diagram fails, simplify the text first. Then add details back slowly.</p>
-    </section>
-
-    <section>
-      <h2>Decision Flowchart</h2>
-      <pre><code>&lt;div class="mermaid"&gt;
+<p>If a diagram fails, simplify the text first. Then add details back slowly.</p>
+</section>
+<section>
+<h2>Decision Flowchart</h2>
+<pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Need a page?] --&gt; B{Mostly writing?}
   B --&gt;|Yes| C[Use Markdown]
@@ -102,11 +105,10 @@ graph TD
   D --&gt;|Yes| E[Use MDX]
   D --&gt;|No| F[Use Astro page]
 &lt;/div&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Worldbuilding Relationship Diagram</h2>
-      <pre><code>&lt;div class="mermaid"&gt;
+</section>
+<section>
+<h2>Worldbuilding Relationship Diagram</h2>
+<pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[House Valoire] --&gt; B[Aurelian Valoire VI]
   A --&gt; C[Aurelian Rassendyll]
@@ -114,11 +116,10 @@ graph TD
   E --&gt; F[Political Rivalry]
   C --&gt; F
 &lt;/div&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Lesson Workflow Diagram</h2>
-      <pre><code>&lt;div class="mermaid"&gt;
+</section>
+<section>
+<h2>Lesson Workflow Diagram</h2>
+<pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Read Lesson] --&gt; B[Follow Example]
   B --&gt; C[Try Exercise]
@@ -127,12 +128,11 @@ graph TD
   D --&gt;|No| F[Check Troubleshooting]
   F --&gt; C
 &lt;/div&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Timeline Diagram</h2>
-      <p>Timeline diagrams can be useful, but keep entries short.</p>
-      <pre><code>&lt;div class="mermaid"&gt;
+</section>
+<section>
+<h2>Timeline Diagram</h2>
+<p>Timeline diagrams can be useful, but keep entries short.</p>
+<pre><code>&lt;div class="mermaid"&gt;
 timeline
   title Project Timeline
   Week 1 : Create Astro project
@@ -140,11 +140,10 @@ timeline
   Week 3 : Add components
   Week 4 : Deploy site
 &lt;/div&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Sequence Diagram</h2>
-      <pre><code>&lt;div class="mermaid"&gt;
+</section>
+<section>
+<h2>Sequence Diagram</h2>
+<pre><code>&lt;div class="mermaid"&gt;
 sequenceDiagram
   participant User
   participant Browser
@@ -154,67 +153,62 @@ sequenceDiagram
   Vercel--&gt;&gt;Browser: Send static HTML
   Browser--&gt;&gt;User: Show page
 &lt;/div&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Adding Styling</h2>
-      <p>Mermaid style lines can work, but they are a common source of syntax mistakes. Start with an unstyled diagram first.</p>
-      <pre><code>&lt;div class="mermaid"&gt;
+</section>
+<section>
+<h2>Adding Styling</h2>
+<p>Mermaid style lines can work, but they are a common source of syntax mistakes. Start with an unstyled diagram first.</p>
+<pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Start] --&gt; B[Build]
   B --&gt; C[Deploy]
   style A fill:#e8f0ff,stroke:#333
   style C fill:#e8ffe8,stroke:#333
 &lt;/div&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Common Mermaid Mistakes</h2>
-      <h3>HTML inside node labels</h3>
-      <pre><code>Risky:
+</section>
+<section>
+<h2>Common Mermaid Mistakes</h2>
+<h3>HTML inside node labels</h3>
+<pre><code>Risky:
 A[Line one&lt;br/&gt;Line two]
 
 Safer:
 A[Line one and line two]</code></pre>
-      <h3>Quotes inside labels</h3>
-      <pre><code>Risky:
+<h3>Quotes inside labels</h3>
+<pre><code>Risky:
 A[path="/about"]
 
 Safer:
 A[path /about]</code></pre>
-      <h3>Too much text in one node</h3>
-      <pre><code>Risky:
+<h3>Too much text in one node</h3>
+<pre><code>Risky:
 A[This is a very long explanation that should probably be normal paragraph text instead]
 
 Safer:
 A[Short label]</code></pre>
-    </section>
-
-    <section>
-      <h2>Mermaid in Markdown vs MDX</h2>
-      <p>In Markdown, simple HTML blocks are usually enough:</p>
-      <pre><code>&lt;div class="mermaid"&gt;
+</section>
+<section>
+<h2>Mermaid in Markdown vs MDX</h2>
+<p>In Markdown, simple HTML blocks are usually enough:</p>
+<pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Start] --&gt; B[End]
 &lt;/div&gt;</code></pre>
-      <p>In MDX, be more careful because MDX parses JSX-like syntax. If raw HTML causes issues, use a reusable component.</p>
-    </section>
-
-    <section>
-      <h2>Good Diagram Design</h2>
-      <ul>
-        <li>Keep labels short.</li>
-        <li>Use paragraphs below diagrams for details.</li>
-        <li>Prefer simple flowcharts before complex diagram types.</li>
-        <li>Use vertical diagrams for lessons and decisions.</li>
-        <li>Use horizontal diagrams for pipelines.</li>
-        <li>Test diagrams one at a time.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Troubleshooting Checklist</h2>
-      <pre><code>[ ] Does a very simple Mermaid diagram render?
+<p>In MDX, be more careful because MDX parses JSX-like syntax. If raw HTML causes issues, use a reusable component.</p>
+</section>
+<section>
+<h2>Good Diagram Design</h2>
+<ul>
+<li>Keep labels short.</li>
+<li>Use paragraphs below diagrams for details.</li>
+<li>Prefer simple flowcharts before complex diagram types.</li>
+<li>Use vertical diagrams for lessons and decisions.</li>
+<li>Use horizontal diagrams for pipelines.</li>
+<li>Test diagrams one at a time.</li>
+</ul>
+</section>
+<section>
+<h2>Troubleshooting Checklist</h2>
+<pre><code>[ ] Does a very simple Mermaid diagram render?
 [ ] Is the Mermaid script loading?
 [ ] Are node labels short?
 [ ] Did you remove risky quotes?
@@ -222,17 +216,16 @@ graph TD
 [ ] Did you test without style lines?
 [ ] Are you using graph TD or graph LR correctly?
 [ ] Does the diagram work outside MDX first?</code></pre>
-    </section>
-
-    <section>
-      <h2>Simple Rule of Thumb</h2>
-      <pre><code>Start with plain Mermaid.
+</section>
+<section>
+<h2>Simple Rule of Thumb</h2>
+<pre><code>Start with plain Mermaid.
 Keep labels simple.
 Avoid quotes and HTML in nodes.
 Use graph TD for step-by-step lessons.
 Use graph LR for process pipelines.
 Add styling only after the diagram works.</code></pre>
-    </section>
-  </main>
+</section>
+<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
 </body>
 </html>

@@ -1,37 +1,44 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starlight Lesson Library Site Tutorial</title>
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="icon" href="/favicon.png">
-</head>
-<body>
-  <header>
-    <h1>Starlight Lesson Library Site Tutorial</h1>
-    <p>A practical capstone tutorial for building a complete lesson library, course guide, or tutorial documentation site with Astro and Starlight.</p>
-  </header>
-
-  <main>
-    <section>
-      <h2>What You Are Building</h2>
-      <p>In this tutorial, you will design a full lesson library site using Astro and Starlight. The site will organize lessons by level, topic, course, and reference type.</p>
-      <p>The finished site can support:</p>
-      <ul>
-        <li>Beginner, intermediate, and advanced lessons.</li>
-        <li>Course landing pages.</li>
-        <li>Lesson pages.</li>
-        <li>Exercise pages.</li>
-        <li>Cheat sheets and reference pages.</li>
-        <li>Tags and categories.</li>
-        <li>A clear sidebar and homepage.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>The Big Picture</h2>
-      <pre><code>Homepage
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Starlight Lesson Library Site Tutorial</title>
+<link href="/styles/main.css" rel="stylesheet"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
+<body><header class="site-header" data-scaffold="header">
+<div class="site-header__inner">
+<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
+<nav class="site-header__nav">
+<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
+</nav>
+</div>
+</header>
+<header>
+<h1>Starlight Lesson Library Site Tutorial</h1>
+<p>A practical capstone tutorial for building a complete lesson library, course guide, or tutorial documentation site with Astro and Starlight.</p>
+</header>
+<main>
+<section>
+<h2>What You Are Building</h2>
+<p>In this tutorial, you will design a full lesson library site using Astro and Starlight. The site will organize lessons by level, topic, course, and reference type.</p>
+<p>The finished site can support:</p>
+<ul>
+<li>Beginner, intermediate, and advanced lessons.</li>
+<li>Course landing pages.</li>
+<li>Lesson pages.</li>
+<li>Exercise pages.</li>
+<li>Cheat sheets and reference pages.</li>
+<li>Tags and categories.</li>
+<li>A clear sidebar and homepage.</li>
+</ul>
+</section>
+<section>
+<h2>The Big Picture</h2>
+<pre><code>Homepage
   ↓
 Learning paths
   ↓
@@ -42,12 +49,11 @@ Lesson pages
 Exercises and references
   ↓
 Deployment</code></pre>
-      <p>A lesson library is not just a folder full of pages. It is a guided learning system. The site should help learners answer: where do I start, what do I read next, and where do I go when I get stuck?</p>
-    </section>
-
-    <section>
-      <h2>Recommended Site Structure</h2>
-      <pre><code>src/content/docs/
+<p>A lesson library is not just a folder full of pages. It is a guided learning system. The site should help learners answer: where do I start, what do I read next, and where do I go when I get stuck?</p>
+</section>
+<section>
+<h2>Recommended Site Structure</h2>
+<pre><code>src/content/docs/
   index.md
   getting-started.md
 
@@ -88,26 +94,24 @@ Deployment</code></pre>
     glossary.md
     troubleshooting.md
     cheat-sheets.md</code></pre>
-    </section>
-
-    <section>
-      <h2>Homepage Purpose</h2>
-      <p>The homepage should not list everything. It should direct the learner to the correct path.</p>
-      <pre><code>Homepage sections:
+</section>
+<section>
+<h2>Homepage Purpose</h2>
+<p>The homepage should not list everything. It should direct the learner to the correct path.</p>
+<pre><code>Homepage sections:
   Hero
   Start Here
   Beginner / Intermediate / Advanced cards
   Featured course
   Reference links
   Troubleshooting link</code></pre>
-      <p>A good lesson-library homepage gives readers confidence that the material has an order.</p>
-    </section>
-
-    <section>
-      <h2>Homepage Example</h2>
-      <p>Create or edit:</p>
-      <pre><code>src/content/docs/index.md</code></pre>
-      <pre><code>---
+<p>A good lesson-library homepage gives readers confidence that the material has an order.</p>
+</section>
+<section>
+<h2>Homepage Example</h2>
+<p>Create or edit:</p>
+<pre><code>src/content/docs/index.md</code></pre>
+<pre><code>---
 title: "Astro Starlight Lesson Library"
 description: "A structured tutorial library for learning Astro, Starlight, Markdown, MDX, and deployment."
 template: splash
@@ -136,12 +140,11 @@ hero:
 ## Featured Course
 
 Start with the [Astro Starlight Course](/courses/astro-starlight/).</code></pre>
-    </section>
-
-    <section>
-      <h2>Lesson Page Template</h2>
-      <p>Every lesson should feel familiar. Use the same section pattern again and again.</p>
-      <pre><code>---
+</section>
+<section>
+<h2>Lesson Page Template</h2>
+<p>Every lesson should feel familiar. Use the same section pattern again and again.</p>
+<pre><code>---
 title: "Markdown Basics"
 description: "Learn how Markdown works in Astro and Starlight."
 level: "beginner"
@@ -172,11 +175,10 @@ tags:
 ## Summary
 
 ## What to Learn Next</code></pre>
-    </section>
-
-    <section>
-      <h2>Course Page Template</h2>
-      <pre><code>---
+</section>
+<section>
+<h2>Course Page Template</h2>
+<pre><code>---
 title: "Astro Starlight Course"
 description: "A guided path through Astro and Starlight site building."
 ---
@@ -203,11 +205,10 @@ Build a complete documentation site.
 - [Full Site Setup](/courses/astro-starlight/setup/)
 - [Project Structure](/courses/astro-starlight/project-structure/)
 - [Deployment](/courses/astro-starlight/deployment/)</code></pre>
-    </section>
-
-    <section>
-      <h2>Exercise Page Template</h2>
-      <pre><code>---
+</section>
+<section>
+<h2>Exercise Page Template</h2>
+<pre><code>---
 title: "Markdown Practice Exercise"
 description: "Practice writing a lesson page in Markdown."
 difficulty: "beginner"
@@ -235,12 +236,11 @@ A readable Markdown page with title, sections, and examples.
 ## Stretch Goal
 
 Add a table and a link to another lesson.</code></pre>
-    </section>
-
-    <section>
-      <h2>Sidebar Configuration</h2>
-      <p>Use a sidebar that reflects the learning path.</p>
-      <pre><code>sidebar: [
+</section>
+<section>
+<h2>Sidebar Configuration</h2>
+<p>Use a sidebar that reflects the learning path.</p>
+<pre><code>sidebar: [
   {
     label: 'Start Here',
     items: [
@@ -270,12 +270,11 @@ Add a table and a link to another lesson.</code></pre>
     autogenerate: { directory: 'reference' },
   },
 ]</code></pre>
-    </section>
-
-    <section>
-      <h2>Content Collections for Lessons</h2>
-      <p>If you want dynamic indexes and filtering, create a lesson collection.</p>
-      <pre><code>import { defineCollection, z } from 'astro:content';
+</section>
+<section>
+<h2>Content Collections for Lessons</h2>
+<p>If you want dynamic indexes and filtering, create a lesson collection.</p>
+<pre><code>import { defineCollection, z } from 'astro:content';
 
 const lessons = defineCollection({
   schema: z.object({
@@ -290,13 +289,12 @@ const lessons = defineCollection({
 });
 
 export const collections = { lessons };</code></pre>
-      <p>Use a schema when you want lesson metadata to stay consistent.</p>
-    </section>
-
-    <section>
-      <h2>Lesson Card Component</h2>
-      <p>A reusable lesson card can make indexes easier to scan.</p>
-      <pre><code>---
+<p>Use a schema when you want lesson metadata to stay consistent.</p>
+</section>
+<section>
+<h2>Lesson Card Component</h2>
+<p>A reusable lesson card can make indexes easier to scan.</p>
+<pre><code>---
 const { title, description, href, level } = Astro.props;
 ---
 
@@ -305,11 +303,10 @@ const { title, description, href, level } = Astro.props;
   &lt;h2&gt;&lt;a href={href}&gt;{title}&lt;/a&gt;&lt;/h2&gt;
   &lt;p&gt;{description}&lt;/p&gt;
 &lt;/article&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Custom CSS for Lesson Cards</h2>
-      <pre><code>.lesson-grid {
+</section>
+<section>
+<h2>Custom CSS for Lesson Cards</h2>
+<pre><code>.lesson-grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
@@ -321,23 +318,21 @@ const { title, description, href, level } = Astro.props;
   padding: 1rem;
   background: var(--sl-color-bg-nav);
 }</code></pre>
-    </section>
-
-    <section>
-      <h2>Reference Section</h2>
-      <p>A lesson library needs quick-reference pages for learners who are stuck.</p>
-      <pre><code>reference/
+</section>
+<section>
+<h2>Reference Section</h2>
+<p>A lesson library needs quick-reference pages for learners who are stuck.</p>
+<pre><code>reference/
   commands.md
   glossary.md
   troubleshooting.md
   cheat-sheets.md
   common-errors.md</code></pre>
-      <p>Reference pages should be short, searchable, and practical.</p>
-    </section>
-
-    <section>
-      <h2>Recommended Tags</h2>
-      <pre><code>level tags:
+<p>Reference pages should be short, searchable, and practical.</p>
+</section>
+<section>
+<h2>Recommended Tags</h2>
+<pre><code>level tags:
   beginner
   intermediate
   advanced
@@ -357,11 +352,10 @@ format tags:
   exercise
   reference
   checklist</code></pre>
-    </section>
-
-    <section>
-      <h2>Build Checklist</h2>
-      <pre><code>[ ] Homepage has a clear start button
+</section>
+<section>
+<h2>Build Checklist</h2>
+<pre><code>[ ] Homepage has a clear start button
 [ ] Getting Started page exists
 [ ] Beginner, intermediate, and advanced folders exist
 [ ] Each major folder has an index.md page
@@ -372,32 +366,27 @@ format tags:
 [ ] Tags are consistent
 [ ] npm run build succeeds
 [ ] npm run preview works</code></pre>
-    </section>
-
-    <section>
-      <h2>Common Mistakes</h2>
-      <h3>Too many lessons at the same level</h3>
-      <p>Separate beginner, intermediate, and advanced material so learners are not overwhelmed.</p>
-
-      <h3>No index pages</h3>
-      <p>Every major folder should have an <code>index.md</code> page that explains what the section contains.</p>
-
-      <h3>Lessons without practice</h3>
-      <p>For learning sites, include exercises, mini projects, or checklists.</p>
-
-      <h3>Reference pages mixed with lessons</h3>
-      <p>Keep guided lessons and quick-reference pages separate.</p>
-    </section>
-
-    <section>
-      <h2>Simple Rule of Thumb</h2>
-      <pre><code>Homepage guides the learner.
+</section>
+<section>
+<h2>Common Mistakes</h2>
+<h3>Too many lessons at the same level</h3>
+<p>Separate beginner, intermediate, and advanced material so learners are not overwhelmed.</p>
+<h3>No index pages</h3>
+<p>Every major folder should have an <code>index.md</code> page that explains what the section contains.</p>
+<h3>Lessons without practice</h3>
+<p>For learning sites, include exercises, mini projects, or checklists.</p>
+<h3>Reference pages mixed with lessons</h3>
+<p>Keep guided lessons and quick-reference pages separate.</p>
+</section>
+<section>
+<h2>Simple Rule of Thumb</h2>
+<pre><code>Homepage guides the learner.
 Sidebar organizes the journey.
 Lessons teach one topic at a time.
 Exercises turn reading into practice.
 Reference pages help when stuck.
 Indexes help learners choose what to read next.</code></pre>
-    </section>
-  </main>
+</section>
+<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
 </body>
 </html>

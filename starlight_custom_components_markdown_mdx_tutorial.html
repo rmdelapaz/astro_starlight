@@ -1,105 +1,109 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Components in Markdown and MDX for Astro Starlight</title>
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="icon" href="/favicon.png">
-</head>
-<body>
-  <header>
-    <h1>Custom Components in Markdown and MDX for Astro Starlight</h1>
-    <p>A practical guide to building reusable Astro components and using them inside Starlight documentation pages, lessons, world bible entries, character sheets, and reference pages.</p>
-  </header>
-
-  <main>
-    <section>
-      <h2>What You Are Learning</h2>
-      <p>This tutorial teaches how custom components work in an Astro Starlight site, especially when writing content in Markdown and MDX.</p>
-      <p>You will learn:</p>
-      <ul>
-        <li>What a component is.</li>
-        <li>Why Markdown alone is sometimes not enough.</li>
-        <li>When to use <code>.md</code> and when to use <code>.mdx</code>.</li>
-        <li>How to create reusable Astro components.</li>
-        <li>How to import components into MDX pages.</li>
-        <li>How to pass data into components using props.</li>
-        <li>How to use slots for nested content.</li>
-        <li>How to create useful components for lessons and world bible projects.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>The Big Picture</h2>
-      <p>Markdown is excellent for writing simple content. MDX is useful when your content needs reusable visual pieces.</p>
-      <pre><code>Markdown page
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Custom Components in Markdown and MDX for Astro Starlight</title>
+<link href="/styles/main.css" rel="stylesheet"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
+<body><header class="site-header" data-scaffold="header">
+<div class="site-header__inner">
+<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
+<nav class="site-header__nav">
+<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
+</nav>
+</div>
+</header>
+<header>
+<h1>Custom Components in Markdown and MDX for Astro Starlight</h1>
+<p>A practical guide to building reusable Astro components and using them inside Starlight documentation pages, lessons, world bible entries, character sheets, and reference pages.</p>
+</header>
+<main>
+<section>
+<h2>What You Are Learning</h2>
+<p>This tutorial teaches how custom components work in an Astro Starlight site, especially when writing content in Markdown and MDX.</p>
+<p>You will learn:</p>
+<ul>
+<li>What a component is.</li>
+<li>Why Markdown alone is sometimes not enough.</li>
+<li>When to use <code>.md</code> and when to use <code>.mdx</code>.</li>
+<li>How to create reusable Astro components.</li>
+<li>How to import components into MDX pages.</li>
+<li>How to pass data into components using props.</li>
+<li>How to use slots for nested content.</li>
+<li>How to create useful components for lessons and world bible projects.</li>
+</ul>
+</section>
+<section>
+<h2>The Big Picture</h2>
+<p>Markdown is excellent for writing simple content. MDX is useful when your content needs reusable visual pieces.</p>
+<pre><code>Markdown page
   ↓
 Good for normal writing
   ↓
 Headings, paragraphs, links, lists, images, code blocks</code></pre>
-      <pre><code>MDX page
+<pre><code>MDX page
   ↓
 Good for writing plus components
   ↓
 Markdown content + imported Astro components</code></pre>
-      <p>Think of Markdown as a clean notebook. Think of MDX as a notebook where you can insert reusable widgets, cards, panels, diagrams, and layout blocks.</p>
-    </section>
-
-    <section>
-      <h2>What Is a Component?</h2>
-      <p>A component is a reusable piece of a webpage. Instead of rewriting the same HTML over and over, you create one component and reuse it many times.</p>
-      <p>For example, instead of manually writing a styled note box on every page, you can create one <code>InfoBox</code> component.</p>
-      <pre><code>&lt;InfoBox title="Remember"&gt;
+<p>Think of Markdown as a clean notebook. Think of MDX as a notebook where you can insert reusable widgets, cards, panels, diagrams, and layout blocks.</p>
+</section>
+<section>
+<h2>What Is a Component?</h2>
+<p>A component is a reusable piece of a webpage. Instead of rewriting the same HTML over and over, you create one component and reuse it many times.</p>
+<p>For example, instead of manually writing a styled note box on every page, you can create one <code>InfoBox</code> component.</p>
+<pre><code>&lt;InfoBox title="Remember"&gt;
 Markdown is for writing. MDX is for writing plus components.
 &lt;/InfoBox&gt;</code></pre>
-      <p>The component controls the structure and styling. The MDX page supplies the content.</p>
-    </section>
-
-    <section>
-      <h2>Markdown vs MDX for Components</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>File Type</th>
-            <th>Can Use Normal Markdown?</th>
-            <th>Can Import Components?</th>
-            <th>Best Use</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>.md</code></td>
-            <td>Yes</td>
-            <td>Usually no</td>
-            <td>Simple articles, lessons, reference pages</td>
-          </tr>
-          <tr>
-            <td><code>.mdx</code></td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Pages with reusable cards, panels, examples, widgets, or custom layouts</td>
-          </tr>
-          <tr>
-            <td><code>.astro</code></td>
-            <td>Not as normal content</td>
-            <td>Yes</td>
-            <td>Full page templates, layouts, and reusable UI pieces</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>Simple rule:</p>
-      <pre><code>If the page is mostly writing, use .md.
+<p>The component controls the structure and styling. The MDX page supplies the content.</p>
+</section>
+<section>
+<h2>Markdown vs MDX for Components</h2>
+<table>
+<thead>
+<tr>
+<th>File Type</th>
+<th>Can Use Normal Markdown?</th>
+<th>Can Import Components?</th>
+<th>Best Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.md</code></td>
+<td>Yes</td>
+<td>Usually no</td>
+<td>Simple articles, lessons, reference pages</td>
+</tr>
+<tr>
+<td><code>.mdx</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Pages with reusable cards, panels, examples, widgets, or custom layouts</td>
+</tr>
+<tr>
+<td><code>.astro</code></td>
+<td>Not as normal content</td>
+<td>Yes</td>
+<td>Full page templates, layouts, and reusable UI pieces</td>
+</tr>
+</tbody>
+</table>
+<p>Simple rule:</p>
+<pre><code>If the page is mostly writing, use .md.
 If the page needs components, use .mdx.
 If you are building the component itself, use .astro.</code></pre>
-    </section>
-
-    <section>
-      <h2>Where Components Go</h2>
-      <p>Reusable components usually live in:</p>
-      <pre><code>src/components/</code></pre>
-      <p>Example structure:</p>
-      <pre><code>src/
+</section>
+<section>
+<h2>Where Components Go</h2>
+<p>Reusable components usually live in:</p>
+<pre><code>src/components/</code></pre>
+<p>Example structure:</p>
+<pre><code>src/
   components/
     InfoBox.astro
     CharacterStats.astro
@@ -112,15 +116,14 @@ If you are building the component itself, use .astro.</code></pre>
         custom-components.mdx
       characters/
         example-character.mdx</code></pre>
-      <p>The component lives in <code>src/components/</code>. The MDX page imports and uses it.</p>
-    </section>
-
-    <section>
-      <h2>Your First Component: InfoBox</h2>
-      <p>Create this file:</p>
-      <pre><code>src/components/InfoBox.astro</code></pre>
-      <p>Add this code:</p>
-      <pre><code>---
+<p>The component lives in <code>src/components/</code>. The MDX page imports and uses it.</p>
+</section>
+<section>
+<h2>Your First Component: InfoBox</h2>
+<p>Create this file:</p>
+<pre><code>src/components/InfoBox.astro</code></pre>
+<p>Add this code:</p>
+<pre><code>---
 const { title = "Note" } = Astro.props;
 ---
 
@@ -130,19 +133,18 @@ const { title = "Note" } = Astro.props;
     &lt;slot /&gt;
   &lt;/div&gt;
 &lt;/aside&gt;</code></pre>
-      <p>This component has two important parts:</p>
-      <ul>
-        <li><code>Astro.props</code> receives values passed into the component.</li>
-        <li><code>&lt;slot /&gt;</code> marks where nested content should appear.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Use the Component in MDX</h2>
-      <p>Create an MDX page:</p>
-      <pre><code>src/content/docs/lessons/custom-components.mdx</code></pre>
-      <p>Add this content:</p>
-      <pre><code>---
+<p>This component has two important parts:</p>
+<ul>
+<li><code>Astro.props</code> receives values passed into the component.</li>
+<li><code>&lt;slot /&gt;</code> marks where nested content should appear.</li>
+</ul>
+</section>
+<section>
+<h2>Use the Component in MDX</h2>
+<p>Create an MDX page:</p>
+<pre><code>src/content/docs/lessons/custom-components.mdx</code></pre>
+<p>Add this content:</p>
+<pre><code>---
 title: "Custom Components"
 description: "Using reusable Astro components inside MDX."
 ---
@@ -154,62 +156,58 @@ import InfoBox from "../../../components/InfoBox.astro";
 &lt;InfoBox title="Remember"&gt;
 Components help you reuse the same layout or visual pattern across many pages.
 &lt;/InfoBox&gt;</code></pre>
-      <p>The import path may change depending on where your MDX file is located. Count the folders carefully.</p>
-    </section>
-
-    <section>
-      <h2>Understanding Import Paths</h2>
-      <p>An import path tells the MDX file where to find the component.</p>
-      <pre><code>import InfoBox from "../../../components/InfoBox.astro";</code></pre>
-      <p>If your MDX file is here:</p>
-      <pre><code>src/content/docs/lessons/custom-components.mdx</code></pre>
-      <p>And your component is here:</p>
-      <pre><code>src/components/InfoBox.astro</code></pre>
-      <p>You may need to go upward through folders using <code>../</code>.</p>
-      <pre><code>lessons/custom-components.mdx
+<p>The import path may change depending on where your MDX file is located. Count the folders carefully.</p>
+</section>
+<section>
+<h2>Understanding Import Paths</h2>
+<p>An import path tells the MDX file where to find the component.</p>
+<pre><code>import InfoBox from "../../../components/InfoBox.astro";</code></pre>
+<p>If your MDX file is here:</p>
+<pre><code>src/content/docs/lessons/custom-components.mdx</code></pre>
+<p>And your component is here:</p>
+<pre><code>src/components/InfoBox.astro</code></pre>
+<p>You may need to go upward through folders using <code>../</code>.</p>
+<pre><code>lessons/custom-components.mdx
   up to docs
   up to content
   up to src
   then into components/InfoBox.astro</code></pre>
-      <p>That is why the path may look like:</p>
-      <pre><code>../../../components/InfoBox.astro</code></pre>
-    </section>
-
-    <section>
-      <h2>Props: Passing Data into Components</h2>
-      <p>Props are values passed into a component. In this example, <code>title</code> is a prop:</p>
-      <pre><code>&lt;InfoBox title="Important"&gt;
+<p>That is why the path may look like:</p>
+<pre><code>../../../components/InfoBox.astro</code></pre>
+</section>
+<section>
+<h2>Props: Passing Data into Components</h2>
+<p>Props are values passed into a component. In this example, <code>title</code> is a prop:</p>
+<pre><code>&lt;InfoBox title="Important"&gt;
 This is important content.
 &lt;/InfoBox&gt;</code></pre>
-      <p>The component receives the prop like this:</p>
-      <pre><code>---
+<p>The component receives the prop like this:</p>
+<pre><code>---
 const { title = "Note" } = Astro.props;
 ---</code></pre>
-      <p>The default value <code>"Note"</code> is used if no title is provided.</p>
-    </section>
-
-    <section>
-      <h2>Slots: Passing Content into Components</h2>
-      <p>A slot is a placeholder for nested content.</p>
-      <pre><code>&lt;InfoBox title="Tip"&gt;
+<p>The default value <code>"Note"</code> is used if no title is provided.</p>
+</section>
+<section>
+<h2>Slots: Passing Content into Components</h2>
+<p>A slot is a placeholder for nested content.</p>
+<pre><code>&lt;InfoBox title="Tip"&gt;
 This text goes into the slot.
 &lt;/InfoBox&gt;</code></pre>
-      <p>The component decides where that nested content appears:</p>
-      <pre><code>&lt;aside class="info-box"&gt;
+<p>The component decides where that nested content appears:</p>
+<pre><code>&lt;aside class="info-box"&gt;
   &lt;h2&gt;{title}&lt;/h2&gt;
   &lt;div&gt;
     &lt;slot /&gt;
   &lt;/div&gt;
 &lt;/aside&gt;</code></pre>
-      <p>Slots are useful for callout boxes, cards, lesson objectives, warnings, summaries, and reusable page sections.</p>
-    </section>
-
-    <section>
-      <h2>Add Custom CSS</h2>
-      <p>Create a custom CSS file:</p>
-      <pre><code>src/styles/custom.css</code></pre>
-      <p>Add example styles:</p>
-      <pre><code>.info-box {
+<p>Slots are useful for callout boxes, cards, lesson objectives, warnings, summaries, and reusable page sections.</p>
+</section>
+<section>
+<h2>Add Custom CSS</h2>
+<p>Create a custom CSS file:</p>
+<pre><code>src/styles/custom.css</code></pre>
+<p>Add example styles:</p>
+<pre><code>.info-box {
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 0.75rem;
   padding: 1rem;
@@ -220,8 +218,8 @@ This text goes into the slot.
 .info-box h2 {
   margin-top: 0;
 }</code></pre>
-      <p>Then register the CSS in <code>astro.config.mjs</code>:</p>
-      <pre><code>import { defineConfig } from 'astro/config';
+<p>Then register the CSS in <code>astro.config.mjs</code>:</p>
+<pre><code>import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
@@ -232,25 +230,24 @@ export default defineConfig({
     }),
   ],
 });</code></pre>
-    </section>
-
-    <section>
-      <h2>Component Example: LessonObjectives</h2>
-      <p>A lesson site often needs the same opening section again and again. Create this file:</p>
-      <pre><code>src/components/LessonObjectives.astro</code></pre>
-      <p>Add:</p>
-      <pre><code>---
+</section>
+<section>
+<h2>Component Example: LessonObjectives</h2>
+<p>A lesson site often needs the same opening section again and again. Create this file:</p>
+<pre><code>src/components/LessonObjectives.astro</code></pre>
+<p>Add:</p>
+<pre><code>---
 const { title = "What You Will Learn", objectives = [] } = Astro.props;
 ---
 
 <section class="lesson-objectives">
   <h2>{title}</h2>
   <ul>
-    {objectives.map((objective) => <li>{objective}</li>)}
+    {objectives.map((objective) =&gt; <li>{objective}</li>)}
   </ul>
 </section></code></pre>
-      <p>Use it in MDX:</p>
-      <pre><code>---
+<p>Use it in MDX:</p>
+<pre><code>---
 title: "Markdown Basics"
 ---
 
@@ -266,15 +263,14 @@ import LessonObjectives from "../../../components/LessonObjectives.astro";
     "Add frontmatter"
   ]}
 /&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Component Example: CharacterStats</h2>
-      <p>For a world bible or RPG-style character page, a reusable stat block is very useful.</p>
-      <p>Create:</p>
-      <pre><code>src/components/CharacterStats.astro</code></pre>
-      <p>Add:</p>
-      <pre><code>---
+</section>
+<section>
+<h2>Component Example: CharacterStats</h2>
+<p>For a world bible or RPG-style character page, a reusable stat block is very useful.</p>
+<p>Create:</p>
+<pre><code>src/components/CharacterStats.astro</code></pre>
+<p>Add:</p>
+<pre><code>---
 const {
   strength = 10,
   dexterity = 10,
@@ -295,15 +291,15 @@ const stats = [
 ---
 
 <div class="character-stats">
-  {stats.map(([label, value]) => (
+  {stats.map(([label, value]) =&gt; (
     <div class="stat-box">
       <strong>{label}</strong>
       <span>{value}</span>
     </div>
   ))}
 </div></code></pre>
-      <p>Use it in an MDX character page:</p>
-      <pre><code>---
+<p>Use it in an MDX character page:</p>
+<pre><code>---
 title: "Example Character"
 description: "A sample character using a reusable stat component."
 ---
@@ -324,15 +320,14 @@ import CharacterStats from "../../../components/CharacterStats.astro";
 ## Background
 
 This character uses a reusable stat block.</code></pre>
-    </section>
-
-    <section>
-      <h2>Component Example: WorldBibleEntry</h2>
-      <p>A world bible page often needs quick metadata at the top.</p>
-      <p>Create:</p>
-      <pre><code>src/components/WorldBibleEntry.astro</code></pre>
-      <p>Add:</p>
-      <pre><code>---
+</section>
+<section>
+<h2>Component Example: WorldBibleEntry</h2>
+<p>A world bible page often needs quick metadata at the top.</p>
+<p>Create:</p>
+<pre><code>src/components/WorldBibleEntry.astro</code></pre>
+<p>Add:</p>
+<pre><code>---
 const {
   type = "Entry",
   region = "Unknown",
@@ -345,12 +340,12 @@ const {
   <p><strong>Type:</strong> {type}</p>
   <p><strong>Region:</strong> {region}</p>
   <p><strong>Status:</strong> {status}</p>
-  {tags.length > 0 && (
+  {tags.length &gt; 0 &amp;&amp; (
     <p><strong>Tags:</strong> {tags.join(', ')}</p>
   )}
 </aside></code></pre>
-      <p>Use it in MDX:</p>
-      <pre><code>---
+<p>Use it in MDX:</p>
+<pre><code>---
 title: "New York Harbor, 2175"
 ---
 
@@ -368,15 +363,14 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 ## Overview
 
 This page describes the location.</code></pre>
-    </section>
-
-    <section>
-      <h2>Component Example: FactionCard</h2>
-      <p>Faction cards are useful when summarizing groups, houses, corporations, teams, or governments.</p>
-      <p>Create:</p>
-      <pre><code>src/components/FactionCard.astro</code></pre>
-      <p>Add:</p>
-      <pre><code>---
+</section>
+<section>
+<h2>Component Example: FactionCard</h2>
+<p>Faction cards are useful when summarizing groups, houses, corporations, teams, or governments.</p>
+<p>Create:</p>
+<pre><code>src/components/FactionCard.astro</code></pre>
+<p>Add:</p>
+<pre><code>---
 const {
   name,
   type = "Faction",
@@ -391,8 +385,8 @@ const {
   <p><strong>Region:</strong> {region}</p>
   <p>{summary}</p>
 </article></code></pre>
-      <p>Use it in MDX:</p>
-      <pre><code>import FactionCard from "../../../components/FactionCard.astro";
+<p>Use it in MDX:</p>
+<pre><code>import FactionCard from "../../../components/FactionCard.astro";
 
 &lt;FactionCard
   name="House Miraculo"
@@ -400,28 +394,27 @@ const {
   region="Europe"
   summary="A rival house with political power, cultural prestige, and dangerous ambitions."
 /&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Component Example: RelatedLinks</h2>
-      <p>A reusable related-links component helps readers move between connected pages.</p>
-      <p>Create:</p>
-      <pre><code>src/components/RelatedLinks.astro</code></pre>
-      <p>Add:</p>
-      <pre><code>---
+</section>
+<section>
+<h2>Component Example: RelatedLinks</h2>
+<p>A reusable related-links component helps readers move between connected pages.</p>
+<p>Create:</p>
+<pre><code>src/components/RelatedLinks.astro</code></pre>
+<p>Add:</p>
+<pre><code>---
 const { links = [] } = Astro.props;
 ---
 
-<nav class="related-links" aria-label="Related pages">
+<nav aria-label="Related pages" class="related-links">
   <h2>Related Pages</h2>
   <ul>
-    {links.map((link) => (
-      <li><a href={link.href}>{link.label}</a></li>
+    {links.map((link) =&gt; (
+      <li><a href="{link.href}">{link.label}</a></li>
     ))}
   </ul>
 </nav></code></pre>
-      <p>Use it in MDX:</p>
-      <pre><code>import RelatedLinks from "../../../components/RelatedLinks.astro";
+<p>Use it in MDX:</p>
+<pre><code>import RelatedLinks from "../../../components/RelatedLinks.astro";
 
 &lt;RelatedLinks
   links={[
@@ -430,12 +423,11 @@ const { links = [] } = Astro.props;
     { label: "Region Template", href: "/regions/region-template/" }
   ]}
 /&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Using Frontmatter with Components</h2>
-      <p>In MDX, you can use frontmatter values inside the page. This is helpful when you do not want to type the same data twice.</p>
-      <pre><code>---
+</section>
+<section>
+<h2>Using Frontmatter with Components</h2>
+<p>In MDX, you can use frontmatter values inside the page. This is helpful when you do not want to type the same data twice.</p>
+<pre><code>---
 title: "Veritas Miraculo"
 role: "Rival Heir Apparent"
 region: "Europe"
@@ -452,14 +444,13 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
   status={frontmatter.status}
   tags={[frontmatter.role]}
 /&gt;</code></pre>
-      <p>This keeps page metadata and visible page content connected.</p>
-    </section>
-
-    <section>
-      <h2>Starlight Built-In Components</h2>
-      <p>Starlight also provides built-in components that can be used in MDX and Markdoc pages. These are useful for documentation features such as cards, tabs, icons, and steps.</p>
-      <p>Example pattern:</p>
-      <pre><code>import { Card, CardGrid } from '@astrojs/starlight/components';
+<p>This keeps page metadata and visible page content connected.</p>
+</section>
+<section>
+<h2>Starlight Built-In Components</h2>
+<p>Starlight also provides built-in components that can be used in MDX and Markdoc pages. These are useful for documentation features such as cards, tabs, icons, and steps.</p>
+<p>Example pattern:</p>
+<pre><code>import { Card, CardGrid } from '@astrojs/starlight/components';
 
 &lt;CardGrid&gt;
   &lt;Card title="Characters" icon="user"&gt;
@@ -469,13 +460,12 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
     Important places and points of interest.
   &lt;/Card&gt;
 &lt;/CardGrid&gt;</code></pre>
-      <p>Use built-in components when they already solve the problem. Create custom components when your project needs its own repeated pattern.</p>
-    </section>
-
-    <section>
-      <h2>Using Tabs in MDX</h2>
-      <p>Tabs are useful for comparing code, alternate versions, or different views of the same information.</p>
-      <pre><code>import { Tabs, TabItem } from '@astrojs/starlight/components';
+<p>Use built-in components when they already solve the problem. Create custom components when your project needs its own repeated pattern.</p>
+</section>
+<section>
+<h2>Using Tabs in MDX</h2>
+<p>Tabs are useful for comparing code, alternate versions, or different views of the same information.</p>
+<pre><code>import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 &lt;Tabs&gt;
   &lt;TabItem label="Markdown"&gt;
@@ -485,13 +475,12 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
     Use MDX when the page needs components.
   &lt;/TabItem&gt;
 &lt;/Tabs&gt;</code></pre>
-      <p>Tabs are especially helpful for lesson pages that compare commands, code styles, or project structures.</p>
-    </section>
-
-    <section>
-      <h2>Using Steps in MDX</h2>
-      <p>Steps are useful for procedural tutorials.</p>
-      <pre><code>import { Steps } from '@astrojs/starlight/components';
+<p>Tabs are especially helpful for lesson pages that compare commands, code styles, or project structures.</p>
+</section>
+<section>
+<h2>Using Steps in MDX</h2>
+<p>Steps are useful for procedural tutorials.</p>
+<pre><code>import { Steps } from '@astrojs/starlight/components';
 
 &lt;Steps&gt;
 1. Create the component in `src/components/`.
@@ -499,63 +488,60 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 3. Pass props into the component.
 4. Run `npm run dev` and check the page.
 &lt;/Steps&gt;</code></pre>
-      <p>This is a good pattern for installation guides, deployment tutorials, and coding walkthroughs.</p>
-    </section>
-
-    <section>
-      <h2>Client-Side Interactive Components</h2>
-      <p>Astro components render mostly as HTML by default. If you import a React, Vue, Svelte, or other UI framework component that needs browser-side interactivity, you may need a client directive.</p>
-      <pre><code>import Counter from "../../../components/Counter.jsx";
+<p>This is a good pattern for installation guides, deployment tutorials, and coding walkthroughs.</p>
+</section>
+<section>
+<h2>Client-Side Interactive Components</h2>
+<p>Astro components render mostly as HTML by default. If you import a React, Vue, Svelte, or other UI framework component that needs browser-side interactivity, you may need a client directive.</p>
+<pre><code>import Counter from "../../../components/Counter.jsx";
 
 &lt;Counter client:load /&gt;</code></pre>
-      <p>Common client directives include:</p>
-      <ul>
-        <li><code>client:load</code> for loading immediately.</li>
-        <li><code>client:idle</code> for loading when the browser is idle.</li>
-        <li><code>client:visible</code> for loading when the component enters the viewport.</li>
-      </ul>
-      <p>For most static callouts, cards, stat blocks, and reference panels, you do not need client-side JavaScript.</p>
-    </section>
-
-    <section>
-      <h2>Component Design Guidelines</h2>
-      <p>Good components are reusable, focused, and easy to understand.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Guideline</th>
-            <th>Explanation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Keep one purpose</td>
-            <td>A CharacterStats component should display stats, not manage the whole page.</td>
-          </tr>
-          <tr>
-            <td>Use clear prop names</td>
-            <td><code>strength</code> is better than <code>s</code>.</td>
-          </tr>
-          <tr>
-            <td>Provide defaults</td>
-            <td>Defaults prevent broken-looking pages when data is missing.</td>
-          </tr>
-          <tr>
-            <td>Use slots for prose</td>
-            <td>Slots let writers add normal content inside reusable wrappers.</td>
-          </tr>
-          <tr>
-            <td>Avoid overengineering</td>
-            <td>Do not make a component for something you only use once.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>Common Mistake: Trying to Use Components in Plain Markdown</h2>
-      <p>Plain <code>.md</code> files are best for Markdown. If you want to import and use components, use <code>.mdx</code>.</p>
-      <pre><code>Good:
+<p>Common client directives include:</p>
+<ul>
+<li><code>client:load</code> for loading immediately.</li>
+<li><code>client:idle</code> for loading when the browser is idle.</li>
+<li><code>client:visible</code> for loading when the component enters the viewport.</li>
+</ul>
+<p>For most static callouts, cards, stat blocks, and reference panels, you do not need client-side JavaScript.</p>
+</section>
+<section>
+<h2>Component Design Guidelines</h2>
+<p>Good components are reusable, focused, and easy to understand.</p>
+<table>
+<thead>
+<tr>
+<th>Guideline</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keep one purpose</td>
+<td>A CharacterStats component should display stats, not manage the whole page.</td>
+</tr>
+<tr>
+<td>Use clear prop names</td>
+<td><code>strength</code> is better than <code>s</code>.</td>
+</tr>
+<tr>
+<td>Provide defaults</td>
+<td>Defaults prevent broken-looking pages when data is missing.</td>
+</tr>
+<tr>
+<td>Use slots for prose</td>
+<td>Slots let writers add normal content inside reusable wrappers.</td>
+</tr>
+<tr>
+<td>Avoid overengineering</td>
+<td>Do not make a component for something you only use once.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Common Mistake: Trying to Use Components in Plain Markdown</h2>
+<p>Plain <code>.md</code> files are best for Markdown. If you want to import and use components, use <code>.mdx</code>.</p>
+<pre><code>Good:
 src/content/docs/example.mdx
 
 import InfoBox from "../../components/InfoBox.astro";
@@ -563,24 +549,22 @@ import InfoBox from "../../components/InfoBox.astro";
 &lt;InfoBox title="Tip"&gt;
 This works in MDX.
 &lt;/InfoBox&gt;</code></pre>
-      <p>Do not expect this same pattern to work in a normal <code>.md</code> file.</p>
-    </section>
-
-    <section>
-      <h2>Common Mistake: Broken Import Paths</h2>
-      <p>If the page fails to build and says it cannot find the component, check the import path.</p>
-      <pre><code>Problem:
+<p>Do not expect this same pattern to work in a normal <code>.md</code> file.</p>
+</section>
+<section>
+<h2>Common Mistake: Broken Import Paths</h2>
+<p>If the page fails to build and says it cannot find the component, check the import path.</p>
+<pre><code>Problem:
 import InfoBox from "../components/InfoBox.astro";
 
 Possible fix:
 import InfoBox from "../../../components/InfoBox.astro";</code></pre>
-      <p>The correct path depends on where the MDX file is located.</p>
-    </section>
-
-    <section>
-      <h2>Common Mistake: Forgetting Curly Braces for JavaScript Values</h2>
-      <p>Strings can use quotes. Numbers, arrays, objects, and variables usually need curly braces.</p>
-      <pre><code>String prop:
+<p>The correct path depends on where the MDX file is located.</p>
+</section>
+<section>
+<h2>Common Mistake: Forgetting Curly Braces for JavaScript Values</h2>
+<p>Strings can use quotes. Numbers, arrays, objects, and variables usually need curly braces.</p>
+<pre><code>String prop:
 &lt;InfoBox title="Remember" /&gt;
 
 Number prop:
@@ -591,12 +575,11 @@ Array prop:
 
 Object array prop:
 &lt;RelatedLinks links={[{ label: "Home", href: "/" }]} /&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Common Mistake: Too Many Components</h2>
-      <p>Components are helpful, but too many components can make content harder to edit. Use regular Markdown whenever possible.</p>
-      <pre><code>Use Markdown for:
+</section>
+<section>
+<h2>Common Mistake: Too Many Components</h2>
+<p>Components are helpful, but too many components can make content harder to edit. Use regular Markdown whenever possible.</p>
+<pre><code>Use Markdown for:
 - headings
 - paragraphs
 - lists
@@ -612,16 +595,15 @@ Use components for:
 - lesson objectives
 - reusable metadata panels
 - interactive examples</code></pre>
-    </section>
-
-    <section>
-      <h2>Mini Project: Build a Lesson Page with Components</h2>
-      <p>Create these files:</p>
-      <pre><code>src/components/LessonObjectives.astro
+</section>
+<section>
+<h2>Mini Project: Build a Lesson Page with Components</h2>
+<p>Create these files:</p>
+<pre><code>src/components/LessonObjectives.astro
 src/components/InfoBox.astro
 src/content/docs/lessons/components-demo.mdx</code></pre>
-      <p>In the MDX page:</p>
-      <pre><code>---
+<p>In the MDX page:</p>
+<pre><code>---
 title: "Components Demo Lesson"
 ---
 
@@ -646,16 +628,15 @@ A component lets one design pattern appear consistently across many pages.
 ## Practice
 
 Create your own reusable component.</code></pre>
-    </section>
-
-    <section>
-      <h2>Mini Project: Build a Character Sheet Page</h2>
-      <p>Create:</p>
-      <pre><code>src/components/CharacterStats.astro
+</section>
+<section>
+<h2>Mini Project: Build a Character Sheet Page</h2>
+<p>Create:</p>
+<pre><code>src/components/CharacterStats.astro
 src/components/WorldBibleEntry.astro
 src/content/docs/characters/example-character.mdx</code></pre>
-      <p>In the MDX page:</p>
-      <pre><code>---
+<p>In the MDX page:</p>
+<pre><code>---
 title: "Example Character"
 role: "Investigator"
 region: "Atlantic Compact"
@@ -690,156 +671,149 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 ## Relationships
 
 ## Story Arc</code></pre>
-    </section>
-
-    <section>
-      <h2>Best Components for Lesson Sites</h2>
-      <ul>
-        <li><code>LessonObjectives</code>: what the learner will learn.</li>
-        <li><code>Prerequisites</code>: what they should know first.</li>
-        <li><code>ExerciseBox</code>: practice task.</li>
-        <li><code>AnswerReveal</code>: optional solution area.</li>
-        <li><code>CommonMistake</code>: warning and fix.</li>
-        <li><code>CommandBox</code>: terminal command with explanation.</li>
-        <li><code>ProjectCheckpoint</code>: confirms progress.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Best Components for World Bible Sites</h2>
-      <ul>
-        <li><code>CharacterStats</code>: RPG-style character attributes.</li>
-        <li><code>WorldBibleEntry</code>: metadata panel.</li>
-        <li><code>FactionCard</code>: faction summary.</li>
-        <li><code>LocationCard</code>: point-of-interest summary.</li>
-        <li><code>TimelineEntry</code>: historical event card.</li>
-        <li><code>RelationshipList</code>: allies, rivals, enemies, patrons.</li>
-        <li><code>RelatedLinks</code>: connected people, places, and storylines.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Best Practice: Start Small</h2>
-      <p>Do not start by building twenty components. Start with three:</p>
-      <pre><code>InfoBox
+</section>
+<section>
+<h2>Best Components for Lesson Sites</h2>
+<ul>
+<li><code>LessonObjectives</code>: what the learner will learn.</li>
+<li><code>Prerequisites</code>: what they should know first.</li>
+<li><code>ExerciseBox</code>: practice task.</li>
+<li><code>AnswerReveal</code>: optional solution area.</li>
+<li><code>CommonMistake</code>: warning and fix.</li>
+<li><code>CommandBox</code>: terminal command with explanation.</li>
+<li><code>ProjectCheckpoint</code>: confirms progress.</li>
+</ul>
+</section>
+<section>
+<h2>Best Components for World Bible Sites</h2>
+<ul>
+<li><code>CharacterStats</code>: RPG-style character attributes.</li>
+<li><code>WorldBibleEntry</code>: metadata panel.</li>
+<li><code>FactionCard</code>: faction summary.</li>
+<li><code>LocationCard</code>: point-of-interest summary.</li>
+<li><code>TimelineEntry</code>: historical event card.</li>
+<li><code>RelationshipList</code>: allies, rivals, enemies, patrons.</li>
+<li><code>RelatedLinks</code>: connected people, places, and storylines.</li>
+</ul>
+</section>
+<section>
+<h2>Best Practice: Start Small</h2>
+<p>Do not start by building twenty components. Start with three:</p>
+<pre><code>InfoBox
 LessonObjectives
 RelatedLinks</code></pre>
-      <p>Then add project-specific components only when you notice repeated patterns.</p>
-      <p>A component is worth creating when you have copied the same structure three or more times.</p>
-    </section>
-
-    <section>
-      <h2>Troubleshooting Checklist</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Problem</th>
-            <th>Likely Cause</th>
-            <th>Fix</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Component does not render</td>
-            <td>Using <code>.md</code> instead of <code>.mdx</code></td>
-            <td>Rename the page to <code>.mdx</code></td>
-          </tr>
-          <tr>
-            <td>Build cannot find component</td>
-            <td>Wrong import path</td>
-            <td>Check how many <code>../</code> steps are needed</td>
-          </tr>
-          <tr>
-            <td>Prop displays incorrectly</td>
-            <td>Missing curly braces</td>
-            <td>Use <code>{12}</code>, <code>{["a", "b"]}</code>, or <code>{variable}</code></td>
-          </tr>
-          <tr>
-            <td>Interactive component does nothing</td>
-            <td>Missing client directive</td>
-            <td>Add <code>client:load</code>, <code>client:idle</code>, or <code>client:visible</code></td>
-          </tr>
-          <tr>
-            <td>Styling is inconsistent</td>
-            <td>CSS not registered or class names do not match</td>
-            <td>Add <code>customCss</code> in <code>astro.config.mjs</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>Cheat Sheet</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Pattern</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Create component</td>
-            <td><code>src/components/Name.astro</code></td>
-          </tr>
-          <tr>
-            <td>Use component in content</td>
-            <td>Use an <code>.mdx</code> file</td>
-          </tr>
-          <tr>
-            <td>Import component</td>
-            <td><code>import Name from "../../../components/Name.astro";</code></td>
-          </tr>
-          <tr>
-            <td>Pass string prop</td>
-            <td><code>&lt;InfoBox title="Tip" /&gt;</code></td>
-          </tr>
-          <tr>
-            <td>Pass number prop</td>
-            <td><code>&lt;Stat value={12} /&gt;</code></td>
-          </tr>
-          <tr>
-            <td>Pass array prop</td>
-            <td><code>&lt;List items={["One", "Two"]} /&gt;</code></td>
-          </tr>
-          <tr>
-            <td>Use nested content</td>
-            <td><code>&lt;InfoBox&gt;Nested text&lt;/InfoBox&gt;</code></td>
-          </tr>
-          <tr>
-            <td>Receive props</td>
-            <td><code>const { title } = Astro.props;</code></td>
-          </tr>
-          <tr>
-            <td>Render nested content</td>
-            <td><code>&lt;slot /&gt;</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>Simple Rule of Thumb</h2>
-      <pre><code>Use Markdown for ordinary writing.
+<p>Then add project-specific components only when you notice repeated patterns.</p>
+<p>A component is worth creating when you have copied the same structure three or more times.</p>
+</section>
+<section>
+<h2>Troubleshooting Checklist</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Component does not render</td>
+<td>Using <code>.md</code> instead of <code>.mdx</code></td>
+<td>Rename the page to <code>.mdx</code></td>
+</tr>
+<tr>
+<td>Build cannot find component</td>
+<td>Wrong import path</td>
+<td>Check how many <code>../</code> steps are needed</td>
+</tr>
+<tr>
+<td>Prop displays incorrectly</td>
+<td>Missing curly braces</td>
+<td>Use <code>{12}</code>, <code>{["a", "b"]}</code>, or <code>{variable}</code></td>
+</tr>
+<tr>
+<td>Interactive component does nothing</td>
+<td>Missing client directive</td>
+<td>Add <code>client:load</code>, <code>client:idle</code>, or <code>client:visible</code></td>
+</tr>
+<tr>
+<td>Styling is inconsistent</td>
+<td>CSS not registered or class names do not match</td>
+<td>Add <code>customCss</code> in <code>astro.config.mjs</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Cheat Sheet</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create component</td>
+<td><code>src/components/Name.astro</code></td>
+</tr>
+<tr>
+<td>Use component in content</td>
+<td>Use an <code>.mdx</code> file</td>
+</tr>
+<tr>
+<td>Import component</td>
+<td><code>import Name from "../../../components/Name.astro";</code></td>
+</tr>
+<tr>
+<td>Pass string prop</td>
+<td><code>&lt;InfoBox title="Tip" /&gt;</code></td>
+</tr>
+<tr>
+<td>Pass number prop</td>
+<td><code>&lt;Stat value={12} /&gt;</code></td>
+</tr>
+<tr>
+<td>Pass array prop</td>
+<td><code>&lt;List items={["One", "Two"]} /&gt;</code></td>
+</tr>
+<tr>
+<td>Use nested content</td>
+<td><code>&lt;InfoBox&gt;Nested text&lt;/InfoBox&gt;</code></td>
+</tr>
+<tr>
+<td>Receive props</td>
+<td><code>const { title } = Astro.props;</code></td>
+</tr>
+<tr>
+<td>Render nested content</td>
+<td><code>&lt;slot /&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Simple Rule of Thumb</h2>
+<pre><code>Use Markdown for ordinary writing.
 Use MDX when the page needs components.
 Use Astro components for reusable UI patterns.
 Use props for short structured data.
 Use slots for longer nested content.
 Use client directives only when browser interactivity is needed.</code></pre>
-    </section>
-
-    <section>
-      <h2>What to Learn Next</h2>
-      <ul>
-        <li>Astro content collections and schemas</li>
-        <li>Starlight built-in components</li>
-        <li>Custom CSS and theme customization</li>
-        <li>Reusable world bible page layouts</li>
-        <li>Reusable lesson page layouts</li>
-        <li>Interactive components with React, Vue, Svelte, or Solid</li>
-        <li>Mermaid diagrams inside Starlight pages</li>
-      </ul>
-    </section>
-  </main>
+</section>
+<section>
+<h2>What to Learn Next</h2>
+<ul>
+<li>Astro content collections and schemas</li>
+<li>Starlight built-in components</li>
+<li>Custom CSS and theme customization</li>
+<li>Reusable world bible page layouts</li>
+<li>Reusable lesson page layouts</li>
+<li>Interactive components with React, Vue, Svelte, or Solid</li>
+<li>Mermaid diagrams inside Starlight pages</li>
+</ul>
+</section>
+<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
 </body>
 </html>

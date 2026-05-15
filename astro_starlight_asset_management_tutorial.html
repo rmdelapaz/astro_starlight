@@ -1,32 +1,40 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astro Starlight Asset Management Tutorial</title>
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="icon" href="/favicon.png">
-</head>
-<body>
-  <header>
-    <h1>Astro Starlight Asset Management Tutorial</h1>
-    <p>A practical guide to organizing images, maps, diagrams, downloads, SVG files, screenshots, icons, and other assets in Astro and Starlight projects.</p>
-  </header>
-  <main>
-    <section>
-      <h2>What You Are Learning</h2>
-      <p>This tutorial explains how to manage assets in an Astro Starlight site. Assets include images, maps, screenshots, PDFs, SVG diagrams, downloadable documents, icons, audio, and video.</p>
-      <ul>
-        <li><code>public/</code> stores files copied directly into the final site.</li>
-        <li><code>src/assets/</code> stores files imported and processed by Astro.</li>
-        <li>Markdown and MDX pages can reference assets in different ways.</li>
-        <li>Deployment problems often come from broken paths or case mismatches.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>The Big Picture</h2>
-      <pre><code>Asset file
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Astro Starlight Asset Management Tutorial</title>
+<link href="/styles/main.css" rel="stylesheet"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
+<body><header class="site-header" data-scaffold="header">
+<div class="site-header__inner">
+<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
+<nav class="site-header__nav">
+<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
+</nav>
+</div>
+</header>
+<header>
+<h1>Astro Starlight Asset Management Tutorial</h1>
+<p>A practical guide to organizing images, maps, diagrams, downloads, SVG files, screenshots, icons, and other assets in Astro and Starlight projects.</p>
+</header>
+<main>
+<section>
+<h2>What You Are Learning</h2>
+<p>This tutorial explains how to manage assets in an Astro Starlight site. Assets include images, maps, screenshots, PDFs, SVG diagrams, downloadable documents, icons, audio, and video.</p>
+<ul>
+<li><code>public/</code> stores files copied directly into the final site.</li>
+<li><code>src/assets/</code> stores files imported and processed by Astro.</li>
+<li>Markdown and MDX pages can reference assets in different ways.</li>
+<li>Deployment problems often come from broken paths or case mismatches.</li>
+</ul>
+</section>
+<section>
+<h2>The Big Picture</h2>
+<pre><code>Asset file
   ↓
 Choose where it belongs
   ↓
@@ -37,32 +45,29 @@ Test in development
 Build and preview
   ↓
 Deploy</code></pre>
-      <p>Most asset problems come from placing files in the wrong folder or using a path that only works on your local computer.</p>
-    </section>
-
-    <section>
-      <h2>Two Main Asset Locations</h2>
-      <table>
-        <thead><tr><th>Folder</th><th>Best For</th><th>How You Reference It</th></tr></thead>
-        <tbody>
-          <tr><td><code>public/</code></td><td>Static files, downloads, favicons, PDFs, and files that need direct URLs.</td><td>Use root paths like <code>/images/map.png</code>.</td></tr>
-          <tr><td><code>src/assets/</code></td><td>Images imported into Astro components, optimized images, and source-managed logos.</td><td>Import the asset or use Astro-supported paths.</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>Using the public Folder</h2>
-      <p>The <code>public/</code> folder is copied directly into the final site. If you place a file here:</p>
-      <pre><code>public/images/world-map.png</code></pre>
-      <p>You reference it like this:</p>
-      <pre><code>![World Map](/images/world-map.png)</code></pre>
-      <p>The word <code>public</code> does not appear in the URL.</p>
-    </section>
-
-    <section>
-      <h2>Good public Folder Structure</h2>
-      <pre><code>public/
+<p>Most asset problems come from placing files in the wrong folder or using a path that only works on your local computer.</p>
+</section>
+<section>
+<h2>Two Main Asset Locations</h2>
+<table>
+<thead><tr><th>Folder</th><th>Best For</th><th>How You Reference It</th></tr></thead>
+<tbody>
+<tr><td><code>public/</code></td><td>Static files, downloads, favicons, PDFs, and files that need direct URLs.</td><td>Use root paths like <code>/images/map.png</code>.</td></tr>
+<tr><td><code>src/assets/</code></td><td>Images imported into Astro components, optimized images, and source-managed logos.</td><td>Import the asset or use Astro-supported paths.</td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Using the public Folder</h2>
+<p>The <code>public/</code> folder is copied directly into the final site. If you place a file here:</p>
+<pre><code>public/images/world-map.png</code></pre>
+<p>You reference it like this:</p>
+<pre><code>![World Map](/images/world-map.png)</code></pre>
+<p>The word <code>public</code> does not appear in the URL.</p>
+</section>
+<section>
+<h2>Good public Folder Structure</h2>
+<pre><code>public/
   favicon.png
   images/
     maps/
@@ -80,61 +85,56 @@ Deploy</code></pre>
     world-bible-template.pdf
     lesson-checklist.pdf
     printable-character-sheet.pdf</code></pre>
-    </section>
-
-    <section>
-      <h2>Referencing Images in Markdown</h2>
-      <pre><code>![Deployment settings screenshot](/images/screenshots/deploy-settings.png)</code></pre>
-      <p>Use descriptive alt text:</p>
-      <pre><code>Good:
+</section>
+<section>
+<h2>Referencing Images in Markdown</h2>
+<pre><code>![Deployment settings screenshot](/images/screenshots/deploy-settings.png)</code></pre>
+<p>Use descriptive alt text:</p>
+<pre><code>Good:
 ![Vercel deployment settings showing npm run build and dist output directory](/images/screenshots/vercel-settings.png)
 
 Weak:
 ![image](/images/screenshots/vercel-settings.png)</code></pre>
-    </section>
-
-    <section>
-      <h2>Referencing Downloads</h2>
-      <p>If you place a PDF in:</p>
-      <pre><code>public/downloads/world-bible-template.pdf</code></pre>
-      <p>Link to it like this:</p>
-      <pre><code>[Download the World Bible Template](/downloads/world-bible-template.pdf)</code></pre>
-    </section>
-
-    <section>
-      <h2>Using src/assets</h2>
-      <p>The <code>src/assets/</code> folder is for assets that are part of your source code and may be imported by Astro components.</p>
-      <pre><code>src/assets/
+</section>
+<section>
+<h2>Referencing Downloads</h2>
+<p>If you place a PDF in:</p>
+<pre><code>public/downloads/world-bible-template.pdf</code></pre>
+<p>Link to it like this:</p>
+<pre><code>[Download the World Bible Template](/downloads/world-bible-template.pdf)</code></pre>
+</section>
+<section>
+<h2>Using src/assets</h2>
+<p>The <code>src/assets/</code> folder is for assets that are part of your source code and may be imported by Astro components.</p>
+<pre><code>src/assets/
   logo.png
   hero-image.png
   icons/
     book.svg
     map.svg</code></pre>
-      <p>Example Astro component import:</p>
-      <pre><code>---
+<p>Example Astro component import:</p>
+<pre><code>---
 import logo from '../assets/logo.png';
 ---
 
 &lt;img src={logo.src} alt="Site logo"&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Which Folder Should You Use?</h2>
-      <table>
-        <thead><tr><th>Need</th><th>Use</th></tr></thead>
-        <tbody>
-          <tr><td>A PDF download</td><td><code>public/downloads/</code></td></tr>
-          <tr><td>A simple image in Markdown</td><td><code>public/images/</code></td></tr>
-          <tr><td>A favicon</td><td><code>public/</code></td></tr>
-          <tr><td>A logo imported into a component</td><td><code>src/assets/</code></td></tr>
-          <tr><td>An optimized image in an Astro component</td><td><code>src/assets/</code></td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>World Bible Asset Structure</h2>
-      <pre><code>public/
+</section>
+<section>
+<h2>Which Folder Should You Use?</h2>
+<table>
+<thead><tr><th>Need</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>A PDF download</td><td><code>public/downloads/</code></td></tr>
+<tr><td>A simple image in Markdown</td><td><code>public/images/</code></td></tr>
+<tr><td>A favicon</td><td><code>public/</code></td></tr>
+<tr><td>A logo imported into a component</td><td><code>src/assets/</code></td></tr>
+<tr><td>An optimized image in an Astro component</td><td><code>src/assets/</code></td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>World Bible Asset Structure</h2>
+<pre><code>public/
   images/
     maps/
       global-map-2175.png
@@ -153,11 +153,10 @@ import logo from '../assets/logo.png';
     character-sheet-template.pdf
     region-template.pdf
     faction-template.pdf</code></pre>
-    </section>
-
-    <section>
-      <h2>Lesson Site Asset Structure</h2>
-      <pre><code>public/
+</section>
+<section>
+<h2>Lesson Site Asset Structure</h2>
+<pre><code>public/
   images/
     screenshots/
       terminal-create-astro.png
@@ -170,47 +169,43 @@ import logo from '../assets/logo.png';
   downloads/
     markdown-cheat-sheet.pdf
     deployment-checklist.pdf</code></pre>
-    </section>
-
-    <section>
-      <h2>Common Broken Path Mistakes</h2>
-      <h3>Using a local computer path</h3>
-      <pre><code>Bad:
+</section>
+<section>
+<h2>Common Broken Path Mistakes</h2>
+<h3>Using a local computer path</h3>
+<pre><code>Bad:
 &lt;img src="C:\Users\Ray\Desktop\map.png"&gt;
 
 Good:
 &lt;img src="/images/maps/map.png" alt="Map"&gt;</code></pre>
-      <h3>Including public in the URL</h3>
-      <pre><code>Bad:
+<h3>Including public in the URL</h3>
+<pre><code>Bad:
 ![Map](/public/images/map.png)
 
 Good:
 ![Map](/images/map.png)</code></pre>
-      <h3>Wrong relative path</h3>
-      <pre><code>Risky:
+<h3>Wrong relative path</h3>
+<pre><code>Risky:
 ![Map](../../images/map.png)
 
 Usually simpler:
 ![Map](/images/map.png)</code></pre>
-    </section>
-
-    <section>
-      <h2>Using SVG Files</h2>
-      <p>SVG files are useful for icons, diagrams, faction symbols, logos, and simple maps.</p>
-      <pre><code>public/images/diagrams/site-flow.svg</code></pre>
-      <pre><code>![Site flow diagram](/images/diagrams/site-flow.svg)</code></pre>
-    </section>
-
-    <section>
-      <h2>Images in MDX</h2>
-      <pre><code>![Character portrait](/images/characters/example-character.png)</code></pre>
-      <p>You can also use HTML in MDX:</p>
-      <pre><code>&lt;img src="/images/characters/example-character.png" alt="Example character portrait" /&gt;</code></pre>
-    </section>
-
-    <section>
-      <h2>Deployment Checklist for Assets</h2>
-      <pre><code>[ ] All images are inside public/ or src/assets/
+</section>
+<section>
+<h2>Using SVG Files</h2>
+<p>SVG files are useful for icons, diagrams, faction symbols, logos, and simple maps.</p>
+<pre><code>public/images/diagrams/site-flow.svg</code></pre>
+<pre><code>![Site flow diagram](/images/diagrams/site-flow.svg)</code></pre>
+</section>
+<section>
+<h2>Images in MDX</h2>
+<pre><code>![Character portrait](/images/characters/example-character.png)</code></pre>
+<p>You can also use HTML in MDX:</p>
+<pre><code>&lt;img src="/images/characters/example-character.png" alt="Example character portrait" /&gt;</code></pre>
+</section>
+<section>
+<h2>Deployment Checklist for Assets</h2>
+<pre><code>[ ] All images are inside public/ or src/assets/
 [ ] No local computer paths are used
 [ ] public/ paths do not include the word public
 [ ] File names match exactly, including capitalization
@@ -218,16 +213,15 @@ Usually simpler:
 [ ] Downloads open from the built site
 [ ] npm run build succeeds
 [ ] npm run preview shows working assets</code></pre>
-    </section>
-
-    <section>
-      <h2>Simple Rule of Thumb</h2>
-      <pre><code>Use public/ when you want a simple URL.
+</section>
+<section>
+<h2>Simple Rule of Thumb</h2>
+<pre><code>Use public/ when you want a simple URL.
 Use src/assets/ when an Astro component imports the file.
 Use root paths for public files.
 Never use local computer paths.
 Always test with npm run build and npm run preview.</code></pre>
-    </section>
-  </main>
+</section>
+<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
 </body>
 </html>

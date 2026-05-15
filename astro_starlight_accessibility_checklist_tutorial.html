@@ -1,20 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astro Starlight Accessibility Checklist Tutorial</title>
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="icon" href="/favicon.png">
-</head>
-<body>
-  <header>
-    <h1>Astro Starlight Accessibility Checklist Tutorial</h1>
-    <p>A practical checklist for making Astro Starlight tutorials, documentation, world bible pages, diagrams, and downloads easier for everyone to use.</p>
-  </header>
-  <main>
-    <section>
-      <h2>What You Are Learning</h2>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Astro Starlight Accessibility Checklist Tutorial</title>
+<link href="/styles/main.css" rel="stylesheet"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
+<body><header class="site-header" data-scaffold="header">
+<div class="site-header__inner">
+<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
+<nav class="site-header__nav">
+<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
+</nav>
+</div>
+</header>
+<header>
+<h1>Astro Starlight Accessibility Checklist Tutorial</h1>
+<p>A practical checklist for making Astro Starlight tutorials, documentation, world bible pages, diagrams, and downloads easier for everyone to use.</p>
+</header>
+<main>
+<section>
+<h2>What You Are Learning</h2>
 <p>This tutorial explains accessibility basics for Starlight sites. Accessibility means making pages usable for people with different devices, abilities, browsers, input methods, and reading needs.</p>
 <ul>
 <li>Headings and page structure.</li>
@@ -24,18 +33,18 @@
 <li>Color contrast and dark mode.</li>
 <li>Keyboard navigation basics.</li>
 </ul>
-    </section>
-    <section>
-      <h2>The Big Picture</h2>
+</section>
+<section>
+<h2>The Big Picture</h2>
 <pre><code>Clear structure
   + readable text
   + useful alt text
   + keyboard-friendly links
   + good contrast
   = more usable documentation</code></pre>
-    </section>
-    <section>
-      <h2>Heading Order</h2>
+</section>
+<section>
+<h2>Heading Order</h2>
 <pre><code>Good:
 # Page Title
 ## Major Section
@@ -46,26 +55,26 @@ Avoid:
 # Page Title
 #### Random Small Heading
 ## Major Section</code></pre>
-    </section>
-    <section>
-      <h2>Alt Text for Images</h2>
+</section>
+<section>
+<h2>Alt Text for Images</h2>
 <pre><code>Good:
 ![Vercel settings screen showing build command npm run build and output directory dist](/images/vercel-settings.png)
 
 Weak:
 ![screenshot](/images/vercel-settings.png)</code></pre>
 <p>For diagrams, summarize what the diagram shows.</p>
-    </section>
-    <section>
-      <h2>Link Text</h2>
+</section>
+<section>
+<h2>Link Text</h2>
 <table><thead><tr><th>Weak</th><th>Better</th></tr></thead><tbody>
 <tr><td>Click here</td><td>Read the deployment workflow tutorial</td></tr>
 <tr><td>More</td><td>View the Markdown and MDX guide</td></tr>
 <tr><td>Download</td><td>Download the character sheet template</td></tr>
 </tbody></table>
-    </section>
-    <section>
-      <h2>Color and Contrast</h2>
+</section>
+<section>
+<h2>Color and Contrast</h2>
 <pre><code>Check:
 - Body text contrast
 - Code block contrast
@@ -74,40 +83,40 @@ Weak:
 - Table borders
 - Warning and note boxes</code></pre>
 <p>Do not rely on color alone. Make sure text is readable in light and dark mode.</p>
-    </section>
-    <section>
-      <h2>Code Blocks and Tables</h2>
+</section>
+<section>
+<h2>Code Blocks and Tables</h2>
 <p>Code blocks should be explained before and after when they are part of a lesson. Tables should be used for real tabular data, not for layout.</p>
 <pre><code>Good table uses:
 - Command reference
 - Feature comparison
 - Checklist
 - Metadata summary</code></pre>
-    </section>
-    <section>
-      <h2>Keyboard Navigation</h2>
+</section>
+<section>
+<h2>Keyboard Navigation</h2>
 <pre><code>Check:
 - Can you tab through links?
 - Is the focus visible?
 - Are buttons actual buttons?
 - Are links actual links?</code></pre>
-    </section>
-    <section>
-      <h2>Custom Components</h2>
+</section>
+<section>
+<h2>Custom Components</h2>
 <pre><code>Use:
 &lt;button&gt; for actions
 &lt;a&gt; for links
 &lt;section&gt; for page sections
 &lt;article&gt; for standalone cards
 &lt;nav&gt; for navigation</code></pre>
-    </section>
-    <section>
-      <h2>Diagrams and Downloads</h2>
+</section>
+<section>
+<h2>Diagrams and Downloads</h2>
 <p>Diagrams should not be the only place where important information appears. Add a written summary below each diagram. When linking a download, tell the reader what kind of file it is.</p>
 <pre><code>[Download the printable character sheet PDF](/downloads/character-sheet.pdf)</code></pre>
-    </section>
-    <section>
-      <h2>Accessibility Checklist</h2>
+</section>
+<section>
+<h2>Accessibility Checklist</h2>
 <pre><code>[ ] Page has one clear title
 [ ] Headings follow a logical order
 [ ] Images have meaningful alt text
@@ -118,16 +127,16 @@ Weak:
 [ ] Custom components use semantic HTML
 [ ] Diagrams have written summaries
 [ ] Important information is not color-only</code></pre>
-    </section>
-    <section>
-      <h2>Simple Rule of Thumb</h2>
+</section>
+<section>
+<h2>Simple Rule of Thumb</h2>
 <pre><code>Structure helps everyone.
 Clear headings help everyone.
 Readable links help everyone.
 Good contrast helps everyone.
 Text summaries help everyone.
 Accessibility is good teaching.</code></pre>
-    </section>
-  </main>
+</section>
+<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
 </body>
 </html>

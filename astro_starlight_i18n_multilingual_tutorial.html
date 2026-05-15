@@ -1,20 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astro Starlight i18n and Multilingual Sites Tutorial</title>
-  <link rel="stylesheet" href="/styles/main.css">
-  <link rel="icon" href="/favicon.png">
-</head>
-<body>
-  <header>
-    <h1>Astro Starlight i18n and Multilingual Sites Tutorial</h1>
-    <p>A practical introduction to multilingual Starlight sites, language folders, translated navigation, fallback content, and when i18n is worth using.</p>
-  </header>
-  <main>
-    <section>
-      <h2>What You Are Learning</h2>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Astro Starlight i18n and Multilingual Sites Tutorial</title>
+<link href="/styles/main.css" rel="stylesheet"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
+<body><header class="site-header" data-scaffold="header">
+<div class="site-header__inner">
+<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
+<nav class="site-header__nav">
+<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
+</nav>
+</div>
+</header>
+<header>
+<h1>Astro Starlight i18n and Multilingual Sites Tutorial</h1>
+<p>A practical introduction to multilingual Starlight sites, language folders, translated navigation, fallback content, and when i18n is worth using.</p>
+</header>
+<main>
+<section>
+<h2>What You Are Learning</h2>
 <p>This tutorial introduces internationalization, often shortened to <strong>i18n</strong>. In a Starlight site, i18n means supporting multiple languages or locale versions of your documentation.</p>
 <ul>
 <li>What i18n means.</li>
@@ -23,9 +32,9 @@
 <li>How to plan translated navigation.</li>
 <li>How worldbuilding sites can use language sections creatively.</li>
 </ul>
-    </section>
-    <section>
-      <h2>The Big Picture</h2>
+</section>
+<section>
+<h2>The Big Picture</h2>
 <pre><code>Default language pages
   ↓
 Translated language folders
@@ -33,25 +42,25 @@ Translated language folders
 Locale-aware navigation
   ↓
 Readers choose their language</code></pre>
-    </section>
-    <section>
-      <h2>When to Use i18n</h2>
+</section>
+<section>
+<h2>When to Use i18n</h2>
 <pre><code>Use i18n when:
 - You have real readers in multiple languages
 - The content will be maintained long-term
 - Translations will be kept updated
 - Navigation and metadata can also be translated</code></pre>
-    </section>
-    <section>
-      <h2>When Not to Use i18n Yet</h2>
+</section>
+<section>
+<h2>When Not to Use i18n Yet</h2>
 <pre><code>Avoid i18n at first when:
 - The site is still changing constantly
 - You only have one or two test translations
 - You cannot maintain translated pages
 - You are still learning Starlight basics</code></pre>
-    </section>
-    <section>
-      <h2>Basic Language Folder Concept</h2>
+</section>
+<section>
+<h2>Basic Language Folder Concept</h2>
 <pre><code>src/content/docs/
   index.md
   getting-started.md
@@ -62,9 +71,9 @@ Readers choose their language</code></pre>
     index.md
     getting-started.md</code></pre>
 <p>The exact setup depends on your configuration, but the concept is the same: each language needs translated content and navigation.</p>
-    </section>
-    <section>
-      <h2>Locale Planning</h2>
+</section>
+<section>
+<h2>Locale Planning</h2>
 <pre><code>Examples:
 en     English
 en-US  English, United States
@@ -72,17 +81,17 @@ es     Spanish
 fr     French
 ja     Japanese</code></pre>
 <p>Use simple language codes unless you need regional differences.</p>
-    </section>
-    <section>
-      <h2>Translated Metadata</h2>
+</section>
+<section>
+<h2>Translated Metadata</h2>
 <pre><code>---
 title: "Introducción"
 description: "Aprende cómo usar este sitio de documentación."
 ---</code></pre>
 <p>Do not translate only the body while leaving all page metadata in the original language.</p>
-    </section>
-    <section>
-      <h2>Translated Navigation</h2>
+</section>
+<section>
+<h2>Translated Navigation</h2>
 <pre><code>English:
 Start Here
 Lessons
@@ -92,29 +101,29 @@ Spanish:
 Comienza Aquí
 Lecciones
 Referencia</code></pre>
-    </section>
-    <section>
-      <h2>Fallback Content</h2>
+</section>
+<section>
+<h2>Fallback Content</h2>
 <p>Fallback content means showing a default-language page when a translation is missing. This can be useful, but it can also confuse readers if not clearly signposted.</p>
 <pre><code>Good practice:
 - Translate core navigation first
 - Translate starting pages first
 - Clearly indicate when content is not yet translated</code></pre>
-    </section>
-    <section>
-      <h2>Right-to-Left Languages</h2>
+</section>
+<section>
+<h2>Right-to-Left Languages</h2>
 <p>Some languages read right-to-left. If your site supports languages such as Arabic or Hebrew, check layout, sidebar behavior, code blocks, tables, and diagrams carefully.</p>
-    </section>
-    <section>
-      <h2>Worldbuilding Uses</h2>
+</section>
+<section>
+<h2>Worldbuilding Uses</h2>
 <p>A world bible can use i18n in two ways:</p>
 <ul>
 <li><strong>Real multilingual support</strong>: the site is available in real-world languages.</li>
 <li><strong>Creative in-world language sections</strong>: documents appear as translated archives from different cultures or factions.</li>
 </ul>
-    </section>
-    <section>
-      <h2>Lesson Site Uses</h2>
+</section>
+<section>
+<h2>Lesson Site Uses</h2>
 <ol>
 <li>Homepage.</li>
 <li>Getting started page.</li>
@@ -122,9 +131,9 @@ Referencia</code></pre>
 <li>Beginner lessons.</li>
 <li>Reference pages.</li>
 </ol>
-    </section>
-    <section>
-      <h2>i18n Maintenance Checklist</h2>
+</section>
+<section>
+<h2>i18n Maintenance Checklist</h2>
 <pre><code>[ ] Which languages are supported?
 [ ] Who maintains translations?
 [ ] Are titles translated?
@@ -133,15 +142,15 @@ Referencia</code></pre>
 [ ] Are images and diagrams still understandable?
 [ ] Are code examples language-neutral where possible?
 [ ] Is missing translation behavior clear?</code></pre>
-    </section>
-    <section>
-      <h2>Simple Rule of Thumb</h2>
+</section>
+<section>
+<h2>Simple Rule of Thumb</h2>
 <pre><code>Do not add languages casually.
 Translate the reader path first.
 Keep navigation understandable.
 Keep translations updated.
 A half-maintained multilingual site can be worse than a clear single-language site.</code></pre>
-    </section>
-  </main>
+</section>
+<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
 </body>
 </html>
