@@ -15,7 +15,6 @@
 <button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
 <div class="nav-links" id="nav-links">
 <a href="index.html">Course Home</a>
-<a href="index.html#course-library">Course Library</a>
 <span aria-hidden="true" class="nav-divider"></span>
 <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
 <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -25,11 +24,10 @@
 </nav>
 
 
-<header>
+<main class="lesson-content" id="main-content"><header class="lesson-hero">
 <h1>Starlight Styling and Theme Customization Tutorial</h1>
-<p>A practical guide to safely customizing the visual design of an Astro Starlight site with custom CSS, theme variables, colors, typography, spacing, cards, dark mode, and layout adjustments.</p>
+<p class="lesson-lead">A practical guide to safely customizing the visual design of an Astro Starlight site with custom CSS, theme variables, colors, typography, spacing, cards, dark mode, and layout adjustments.</p>
 </header>
-<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Components &amp; Customization</a></li><li aria-current="page">Styling &amp; Theme Customization</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-idea">The Big Idea</a></li><li><a class="toc-link" href="#where-custom-styling-lives">Where Custom Styling Lives</a></li><li><a class="toc-link" href="#why-use-customcss-instead-of-random-style-tags">Why Use customCss Instead of Random Style Tags?</a></li><li><a class="toc-link" href="#basic-custom-css-starter">Basic Custom CSS Starter</a></li><li><a class="toc-link" href="#understanding-starlight-css-variables">Understanding Starlight CSS Variables</a></li><li><a class="toc-link" href="#change-the-main-content-width">Change the Main Content Width</a></li><li><a class="toc-link" href="#change-typography-size">Change Typography Size</a></li><li><a class="toc-link" href="#theme-colors">Theme Colors</a></li><li><a class="toc-link" href="#dark-mode-colors">Dark Mode Colors</a></li><li><a class="toc-link" href="#light-mode-colors">Light Mode Colors</a></li><li><a class="toc-link" href="#color-safety-checklist">Color Safety Checklist</a></li><li><a class="toc-link" href="#custom-homepage-cards">Custom Homepage Cards</a></li><li><a class="toc-link" href="#lesson-callout-styling">Lesson Callout Styling</a></li><li><a class="toc-link" href="#world-bible-panel-styling">World Bible Panel Styling</a></li><li><a class="toc-link" href="#rpg-character-stat-block-styling">RPG Character Stat Block Styling</a></li><li><a class="toc-link" href="#style-code-blocks-carefully">Style Code Blocks Carefully</a></li><li><a class="toc-link" href="#custom-link-styles">Custom Link Styles</a></li><li><a class="toc-link" href="#spacing-improvements">Spacing Improvements</a></li><li><a class="toc-link" href="#using-css-classes-in-markdown">Using CSS Classes in Markdown</a></li><li><a class="toc-link" href="#when-to-make-a-component-instead">When to Make a Component Instead</a></li><li><a class="toc-link" href="#custom-fonts">Custom Fonts</a></li><li><a class="toc-link" href="#using-tailwind-css">Using Tailwind CSS</a></li><li><a class="toc-link" href="#safe-theme-customization-example">Safe Theme Customization Example</a></li><li><a class="toc-link" href="#testing-your-styling">Testing Your Styling</a></li><li><a class="toc-link" href="#common-styling-mistakes">Common Styling Mistakes</a></li><li><a class="toc-link" href="#when-css-is-not-enough">When CSS Is Not Enough</a></li><li><a class="toc-link" href="#mini-project-create-a-custom-theme-layer">Mini Project: Create a Custom Theme Layer</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li><li><a class="toc-link" href="#what-to-learn-next">What to Learn Next</a></li></ol></nav></details>
 <section>
 <h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial teaches how to customize the look and feel of an Astro Starlight site without immediately replacing Starlight's built-in components.</p>
@@ -657,7 +655,7 @@ Always test light mode, dark mode, mobile, and build output.</code></pre>
 <li>Deployment testing for styled Starlight sites.</li>
 </ul>
 </section>
-<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="starlight_customizing_overriding_components_tutorial.html">← Overriding Starlight Components</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_plugins_tutorial.html">Starlight Plugins →</a></nav></main>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="starlight_customizing_overriding_components_tutorial.html">← Overriding Starlight Components</a><a class="home-link" href="index.html">Course Home</a><a class="next-lesson" href="astro_starlight_plugins_tutorial.html">Starlight Plugins →</a></nav></main>
 <footer class="site-footer">
 <p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
 <div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>

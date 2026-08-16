@@ -94,7 +94,6 @@ def modernize(path):
     <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">☰</button>
     <div class="nav-links" id="nav-links">
       <a href="index.html">Course Home</a>
-      <a href="index.html#course-library">Course Library</a>
       <span class="nav-divider" aria-hidden="true"></span>
       <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
       <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -108,54 +107,42 @@ def modernize(path):
     main = soup.main
     main["id"] = "main-content"
     main["class"] = list(dict.fromkeys(main.get("class", []) + (["home-content"] if is_home else ["lesson-content"])))
-    # The original home hero lived directly under <body>; bring it into main.
-    if is_home:
-        authored_header = soup.body.find("header", recursive=False)
-        if authored_header:
-            main.insert(0, authored_header.extract())
+    # Some original pages placed their authored hero directly under <body>.
+    authored_header = soup.body.find("header", recursive=False)
+    if authored_header:
+        main.insert(0, authored_header.extract())
 
-    # Breadcrumb sits outside main, matching the reference layout.
-    current = "Home" if is_home else (info[0] if info else soup.title.get_text().split(" - ")[0])
-    crumb = fragment('<nav class="breadcrumb" aria-label="Breadcrumb"><ol></ol></nav>').nav
-    ol = crumb.ol
-    if not is_home:
-        li = soup.new_tag("li")
-        a = soup.new_tag("a", href="index.html")
-        a.string = "Home"
-        li.append(a)
-        ol.append(li)
-        if info:
-            li = soup.new_tag("li")
-            a = soup.new_tag("a", href="index.html#course-library")
-            a.string = info[1]
-            li.append(a)
-            ol.append(li)
-    li = soup.new_tag("li")
-    li["aria-current"] = "page"
-    li.string = current
-    ol.append(li)
-    main.insert_before(crumb)
-
-    # Add stable heading anchors and an automatic lesson TOC.
+    # Add stable heading anchors for direct links.
     used = {tag.get("id") for tag in main.find_all(id=True)}
     headings = main.find_all("h2")
     for heading in headings:
         if not heading.get("id"):
             heading["id"] = slug(heading.get_text(" ", strip=True), used)
-    if not is_home and len(headings) >= 3:
-        toc = fragment('<details class="toc-card" open><summary><span aria-hidden="true">☷</span> On this page <span class="toc-chevron" aria-hidden="true">⌄</span></summary><nav aria-label="Table of contents"><ol></ol></nav></details>').details
-        for heading in headings:
-            li = soup.new_tag("li")
-            a = soup.new_tag("a", href="#" + heading["id"])
-            a["class"] = "toc-link"
-            a.string = heading.get_text(" ", strip=True)
-            li.append(a)
-            toc.ol.append(li)
-        first_h1 = main.find("h1")
-        if first_h1:
-            first_h1.insert_after(toc)
+    # Give lessons a clear opening without inventing or duplicating content.
+    if not is_home:
+        old_hero = main.find("header", class_="lesson-hero")
+        authored_hero = main.find("header", recursive=False)
+        if authored_hero and authored_hero.find("h1"):
+            hero = authored_hero
+            hero["class"] = "lesson-hero"
+            intro = hero.find("p")
         else:
-            main.insert(0, toc)
+            if old_hero:
+                old_hero.unwrap()
+            first_h1 = main.find("h1")
+            first_section = main.find("section")
+            intro = main.find("p", class_="lesson-lead")
+            if not intro and first_section:
+                intro = first_section.find("p", recursive=False)
+            hero = soup.new_tag("header")
+            hero["class"] = "lesson-hero"
+            if first_h1:
+                first_h1.insert_before(hero)
+                hero.append(first_h1.extract())
+                if intro:
+                    hero.append(intro.extract())
+        if intro:
+            intro["class"] = list(dict.fromkeys(intro.get("class", []) + ["lesson-lead"]))
 
     # Course navigation follows the learning path on the existing home page.
     if info:
@@ -167,9 +154,9 @@ def modernize(path):
             a["class"] = "prev-lesson"
             a.string = "← " + prev[1]
             nav.append(a)
-        a = soup.new_tag("a", href="index.html#course-library")
+        a = soup.new_tag("a", href="index.html")
         a["class"] = "home-link"
-        a.string = "Course Library"
+        a.string = "Course Home"
         nav.append(a)
         if idx < len(PAGES) - 1:
             nxt = PAGES[idx + 1]

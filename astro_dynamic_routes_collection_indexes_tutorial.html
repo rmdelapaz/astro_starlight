@@ -15,7 +15,6 @@
 <button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
 <div class="nav-links" id="nav-links">
 <a href="index.html">Course Home</a>
-<a href="index.html#course-library">Course Library</a>
 <span aria-hidden="true" class="nav-divider"></span>
 <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
 <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -25,11 +24,10 @@
 </nav>
 
 
-<header>
+<main class="lesson-content" id="main-content"><header class="lesson-hero">
 <h1>Astro Dynamic Routes and Collection Indexes Tutorial</h1>
-<p>A practical guide to generating pages and indexes from Astro Content Collections using <code>getCollection()</code>, <code>getStaticPaths()</code>, and <code>render()</code>.</p>
+<p class="lesson-lead">A practical guide to generating pages and indexes from Astro Content Collections using <code>getCollection()</code>, <code>getStaticPaths()</code>, and <code>render()</code>.</p>
 </header>
-<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Content Architecture</a></li><li aria-current="page">Dynamic Routes &amp; Indexes</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#why-dynamic-routes-matter">Why Dynamic Routes Matter</a></li><li><a class="toc-link" href="#example-content-structure">Example Content Structure</a></li><li><a class="toc-link" href="#example-content-config-ts">Example content.config.ts</a></li><li><a class="toc-link" href="#create-a-lesson-entry">Create a Lesson Entry</a></li><li><a class="toc-link" href="#create-a-lesson-index-page">Create a Lesson Index Page</a></li><li><a class="toc-link" href="#create-dynamic-lesson-pages">Create Dynamic Lesson Pages</a></li><li><a class="toc-link" href="#how-getstaticpaths-works">How getStaticPaths Works</a></li><li><a class="toc-link" href="#understanding-slug-astro">Understanding [...slug].astro</a></li><li><a class="toc-link" href="#create-a-character-index-page">Create a Character Index Page</a></li><li><a class="toc-link" href="#create-dynamic-character-pages">Create Dynamic Character Pages</a></li><li><a class="toc-link" href="#sorting-and-filtering-entries">Sorting and Filtering Entries</a></li><li><a class="toc-link" href="#create-a-tag-index">Create a Tag Index</a></li><li><a class="toc-link" href="#generate-tag-pages">Generate Tag Pages</a></li><li><a class="toc-link" href="#dynamic-routes-and-starlight">Dynamic Routes and Starlight</a></li><li><a class="toc-link" href="#common-mistakes">Common Mistakes</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
 <h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains how to move from hand-written pages to generated pages and indexes.</p>
@@ -382,7 +380,7 @@ Use schemas to keep data consistent.
 Use filters for categories and tags.
 Use render() to display Markdown/MDX body content.</code></pre>
 </section>
-<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_tags_categories_filtering_tutorial.html">← Tags, Categories &amp; Filtering</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_asset_management_tutorial.html">Asset Management →</a></nav></main>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_tags_categories_filtering_tutorial.html">← Tags, Categories &amp; Filtering</a><a class="home-link" href="index.html">Course Home</a><a class="next-lesson" href="astro_starlight_asset_management_tutorial.html">Asset Management →</a></nav></main>
 <footer class="site-footer">
 <p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
 <div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>

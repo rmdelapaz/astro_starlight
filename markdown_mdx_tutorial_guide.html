@@ -15,7 +15,6 @@
 <button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
 <div class="nav-links" id="nav-links">
 <a href="index.html">Course Home</a>
-<a href="index.html#course-library">Course Library</a>
 <span aria-hidden="true" class="nav-divider"></span>
 <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
 <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -25,11 +24,10 @@
 </nav>
 
 
-<header>
+<main class="lesson-content" id="main-content"><header class="lesson-hero">
 <h1>Markdown and MDX Tutorial Guide</h1>
-<p>A beginner-friendly guide to writing Markdown and MDX for lessons, documentation, world bible pages, and Astro/Starlight projects.</p>
+<p class="lesson-lead">A beginner-friendly guide to writing Markdown and MDX for lessons, documentation, world bible pages, and Astro/Starlight projects.</p>
 </header>
-<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Core Writing Tools</a></li><li aria-current="page">Markdown &amp; MDX Guide</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#markdown-in-simple-terms">Markdown in Simple Terms</a></li><li><a class="toc-link" href="#markdown-headings">Markdown Headings</a></li><li><a class="toc-link" href="#paragraphs">Paragraphs</a></li><li><a class="toc-link" href="#bold-italic-and-inline-code">Bold, Italic, and Inline Code</a></li><li><a class="toc-link" href="#lists">Lists</a></li><li><a class="toc-link" href="#links">Links</a></li><li><a class="toc-link" href="#images">Images</a></li><li><a class="toc-link" href="#code-blocks">Code Blocks</a></li><li><a class="toc-link" href="#blockquotes">Blockquotes</a></li><li><a class="toc-link" href="#tables">Tables</a></li><li><a class="toc-link" href="#frontmatter">Frontmatter</a></li><li><a class="toc-link" href="#markdown-for-a-lesson-page">Markdown for a Lesson Page</a></li><li><a class="toc-link" href="#markdown-for-a-world-bible-page">Markdown for a World Bible Page</a></li><li><a class="toc-link" href="#markdown-for-an-rpg-style-character-sheet">Markdown for an RPG-Style Character Sheet</a></li><li><a class="toc-link" href="#what-mdx-adds">What MDX Adds</a></li><li><a class="toc-link" href="#when-to-use-markdown-vs-mdx">When to Use Markdown vs MDX</a></li><li><a class="toc-link" href="#installing-mdx-in-astro">Installing MDX in Astro</a></li><li><a class="toc-link" href="#mdx-component-example">MDX Component Example</a></li><li><a class="toc-link" href="#mdx-expressions">MDX Expressions</a></li><li><a class="toc-link" href="#using-frontmatter-variables-in-mdx">Using Frontmatter Variables in MDX</a></li><li><a class="toc-link" href="#markdown-mdx-and-starlight">Markdown, MDX, and Starlight</a></li><li><a class="toc-link" href="#recommended-file-naming">Recommended File Naming</a></li><li><a class="toc-link" href="#common-markdown-mistakes">Common Markdown Mistakes</a></li><li><a class="toc-link" href="#common-mdx-mistakes">Common MDX Mistakes</a></li><li><a class="toc-link" href="#best-practice-for-world-bible-projects">Best Practice for World Bible Projects</a></li><li><a class="toc-link" href="#best-practice-for-lesson-sites">Best Practice for Lesson Sites</a></li><li><a class="toc-link" href="#mini-project-create-a-markdown-lesson-page">Mini Project: Create a Markdown Lesson Page</a></li><li><a class="toc-link" href="#mini-project-create-an-mdx-character-page">Mini Project: Create an MDX Character Page</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li><li><a class="toc-link" href="#related-topics-to-learn-next">Related Topics to Learn Next</a></li></ol></nav></details>
 <section>
 <h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This guide explains two related writing formats:</p>
@@ -615,7 +613,7 @@ If the page needs full custom layout and logic:
 <li>Deploying Astro projects to Vercel or Netlify</li>
 </ul>
 </section>
-<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="yaml_tutorial_guide.html">← YAML Guide</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="starlight_project_structure_sidebar_navigation_tutorial.html">Project Structure &amp; Navigation →</a></nav></main>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="yaml_tutorial_guide.html">← YAML Guide</a><a class="home-link" href="index.html">Course Home</a><a class="next-lesson" href="starlight_project_structure_sidebar_navigation_tutorial.html">Project Structure &amp; Navigation →</a></nav></main>
 <footer class="site-footer">
 <p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
 <div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>

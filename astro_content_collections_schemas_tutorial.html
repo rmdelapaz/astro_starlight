@@ -15,7 +15,6 @@
 <button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
 <div class="nav-links" id="nav-links">
 <a href="index.html">Course Home</a>
-<a href="index.html#course-library">Course Library</a>
 <span aria-hidden="true" class="nav-divider"></span>
 <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
 <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -25,11 +24,10 @@
 </nav>
 
 
-<header>
+<main class="lesson-content" id="main-content"><header class="lesson-hero">
 <h1>Astro Content Collections and Schemas</h1>
-<p>A practical tutorial for using Astro Content Collections and schemas to organize lessons, world bible pages, character sheets, factions, regions, locations, and reference entries.</p>
+<p class="lesson-lead">A practical tutorial for using Astro Content Collections and schemas to organize lessons, world bible pages, character sheets, factions, regions, locations, and reference entries.</p>
 </header>
-<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Content Architecture</a></li><li aria-current="page">Content Collections &amp; Schemas</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#why-content-collections-matter">Why Content Collections Matter</a></li><li><a class="toc-link" href="#basic-terms">Basic Terms</a></li><li><a class="toc-link" href="#project-folder-structure">Project Folder Structure</a></li><li><a class="toc-link" href="#important-note-for-starlight">Important Note for Starlight</a></li><li><a class="toc-link" href="#create-a-basic-content-config-file">Create a Basic Content Config File</a></li><li><a class="toc-link" href="#create-a-lesson-entry">Create a Lesson Entry</a></li><li><a class="toc-link" href="#common-zod-field-types">Common Zod Field Types</a></li><li><a class="toc-link" href="#required-optional-and-default-fields">Required, Optional, and Default Fields</a></li><li><a class="toc-link" href="#lesson-schema-example">Lesson Schema Example</a></li><li><a class="toc-link" href="#character-schema-example">Character Schema Example</a></li><li><a class="toc-link" href="#region-schema-example">Region Schema Example</a></li><li><a class="toc-link" href="#faction-schema-example">Faction Schema Example</a></li><li><a class="toc-link" href="#location-schema-example">Location Schema Example</a></li><li><a class="toc-link" href="#complete-content-config-ts-example">Complete content.config.ts Example</a></li><li><a class="toc-link" href="#reading-a-collection-with-getcollection">Reading a Collection with getCollection()</a></li><li><a class="toc-link" href="#filtering-entries">Filtering Entries</a></li><li><a class="toc-link" href="#generating-pages-from-a-collection">Generating Pages from a Collection</a></li><li><a class="toc-link" href="#using-collection-data-for-cards">Using Collection Data for Cards</a></li><li><a class="toc-link" href="#reusable-schema-pieces">Reusable Schema Pieces</a></li><li><a class="toc-link" href="#drafts-and-publishing">Drafts and Publishing</a></li><li><a class="toc-link" href="#dates">Dates</a></li><li><a class="toc-link" href="#images">Images</a></li><li><a class="toc-link" href="#references-between-entries">References Between Entries</a></li><li><a class="toc-link" href="#common-content-collection-errors">Common Content Collection Errors</a></li><li><a class="toc-link" href="#best-practices">Best Practices</a></li><li><a class="toc-link" href="#recommended-collections-for-a-lesson-site">Recommended Collections for a Lesson Site</a></li><li><a class="toc-link" href="#recommended-collections-for-a-world-bible-site">Recommended Collections for a World Bible Site</a></li><li><a class="toc-link" href="#mini-project-build-a-character-collection">Mini Project: Build a Character Collection</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li><li><a class="toc-link" href="#what-to-learn-next">What to Learn Next</a></li></ol></nav></details>
 <section>
 <h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains how to use <strong>Astro Content Collections</strong> and <strong>schemas</strong>.</p>
@@ -866,7 +864,7 @@ If the page is a one-off landing page:
 <li>Using Starlight with structured collections</li>
 </ul>
 </section>
-<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_plugins_tutorial.html">← Starlight Plugins</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_tags_categories_filtering_tutorial.html">Tags, Categories &amp; Filtering →</a></nav></main>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_plugins_tutorial.html">← Starlight Plugins</a><a class="home-link" href="index.html">Course Home</a><a class="next-lesson" href="astro_starlight_tags_categories_filtering_tutorial.html">Tags, Categories &amp; Filtering →</a></nav></main>
 <footer class="site-footer">
 <p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
 <div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>

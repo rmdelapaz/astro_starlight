@@ -15,7 +15,6 @@
 <button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
 <div class="nav-links" id="nav-links">
 <a href="index.html">Course Home</a>
-<a href="index.html#course-library">Course Library</a>
 <span aria-hidden="true" class="nav-divider"></span>
 <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
 <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -25,11 +24,10 @@
 </nav>
 
 
-<header>
+<main class="lesson-content" id="main-content"><header class="lesson-hero">
 <h1>Astro Starlight Deployment Workflow</h1>
-<p>A practical guide to building, previewing, and deploying an Astro Starlight site to Vercel, Netlify, Cloudflare Pages, or a simple static host.</p>
+<p class="lesson-lead">A practical guide to building, previewing, and deploying an Astro Starlight site to Vercel, Netlify, Cloudflare Pages, or a simple static host.</p>
 </header>
-<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Deployment</a></li><li aria-current="page">Deployment Workflow</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#big-picture-mental-model">Big Picture Mental Model</a></li><li><a class="toc-link" href="#deployment-vocabulary">Deployment Vocabulary</a></li><li><a class="toc-link" href="#check-your-scripts">Check Your Scripts</a></li><li><a class="toc-link" href="#build-locally-before-deploying">Build Locally Before Deploying</a></li><li><a class="toc-link" href="#preview-the-production-build">Preview the Production Build</a></li><li><a class="toc-link" href="#git-workflow-before-deployment">Git Workflow Before Deployment</a></li><li><a class="toc-link" href="#general-static-deployment-settings">General Static Deployment Settings</a></li><li><a class="toc-link" href="#deploy-to-vercel">Deploy to Vercel</a></li><li><a class="toc-link" href="#deploy-to-netlify">Deploy to Netlify</a></li><li><a class="toc-link" href="#deploy-to-cloudflare-pages">Deploy to Cloudflare Pages</a></li><li><a class="toc-link" href="#deploy-to-cloudflare-workers-with-wrangler">Deploy to Cloudflare Workers with Wrangler</a></li><li><a class="toc-link" href="#environment-variables">Environment Variables</a></li><li><a class="toc-link" href="#static-site-vs-server-features">Static Site vs Server Features</a></li><li><a class="toc-link" href="#base-url-and-site-url">Base URL and Site URL</a></li><li><a class="toc-link" href="#custom-domains">Custom Domains</a></li><li><a class="toc-link" href="#deployment-checklist">Deployment Checklist</a></li><li><a class="toc-link" href="#common-problem-build-fails-locally">Common Problem: Build Fails Locally</a></li><li><a class="toc-link" href="#common-problem-deployment-builds-but-site-is-blank">Common Problem: Deployment Builds but Site Is Blank</a></li><li><a class="toc-link" href="#common-problem-images-missing-after-deployment">Common Problem: Images Missing After Deployment</a></li><li><a class="toc-link" href="#common-problem-environment-variable-undefined">Common Problem: Environment Variable Undefined</a></li><li><a class="toc-link" href="#common-problem-wrong-node-version">Common Problem: Wrong Node Version</a></li><li><a class="toc-link" href="#preview-deployments">Preview Deployments</a></li><li><a class="toc-link" href="#recommended-workflow-for-ongoing-updates">Recommended Workflow for Ongoing Updates</a></li><li><a class="toc-link" href="#which-platform-should-you-use">Which Platform Should You Use?</a></li><li><a class="toc-link" href="#manual-deployment">Manual Deployment</a></li><li><a class="toc-link" href="#best-practices">Best Practices</a></li><li><a class="toc-link" href="#mini-project-deploy-a-starlight-site">Mini Project: Deploy a Starlight Site</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
 <h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains the deployment workflow for an Astro Starlight site.</p>
@@ -557,7 +555,7 @@ If it needs server features:
 If something breaks after deployment:
   test npm run build and npm run preview locally first</code></pre>
 </section>
-<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="vercel_basic_how_to_tutorial.html">← Vercel Basics</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_troubleshooting_build_errors_tutorial.html">Troubleshooting Build Errors →</a></nav></main>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="vercel_basic_how_to_tutorial.html">← Vercel Basics</a><a class="home-link" href="index.html">Course Home</a><a class="next-lesson" href="astro_starlight_troubleshooting_build_errors_tutorial.html">Troubleshooting Build Errors →</a></nav></main>
 <footer class="site-footer">
 <p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
 <div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>

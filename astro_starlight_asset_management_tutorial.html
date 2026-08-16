@@ -15,7 +15,6 @@
 <button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
 <div class="nav-links" id="nav-links">
 <a href="index.html">Course Home</a>
-<a href="index.html#course-library">Course Library</a>
 <span aria-hidden="true" class="nav-divider"></span>
 <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
 <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -25,11 +24,10 @@
 </nav>
 
 
-<header>
+<main class="lesson-content" id="main-content"><header class="lesson-hero">
 <h1>Astro Starlight Asset Management Tutorial</h1>
-<p>A practical guide to organizing images, maps, diagrams, downloads, SVG files, screenshots, icons, and other assets in Astro and Starlight projects.</p>
+<p class="lesson-lead">A practical guide to organizing images, maps, diagrams, downloads, SVG files, screenshots, icons, and other assets in Astro and Starlight projects.</p>
 </header>
-<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Assets &amp; Features</a></li><li aria-current="page">Asset Management</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#two-main-asset-locations">Two Main Asset Locations</a></li><li><a class="toc-link" href="#using-the-public-folder">Using the public Folder</a></li><li><a class="toc-link" href="#good-public-folder-structure">Good public Folder Structure</a></li><li><a class="toc-link" href="#referencing-images-in-markdown">Referencing Images in Markdown</a></li><li><a class="toc-link" href="#referencing-downloads">Referencing Downloads</a></li><li><a class="toc-link" href="#using-src-assets">Using src/assets</a></li><li><a class="toc-link" href="#which-folder-should-you-use">Which Folder Should You Use?</a></li><li><a class="toc-link" href="#world-bible-asset-structure">World Bible Asset Structure</a></li><li><a class="toc-link" href="#lesson-site-asset-structure">Lesson Site Asset Structure</a></li><li><a class="toc-link" href="#common-broken-path-mistakes">Common Broken Path Mistakes</a></li><li><a class="toc-link" href="#using-svg-files">Using SVG Files</a></li><li><a class="toc-link" href="#images-in-mdx">Images in MDX</a></li><li><a class="toc-link" href="#deployment-checklist-for-assets">Deployment Checklist for Assets</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
 <h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains how to manage assets in an Astro Starlight site. Assets include images, maps, screenshots, PDFs, SVG diagrams, downloadable documents, icons, audio, and video.</p>
@@ -230,7 +228,7 @@ Use root paths for public files.
 Never use local computer paths.
 Always test with npm run build and npm run preview.</code></pre>
 </section>
-<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_dynamic_routes_collection_indexes_tutorial.html">← Dynamic Routes &amp; Indexes</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_mermaid_diagrams_tutorial.html">Mermaid Diagrams →</a></nav></main>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_dynamic_routes_collection_indexes_tutorial.html">← Dynamic Routes &amp; Indexes</a><a class="home-link" href="index.html">Course Home</a><a class="next-lesson" href="astro_starlight_mermaid_diagrams_tutorial.html">Mermaid Diagrams →</a></nav></main>
 <footer class="site-footer">
 <p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
 <div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>

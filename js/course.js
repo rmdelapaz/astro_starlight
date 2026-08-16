@@ -49,16 +49,6 @@
       pre.appendChild(button);
     });
 
-    var tocLinks = Array.from(document.querySelectorAll('.toc-link'));
-    if (tocLinks.length && 'IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          tocLinks.forEach(function (link) { link.classList.toggle('active', link.hash === '#' + entry.target.id); });
-        });
-      }, { rootMargin: '-15% 0px -72% 0px' });
-      tocLinks.forEach(function (link) { var heading = document.querySelector(link.hash); if (heading) observer.observe(heading); });
-    }
     var print = document.getElementById('print-button');
     if (print) print.addEventListener('click', function () { window.print(); });
   });

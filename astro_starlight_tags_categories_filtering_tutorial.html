@@ -15,7 +15,6 @@
 <button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
 <div class="nav-links" id="nav-links">
 <a href="index.html">Course Home</a>
-<a href="index.html#course-library">Course Library</a>
 <span aria-hidden="true" class="nav-divider"></span>
 <a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
 <a href="https://rays-home.netlify.app/contact">Contact</a>
@@ -25,11 +24,10 @@
 </nav>
 
 
-<header>
+<main class="lesson-content" id="main-content"><header class="lesson-hero">
 <h1>Astro Starlight Tags Categories and Filtering</h1>
-<p>A practical tutorial for adding tags, categories, difficulty levels, regions, factions, and filtering pages to an Astro Starlight project.</p>
+<p class="lesson-lead">A practical tutorial for adding tags, categories, difficulty levels, regions, factions, and filtering pages to an Astro Starlight project.</p>
 </header>
-<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Content Architecture</a></li><li aria-current="page">Tags, Categories &amp; Filtering</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-building">What You Are Building</a></li><li><a class="toc-link" href="#big-picture-mental-model">Big Picture Mental Model</a></li><li><a class="toc-link" href="#tags-vs-categories">Tags vs Categories</a></li><li><a class="toc-link" href="#simple-frontmatter-example">Simple Frontmatter Example</a></li><li><a class="toc-link" href="#recommended-metadata-fields-for-lessons">Recommended Metadata Fields for Lessons</a></li><li><a class="toc-link" href="#recommended-metadata-fields-for-world-bible-entries">Recommended Metadata Fields for World Bible Entries</a></li><li><a class="toc-link" href="#create-a-content-collection-schema">Create a Content Collection Schema</a></li><li><a class="toc-link" href="#add-a-world-bible-collection">Add a World Bible Collection</a></li><li><a class="toc-link" href="#folder-structure-for-collection-based-content">Folder Structure for Collection-Based Content</a></li><li><a class="toc-link" href="#read-and-filter-a-collection">Read and Filter a Collection</a></li><li><a class="toc-link" href="#create-a-beginner-lessons-index">Create a Beginner Lessons Index</a></li><li><a class="toc-link" href="#generate-lesson-pages-from-a-collection">Generate Lesson Pages from a Collection</a></li><li><a class="toc-link" href="#find-all-tags">Find All Tags</a></li><li><a class="toc-link" href="#create-dynamic-tag-pages">Create Dynamic Tag Pages</a></li><li><a class="toc-link" href="#create-category-pages">Create Category Pages</a></li><li><a class="toc-link" href="#world-bible-filtering-examples">World Bible Filtering Examples</a></li><li><a class="toc-link" href="#create-related-content">Create Related Content</a></li><li><a class="toc-link" href="#designing-a-good-tag-system">Designing a Good Tag System</a></li><li><a class="toc-link" href="#recommended-tags-for-an-astro-tutorial-site">Recommended Tags for an Astro Tutorial Site</a></li><li><a class="toc-link" href="#recommended-tags-for-a-world-bible-site">Recommended Tags for a World Bible Site</a></li><li><a class="toc-link" href="#tag-display-component">Tag Display Component</a></li><li><a class="toc-link" href="#filtering-strategy-for-starlight-docs-pages">Filtering Strategy for Starlight Docs Pages</a></li><li><a class="toc-link" href="#common-mistakes">Common Mistakes</a></li><li><a class="toc-link" href="#best-practices">Best Practices</a></li><li><a class="toc-link" href="#mini-project-checklist">Mini Project Checklist</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
 <h2 id="what-you-are-building">What You Are Building</h2>
 <p>This tutorial shows how to organize a growing Astro Starlight site with tags, categories, and filtered index pages.</p>
@@ -639,7 +637,7 @@ Use schemas for consistency.
 Use filtered indexes for navigation.
 Use generated tag pages only when they help readers.</code></pre>
 </section>
-<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_content_collections_schemas_tutorial.html">← Content Collections &amp; Schemas</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_dynamic_routes_collection_indexes_tutorial.html">Dynamic Routes &amp; Indexes →</a></nav></main>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_content_collections_schemas_tutorial.html">← Content Collections &amp; Schemas</a><a class="home-link" href="index.html">Course Home</a><a class="next-lesson" href="astro_dynamic_routes_collection_indexes_tutorial.html">Dynamic Routes &amp; Indexes →</a></nav></main>
 <footer class="site-footer">
 <p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
 <div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
