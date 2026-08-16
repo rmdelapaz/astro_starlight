@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Content Collections and Schemas Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Content Collections and Schemas — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Content Collections and Schemas</h1>
 <p>A practical tutorial for using Astro Content Collections and schemas to organize lessons, world bible pages, character sheets, factions, regions, locations, and reference entries.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Content Architecture</a></li><li aria-current="page">Content Collections &amp; Schemas</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#why-content-collections-matter">Why Content Collections Matter</a></li><li><a class="toc-link" href="#basic-terms">Basic Terms</a></li><li><a class="toc-link" href="#project-folder-structure">Project Folder Structure</a></li><li><a class="toc-link" href="#important-note-for-starlight">Important Note for Starlight</a></li><li><a class="toc-link" href="#create-a-basic-content-config-file">Create a Basic Content Config File</a></li><li><a class="toc-link" href="#create-a-lesson-entry">Create a Lesson Entry</a></li><li><a class="toc-link" href="#common-zod-field-types">Common Zod Field Types</a></li><li><a class="toc-link" href="#required-optional-and-default-fields">Required, Optional, and Default Fields</a></li><li><a class="toc-link" href="#lesson-schema-example">Lesson Schema Example</a></li><li><a class="toc-link" href="#character-schema-example">Character Schema Example</a></li><li><a class="toc-link" href="#region-schema-example">Region Schema Example</a></li><li><a class="toc-link" href="#faction-schema-example">Faction Schema Example</a></li><li><a class="toc-link" href="#location-schema-example">Location Schema Example</a></li><li><a class="toc-link" href="#complete-content-config-ts-example">Complete content.config.ts Example</a></li><li><a class="toc-link" href="#reading-a-collection-with-getcollection">Reading a Collection with getCollection()</a></li><li><a class="toc-link" href="#filtering-entries">Filtering Entries</a></li><li><a class="toc-link" href="#generating-pages-from-a-collection">Generating Pages from a Collection</a></li><li><a class="toc-link" href="#using-collection-data-for-cards">Using Collection Data for Cards</a></li><li><a class="toc-link" href="#reusable-schema-pieces">Reusable Schema Pieces</a></li><li><a class="toc-link" href="#drafts-and-publishing">Drafts and Publishing</a></li><li><a class="toc-link" href="#dates">Dates</a></li><li><a class="toc-link" href="#images">Images</a></li><li><a class="toc-link" href="#references-between-entries">References Between Entries</a></li><li><a class="toc-link" href="#common-content-collection-errors">Common Content Collection Errors</a></li><li><a class="toc-link" href="#best-practices">Best Practices</a></li><li><a class="toc-link" href="#recommended-collections-for-a-lesson-site">Recommended Collections for a Lesson Site</a></li><li><a class="toc-link" href="#recommended-collections-for-a-world-bible-site">Recommended Collections for a World Bible Site</a></li><li><a class="toc-link" href="#mini-project-build-a-character-collection">Mini Project: Build a Character Collection</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li><li><a class="toc-link" href="#what-to-learn-next">What to Learn Next</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains how to use <strong>Astro Content Collections</strong> and <strong>schemas</strong>.</p>
 <p>Content Collections let you organize Markdown, MDX, and other content into named groups. Schemas let you define what frontmatter fields each content type is expected to have.</p>
 <pre><code>Markdown/MDX files
@@ -37,7 +45,7 @@ Safe, organized content data
 Pages, indexes, cards, filters, and related links</code></pre>
 </section>
 <section>
-<h2>Why Content Collections Matter</h2>
+<h2 id="why-content-collections-matter">Why Content Collections Matter</h2>
 <p>Without schemas, each page can accidentally use different frontmatter.</p>
 <pre><code>---
 title: "Veritas Miraculo"
@@ -59,7 +67,7 @@ tags</code></pre>
 <p>This helps Astro catch mistakes before the site is built.</p>
 </section>
 <section>
-<h2>Basic Terms</h2>
+<h2 id="basic-terms">Basic Terms</h2>
 <table>
 <thead>
 <tr>
@@ -92,7 +100,7 @@ tags</code></pre>
 </table>
 </section>
 <section>
-<h2>Project Folder Structure</h2>
+<h2 id="project-folder-structure">Project Folder Structure</h2>
 <p>A common Astro content structure looks like this:</p>
 <pre><code>src/
   content/
@@ -114,7 +122,7 @@ src/content/regions/     → regions collection</code></pre>
 <pre><code>src/content.config.ts</code></pre>
 </section>
 <section>
-<h2>Important Note for Starlight</h2>
+<h2 id="important-note-for-starlight">Important Note for Starlight</h2>
 <p>Starlight documentation pages usually live in:</p>
 <pre><code>src/content/docs/</code></pre>
 <p>That <code>docs</code> collection is special to Starlight. You can still create other collections beside it:</p>
@@ -132,7 +140,7 @@ src/content/regions/     → regions collection</code></pre>
 <p>A practical Starlight site might use <code>docs</code> for normal documentation pages and separate collections for structured data like characters, regions, lessons, or factions.</p>
 </section>
 <section>
-<h2>Create a Basic Content Config File</h2>
+<h2 id="create-a-basic-content-config-file">Create a Basic Content Config File</h2>
 <p>Create this file:</p>
 <pre><code>src/content.config.ts</code></pre>
 <p>Add a simple collection:</p>
@@ -154,7 +162,7 @@ export const collections = {
 <p>This says that every lesson entry should have a title, description, level, order number, and tags list.</p>
 </section>
 <section>
-<h2>Create a Lesson Entry</h2>
+<h2 id="create-a-lesson-entry">Create a Lesson Entry</h2>
 <p>Create this file:</p>
 <pre><code>src/content/lessons/markdown-basics.md</code></pre>
 <p>Add this content:</p>
@@ -175,7 +183,7 @@ Markdown is a plain-text format for writing structured content.</code></pre>
 <p>If you forget a required field, Astro can report a validation error during development or build.</p>
 </section>
 <section>
-<h2>Common Zod Field Types</h2>
+<h2 id="common-zod-field-types">Common Zod Field Types</h2>
 <table>
 <thead>
 <tr>
@@ -224,7 +232,7 @@ Markdown is a plain-text format for writing structured content.</code></pre>
 </table>
 </section>
 <section>
-<h2>Required, Optional, and Default Fields</h2>
+<h2 id="required-optional-and-default-fields">Required, Optional, and Default Fields</h2>
 <p>A normal field is required:</p>
 <pre><code>title: z.string()</code></pre>
 <p>An optional field can be left out:</p>
@@ -234,7 +242,7 @@ Markdown is a plain-text format for writing structured content.</code></pre>
 <p>Use defaults when you want the data to always be present, even if the author does not type it.</p>
 </section>
 <section>
-<h2>Lesson Schema Example</h2>
+<h2 id="lesson-schema-example">Lesson Schema Example</h2>
 <p>This schema works well for a tutorial or curriculum site:</p>
 <pre><code>const lessons = defineCollection({
   schema: z.object({
@@ -264,7 +272,7 @@ tags:
 ---</code></pre>
 </section>
 <section>
-<h2>Character Schema Example</h2>
+<h2 id="character-schema-example">Character Schema Example</h2>
 <p>This schema works for RPG-style character pages or world bible character entries:</p>
 <pre><code>const characters = defineCollection({
   schema: z.object({
@@ -314,7 +322,7 @@ tags:
 ---</code></pre>
 </section>
 <section>
-<h2>Region Schema Example</h2>
+<h2 id="region-schema-example">Region Schema Example</h2>
 <pre><code>const regions = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -344,7 +352,7 @@ tags:
 ---</code></pre>
 </section>
 <section>
-<h2>Faction Schema Example</h2>
+<h2 id="faction-schema-example">Faction Schema Example</h2>
 <pre><code>const factions = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -359,7 +367,7 @@ tags:
 });</code></pre>
 </section>
 <section>
-<h2>Location Schema Example</h2>
+<h2 id="location-schema-example">Location Schema Example</h2>
 <pre><code>const locations = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -383,7 +391,7 @@ tags:
 <p>Controlled choices are useful because they prevent accidental variants such as <code>High</code>, <code>high security</code>, <code>HIGH</code>, and <code>secure</code> all meaning the same thing.</p>
 </section>
 <section>
-<h2>Complete content.config.ts Example</h2>
+<h2 id="complete-content-config-ts-example">Complete content.config.ts Example</h2>
 <pre><code>import { defineCollection, z } from 'astro:content';
 
 const lessons = defineCollection({
@@ -433,7 +441,7 @@ export const collections = {
 };</code></pre>
 </section>
 <section>
-<h2>Reading a Collection with getCollection()</h2>
+<h2 id="reading-a-collection-with-getcollection">Reading a Collection with getCollection()</h2>
 <p>Inside an Astro page, you can load collection entries.</p>
 <pre><code>---
 import { getCollection } from 'astro:content';
@@ -459,7 +467,7 @@ const sortedLessons = lessons.sort((a, b) =&gt; {
 <p>The <code>data</code> property contains the validated frontmatter.</p>
 </section>
 <section>
-<h2>Filtering Entries</h2>
+<h2 id="filtering-entries">Filtering Entries</h2>
 <p>You can filter entries by frontmatter values.</p>
 <pre><code>---
 import { getCollection } from 'astro:content';
@@ -471,7 +479,7 @@ const beginnerLessons = await getCollection('lessons', ({ data }) =&gt; {
 <p>This is useful for creating course pages, tag pages, region pages, faction pages, or character lists.</p>
 </section>
 <section>
-<h2>Generating Pages from a Collection</h2>
+<h2 id="generating-pages-from-a-collection">Generating Pages from a Collection</h2>
 <p>To generate one page per entry, create a dynamic route.</p>
 <pre><code>src/pages/lessons/[...slug].astro</code></pre>
 <p>Example:</p>
@@ -498,7 +506,7 @@ const { Content } = await render(lesson);
 &lt;/article&gt;</code></pre>
 </section>
 <section>
-<h2>Using Collection Data for Cards</h2>
+<h2 id="using-collection-data-for-cards">Using Collection Data for Cards</h2>
 <p>Collection metadata is useful for index pages.</p>
 <pre><code>---
 import { getCollection } from 'astro:content';
@@ -521,7 +529,7 @@ const characters = await getCollection('characters');
 <p>This is why consistent schemas matter. If every character has the same fields, you can create reliable character cards.</p>
 </section>
 <section>
-<h2>Reusable Schema Pieces</h2>
+<h2 id="reusable-schema-pieces">Reusable Schema Pieces</h2>
 <p>If several collections use the same fields, create reusable schema pieces.</p>
 <pre><code>const baseEntry = {
   title: z.string(),
@@ -548,7 +556,7 @@ const regions = defineCollection({
 <p>This keeps your schema file shorter and more consistent.</p>
 </section>
 <section>
-<h2>Drafts and Publishing</h2>
+<h2 id="drafts-and-publishing">Drafts and Publishing</h2>
 <p>Add a draft field if you want to hide unfinished entries.</p>
 <pre><code>draft: z.boolean().default(false)</code></pre>
 <p>Then filter drafts out:</p>
@@ -557,7 +565,7 @@ const regions = defineCollection({
 });</code></pre>
 </section>
 <section>
-<h2>Dates</h2>
+<h2 id="dates">Dates</h2>
 <p>Use dates for posts, changelogs, updates, or published lessons.</p>
 <pre><code>publishedDate: z.coerce.date(),
 updatedDate: z.coerce.date().optional(),</code></pre>
@@ -570,7 +578,7 @@ updatedDate: 2026-05-13
 <p><code>z.coerce.date()</code> is helpful because frontmatter dates often begin as strings.</p>
 </section>
 <section>
-<h2>Images</h2>
+<h2 id="images">Images</h2>
 <p>Astro schemas can also work with image helpers for local images. This is useful for thumbnails, portraits, maps, and lesson screenshots.</p>
 <pre><code>import { defineCollection, z } from 'astro:content';
 
@@ -583,7 +591,7 @@ const characters = defineCollection({
 <p>Use image fields when you want Astro to understand an image as part of structured content.</p>
 </section>
 <section>
-<h2>References Between Entries</h2>
+<h2 id="references-between-entries">References Between Entries</h2>
 <p>Astro supports references between collections. This can be useful when one type of content points to another.</p>
 <pre><code>import { defineCollection, reference, z } from 'astro:content';
 
@@ -608,7 +616,7 @@ export const collections = {
 <p>References are useful for relationships such as character-to-region, character-to-faction, location-to-region, and storyline-to-character.</p>
 </section>
 <section>
-<h2>Common Content Collection Errors</h2>
+<h2 id="common-content-collection-errors">Common Content Collection Errors</h2>
 <h3>Wrong config file location</h3>
 <pre><code>Correct:
 src/content.config.ts
@@ -639,7 +647,7 @@ But frontmatter has:
 order: "first"</code></pre>
 </section>
 <section>
-<h2>Best Practices</h2>
+<h2 id="best-practices">Best Practices</h2>
 <ul>
 <li>Start with simple schemas and add complexity later.</li>
 <li>Use <code>z.enum()</code> for controlled categories such as level, status, type, and security level.</li>
@@ -651,7 +659,7 @@ order: "first"</code></pre>
 </ul>
 </section>
 <section>
-<h2>Recommended Collections for a Lesson Site</h2>
+<h2 id="recommended-collections-for-a-lesson-site">Recommended Collections for a Lesson Site</h2>
 <pre><code>src/content/
   lessons/
   courses/
@@ -686,7 +694,7 @@ exercises:
   tags</code></pre>
 </section>
 <section>
-<h2>Recommended Collections for a World Bible Site</h2>
+<h2 id="recommended-collections-for-a-world-bible-site">Recommended Collections for a World Bible Site</h2>
 <pre><code>src/content/
   regions/
   characters/
@@ -742,7 +750,7 @@ storylines:
   tags</code></pre>
 </section>
 <section>
-<h2>Mini Project: Build a Character Collection</h2>
+<h2 id="mini-project-build-a-character-collection">Mini Project: Build a Character Collection</h2>
 <p>Create this folder:</p>
 <pre><code>src/content/characters/</code></pre>
 <p>Create this config:</p>
@@ -784,7 +792,7 @@ tags:
 <p>Then create an index page that loads and displays the character collection.</p>
 </section>
 <section>
-<h2>Cheat Sheet</h2>
+<h2 id="cheat-sheet">Cheat Sheet</h2>
 <table>
 <thead>
 <tr>
@@ -833,7 +841,7 @@ tags:
 </table>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>If the page is one of many similar pages:
   use a collection.
 
@@ -847,7 +855,7 @@ If the page is a one-off landing page:
   a normal Astro page may be enough.</code></pre>
 </section>
 <section>
-<h2>What to Learn Next</h2>
+<h2 id="what-to-learn-next">What to Learn Next</h2>
 <ul>
 <li>Dynamic routes with collection entries</li>
 <li>Filtering and sorting collection data</li>
@@ -858,6 +866,10 @@ If the page is a one-off landing page:
 <li>Using Starlight with structured collections</li>
 </ul>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_plugins_tutorial.html">← Starlight Plugins</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_tags_categories_filtering_tutorial.html">Tags, Categories &amp; Filtering →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

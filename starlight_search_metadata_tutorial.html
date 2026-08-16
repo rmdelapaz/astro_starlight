@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Starlight Search and Metadata Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Starlight Search and Metadata Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Starlight Search and Metadata Tutorial</h1>
 <p>A practical guide to making Astro Starlight pages easier to find, understand, preview, and search.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Project Structure</a></li><li aria-current="page">Search &amp; Metadata</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#basic-page-metadata">Basic Page Metadata</a></li><li><a class="toc-link" href="#weak-vs-strong-titles">Weak vs Strong Titles</a></li><li><a class="toc-link" href="#search-friendly-headings">Search-Friendly Headings</a></li><li><a class="toc-link" href="#tags-and-categories">Tags and Categories</a></li><li><a class="toc-link" href="#search-writing-tips">Search Writing Tips</a></li><li><a class="toc-link" href="#built-in-search-vs-external-search">Built-In Search vs External Search</a></li><li><a class="toc-link" href="#metadata-checklist">Metadata Checklist</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial covers search and metadata for a Starlight documentation site. You will learn how page titles, descriptions, headings, frontmatter, and search-friendly writing help readers find what they need.</p>
 <ul>
 <li>How Starlight search fits into a documentation site.</li>
@@ -34,7 +42,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <pre><code>Page content
   ↓
 Frontmatter metadata
@@ -47,7 +55,7 @@ Reader finds the right page</code></pre>
 <p>Search is not only a technical feature. Search quality depends on how clearly the content is written and organized.</p>
 </section>
 <section>
-<h2>Basic Page Metadata</h2>
+<h2 id="basic-page-metadata">Basic Page Metadata</h2>
 <pre><code>---
 title: "Content Collections and Schemas"
 description: "Learn how to organize Astro content with typed frontmatter schemas."
@@ -55,7 +63,7 @@ description: "Learn how to organize Astro content with typed frontmatter schemas
 <p>The title should identify the page. The description should explain why the page exists.</p>
 </section>
 <section>
-<h2>Weak vs Strong Titles</h2>
+<h2 id="weak-vs-strong-titles">Weak vs Strong Titles</h2>
 <table><thead><tr><th>Weak</th><th>Better</th></tr></thead><tbody>
 <tr><td>Stuff</td><td>Astro Project Structure</td></tr>
 <tr><td>Advanced Things</td><td>Content Collections and Schemas</td></tr>
@@ -64,7 +72,7 @@ description: "Learn how to organize Astro content with typed frontmatter schemas
 </tbody></table>
 </section>
 <section>
-<h2>Search-Friendly Headings</h2>
+<h2 id="search-friendly-headings">Search-Friendly Headings</h2>
 <pre><code>Good:
 ## Deploying to Vercel
 ## Fixing Broken Image Paths
@@ -77,7 +85,7 @@ Less useful:
 <p>Use descriptive section headings so both humans and search tools can understand the page.</p>
 </section>
 <section>
-<h2>Tags and Categories</h2>
+<h2 id="tags-and-categories">Tags and Categories</h2>
 <pre><code>---
 title: "Mermaid Diagrams"
 description: "Create flowcharts and diagrams in Astro Starlight."
@@ -91,7 +99,7 @@ tags:
 <p>Use tags for topics. Use categories for broad sections.</p>
 </section>
 <section>
-<h2>Search Writing Tips</h2>
+<h2 id="search-writing-tips">Search Writing Tips</h2>
 <ul>
 <li>Use the actual tool or topic name in the title.</li>
 <li>Repeat important terms naturally in headings and opening paragraphs.</li>
@@ -101,7 +109,7 @@ tags:
 </ul>
 </section>
 <section>
-<h2>Built-In Search vs External Search</h2>
+<h2 id="built-in-search-vs-external-search">Built-In Search vs External Search</h2>
 <p>Built-in search is usually enough for small and medium tutorial sites, world bible sites, and internal documentation projects. External search can be useful when a public site grows to hundreds or thousands of pages.</p>
 <pre><code>Built-in search:
 - Small and medium sites
@@ -115,7 +123,7 @@ External search:
 - Advanced ranking needs</code></pre>
 </section>
 <section>
-<h2>Metadata Checklist</h2>
+<h2 id="metadata-checklist">Metadata Checklist</h2>
 <pre><code>[ ] Every page has a clear title
 [ ] Important pages have descriptions
 [ ] Section headings use searchable terms
@@ -126,7 +134,7 @@ External search:
 [ ] Index pages summarize each section</code></pre>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Good search starts with good writing.
 Use clear titles.
 Use descriptive headings.
@@ -134,6 +142,10 @@ Use consistent tags.
 Use index pages.
 Write for the reader first.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="starlight_homepage_landing_page_tutorial.html">← Homepages &amp; Landing Pages</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="starlight_custom_components_markdown_mdx_tutorial.html">Custom MDX Components →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

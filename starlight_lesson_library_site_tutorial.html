@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Starlight Lesson Library Site Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Starlight Lesson Library Site Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Starlight Lesson Library Site Tutorial</h1>
 <p>A practical capstone tutorial for building a complete lesson library, course guide, or tutorial documentation site with Astro and Starlight.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Capstone Projects</a></li><li aria-current="page">Lesson Library Capstone</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-building">What You Are Building</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#recommended-site-structure">Recommended Site Structure</a></li><li><a class="toc-link" href="#homepage-purpose">Homepage Purpose</a></li><li><a class="toc-link" href="#homepage-example">Homepage Example</a></li><li><a class="toc-link" href="#lesson-page-template">Lesson Page Template</a></li><li><a class="toc-link" href="#course-page-template">Course Page Template</a></li><li><a class="toc-link" href="#exercise-page-template">Exercise Page Template</a></li><li><a class="toc-link" href="#sidebar-configuration">Sidebar Configuration</a></li><li><a class="toc-link" href="#content-collections-for-lessons">Content Collections for Lessons</a></li><li><a class="toc-link" href="#lesson-card-component">Lesson Card Component</a></li><li><a class="toc-link" href="#custom-css-for-lesson-cards">Custom CSS for Lesson Cards</a></li><li><a class="toc-link" href="#reference-section">Reference Section</a></li><li><a class="toc-link" href="#recommended-tags">Recommended Tags</a></li><li><a class="toc-link" href="#build-checklist">Build Checklist</a></li><li><a class="toc-link" href="#common-mistakes">Common Mistakes</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Building</h2>
+<h2 id="what-you-are-building">What You Are Building</h2>
 <p>In this tutorial, you will design a full lesson library site using Astro and Starlight. The site will organize lessons by level, topic, course, and reference type.</p>
 <p>The finished site can support:</p>
 <ul>
@@ -37,7 +45,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <pre><code>Homepage
   ↓
 Learning paths
@@ -52,7 +60,7 @@ Deployment</code></pre>
 <p>A lesson library is not just a folder full of pages. It is a guided learning system. The site should help learners answer: where do I start, what do I read next, and where do I go when I get stuck?</p>
 </section>
 <section>
-<h2>Recommended Site Structure</h2>
+<h2 id="recommended-site-structure">Recommended Site Structure</h2>
 <pre><code>src/content/docs/
   index.md
   getting-started.md
@@ -96,7 +104,7 @@ Deployment</code></pre>
     cheat-sheets.md</code></pre>
 </section>
 <section>
-<h2>Homepage Purpose</h2>
+<h2 id="homepage-purpose">Homepage Purpose</h2>
 <p>The homepage should not list everything. It should direct the learner to the correct path.</p>
 <pre><code>Homepage sections:
   Hero
@@ -108,7 +116,7 @@ Deployment</code></pre>
 <p>A good lesson-library homepage gives readers confidence that the material has an order.</p>
 </section>
 <section>
-<h2>Homepage Example</h2>
+<h2 id="homepage-example">Homepage Example</h2>
 <p>Create or edit:</p>
 <pre><code>src/content/docs/index.md</code></pre>
 <pre><code>---
@@ -142,7 +150,7 @@ hero:
 Start with the [Astro Starlight Course](/courses/astro-starlight/).</code></pre>
 </section>
 <section>
-<h2>Lesson Page Template</h2>
+<h2 id="lesson-page-template">Lesson Page Template</h2>
 <p>Every lesson should feel familiar. Use the same section pattern again and again.</p>
 <pre><code>---
 title: "Markdown Basics"
@@ -177,7 +185,7 @@ tags:
 ## What to Learn Next</code></pre>
 </section>
 <section>
-<h2>Course Page Template</h2>
+<h2 id="course-page-template">Course Page Template</h2>
 <pre><code>---
 title: "Astro Starlight Course"
 description: "A guided path through Astro and Starlight site building."
@@ -207,7 +215,7 @@ Build a complete documentation site.
 - [Deployment](/courses/astro-starlight/deployment/)</code></pre>
 </section>
 <section>
-<h2>Exercise Page Template</h2>
+<h2 id="exercise-page-template">Exercise Page Template</h2>
 <pre><code>---
 title: "Markdown Practice Exercise"
 description: "Practice writing a lesson page in Markdown."
@@ -238,7 +246,7 @@ A readable Markdown page with title, sections, and examples.
 Add a table and a link to another lesson.</code></pre>
 </section>
 <section>
-<h2>Sidebar Configuration</h2>
+<h2 id="sidebar-configuration">Sidebar Configuration</h2>
 <p>Use a sidebar that reflects the learning path.</p>
 <pre><code>sidebar: [
   {
@@ -272,7 +280,7 @@ Add a table and a link to another lesson.</code></pre>
 ]</code></pre>
 </section>
 <section>
-<h2>Content Collections for Lessons</h2>
+<h2 id="content-collections-for-lessons">Content Collections for Lessons</h2>
 <p>If you want dynamic indexes and filtering, create a lesson collection.</p>
 <pre><code>import { defineCollection, z } from 'astro:content';
 
@@ -292,7 +300,7 @@ export const collections = { lessons };</code></pre>
 <p>Use a schema when you want lesson metadata to stay consistent.</p>
 </section>
 <section>
-<h2>Lesson Card Component</h2>
+<h2 id="lesson-card-component">Lesson Card Component</h2>
 <p>A reusable lesson card can make indexes easier to scan.</p>
 <pre><code>---
 const { title, description, href, level } = Astro.props;
@@ -305,7 +313,7 @@ const { title, description, href, level } = Astro.props;
 &lt;/article&gt;</code></pre>
 </section>
 <section>
-<h2>Custom CSS for Lesson Cards</h2>
+<h2 id="custom-css-for-lesson-cards">Custom CSS for Lesson Cards</h2>
 <pre><code>.lesson-grid {
   display: grid;
   gap: 1rem;
@@ -320,7 +328,7 @@ const { title, description, href, level } = Astro.props;
 }</code></pre>
 </section>
 <section>
-<h2>Reference Section</h2>
+<h2 id="reference-section">Reference Section</h2>
 <p>A lesson library needs quick-reference pages for learners who are stuck.</p>
 <pre><code>reference/
   commands.md
@@ -331,7 +339,7 @@ const { title, description, href, level } = Astro.props;
 <p>Reference pages should be short, searchable, and practical.</p>
 </section>
 <section>
-<h2>Recommended Tags</h2>
+<h2 id="recommended-tags">Recommended Tags</h2>
 <pre><code>level tags:
   beginner
   intermediate
@@ -354,7 +362,7 @@ format tags:
   checklist</code></pre>
 </section>
 <section>
-<h2>Build Checklist</h2>
+<h2 id="build-checklist">Build Checklist</h2>
 <pre><code>[ ] Homepage has a clear start button
 [ ] Getting Started page exists
 [ ] Beginner, intermediate, and advanced folders exist
@@ -368,7 +376,7 @@ format tags:
 [ ] npm run preview works</code></pre>
 </section>
 <section>
-<h2>Common Mistakes</h2>
+<h2 id="common-mistakes">Common Mistakes</h2>
 <h3>Too many lessons at the same level</h3>
 <p>Separate beginner, intermediate, and advanced material so learners are not overwhelmed.</p>
 <h3>No index pages</h3>
@@ -379,7 +387,7 @@ format tags:
 <p>Keep guided lessons and quick-reference pages separate.</p>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Homepage guides the learner.
 Sidebar organizes the journey.
 Lessons teach one topic at a time.
@@ -387,6 +395,10 @@ Exercises turn reading into practice.
 Reference pages help when stuck.
 Indexes help learners choose what to read next.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_i18n_multilingual_tutorial.html">← Internationalization</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="starlight_world_bible_site_tutorial.html">World Bible Capstone →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

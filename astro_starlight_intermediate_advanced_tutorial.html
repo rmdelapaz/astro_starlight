@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Intermediate and Advanced Astro + Starlight Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Intermediate and Advanced Astro + Starlight Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Intermediate and Advanced Astro + Starlight Tutorial</h1>
 <p>A practical guide for building maintainable documentation, lesson, reference, and worldbuilding sites with Astro and Starlight.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Start Here</a></li><li aria-current="page">Intermediate &amp; Advanced Astro</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-this-tutorial-covers">What This Tutorial Covers</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#recommended-project-structure">Recommended Project Structure</a></li><li><a class="toc-link" href="#configuring-starlight-in-astro-config-mjs">Configuring Starlight in astro.config.mjs</a></li><li><a class="toc-link" href="#sidebar-strategy">Sidebar Strategy</a></li><li><a class="toc-link" href="#using-frontmatter-well">Using Frontmatter Well</a></li><li><a class="toc-link" href="#markdown-vs-mdx">Markdown vs MDX</a></li><li><a class="toc-link" href="#creating-reusable-astro-components">Creating Reusable Astro Components</a></li><li><a class="toc-link" href="#custom-css-without-fighting-starlight">Custom CSS Without Fighting Starlight</a></li><li><a class="toc-link" href="#content-collections-and-structured-content">Content Collections and Structured Content</a></li><li><a class="toc-link" href="#advanced-pattern-index-pages-generated-from-content">Advanced Pattern: Index Pages Generated from Content</a></li><li><a class="toc-link" href="#advanced-pattern-a-worldbuilding-index">Advanced Pattern: A Worldbuilding Index</a></li><li><a class="toc-link" href="#using-built-in-starlight-features">Using Built-In Starlight Features</a></li><li><a class="toc-link" href="#adding-diagrams">Adding Diagrams</a></li><li><a class="toc-link" href="#adding-react-or-other-interactive-components">Adding React or Other Interactive Components</a></li><li><a class="toc-link" href="#intermediate-deployment-knowledge">Intermediate Deployment Knowledge</a></li><li><a class="toc-link" href="#github-pages-base-path-warning">GitHub Pages Base Path Warning</a></li><li><a class="toc-link" href="#performance-best-practices">Performance Best Practices</a></li><li><a class="toc-link" href="#content-maintenance-strategy">Content Maintenance Strategy</a></li><li><a class="toc-link" href="#common-problems-and-fixes">Common Problems and Fixes</a></li><li><a class="toc-link" href="#suggested-intermediate-practice-project">Suggested Intermediate Practice Project</a></li><li><a class="toc-link" href="#suggested-advanced-practice-project">Suggested Advanced Practice Project</a></li><li><a class="toc-link" href="#advanced-mental-model">Advanced Mental Model</a></li><li><a class="toc-link" href="#when-astro-starlight-is-the-right-tool">When Astro + Starlight Is the Right Tool</a></li><li><a class="toc-link" href="#checklist">Checklist</a></li><li><a class="toc-link" href="#summary">Summary</a></li></ol></nav></details>
 <section>
-<h2>What This Tutorial Covers</h2>
+<h2 id="what-this-tutorial-covers">What This Tutorial Covers</h2>
 <p>This tutorial assumes you already know the basic Astro and Starlight workflow:</p>
 <pre><code>npm create astro@latest
 npx astro add starlight
@@ -32,7 +40,7 @@ npm run build</code></pre>
 <p>Now the goal is to move beyond a simple docs site and learn how to organize a serious project with reusable structure, content strategy, custom components, deployment settings, and troubleshooting habits.</p>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <p>Astro is useful when your site is mostly content, but you still want modern tooling. Starlight is a documentation framework built on Astro. Together, they are a strong choice for:</p>
 <ul>
 <li>Documentation sites</li>
@@ -50,7 +58,7 @@ Starlight config = docs structure and navigation
 Astro build = final static website</code></pre>
 </section>
 <section>
-<h2>Recommended Project Structure</h2>
+<h2 id="recommended-project-structure">Recommended Project Structure</h2>
 <p>A serious Starlight site should be organized intentionally. A common structure looks like this:</p>
 <pre><code>my-starlight-site/
   astro.config.mjs
@@ -79,7 +87,7 @@ Astro build = final static website</code></pre>
 <p>That folder becomes the backbone of the site. The file and folder names inside it help determine page URLs and sidebar structure.</p>
 </section>
 <section>
-<h2>Configuring Starlight in astro.config.mjs</h2>
+<h2 id="configuring-starlight-in-astro-config-mjs">Configuring Starlight in astro.config.mjs</h2>
 <p>The main Starlight configuration usually lives inside <code>astro.config.mjs</code>. This is where you control the site title, description, sidebar, social links, plugins, custom CSS, and other global settings.</p>
 <pre><code>import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -113,7 +121,7 @@ export default defineConfig({
 <p>For a small site, manual sidebar links are fine. For a larger site, autogenerated sidebar sections save time and reduce broken navigation.</p>
 </section>
 <section>
-<h2>Sidebar Strategy</h2>
+<h2 id="sidebar-strategy">Sidebar Strategy</h2>
 <p>Intermediate and advanced Starlight projects need a sidebar strategy. Do not let the sidebar become a junk drawer.</p>
 <p>A good sidebar usually has a few clear groups:</p>
 <pre><code>Start Here
@@ -140,7 +148,7 @@ Troubleshooting
 Next Steps</code></pre>
 </section>
 <section>
-<h2>Using Frontmatter Well</h2>
+<h2 id="using-frontmatter-well">Using Frontmatter Well</h2>
 <p>Markdown pages in Starlight use frontmatter at the top of the file. Frontmatter is metadata about the page.</p>
 <pre><code>---
 title: "Working with Astro Components"
@@ -163,7 +171,7 @@ Page content goes here.</code></pre>
 </ul>
 </section>
 <section>
-<h2>Markdown vs MDX</h2>
+<h2 id="markdown-vs-mdx">Markdown vs MDX</h2>
 <p>Use regular Markdown for most pages. Use MDX when a page needs interactive or reusable components.</p>
 <table>
 <thead>
@@ -199,7 +207,7 @@ import LessonCard from '../../components/LessonCard.astro';
 &lt;LessonCard title="Practice Project" level="Intermediate" /&gt;</code></pre>
 </section>
 <section>
-<h2>Creating Reusable Astro Components</h2>
+<h2 id="creating-reusable-astro-components">Creating Reusable Astro Components</h2>
 <p>Reusable components are one of the main reasons to move beyond hand-coded HTML. They keep repeated content consistent.</p>
 <p>Example component:</p>
 <pre><code>---
@@ -221,7 +229,7 @@ const { title, level, description } = Astro.props;
 /&gt;</code></pre>
 </section>
 <section>
-<h2>Custom CSS Without Fighting Starlight</h2>
+<h2 id="custom-css-without-fighting-starlight">Custom CSS Without Fighting Starlight</h2>
 <p>Starlight already provides a strong visual foundation. Instead of replacing everything, start with small custom improvements.</p>
 <p>In <code>astro.config.mjs</code>:</p>
 <pre><code>starlight({
@@ -244,7 +252,7 @@ const { title, level, description } = Astro.props;
 <p>Best practice: add custom styles for your own classes first. Avoid deeply overriding Starlight internals unless you have a specific reason.</p>
 </section>
 <section>
-<h2>Content Collections and Structured Content</h2>
+<h2 id="content-collections-and-structured-content">Content Collections and Structured Content</h2>
 <p>Astro content collections help manage structured content with schemas and type safety. Starlight already uses a docs collection, but you can also create additional collections for data-like content.</p>
 <p>For example, a lesson collection could describe lessons with required metadata:</p>
 <pre><code>// src/content.config.ts
@@ -263,7 +271,7 @@ export const collections = { lessons };</code></pre>
 <p>This is useful when you want Astro to validate your content. For example, if every lesson must have a level, the schema can enforce that.</p>
 </section>
 <section>
-<h2>Advanced Pattern: Index Pages Generated from Content</h2>
+<h2 id="advanced-pattern-index-pages-generated-from-content">Advanced Pattern: Index Pages Generated from Content</h2>
 <p>Instead of manually maintaining a list of lessons, you can generate an index page from a collection.</p>
 <pre><code>---
 import { getCollection } from 'astro:content';
@@ -285,7 +293,7 @@ const sortedLessons = lessons.sort((a, b) =&gt; a.data.order - b.data.order);
 <p>This pattern is powerful for lesson libraries, character indexes, reference pages, bestiaries, timelines, and project archives.</p>
 </section>
 <section>
-<h2>Advanced Pattern: A Worldbuilding Index</h2>
+<h2 id="advanced-pattern-a-worldbuilding-index">Advanced Pattern: A Worldbuilding Index</h2>
 <p>For a worldbuilding site, you could create structured collections for characters, locations, factions, or storylines.</p>
 <pre><code>const characters = defineCollection({
   schema: z.object({
@@ -315,7 +323,7 @@ status: "active"
 <p>This lets the site generate character lists, region indexes, faction pages, and cross-reference pages.</p>
 </section>
 <section>
-<h2>Using Built-In Starlight Features</h2>
+<h2 id="using-built-in-starlight-features">Using Built-In Starlight Features</h2>
 <p>Starlight gives you many features without requiring you to build them manually:</p>
 <ul>
 <li>Sidebar navigation</li>
@@ -330,7 +338,7 @@ status: "active"
 <p>Before building your own version of a feature, check whether Starlight already provides it.</p>
 </section>
 <section>
-<h2>Adding Diagrams</h2>
+<h2 id="adding-diagrams">Adding Diagrams</h2>
 <p>For lessons and worldbuilding, diagrams are often helpful. You can use Mermaid, SVG, or custom Astro components.</p>
 <p>For Mermaid, one approach is to create a component that safely renders Mermaid blocks. A simple component might look like this:</p>
 <pre><code>---
@@ -346,7 +354,7 @@ const { chart } = Astro.props;
 <p>For production, consider loading Mermaid once globally instead of importing it on every page.</p>
 </section>
 <section>
-<h2>Adding React or Other Interactive Components</h2>
+<h2 id="adding-react-or-other-interactive-components">Adding React or Other Interactive Components</h2>
 <p>Astro lets you use interactive components only when needed. This is one of its biggest advantages.</p>
 <p>Example use cases:</p>
 <ul>
@@ -369,7 +377,7 @@ const { chart } = Astro.props;
 <p>Use the lightest option that solves the problem. A static page does not need a hydrated component.</p>
 </section>
 <section>
-<h2>Intermediate Deployment Knowledge</h2>
+<h2 id="intermediate-deployment-knowledge">Intermediate Deployment Knowledge</h2>
 <p>For a static Starlight site, the normal build command is:</p>
 <pre><code>npm run build</code></pre>
 <p>The default output folder is usually:</p>
@@ -408,7 +416,7 @@ const { chart } = Astro.props;
 </table>
 </section>
 <section>
-<h2>GitHub Pages Base Path Warning</h2>
+<h2 id="github-pages-base-path-warning">GitHub Pages Base Path Warning</h2>
 <p>If you deploy to a GitHub Pages project URL, your site may live at a path like:</p>
 <pre><code>https://username.github.io/repository-name/</code></pre>
 <p>In that case, you may need to configure <code>site</code> and <code>base</code> in <code>astro.config.mjs</code>:</p>
@@ -420,7 +428,7 @@ const { chart } = Astro.props;
 <p>If the site works locally but assets break on GitHub Pages, check the base path first.</p>
 </section>
 <section>
-<h2>Performance Best Practices</h2>
+<h2 id="performance-best-practices">Performance Best Practices</h2>
 <p>Astro and Starlight are already performance-oriented, but larger sites still need discipline.</p>
 <ul>
 <li>Use static Markdown when possible.</li>
@@ -433,7 +441,7 @@ const { chart } = Astro.props;
 </ul>
 </section>
 <section>
-<h2>Content Maintenance Strategy</h2>
+<h2 id="content-maintenance-strategy">Content Maintenance Strategy</h2>
 <p>Advanced Astro/Starlight work is not only about code. It is also about maintaining a growing content library.</p>
 <p>Use consistent file names:</p>
 <pre><code>good-file-name.md
@@ -458,7 +466,7 @@ Summary</code></pre>
 <p>Consistency matters more as the site grows.</p>
 </section>
 <section>
-<h2>Common Problems and Fixes</h2>
+<h2 id="common-problems-and-fixes">Common Problems and Fixes</h2>
 <h3>Problem: The sidebar page order is wrong</h3>
 <p>Fix it with frontmatter:</p>
 <pre><code>---
@@ -476,7 +484,7 @@ sidebar:
 <p>Check Node version, lockfile consistency, missing environment variables, and case-sensitive file names.</p>
 </section>
 <section>
-<h2>Suggested Intermediate Practice Project</h2>
+<h2 id="suggested-intermediate-practice-project">Suggested Intermediate Practice Project</h2>
 <p>Build a Starlight site with these sections:</p>
 <pre><code>Start Here
 Lessons
@@ -494,7 +502,7 @@ Troubleshooting</code></pre>
 </ul>
 </section>
 <section>
-<h2>Suggested Advanced Practice Project</h2>
+<h2 id="suggested-advanced-practice-project">Suggested Advanced Practice Project</h2>
 <p>Build a reference site with structured collections:</p>
 <pre><code>characters
 locations
@@ -514,7 +522,7 @@ references</code></pre>
 <p>This project teaches you the real value of Astro: content is not just pages; content can become structured data that generates pages, indexes, and navigation.</p>
 </section>
 <section>
-<h2>Advanced Mental Model</h2>
+<h2 id="advanced-mental-model">Advanced Mental Model</h2>
 <p>Beginner Astro thinking:</p>
 <pre><code>I write pages and Astro publishes them.</code></pre>
 <p>Intermediate Astro thinking:</p>
@@ -523,7 +531,7 @@ references</code></pre>
 <pre><code>I model my content as structured data, then generate pages, indexes, navigation, and references from that data.</code></pre>
 </section>
 <section>
-<h2>When Astro + Starlight Is the Right Tool</h2>
+<h2 id="when-astro-starlight-is-the-right-tool">When Astro + Starlight Is the Right Tool</h2>
 <p>Astro + Starlight is a strong choice when the project is mostly content and reference material.</p>
 <p>Use it for:</p>
 <ul>
@@ -545,7 +553,7 @@ references</code></pre>
 </ul>
 </section>
 <section>
-<h2>Checklist</h2>
+<h2 id="checklist">Checklist</h2>
 <p>Before calling a Starlight project maintainable, check the following:</p>
 <ul>
 <li>The sidebar is organized intentionally.</li>
@@ -561,7 +569,7 @@ references</code></pre>
 </ul>
 </section>
 <section>
-<h2>Summary</h2>
+<h2 id="summary">Summary</h2>
 <p>Astro + Starlight starts simple, but it scales well when you treat it as a content system instead of a pile of pages. The core skills are:</p>
 <ul>
 <li>Organizing content into folders</li>
@@ -575,6 +583,10 @@ references</code></pre>
 </ul>
 <p>The more your site grows, the more valuable Astro becomes. A single reusable component or schema can save dozens of future edits.</p>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_full_site_setup_tutorial.html">← Full Site Setup</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="yaml_tutorial_guide.html">YAML Guide →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

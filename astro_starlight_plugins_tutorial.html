@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Starlight Plugins Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Starlight Plugins Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Starlight Plugins Tutorial</h1>
 <p>A beginner-friendly guide to understanding Starlight plugins, when to use them, and how to avoid plugin overload.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Components &amp; Customization</a></li><li aria-current="page">Starlight Plugins</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#where-plugins-go">Where Plugins Go</a></li><li><a class="toc-link" href="#official-vs-community-plugins">Official vs Community Plugins</a></li><li><a class="toc-link" href="#when-to-use-a-plugin">When to Use a Plugin</a></li><li><a class="toc-link" href="#when-not-to-use-a-plugin">When Not to Use a Plugin</a></li><li><a class="toc-link" href="#plugin-evaluation-checklist">Plugin Evaluation Checklist</a></li><li><a class="toc-link" href="#example-plugin-use-cases">Example Plugin Use Cases</a></li><li><a class="toc-link" href="#safe-plugin-workflow">Safe Plugin Workflow</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains what Starlight plugins are and how they fit into an Astro Starlight project.</p>
 <ul>
 <li>What plugins do.</li>
@@ -34,7 +42,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <pre><code>Starlight core
   ↓
 Project configuration
@@ -45,7 +53,7 @@ Extra behavior or UI features</code></pre>
 <p>Plugins can add features, but every plugin is also another dependency to maintain.</p>
 </section>
 <section>
-<h2>Where Plugins Go</h2>
+<h2 id="where-plugins-go">Where Plugins Go</h2>
 <pre><code>import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -61,7 +69,7 @@ export default defineConfig({
 });</code></pre>
 </section>
 <section>
-<h2>Official vs Community Plugins</h2>
+<h2 id="official-vs-community-plugins">Official vs Community Plugins</h2>
 <table><thead><tr><th>Type</th><th>Best For</th><th>Risk</th></tr></thead><tbody>
 <tr><td>Official</td><td>Common supported features</td><td>Usually lower risk</td></tr>
 <tr><td>Community</td><td>Specialized features</td><td>Check maintenance and compatibility</td></tr>
@@ -69,7 +77,7 @@ export default defineConfig({
 </tbody></table>
 </section>
 <section>
-<h2>When to Use a Plugin</h2>
+<h2 id="when-to-use-a-plugin">When to Use a Plugin</h2>
 <pre><code>Use a plugin when:
 - The feature is repeated across the site
 - The plugin solves a real maintenance problem
@@ -77,7 +85,7 @@ export default defineConfig({
 - The plugin is maintained and documented</code></pre>
 </section>
 <section>
-<h2>When Not to Use a Plugin</h2>
+<h2 id="when-not-to-use-a-plugin">When Not to Use a Plugin</h2>
 <pre><code>Avoid plugins when:
 - A few lines of Markdown or CSS solve the problem
 - The plugin is abandoned
@@ -86,7 +94,7 @@ export default defineConfig({
 - You are still learning the basics</code></pre>
 </section>
 <section>
-<h2>Plugin Evaluation Checklist</h2>
+<h2 id="plugin-evaluation-checklist">Plugin Evaluation Checklist</h2>
 <pre><code>[ ] Does it support your current Starlight version?
 [ ] Is it documented?
 [ ] Is it actively maintained?
@@ -96,7 +104,7 @@ export default defineConfig({
 [ ] Does it make future upgrades harder?</code></pre>
 </section>
 <section>
-<h2>Example Plugin Use Cases</h2>
+<h2 id="example-plugin-use-cases">Example Plugin Use Cases</h2>
 <ul>
 <li>Search enhancements.</li>
 <li>Automatic sidebar organization.</li>
@@ -108,7 +116,7 @@ export default defineConfig({
 </ul>
 </section>
 <section>
-<h2>Safe Plugin Workflow</h2>
+<h2 id="safe-plugin-workflow">Safe Plugin Workflow</h2>
 <ol>
 <li>Commit your working site before adding a plugin.</li>
 <li>Install one plugin at a time.</li>
@@ -119,13 +127,17 @@ export default defineConfig({
 </ol>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Start with Starlight core.
 Add custom CSS only when needed.
 Add components when content repeats.
 Add plugins when site-wide behavior is needed.
 Do not add plugins just because they exist.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="starlight_styling_theme_customization_tutorial.html">← Styling &amp; Theme Customization</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_content_collections_schemas_tutorial.html">Content Collections &amp; Schemas →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

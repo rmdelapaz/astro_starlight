@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Customizing and Overriding Starlight Components Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Customizing and Overriding Starlight Components — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Customizing and Overriding Starlight Components</h1>
 <p>A practical guide to changing the look, layout, and behavior of an Astro Starlight site without losing the benefits of Starlight’s documentation system.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Customizing and Overriding Starlight Components Tutorial</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-idea">The Big Idea</a></li><li><a class="toc-link" href="#recommended-customization-order">Recommended Customization Order</a></li><li><a class="toc-link" href="#project-structure-for-customization">Project Structure for Customization</a></li><li><a class="toc-link" href="#level-one-configuration-customization">Level One: Configuration Customization</a></li><li><a class="toc-link" href="#adding-a-logo">Adding a Logo</a></li><li><a class="toc-link" href="#customizing-the-page-layout-with-frontmatter">Customizing the Page Layout with Frontmatter</a></li><li><a class="toc-link" href="#customizing-the-table-of-contents">Customizing the Table of Contents</a></li><li><a class="toc-link" href="#level-two-custom-css">Level Two: Custom CSS</a></li><li><a class="toc-link" href="#theme-variables">Theme Variables</a></li><li><a class="toc-link" href="#styling-custom-content-components">Styling Custom Content Components</a></li><li><a class="toc-link" href="#level-three-content-components">Level Three: Content Components</a></li><li><a class="toc-link" href="#example-lesson-objectives-component">Example: Lesson Objectives Component</a></li><li><a class="toc-link" href="#level-four-component-overrides">Level Four: Component Overrides</a></li><li><a class="toc-link" href="#when-to-override-a-component">When to Override a Component</a></li><li><a class="toc-link" href="#basic-override-setup">Basic Override Setup</a></li><li><a class="toc-link" href="#example-override-sitetitle">Example: Override SiteTitle</a></li><li><a class="toc-link" href="#important-check-the-override-reference">Important: Check the Override Reference</a></li><li><a class="toc-link" href="#extending-instead-of-replacing">Extending Instead of Replacing</a></li><li><a class="toc-link" href="#common-override-example-ideas">Common Override Example Ideas</a></li><li><a class="toc-link" href="#world-bible-use-cases">World Bible Use Cases</a></li><li><a class="toc-link" href="#lesson-site-use-cases">Lesson Site Use Cases</a></li><li><a class="toc-link" href="#example-page-metadata-display">Example: Page Metadata Display</a></li><li><a class="toc-link" href="#accessibility-rules-for-overrides">Accessibility Rules for Overrides</a></li><li><a class="toc-link" href="#upgrade-safety">Upgrade Safety</a></li><li><a class="toc-link" href="#common-mistakes">Common Mistakes</a></li><li><a class="toc-link" href="#troubleshooting">Troubleshooting</a></li><li><a class="toc-link" href="#practice-exercise-safe-customization">Practice Exercise: Safe Customization</a></li><li><a class="toc-link" href="#practice-exercise-first-override">Practice Exercise: First Override</a></li><li><a class="toc-link" href="#full-example-configuration">Full Example Configuration</a></li><li><a class="toc-link" href="#decision-guide">Decision Guide</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#what-to-learn-next">What to Learn Next</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains how to customize an Astro Starlight site at three levels:</p>
 <ul>
 <li><strong>Configuration customization</strong>: change built-in Starlight options such as title, logo, social links, table of contents, and edit links.</li>
@@ -33,7 +41,7 @@
 <p>The goal is to customize safely. Start with the least invasive option, then move to component overrides only when you need deeper control.</p>
 </section>
 <section>
-<h2>The Big Idea</h2>
+<h2 id="the-big-idea">The Big Idea</h2>
 <p>Starlight gives you a polished documentation interface by default. You can change a lot without replacing major parts of the system.</p>
 <pre><code>Small visual change?
   Use custom CSS.
@@ -51,7 +59,7 @@ Need to replace part of the Starlight UI?
 </ul>
 </section>
 <section>
-<h2>Recommended Customization Order</h2>
+<h2 id="recommended-customization-order">Recommended Customization Order</h2>
 <p>Before overriding a Starlight component, try these approaches in order:</p>
 <ol>
 <li>Use page frontmatter.</li>
@@ -63,7 +71,7 @@ Need to replace part of the Starlight UI?
 <p>This order keeps your site easier to upgrade and maintain.</p>
 </section>
 <section>
-<h2>Project Structure for Customization</h2>
+<h2 id="project-structure-for-customization">Project Structure for Customization</h2>
 <p>A customized Starlight project might use this structure:</p>
 <pre><code>my-starlight-site/
   public/
@@ -91,7 +99,7 @@ Need to replace part of the Starlight UI?
 <p>You do not have to use an <code>overrides</code> folder, but it is a clean convention. It makes it obvious which files are replacing Starlight internals.</p>
 </section>
 <section>
-<h2>Level One: Configuration Customization</h2>
+<h2 id="level-one-configuration-customization">Level One: Configuration Customization</h2>
 <p>Many customizations belong in <code>astro.config.mjs</code>. This file controls Astro and Starlight settings.</p>
 <pre><code>import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -106,7 +114,7 @@ export default defineConfig({
 <p>Use configuration when you want to change official Starlight options such as title, sidebar, logo, social links, page layout behavior, table of contents, or custom CSS registration.</p>
 </section>
 <section>
-<h2>Adding a Logo</h2>
+<h2 id="adding-a-logo">Adding a Logo</h2>
 <p>Add logo files to <code>src/assets/</code>:</p>
 <pre><code>src/assets/light-logo.svg
 src/assets/dark-logo.svg</code></pre>
@@ -132,7 +140,7 @@ export default defineConfig({
 }</code></pre>
 </section>
 <section>
-<h2>Customizing the Page Layout with Frontmatter</h2>
+<h2 id="customizing-the-page-layout-with-frontmatter">Customizing the Page Layout with Frontmatter</h2>
 <p>For a special landing page, use Starlight’s <code>template: splash</code> frontmatter option.</p>
 <pre><code>---
 title: "World Bible Home"
@@ -145,7 +153,7 @@ Welcome to the setting archive.</code></pre>
 <p>This is useful for homepages, course landing pages, or large visual index pages. Use this before trying to override layout components.</p>
 </section>
 <section>
-<h2>Customizing the Table of Contents</h2>
+<h2 id="customizing-the-table-of-contents">Customizing the Table of Contents</h2>
 <p>Starlight normally displays a table of contents based on page headings. For some pages, you may want to reduce or disable it.</p>
 <pre><code>---
 title: "Landing Page"
@@ -154,7 +162,7 @@ tableOfContents: false
 <p>Use this for pages where the normal right-side page navigation is not helpful, such as a homepage, gallery, or custom index.</p>
 </section>
 <section>
-<h2>Level Two: Custom CSS</h2>
+<h2 id="level-two-custom-css">Level Two: Custom CSS</h2>
 <p>Custom CSS is the safest way to change the look of a Starlight site.</p>
 <p>Create:</p>
 <pre><code>src/styles/custom.css</code></pre>
@@ -173,7 +181,7 @@ export default defineConfig({
 <p>Now your CSS file can customize theme variables and page styling.</p>
 </section>
 <section>
-<h2>Theme Variables</h2>
+<h2 id="theme-variables">Theme Variables</h2>
 <p>Starlight exposes CSS custom properties that can be changed in your custom CSS file.</p>
 <pre><code>:root {
   --sl-font: system-ui, sans-serif;
@@ -183,7 +191,7 @@ export default defineConfig({
 <p>Exact variable names may change as Starlight evolves, so always check the current Starlight CSS and styling documentation when making deep visual changes.</p>
 </section>
 <section>
-<h2>Styling Custom Content Components</h2>
+<h2 id="styling-custom-content-components">Styling Custom Content Components</h2>
 <p>If you create your own components, style them with classes in your custom CSS.</p>
 <pre><code>/* src/styles/custom.css */
 .character-card {
@@ -204,7 +212,7 @@ const { name, role } = Astro.props;
 <p>This approach is safer than overriding Starlight’s built-in UI.</p>
 </section>
 <section>
-<h2>Level Three: Content Components</h2>
+<h2 id="level-three-content-components">Level Three: Content Components</h2>
 <p>Before replacing Starlight internals, ask whether you only need a reusable content block.</p>
 <p>Examples:</p>
 <ul>
@@ -218,7 +226,7 @@ const { name, role } = Astro.props;
 <p>These belong in <code>src/components/</code>, not necessarily in Starlight overrides.</p>
 </section>
 <section>
-<h2>Example: Lesson Objectives Component</h2>
+<h2 id="example-lesson-objectives-component">Example: Lesson Objectives Component</h2>
 <p>Create:</p>
 <pre><code>src/components/LessonObjectives.astro</code></pre>
 <p>Add:</p>
@@ -248,7 +256,7 @@ import LessonObjectives from '../../components/LessonObjectives.astro';
 <p>This adds a custom block without changing Starlight itself.</p>
 </section>
 <section>
-<h2>Level Four: Component Overrides</h2>
+<h2 id="level-four-component-overrides">Level Four: Component Overrides</h2>
 <p>Component overrides are for changing Starlight’s built-in interface. Starlight supports overriding built-in components by pointing component names to your replacement files in the Starlight <code>components</code> configuration option.</p>
 <pre><code>starlight({
   title: 'My Custom Docs',
@@ -259,7 +267,7 @@ import LessonObjectives from '../../components/LessonObjectives.astro';
 <p>This tells Starlight, “When you would normally render <code>SiteTitle</code>, use my file instead.”</p>
 </section>
 <section>
-<h2>When to Override a Component</h2>
+<h2 id="when-to-override-a-component">When to Override a Component</h2>
 <p>Override a Starlight component when you need to change behavior or markup that CSS cannot reasonably change.</p>
 <table>
 <thead>
@@ -297,7 +305,7 @@ import LessonObjectives from '../../components/LessonObjectives.astro';
 </table>
 </section>
 <section>
-<h2>Basic Override Setup</h2>
+<h2 id="basic-override-setup">Basic Override Setup</h2>
 <p>Create an override folder:</p>
 <pre><code>src/overrides/</code></pre>
 <p>Create a replacement component:</p>
@@ -318,7 +326,7 @@ export default defineConfig({
 });</code></pre>
 </section>
 <section>
-<h2>Example: Override SiteTitle</h2>
+<h2 id="example-override-sitetitle">Example: Override SiteTitle</h2>
 <p>A simple custom <code>SiteTitle</code> might look like this:</p>
 <pre><code>---
 import type { Props } from '@astrojs/starlight/props';
@@ -344,7 +352,7 @@ const { siteTitle } = Astro.props;
 <p>This is useful if you want the site title to have special markup, icon text, or different link behavior.</p>
 </section>
 <section>
-<h2>Important: Check the Override Reference</h2>
+<h2 id="important-check-the-override-reference">Important: Check the Override Reference</h2>
 <p>Do not guess component names. Starlight has an overrides reference that lists the components available to override.</p>
 <p>Common kinds of override targets include:</p>
 <ul>
@@ -358,7 +366,7 @@ const { siteTitle } = Astro.props;
 <p>Component names and APIs can change over time, so always compare your override with the current Starlight implementation.</p>
 </section>
 <section>
-<h2>Extending Instead of Replacing</h2>
+<h2 id="extending-instead-of-replacing">Extending Instead of Replacing</h2>
 <p>Sometimes you do not want to fully replace a component. You want to reuse the default component and wrap it with extra markup.</p>
 <p>Conceptually, this looks like:</p>
 <pre><code>---
@@ -372,7 +380,7 @@ import DefaultComponent from '@astrojs/starlight/components/SomeComponent.astro'
 <p>This approach can be safer than rewriting everything from scratch, but the exact import path depends on Starlight’s current exports and documentation.</p>
 </section>
 <section>
-<h2>Common Override Example Ideas</h2>
+<h2 id="common-override-example-ideas">Common Override Example Ideas</h2>
 <h3>Custom footer</h3>
 <p>Use this when you want world bible copyright notes, project version, contact links, or deployment metadata.</p>
 <h3>Custom site title</h3>
@@ -383,7 +391,7 @@ import DefaultComponent from '@astrojs/starlight/components/SomeComponent.astro'
 <p>Use this only when you need different navigation behavior. Sidebar overrides can become complex because they affect how readers move through the entire site.</p>
 </section>
 <section>
-<h2>World Bible Use Cases</h2>
+<h2 id="world-bible-use-cases">World Bible Use Cases</h2>
 <p>For a world bible, component overrides can help make Starlight feel less like generic software documentation.</p>
 <table>
 <thead>
@@ -417,7 +425,7 @@ import DefaultComponent from '@astrojs/starlight/components/SomeComponent.astro'
 </table>
 </section>
 <section>
-<h2>Lesson Site Use Cases</h2>
+<h2 id="lesson-site-use-cases">Lesson Site Use Cases</h2>
 <p>For a lesson or tutorial site, customizations usually support learning flow.</p>
 <table>
 <thead>
@@ -451,7 +459,7 @@ import DefaultComponent from '@astrojs/starlight/components/SomeComponent.astro'
 </table>
 </section>
 <section>
-<h2>Example: Page Metadata Display</h2>
+<h2 id="example-page-metadata-display">Example: Page Metadata Display</h2>
 <p>For lesson or world bible pages, you may want visible metadata:</p>
 <pre><code>---
 title: "Markdown Basics"
@@ -466,7 +474,7 @@ status: "Draft"
 <p>This is easier to maintain than replacing the global title component for every page.</p>
 </section>
 <section>
-<h2>Accessibility Rules for Overrides</h2>
+<h2 id="accessibility-rules-for-overrides">Accessibility Rules for Overrides</h2>
 <p>When you override built-in UI, you take responsibility for accessibility.</p>
 <ul>
 <li>Keep meaningful links as real <code>&lt;a&gt;</code> elements.</li>
@@ -479,7 +487,7 @@ status: "Draft"
 <p>Starlight’s default UI is designed with documentation usability in mind. Overrides should preserve or improve that usability.</p>
 </section>
 <section>
-<h2>Upgrade Safety</h2>
+<h2 id="upgrade-safety">Upgrade Safety</h2>
 <p>Component overrides are powerful, but they can be more fragile during upgrades than configuration or CSS.</p>
 <p>Best practices:</p>
 <ul>
@@ -492,7 +500,7 @@ status: "Draft"
 </ul>
 </section>
 <section>
-<h2>Common Mistakes</h2>
+<h2 id="common-mistakes">Common Mistakes</h2>
 <h3>Overriding too soon</h3>
 <p>If CSS or configuration can solve the problem, use that first.</p>
 <h3>Copying old component code</h3>
@@ -505,7 +513,7 @@ status: "Draft"
 <p>Reusable content blocks belong in <code>src/components/</code>. Files that replace Starlight internals belong in <code>src/overrides/</code>.</p>
 </section>
 <section>
-<h2>Troubleshooting</h2>
+<h2 id="troubleshooting">Troubleshooting</h2>
 <h3>The override does not appear</h3>
 <p>Check that the component name is correct and that the path in <code>astro.config.mjs</code> points to the right file.</p>
 <h3>The site fails to build</h3>
@@ -518,7 +526,7 @@ status: "Draft"
 <p>If you overrode search, sidebar, or page navigation components, compare your replacement with the current Starlight default implementation.</p>
 </section>
 <section>
-<h2>Practice Exercise: Safe Customization</h2>
+<h2 id="practice-exercise-safe-customization">Practice Exercise: Safe Customization</h2>
 <p>Before using overrides, practice with configuration and CSS.</p>
 <ol>
 <li>Create <code>src/styles/custom.css</code>.</li>
@@ -530,7 +538,7 @@ status: "Draft"
 <p>This gives you a customized site without replacing Starlight internals.</p>
 </section>
 <section>
-<h2>Practice Exercise: First Override</h2>
+<h2 id="practice-exercise-first-override">Practice Exercise: First Override</h2>
 <p>After you are comfortable with safe customization, try a small override.</p>
 <ol>
 <li>Create <code>src/overrides/SiteTitle.astro</code>.</li>
@@ -543,7 +551,7 @@ status: "Draft"
 <p>Start small. Do not begin by replacing the whole sidebar or page layout.</p>
 </section>
 <section>
-<h2>Full Example Configuration</h2>
+<h2 id="full-example-configuration">Full Example Configuration</h2>
 <pre><code>import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -582,7 +590,7 @@ export default defineConfig({
 });</code></pre>
 </section>
 <section>
-<h2>Decision Guide</h2>
+<h2 id="decision-guide">Decision Guide</h2>
 <table>
 <thead>
 <tr>
@@ -615,7 +623,7 @@ export default defineConfig({
 </table>
 </section>
 <section>
-<h2>Cheat Sheet</h2>
+<h2 id="cheat-sheet">Cheat Sheet</h2>
 <table>
 <thead>
 <tr>
@@ -656,7 +664,7 @@ export default defineConfig({
 </table>
 </section>
 <section>
-<h2>What to Learn Next</h2>
+<h2 id="what-to-learn-next">What to Learn Next</h2>
 <ul>
 <li>Starlight CSS and theme variables</li>
 <li>Astro component props and slots</li>
@@ -667,6 +675,10 @@ export default defineConfig({
 <li>Testing Starlight builds before deployment</li>
 </ul>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+</main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

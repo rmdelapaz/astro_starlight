@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Starlight i18n and Multilingual Sites Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Starlight i18n and Multilingual Sites Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Starlight i18n and Multilingual Sites Tutorial</h1>
 <p>A practical introduction to multilingual Starlight sites, language folders, translated navigation, fallback content, and when i18n is worth using.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Assets &amp; Features</a></li><li aria-current="page">Internationalization</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#when-to-use-i18n">When to Use i18n</a></li><li><a class="toc-link" href="#when-not-to-use-i18n-yet">When Not to Use i18n Yet</a></li><li><a class="toc-link" href="#basic-language-folder-concept">Basic Language Folder Concept</a></li><li><a class="toc-link" href="#locale-planning">Locale Planning</a></li><li><a class="toc-link" href="#translated-metadata">Translated Metadata</a></li><li><a class="toc-link" href="#translated-navigation">Translated Navigation</a></li><li><a class="toc-link" href="#fallback-content">Fallback Content</a></li><li><a class="toc-link" href="#right-to-left-languages">Right-to-Left Languages</a></li><li><a class="toc-link" href="#worldbuilding-uses">Worldbuilding Uses</a></li><li><a class="toc-link" href="#lesson-site-uses">Lesson Site Uses</a></li><li><a class="toc-link" href="#i18n-maintenance-checklist">i18n Maintenance Checklist</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial introduces internationalization, often shortened to <strong>i18n</strong>. In a Starlight site, i18n means supporting multiple languages or locale versions of your documentation.</p>
 <ul>
 <li>What i18n means.</li>
@@ -34,7 +42,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <pre><code>Default language pages
   ↓
 Translated language folders
@@ -44,7 +52,7 @@ Locale-aware navigation
 Readers choose their language</code></pre>
 </section>
 <section>
-<h2>When to Use i18n</h2>
+<h2 id="when-to-use-i18n">When to Use i18n</h2>
 <pre><code>Use i18n when:
 - You have real readers in multiple languages
 - The content will be maintained long-term
@@ -52,7 +60,7 @@ Readers choose their language</code></pre>
 - Navigation and metadata can also be translated</code></pre>
 </section>
 <section>
-<h2>When Not to Use i18n Yet</h2>
+<h2 id="when-not-to-use-i18n-yet">When Not to Use i18n Yet</h2>
 <pre><code>Avoid i18n at first when:
 - The site is still changing constantly
 - You only have one or two test translations
@@ -60,7 +68,7 @@ Readers choose their language</code></pre>
 - You are still learning Starlight basics</code></pre>
 </section>
 <section>
-<h2>Basic Language Folder Concept</h2>
+<h2 id="basic-language-folder-concept">Basic Language Folder Concept</h2>
 <pre><code>src/content/docs/
   index.md
   getting-started.md
@@ -73,7 +81,7 @@ Readers choose their language</code></pre>
 <p>The exact setup depends on your configuration, but the concept is the same: each language needs translated content and navigation.</p>
 </section>
 <section>
-<h2>Locale Planning</h2>
+<h2 id="locale-planning">Locale Planning</h2>
 <pre><code>Examples:
 en     English
 en-US  English, United States
@@ -83,7 +91,7 @@ ja     Japanese</code></pre>
 <p>Use simple language codes unless you need regional differences.</p>
 </section>
 <section>
-<h2>Translated Metadata</h2>
+<h2 id="translated-metadata">Translated Metadata</h2>
 <pre><code>---
 title: "Introducción"
 description: "Aprende cómo usar este sitio de documentación."
@@ -91,7 +99,7 @@ description: "Aprende cómo usar este sitio de documentación."
 <p>Do not translate only the body while leaving all page metadata in the original language.</p>
 </section>
 <section>
-<h2>Translated Navigation</h2>
+<h2 id="translated-navigation">Translated Navigation</h2>
 <pre><code>English:
 Start Here
 Lessons
@@ -103,7 +111,7 @@ Lecciones
 Referencia</code></pre>
 </section>
 <section>
-<h2>Fallback Content</h2>
+<h2 id="fallback-content">Fallback Content</h2>
 <p>Fallback content means showing a default-language page when a translation is missing. This can be useful, but it can also confuse readers if not clearly signposted.</p>
 <pre><code>Good practice:
 - Translate core navigation first
@@ -111,11 +119,11 @@ Referencia</code></pre>
 - Clearly indicate when content is not yet translated</code></pre>
 </section>
 <section>
-<h2>Right-to-Left Languages</h2>
+<h2 id="right-to-left-languages">Right-to-Left Languages</h2>
 <p>Some languages read right-to-left. If your site supports languages such as Arabic or Hebrew, check layout, sidebar behavior, code blocks, tables, and diagrams carefully.</p>
 </section>
 <section>
-<h2>Worldbuilding Uses</h2>
+<h2 id="worldbuilding-uses">Worldbuilding Uses</h2>
 <p>A world bible can use i18n in two ways:</p>
 <ul>
 <li><strong>Real multilingual support</strong>: the site is available in real-world languages.</li>
@@ -123,7 +131,7 @@ Referencia</code></pre>
 </ul>
 </section>
 <section>
-<h2>Lesson Site Uses</h2>
+<h2 id="lesson-site-uses">Lesson Site Uses</h2>
 <ol>
 <li>Homepage.</li>
 <li>Getting started page.</li>
@@ -133,7 +141,7 @@ Referencia</code></pre>
 </ol>
 </section>
 <section>
-<h2>i18n Maintenance Checklist</h2>
+<h2 id="i18n-maintenance-checklist">i18n Maintenance Checklist</h2>
 <pre><code>[ ] Which languages are supported?
 [ ] Who maintains translations?
 [ ] Are titles translated?
@@ -144,13 +152,17 @@ Referencia</code></pre>
 [ ] Is missing translation behavior clear?</code></pre>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Do not add languages casually.
 Translate the reader path first.
 Keep navigation understandable.
 Keep translations updated.
 A half-maintained multilingual site can be worse than a clear single-language site.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_accessibility_checklist_tutorial.html">← Accessibility Checklist</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="starlight_lesson_library_site_tutorial.html">Lesson Library Capstone →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

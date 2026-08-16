@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Starlight RPG Character Sheet System Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Starlight RPG Character Sheet System Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Starlight RPG Character Sheet System Tutorial</h1>
 <p>A practical guide to building RPG-style character sheets in Astro and Starlight using YAML frontmatter, Markdown/MDX pages, schemas, reusable components, and generated indexes.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Capstone Projects</a></li><li aria-current="page">RPG Character Sheet System</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-building">What You Are Building</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#recommended-character-file-structure">Recommended Character File Structure</a></li><li><a class="toc-link" href="#basic-character-frontmatter">Basic Character Frontmatter</a></li><li><a class="toc-link" href="#rpg-style-attribute-frontmatter">RPG-Style Attribute Frontmatter</a></li><li><a class="toc-link" href="#character-page-body-template">Character Page Body Template</a></li><li><a class="toc-link" href="#character-schema">Character Schema</a></li><li><a class="toc-link" href="#characterstats-component">CharacterStats Component</a></li><li><a class="toc-link" href="#charactercard-component">CharacterCard Component</a></li><li><a class="toc-link" href="#dynamic-character-page">Dynamic Character Page</a></li><li><a class="toc-link" href="#character-index-page">Character Index Page</a></li><li><a class="toc-link" href="#filtering-characters">Filtering Characters</a></li><li><a class="toc-link" href="#css-for-character-sheets">CSS for Character Sheets</a></li><li><a class="toc-link" href="#optional-derived-stats">Optional Derived Stats</a></li><li><a class="toc-link" href="#character-relationships">Character Relationships</a></li><li><a class="toc-link" href="#build-checklist">Build Checklist</a></li><li><a class="toc-link" href="#common-mistakes">Common Mistakes</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Building</h2>
+<h2 id="what-you-are-building">What You Are Building</h2>
 <p>This tutorial shows how to build a character-sheet system for a world bible, campaign guide, fiction project, or RPG-inspired setting.</p>
 <p>The system includes:</p>
 <ul>
@@ -37,7 +45,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <pre><code>Character Markdown or MDX file
   ↓
 YAML frontmatter stores structured sheet data
@@ -52,7 +60,7 @@ Indexes list and filter characters</code></pre>
 <p>The main idea is to separate structured data from prose. Stats, roles, factions, tags, and status belong in frontmatter. Background, personality, relationships, and arc belong in the page body.</p>
 </section>
 <section>
-<h2>Recommended Character File Structure</h2>
+<h2 id="recommended-character-file-structure">Recommended Character File Structure</h2>
 <pre><code>src/content/characters/
   character-template.md
   example-character.md
@@ -69,7 +77,7 @@ src/components/
   CharacterSheet.astro</code></pre>
 </section>
 <section>
-<h2>Basic Character Frontmatter</h2>
+<h2 id="basic-character-frontmatter">Basic Character Frontmatter</h2>
 <pre><code>---
 title: "Example Character"
 description: "A sample character used to test the character sheet system."
@@ -86,7 +94,7 @@ tags:
 ---</code></pre>
 </section>
 <section>
-<h2>RPG-Style Attribute Frontmatter</h2>
+<h2 id="rpg-style-attribute-frontmatter">RPG-Style Attribute Frontmatter</h2>
 <pre><code>---
 title: "Example Character"
 role: "Investigator"
@@ -109,7 +117,7 @@ skills:
 <p>This uses a familiar six-attribute structure, but you can rename or replace the attributes for your own system.</p>
 </section>
 <section>
-<h2>Character Page Body Template</h2>
+<h2 id="character-page-body-template">Character Page Body Template</h2>
 <pre><code># Example Character
 
 ## Identity
@@ -138,7 +146,7 @@ skills:
 <p>The frontmatter is the sheet data. The body is the character article.</p>
 </section>
 <section>
-<h2>Character Schema</h2>
+<h2 id="character-schema">Character Schema</h2>
 <p>Create or edit:</p>
 <pre><code>src/content.config.ts</code></pre>
 <pre><code>import { defineCollection, z } from 'astro:content';
@@ -170,7 +178,7 @@ export const collections = { characters };</code></pre>
 <p>The schema catches missing or incorrectly typed character data.</p>
 </section>
 <section>
-<h2>CharacterStats Component</h2>
+<h2 id="characterstats-component">CharacterStats Component</h2>
 <p>Create:</p>
 <pre><code>src/components/CharacterStats.astro</code></pre>
 <pre><code>---
@@ -198,7 +206,7 @@ const { attributes } = Astro.props;
 )}</code></pre>
 </section>
 <section>
-<h2>CharacterCard Component</h2>
+<h2 id="charactercard-component">CharacterCard Component</h2>
 <p>Create:</p>
 <pre><code>src/components/CharacterCard.astro</code></pre>
 <pre><code>---
@@ -219,7 +227,7 @@ const { character, href } = Astro.props;
 &lt;/article&gt;</code></pre>
 </section>
 <section>
-<h2>Dynamic Character Page</h2>
+<h2 id="dynamic-character-page">Dynamic Character Page</h2>
 <p>Create:</p>
 <pre><code>src/pages/characters/[...slug].astro</code></pre>
 <pre><code>---
@@ -270,7 +278,7 @@ const { Content } = await render(character);
 &lt;/article&gt;</code></pre>
 </section>
 <section>
-<h2>Character Index Page</h2>
+<h2 id="character-index-page">Character Index Page</h2>
 <p>Create:</p>
 <pre><code>src/pages/characters/index.astro</code></pre>
 <pre><code>---
@@ -295,7 +303,7 @@ const sortedCharacters = characters.sort((a, b) =&gt; {
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Filtering Characters</h2>
+<h2 id="filtering-characters">Filtering Characters</h2>
 <p>Filter by region:</p>
 <pre><code>const europeCharacters = characters.filter((character) =&gt; {
   return character.data.region === 'Europe';
@@ -310,7 +318,7 @@ const sortedCharacters = characters.sort((a, b) =&gt; {
 });</code></pre>
 </section>
 <section>
-<h2>CSS for Character Sheets</h2>
+<h2 id="css-for-character-sheets">CSS for Character Sheets</h2>
 <pre><code>.character-grid {
   display: grid;
   gap: 1rem;
@@ -332,7 +340,7 @@ const sortedCharacters = characters.sort((a, b) =&gt; {
 }</code></pre>
 </section>
 <section>
-<h2>Optional Derived Stats</h2>
+<h2 id="optional-derived-stats">Optional Derived Stats</h2>
 <p>You can calculate derived values in a component.</p>
 <pre><code>---
 const { attributes } = Astro.props;
@@ -342,7 +350,7 @@ const initiative = attributes ? Math.floor((attributes.dexterity - 10) / 2) : nu
 <p>Derived stats are useful for RPG-inspired sheets, but keep the rules simple and well documented.</p>
 </section>
 <section>
-<h2>Character Relationships</h2>
+<h2 id="character-relationships">Character Relationships</h2>
 <p>For simple projects, relationships can be prose:</p>
 <pre><code>## Relationships
 
@@ -359,7 +367,7 @@ const initiative = attributes ? Math.floor((attributes.dexterity - 10) / 2) : nu
     - "Example Enemy"</code></pre>
 </section>
 <section>
-<h2>Build Checklist</h2>
+<h2 id="build-checklist">Build Checklist</h2>
 <pre><code>[ ] Character collection exists
 [ ] Character schema validates required fields
 [ ] Character template exists
@@ -372,7 +380,7 @@ const initiative = attributes ? Math.floor((attributes.dexterity - 10) / 2) : nu
 [ ] npm run build succeeds</code></pre>
 </section>
 <section>
-<h2>Common Mistakes</h2>
+<h2 id="common-mistakes">Common Mistakes</h2>
 <h3>Putting everything in the body</h3>
 <p>Stats, tags, roles, regions, and statuses are better in frontmatter so they can be sorted and filtered.</p>
 <h3>Overcomplicating the first schema</h3>
@@ -383,7 +391,7 @@ const initiative = attributes ? Math.floor((attributes.dexterity - 10) / 2) : nu
 <p>The character system becomes much more useful when readers can browse all characters in one place.</p>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Use frontmatter for sheet data.
 Use Markdown body for story and personality.
 Use schemas for consistency.
@@ -391,6 +399,10 @@ Use components for repeated visual blocks.
 Use indexes for browsing.
 Use filters for worldbuilding scale.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_world_factbook_world_bible_tutorial.html">← World Factbook to World Bible</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="vercel_basic_how_to_tutorial.html">Vercel Basics →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

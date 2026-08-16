@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Starlight Mermaid Diagrams Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Starlight Mermaid Diagrams Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Starlight Mermaid Diagrams Tutorial</h1>
 <p>A practical guide to adding Mermaid diagrams to Astro and Starlight pages, with safe syntax patterns for lesson flowcharts, worldbuilding relationships, timelines, and troubleshooting.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Assets &amp; Features</a></li><li aria-current="page">Mermaid Diagrams</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#why-use-mermaid">Why Use Mermaid?</a></li><li><a class="toc-link" href="#basic-setup-option">Basic Setup Option</a></li><li><a class="toc-link" href="#basic-flowchart">Basic Flowchart</a></li><li><a class="toc-link" href="#vertical-vs-horizontal">Vertical vs Horizontal</a></li><li><a class="toc-link" href="#safe-node-text">Safe Node Text</a></li><li><a class="toc-link" href="#decision-flowchart">Decision Flowchart</a></li><li><a class="toc-link" href="#worldbuilding-relationship-diagram">Worldbuilding Relationship Diagram</a></li><li><a class="toc-link" href="#lesson-workflow-diagram">Lesson Workflow Diagram</a></li><li><a class="toc-link" href="#timeline-diagram">Timeline Diagram</a></li><li><a class="toc-link" href="#sequence-diagram">Sequence Diagram</a></li><li><a class="toc-link" href="#adding-styling">Adding Styling</a></li><li><a class="toc-link" href="#common-mermaid-mistakes">Common Mermaid Mistakes</a></li><li><a class="toc-link" href="#mermaid-in-markdown-vs-mdx">Mermaid in Markdown vs MDX</a></li><li><a class="toc-link" href="#good-diagram-design">Good Diagram Design</a></li><li><a class="toc-link" href="#troubleshooting-checklist">Troubleshooting Checklist</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>Mermaid is a text-based diagram tool. You write diagram code, and Mermaid renders it as a visual diagram.</p>
 <ul>
 <li>How Mermaid fits into Astro/Starlight documentation.</li>
@@ -33,7 +41,7 @@
 </ul>
 </section>
 <section>
-<h2>Why Use Mermaid?</h2>
+<h2 id="why-use-mermaid">Why Use Mermaid?</h2>
 <p>Mermaid is useful when you want diagrams that are easy to edit as text.</p>
 <pre><code>Text diagram source
   ↓
@@ -43,7 +51,7 @@ Visual flowchart, timeline, or relationship map</code></pre>
 <p>For tutorial sites, Mermaid can explain workflows. For world bible sites, Mermaid can show factions, relationships, timelines, and political structures.</p>
 </section>
 <section>
-<h2>Basic Setup Option</h2>
+<h2 id="basic-setup-option">Basic Setup Option</h2>
 <p>A simple way to support Mermaid is to load Mermaid on pages where you need diagrams.</p>
 <pre><code>&lt;script type="module"&gt;
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -59,7 +67,7 @@ graph TD
 <p>For a production Starlight site, consider moving the setup into a reusable component or layout.</p>
 </section>
 <section>
-<h2>Basic Flowchart</h2>
+<h2 id="basic-flowchart">Basic Flowchart</h2>
 <p>Use <code>graph TD</code> for a vertical top-down chart.</p>
 <pre><code>&lt;div class="mermaid"&gt;
 graph TD
@@ -76,7 +84,7 @@ graph LR
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Vertical vs Horizontal</h2>
+<h2 id="vertical-vs-horizontal">Vertical vs Horizontal</h2>
 <table>
 <thead><tr><th>Direction</th><th>Syntax</th><th>Best For</th></tr></thead>
 <tbody>
@@ -86,7 +94,7 @@ graph LR
 </table>
 </section>
 <section>
-<h2>Safe Node Text</h2>
+<h2 id="safe-node-text">Safe Node Text</h2>
 <p>Mermaid can break when node text contains complex HTML, quotes, or special characters. Keep node text simple.</p>
 <pre><code>Safer:
 A[Check dependency array]
@@ -96,7 +104,7 @@ A[Check "dependency array" with &lt;br/&gt; HTML]</code></pre>
 <p>If a diagram fails, simplify the text first. Then add details back slowly.</p>
 </section>
 <section>
-<h2>Decision Flowchart</h2>
+<h2 id="decision-flowchart">Decision Flowchart</h2>
 <pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Need a page?] --&gt; B{Mostly writing?}
@@ -107,7 +115,7 @@ graph TD
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Worldbuilding Relationship Diagram</h2>
+<h2 id="worldbuilding-relationship-diagram">Worldbuilding Relationship Diagram</h2>
 <pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[House Valoire] --&gt; B[Aurelian Valoire VI]
@@ -118,7 +126,7 @@ graph TD
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Lesson Workflow Diagram</h2>
+<h2 id="lesson-workflow-diagram">Lesson Workflow Diagram</h2>
 <pre><code>&lt;div class="mermaid"&gt;
 graph TD
   A[Read Lesson] --&gt; B[Follow Example]
@@ -130,7 +138,7 @@ graph TD
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Timeline Diagram</h2>
+<h2 id="timeline-diagram">Timeline Diagram</h2>
 <p>Timeline diagrams can be useful, but keep entries short.</p>
 <pre><code>&lt;div class="mermaid"&gt;
 timeline
@@ -142,7 +150,7 @@ timeline
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Sequence Diagram</h2>
+<h2 id="sequence-diagram">Sequence Diagram</h2>
 <pre><code>&lt;div class="mermaid"&gt;
 sequenceDiagram
   participant User
@@ -155,7 +163,7 @@ sequenceDiagram
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Adding Styling</h2>
+<h2 id="adding-styling">Adding Styling</h2>
 <p>Mermaid style lines can work, but they are a common source of syntax mistakes. Start with an unstyled diagram first.</p>
 <pre><code>&lt;div class="mermaid"&gt;
 graph TD
@@ -166,7 +174,7 @@ graph TD
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Common Mermaid Mistakes</h2>
+<h2 id="common-mermaid-mistakes">Common Mermaid Mistakes</h2>
 <h3>HTML inside node labels</h3>
 <pre><code>Risky:
 A[Line one&lt;br/&gt;Line two]
@@ -187,7 +195,7 @@ Safer:
 A[Short label]</code></pre>
 </section>
 <section>
-<h2>Mermaid in Markdown vs MDX</h2>
+<h2 id="mermaid-in-markdown-vs-mdx">Mermaid in Markdown vs MDX</h2>
 <p>In Markdown, simple HTML blocks are usually enough:</p>
 <pre><code>&lt;div class="mermaid"&gt;
 graph TD
@@ -196,7 +204,7 @@ graph TD
 <p>In MDX, be more careful because MDX parses JSX-like syntax. If raw HTML causes issues, use a reusable component.</p>
 </section>
 <section>
-<h2>Good Diagram Design</h2>
+<h2 id="good-diagram-design">Good Diagram Design</h2>
 <ul>
 <li>Keep labels short.</li>
 <li>Use paragraphs below diagrams for details.</li>
@@ -207,7 +215,7 @@ graph TD
 </ul>
 </section>
 <section>
-<h2>Troubleshooting Checklist</h2>
+<h2 id="troubleshooting-checklist">Troubleshooting Checklist</h2>
 <pre><code>[ ] Does a very simple Mermaid diagram render?
 [ ] Is the Mermaid script loading?
 [ ] Are node labels short?
@@ -218,7 +226,7 @@ graph TD
 [ ] Does the diagram work outside MDX first?</code></pre>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Start with plain Mermaid.
 Keep labels simple.
 Avoid quotes and HTML in nodes.
@@ -226,6 +234,10 @@ Use graph TD for step-by-step lessons.
 Use graph LR for process pipelines.
 Add styling only after the diagram works.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_asset_management_tutorial.html">← Asset Management</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_accessibility_checklist_tutorial.html">Accessibility Checklist →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Dynamic Routes and Collection Indexes Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Dynamic Routes and Collection Indexes Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Dynamic Routes and Collection Indexes Tutorial</h1>
 <p>A practical guide to generating pages and indexes from Astro Content Collections using <code>getCollection()</code>, <code>getStaticPaths()</code>, and <code>render()</code>.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Content Architecture</a></li><li aria-current="page">Dynamic Routes &amp; Indexes</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#why-dynamic-routes-matter">Why Dynamic Routes Matter</a></li><li><a class="toc-link" href="#example-content-structure">Example Content Structure</a></li><li><a class="toc-link" href="#example-content-config-ts">Example content.config.ts</a></li><li><a class="toc-link" href="#create-a-lesson-entry">Create a Lesson Entry</a></li><li><a class="toc-link" href="#create-a-lesson-index-page">Create a Lesson Index Page</a></li><li><a class="toc-link" href="#create-dynamic-lesson-pages">Create Dynamic Lesson Pages</a></li><li><a class="toc-link" href="#how-getstaticpaths-works">How getStaticPaths Works</a></li><li><a class="toc-link" href="#understanding-slug-astro">Understanding [...slug].astro</a></li><li><a class="toc-link" href="#create-a-character-index-page">Create a Character Index Page</a></li><li><a class="toc-link" href="#create-dynamic-character-pages">Create Dynamic Character Pages</a></li><li><a class="toc-link" href="#sorting-and-filtering-entries">Sorting and Filtering Entries</a></li><li><a class="toc-link" href="#create-a-tag-index">Create a Tag Index</a></li><li><a class="toc-link" href="#generate-tag-pages">Generate Tag Pages</a></li><li><a class="toc-link" href="#dynamic-routes-and-starlight">Dynamic Routes and Starlight</a></li><li><a class="toc-link" href="#common-mistakes">Common Mistakes</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains how to move from hand-written pages to generated pages and indexes.</p>
 <ul>
 <li>Load content entries with <code>getCollection()</code>.</li>
@@ -34,7 +42,7 @@
 </ul>
 </section>
 <section>
-<h2>Why Dynamic Routes Matter</h2>
+<h2 id="why-dynamic-routes-matter">Why Dynamic Routes Matter</h2>
 <p>If you only have five pages, writing each page by hand is fine. If you have dozens or hundreds of lessons, characters, regions, or reference entries, dynamic routes help you generate consistent pages from content files.</p>
 <pre><code>Content files
   ↓
@@ -47,7 +55,7 @@ Generated pages
 Index pages and filters</code></pre>
 </section>
 <section>
-<h2>Example Content Structure</h2>
+<h2 id="example-content-structure">Example Content Structure</h2>
 <pre><code>src/content/
   lessons/
     markdown-basics.md
@@ -61,7 +69,7 @@ Index pages and filters</code></pre>
     austral-confluence.md</code></pre>
 </section>
 <section>
-<h2>Example content.config.ts</h2>
+<h2 id="example-content-config-ts">Example content.config.ts</h2>
 <pre><code>import { defineCollection, z } from 'astro:content';
 
 const lessons = defineCollection({
@@ -93,7 +101,7 @@ export const collections = {
 };</code></pre>
 </section>
 <section>
-<h2>Create a Lesson Entry</h2>
+<h2 id="create-a-lesson-entry">Create a Lesson Entry</h2>
 <pre><code>src/content/lessons/markdown-basics.md</code></pre>
 <pre><code>---
 title: "Markdown Basics"
@@ -111,7 +119,7 @@ draft: false
 Markdown is a simple writing format for structured content.</code></pre>
 </section>
 <section>
-<h2>Create a Lesson Index Page</h2>
+<h2 id="create-a-lesson-index-page">Create a Lesson Index Page</h2>
 <p>Create:</p>
 <pre><code>src/pages/lessons/index.astro</code></pre>
 <pre><code>---
@@ -140,7 +148,7 @@ const sortedLessons = lessons.sort((a, b) =&gt; {
 &lt;/ul&gt;</code></pre>
 </section>
 <section>
-<h2>Create Dynamic Lesson Pages</h2>
+<h2 id="create-dynamic-lesson-pages">Create Dynamic Lesson Pages</h2>
 <p>Create:</p>
 <pre><code>src/pages/lessons/[...slug].astro</code></pre>
 <pre><code>---
@@ -168,7 +176,7 @@ const { Content } = await render(lesson);
 &lt;/article&gt;</code></pre>
 </section>
 <section>
-<h2>How getStaticPaths Works</h2>
+<h2 id="how-getstaticpaths-works">How getStaticPaths Works</h2>
 <p><code>getStaticPaths()</code> tells Astro which pages to create at build time.</p>
 <pre><code>return lessons.map((lesson) =&gt; ({
   params: { slug: lesson.id },
@@ -177,7 +185,7 @@ const { Content } = await render(lesson);
 <p>The <code>params</code> define the URL. The <code>props</code> pass the entry into the page template.</p>
 </section>
 <section>
-<h2>Understanding [...slug].astro</h2>
+<h2 id="understanding-slug-astro">Understanding [...slug].astro</h2>
 <p>The file name <code>[...slug].astro</code> creates a dynamic route that can handle nested paths.</p>
 <pre><code>src/content/lessons/markdown-basics.md
   → /lessons/markdown-basics/
@@ -186,7 +194,7 @@ src/content/lessons/beginner/yaml-basics.md
   → /lessons/beginner/yaml-basics/</code></pre>
 </section>
 <section>
-<h2>Create a Character Index Page</h2>
+<h2 id="create-a-character-index-page">Create a Character Index Page</h2>
 <p>Create:</p>
 <pre><code>src/pages/characters/index.astro</code></pre>
 <pre><code>---
@@ -217,7 +225,7 @@ const activeCharacters = characters
 &lt;/div&gt;</code></pre>
 </section>
 <section>
-<h2>Create Dynamic Character Pages</h2>
+<h2 id="create-dynamic-character-pages">Create Dynamic Character Pages</h2>
 <p>Create:</p>
 <pre><code>src/pages/characters/[...slug].astro</code></pre>
 <pre><code>---
@@ -253,7 +261,7 @@ const { Content } = await render(character);
 &lt;/article&gt;</code></pre>
 </section>
 <section>
-<h2>Sorting and Filtering Entries</h2>
+<h2 id="sorting-and-filtering-entries">Sorting and Filtering Entries</h2>
 <pre><code>// Sort lessons by order
 const sortedLessons = lessons.sort((a, b) =&gt; a.data.order - b.data.order);
 
@@ -269,7 +277,7 @@ const beginnerLessons = lessons.filter((lesson) =&gt; lesson.data.level === 'beg
 const markdownLessons = lessons.filter((lesson) =&gt; lesson.data.tags.includes('markdown'));</code></pre>
 </section>
 <section>
-<h2>Create a Tag Index</h2>
+<h2 id="create-a-tag-index">Create a Tag Index</h2>
 <pre><code>const lessons = await getCollection('lessons');
 
 const tags = [...new Set(
@@ -285,7 +293,7 @@ const tags = [...new Set(
 &lt;/ul&gt;</code></pre>
 </section>
 <section>
-<h2>Generate Tag Pages</h2>
+<h2 id="generate-tag-pages">Generate Tag Pages</h2>
 <p>Create:</p>
 <pre><code>src/pages/tags/[tag].astro</code></pre>
 <pre><code>---
@@ -324,7 +332,7 @@ const lessons = await getCollection('lessons', ({ data }) =&gt; {
 &lt;/ul&gt;</code></pre>
 </section>
 <section>
-<h2>Dynamic Routes and Starlight</h2>
+<h2 id="dynamic-routes-and-starlight">Dynamic Routes and Starlight</h2>
 <p>Starlight documentation pages normally live in <code>src/content/docs/</code>. Custom dynamic routes live in <code>src/pages/</code>. You can use both in the same project.</p>
 <pre><code>src/content/docs/
   getting-started.md
@@ -338,7 +346,7 @@ src/pages/characters/
   [...slug].astro</code></pre>
 </section>
 <section>
-<h2>Common Mistakes</h2>
+<h2 id="common-mistakes">Common Mistakes</h2>
 <h3>Wrong collection name</h3>
 <pre><code>Bad:
 getCollection('lesson')
@@ -351,7 +359,7 @@ getCollection('lessons')</code></pre>
 <pre><code>Check that your href matches the route created by your dynamic page.</code></pre>
 </section>
 <section>
-<h2>Cheat Sheet</h2>
+<h2 id="cheat-sheet">Cheat Sheet</h2>
 <table>
 <thead><tr><th>Need</th><th>Use</th></tr></thead>
 <tbody>
@@ -366,7 +374,7 @@ getCollection('lessons')</code></pre>
 </table>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Use collections for repeated content.
 Use index pages to list entries.
 Use dynamic routes to generate entry pages.
@@ -374,6 +382,10 @@ Use schemas to keep data consistent.
 Use filters for categories and tags.
 Use render() to display Markdown/MDX body content.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_tags_categories_filtering_tutorial.html">← Tags, Categories &amp; Filtering</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_asset_management_tutorial.html">Asset Management →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

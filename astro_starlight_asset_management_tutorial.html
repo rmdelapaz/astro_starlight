@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Starlight Asset Management Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Starlight Asset Management Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Starlight Asset Management Tutorial</h1>
 <p>A practical guide to organizing images, maps, diagrams, downloads, SVG files, screenshots, icons, and other assets in Astro and Starlight projects.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Assets &amp; Features</a></li><li aria-current="page">Asset Management</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#two-main-asset-locations">Two Main Asset Locations</a></li><li><a class="toc-link" href="#using-the-public-folder">Using the public Folder</a></li><li><a class="toc-link" href="#good-public-folder-structure">Good public Folder Structure</a></li><li><a class="toc-link" href="#referencing-images-in-markdown">Referencing Images in Markdown</a></li><li><a class="toc-link" href="#referencing-downloads">Referencing Downloads</a></li><li><a class="toc-link" href="#using-src-assets">Using src/assets</a></li><li><a class="toc-link" href="#which-folder-should-you-use">Which Folder Should You Use?</a></li><li><a class="toc-link" href="#world-bible-asset-structure">World Bible Asset Structure</a></li><li><a class="toc-link" href="#lesson-site-asset-structure">Lesson Site Asset Structure</a></li><li><a class="toc-link" href="#common-broken-path-mistakes">Common Broken Path Mistakes</a></li><li><a class="toc-link" href="#using-svg-files">Using SVG Files</a></li><li><a class="toc-link" href="#images-in-mdx">Images in MDX</a></li><li><a class="toc-link" href="#deployment-checklist-for-assets">Deployment Checklist for Assets</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains how to manage assets in an Astro Starlight site. Assets include images, maps, screenshots, PDFs, SVG diagrams, downloadable documents, icons, audio, and video.</p>
 <ul>
 <li><code>public/</code> stores files copied directly into the final site.</li>
@@ -33,7 +41,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <pre><code>Asset file
   ↓
 Choose where it belongs
@@ -48,7 +56,7 @@ Deploy</code></pre>
 <p>Most asset problems come from placing files in the wrong folder or using a path that only works on your local computer.</p>
 </section>
 <section>
-<h2>Two Main Asset Locations</h2>
+<h2 id="two-main-asset-locations">Two Main Asset Locations</h2>
 <table>
 <thead><tr><th>Folder</th><th>Best For</th><th>How You Reference It</th></tr></thead>
 <tbody>
@@ -58,7 +66,7 @@ Deploy</code></pre>
 </table>
 </section>
 <section>
-<h2>Using the public Folder</h2>
+<h2 id="using-the-public-folder">Using the public Folder</h2>
 <p>The <code>public/</code> folder is copied directly into the final site. If you place a file here:</p>
 <pre><code>public/images/world-map.png</code></pre>
 <p>You reference it like this:</p>
@@ -66,7 +74,7 @@ Deploy</code></pre>
 <p>The word <code>public</code> does not appear in the URL.</p>
 </section>
 <section>
-<h2>Good public Folder Structure</h2>
+<h2 id="good-public-folder-structure">Good public Folder Structure</h2>
 <pre><code>public/
   favicon.png
   images/
@@ -87,7 +95,7 @@ Deploy</code></pre>
     printable-character-sheet.pdf</code></pre>
 </section>
 <section>
-<h2>Referencing Images in Markdown</h2>
+<h2 id="referencing-images-in-markdown">Referencing Images in Markdown</h2>
 <pre><code>![Deployment settings screenshot](/images/screenshots/deploy-settings.png)</code></pre>
 <p>Use descriptive alt text:</p>
 <pre><code>Good:
@@ -97,14 +105,14 @@ Weak:
 ![image](/images/screenshots/vercel-settings.png)</code></pre>
 </section>
 <section>
-<h2>Referencing Downloads</h2>
+<h2 id="referencing-downloads">Referencing Downloads</h2>
 <p>If you place a PDF in:</p>
 <pre><code>public/downloads/world-bible-template.pdf</code></pre>
 <p>Link to it like this:</p>
 <pre><code>[Download the World Bible Template](/downloads/world-bible-template.pdf)</code></pre>
 </section>
 <section>
-<h2>Using src/assets</h2>
+<h2 id="using-src-assets">Using src/assets</h2>
 <p>The <code>src/assets/</code> folder is for assets that are part of your source code and may be imported by Astro components.</p>
 <pre><code>src/assets/
   logo.png
@@ -120,7 +128,7 @@ import logo from '../assets/logo.png';
 &lt;img src={logo.src} alt="Site logo"&gt;</code></pre>
 </section>
 <section>
-<h2>Which Folder Should You Use?</h2>
+<h2 id="which-folder-should-you-use">Which Folder Should You Use?</h2>
 <table>
 <thead><tr><th>Need</th><th>Use</th></tr></thead>
 <tbody>
@@ -133,7 +141,7 @@ import logo from '../assets/logo.png';
 </table>
 </section>
 <section>
-<h2>World Bible Asset Structure</h2>
+<h2 id="world-bible-asset-structure">World Bible Asset Structure</h2>
 <pre><code>public/
   images/
     maps/
@@ -155,7 +163,7 @@ import logo from '../assets/logo.png';
     faction-template.pdf</code></pre>
 </section>
 <section>
-<h2>Lesson Site Asset Structure</h2>
+<h2 id="lesson-site-asset-structure">Lesson Site Asset Structure</h2>
 <pre><code>public/
   images/
     screenshots/
@@ -171,7 +179,7 @@ import logo from '../assets/logo.png';
     deployment-checklist.pdf</code></pre>
 </section>
 <section>
-<h2>Common Broken Path Mistakes</h2>
+<h2 id="common-broken-path-mistakes">Common Broken Path Mistakes</h2>
 <h3>Using a local computer path</h3>
 <pre><code>Bad:
 &lt;img src="C:\Users\Ray\Desktop\map.png"&gt;
@@ -192,19 +200,19 @@ Usually simpler:
 ![Map](/images/map.png)</code></pre>
 </section>
 <section>
-<h2>Using SVG Files</h2>
+<h2 id="using-svg-files">Using SVG Files</h2>
 <p>SVG files are useful for icons, diagrams, faction symbols, logos, and simple maps.</p>
 <pre><code>public/images/diagrams/site-flow.svg</code></pre>
 <pre><code>![Site flow diagram](/images/diagrams/site-flow.svg)</code></pre>
 </section>
 <section>
-<h2>Images in MDX</h2>
+<h2 id="images-in-mdx">Images in MDX</h2>
 <pre><code>![Character portrait](/images/characters/example-character.png)</code></pre>
 <p>You can also use HTML in MDX:</p>
 <pre><code>&lt;img src="/images/characters/example-character.png" alt="Example character portrait" /&gt;</code></pre>
 </section>
 <section>
-<h2>Deployment Checklist for Assets</h2>
+<h2 id="deployment-checklist-for-assets">Deployment Checklist for Assets</h2>
 <pre><code>[ ] All images are inside public/ or src/assets/
 [ ] No local computer paths are used
 [ ] public/ paths do not include the word public
@@ -215,13 +223,17 @@ Usually simpler:
 [ ] npm run preview shows working assets</code></pre>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Use public/ when you want a simple URL.
 Use src/assets/ when an Astro component imports the file.
 Use root paths for public files.
 Never use local computer paths.
 Always test with npm run build and npm run preview.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_dynamic_routes_collection_indexes_tutorial.html">← Dynamic Routes &amp; Indexes</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_mermaid_diagrams_tutorial.html">Mermaid Diagrams →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

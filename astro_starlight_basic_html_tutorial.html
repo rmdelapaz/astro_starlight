@@ -5,27 +5,35 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro and Starlight Basic Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro and Starlight Basic Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
-<main>
-<h1>Astro and Starlight Basic Tutorial</h1>
+</div>
+</nav>
+
+
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Start Here</a></li><li aria-current="page">Astro + Starlight Basics</li></ol></nav><main class="lesson-content" id="main-content">
+<h1>Astro and Starlight Basic Tutorial</h1><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-building">What You Are Building</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#when-to-use-astro-and-starlight">When to Use Astro and Starlight</a></li><li><a class="toc-link" href="#prerequisites">Prerequisites</a></li><li><a class="toc-link" href="#create-a-new-starlight-project">Create a New Starlight Project</a></li><li><a class="toc-link" href="#alternative-add-starlight-to-an-existing-astro-project">Alternative: Add Starlight to an Existing Astro Project</a></li><li><a class="toc-link" href="#basic-project-structure">Basic Project Structure</a></li><li><a class="toc-link" href="#create-your-first-page">Create Your First Page</a></li><li><a class="toc-link" href="#markdown-basics">Markdown Basics</a></li><li><a class="toc-link" href="#configure-the-site-title-and-sidebar">Configure the Site Title and Sidebar</a></li><li><a class="toc-link" href="#example-sidebar-for-a-lesson-site">Example Sidebar for a Lesson Site</a></li><li><a class="toc-link" href="#example-sidebar-for-a-worldbuilding-site">Example Sidebar for a Worldbuilding Site</a></li><li><a class="toc-link" href="#add-more-pages">Add More Pages</a></li><li><a class="toc-link" href="#use-mdx-when-you-need-components">Use MDX When You Need Components</a></li><li><a class="toc-link" href="#common-commands">Common Commands</a></li><li><a class="toc-link" href="#build-the-site">Build the Site</a></li><li><a class="toc-link" href="#preview-the-built-site">Preview the Built Site</a></li><li><a class="toc-link" href="#deploy-to-netlify">Deploy to Netlify</a></li><li><a class="toc-link" href="#deploy-to-vercel">Deploy to Vercel</a></li><li><a class="toc-link" href="#common-beginner-problems">Common Beginner Problems</a></li><li><a class="toc-link" href="#suggested-lesson-site-structure">Suggested Lesson Site Structure</a></li><li><a class="toc-link" href="#suggested-worldbuilding-site-structure">Suggested Worldbuilding Site Structure</a></li><li><a class="toc-link" href="#practice-exercise">Practice Exercise</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#final-summary">Final Summary</a></li><li><a class="toc-link" href="#sources-and-further-reading">Sources and Further Reading</a></li></ol></nav></details>
 <section>
-<h2>What You Are Building</h2>
+<h2 id="what-you-are-building">What You Are Building</h2>
 <p>This tutorial shows how to create a basic documentation-style website using Astro and Starlight.</p>
 <p>Astro is a framework for building fast, content-focused websites. Starlight is Astro's official documentation framework/theme. Together, they are a good fit for guides, lesson sites, manuals, reference sites, project notes, and worldbuilding-style documentation.</p>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <p>Astro gives you the site-building system. Starlight gives you a ready-made documentation layout with navigation, sidebars, search, Markdown support, and a polished structure.</p>
 <p>A simple mental model:</p>
 <pre><code>Astro = the engine
@@ -34,7 +42,7 @@ Markdown files = your pages
 astro.config.mjs = your control panel</code></pre>
 </section>
 <section>
-<h2>When to Use Astro and Starlight</h2>
+<h2 id="when-to-use-astro-and-starlight">When to Use Astro and Starlight</h2>
 <p>Use Astro and Starlight when your project is mostly written content organized into pages.</p>
 <ul>
 <li>Documentation sites</li>
@@ -49,7 +57,7 @@ astro.config.mjs = your control panel</code></pre>
 <p>Do not choose Starlight first if you are building a complex web app with accounts, dashboards, live editing, and database-heavy workflows. For that kind of project, you may want something like Next.js, SvelteKit, Nuxt, Laravel, Django, or another app-focused framework.</p>
 </section>
 <section>
-<h2>Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites</h2>
 <p>Before starting, install Node.js. You should also be comfortable opening a terminal and running commands.</p>
 <p>Check your installed versions:</p>
 <pre><code>node -v
@@ -57,7 +65,7 @@ npm -v</code></pre>
 <p>If those commands return version numbers, you are ready to continue.</p>
 </section>
 <section>
-<h2>Create a New Starlight Project</h2>
+<h2 id="create-a-new-starlight-project">Create a New Starlight Project</h2>
 <p>The fastest beginner-friendly path is to create a new Astro project from the official Starlight starter.</p>
 <pre><code>npm create astro@latest my-starlight-site -- --template starlight</code></pre>
 <p>Then move into the project folder:</p>
@@ -70,13 +78,13 @@ npm -v</code></pre>
 <pre><code>http://localhost:4321</code></pre>
 </section>
 <section>
-<h2>Alternative: Add Starlight to an Existing Astro Project</h2>
+<h2 id="alternative-add-starlight-to-an-existing-astro-project">Alternative: Add Starlight to an Existing Astro Project</h2>
 <p>If you already have an Astro project, you can add Starlight with:</p>
 <pre><code>npx astro add starlight</code></pre>
 <p>This installs the Starlight integration and updates the project configuration.</p>
 </section>
 <section>
-<h2>Basic Project Structure</h2>
+<h2 id="basic-project-structure">Basic Project Structure</h2>
 <p>A simple Starlight project usually looks similar to this:</p>
 <pre><code>my-starlight-site/
   astro.config.mjs
@@ -94,7 +102,7 @@ npm -v</code></pre>
 <p>That is where your documentation pages live.</p>
 </section>
 <section>
-<h2>Create Your First Page</h2>
+<h2 id="create-your-first-page">Create Your First Page</h2>
 <p>Inside <code>src/content/docs/</code>, create a file named <code>getting-started.md</code>.</p>
 <pre><code>---
 title: Getting Started
@@ -120,7 +128,7 @@ Open the first guide and follow the instructions.</code></pre>
 <p>The top section between the triple dashes is called frontmatter. It stores page metadata such as the title and description.</p>
 </section>
 <section>
-<h2>Markdown Basics</h2>
+<h2 id="markdown-basics">Markdown Basics</h2>
 <p>Most Starlight pages are written in Markdown or MDX.</p>
 <pre><code># Main Heading
 
@@ -139,7 +147,7 @@ console.log('Hello, Astro!');
 <p>Markdown is useful because you can focus on writing content instead of repeating full HTML structure on every page.</p>
 </section>
 <section>
-<h2>Configure the Site Title and Sidebar</h2>
+<h2 id="configure-the-site-title-and-sidebar">Configure the Site Title and Sidebar</h2>
 <p>Open <code>astro.config.mjs</code>. A Starlight configuration may look similar to this:</p>
 <pre><code>import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -162,7 +170,7 @@ export default defineConfig({
 <p>The <code>title</code> controls the site name. The <code>sidebar</code> controls the navigation links shown in the documentation layout.</p>
 </section>
 <section>
-<h2>Example Sidebar for a Lesson Site</h2>
+<h2 id="example-sidebar-for-a-lesson-site">Example Sidebar for a Lesson Site</h2>
 <pre><code>sidebar: [
   {
     label: 'Course Introduction',
@@ -182,7 +190,7 @@ export default defineConfig({
 <p>This works well for tutorials, course notes, software manuals, and structured learning paths.</p>
 </section>
 <section>
-<h2>Example Sidebar for a Worldbuilding Site</h2>
+<h2 id="example-sidebar-for-a-worldbuilding-site">Example Sidebar for a Worldbuilding Site</h2>
 <pre><code>sidebar: [
   {
     label: 'World Bible',
@@ -204,7 +212,7 @@ export default defineConfig({
 <p>Starlight is not specifically a worldbuilding app, but its documentation structure can work very well for a world bible, lore guide, setting reference, or campaign wiki.</p>
 </section>
 <section>
-<h2>Add More Pages</h2>
+<h2 id="add-more-pages">Add More Pages</h2>
 <p>You can organize pages in folders.</p>
 <pre><code>src/content/docs/
   index.mdx
@@ -221,7 +229,7 @@ export default defineConfig({
 <pre><code>/lessons/lesson-one/</code></pre>
 </section>
 <section>
-<h2>Use MDX When You Need Components</h2>
+<h2 id="use-mdx-when-you-need-components">Use MDX When You Need Components</h2>
 <p>Use regular <code>.md</code> files for normal writing. Use <code>.mdx</code> files when you want to mix Markdown with components.</p>
 <p>For example, an MDX page could include a reusable card, diagram component, or custom warning box.</p>
 <pre><code>---
@@ -238,7 +246,7 @@ This is normal Markdown.
 <p>For beginners, start with Markdown. Add MDX later only when you need richer page features.</p>
 </section>
 <section>
-<h2>Common Commands</h2>
+<h2 id="common-commands">Common Commands</h2>
 <table>
 <thead>
 <tr>
@@ -271,7 +279,7 @@ This is normal Markdown.
 </table>
 </section>
 <section>
-<h2>Build the Site</h2>
+<h2 id="build-the-site">Build the Site</h2>
 <p>Before deploying, always test the production build:</p>
 <pre><code>npm run build</code></pre>
 <p>If the build succeeds, Astro creates a production-ready output folder named:</p>
@@ -279,27 +287,27 @@ This is normal Markdown.
 <p>That <code>dist</code> folder is what hosting services publish online.</p>
 </section>
 <section>
-<h2>Preview the Built Site</h2>
+<h2 id="preview-the-built-site">Preview the Built Site</h2>
 <p>After building, preview the production output:</p>
 <pre><code>npm run preview</code></pre>
 <p>This lets you check the final site before deployment.</p>
 </section>
 <section>
-<h2>Deploy to Netlify</h2>
+<h2 id="deploy-to-netlify">Deploy to Netlify</h2>
 <p>For Netlify, the basic settings are:</p>
 <pre><code>Build command: npm run build
 Publish directory: dist</code></pre>
 <p>Connect your GitHub repository to Netlify, set those build options, and deploy.</p>
 </section>
 <section>
-<h2>Deploy to Vercel</h2>
+<h2 id="deploy-to-vercel">Deploy to Vercel</h2>
 <p>For Vercel, import the GitHub repository and use the Astro framework preset when available.</p>
 <pre><code>Build command: npm run build
 Output directory: dist</code></pre>
 <p>Vercel often detects Astro projects automatically, but it is still useful to understand these settings.</p>
 </section>
 <section>
-<h2>Common Beginner Problems</h2>
+<h2 id="common-beginner-problems">Common Beginner Problems</h2>
 <h3>The Site Does Not Start</h3>
 <p>Try reinstalling dependencies:</p>
 <pre><code>npm install
@@ -317,7 +325,7 @@ npm run dev</code></pre>
 <pre><code>![Logo](/images/logo.png)</code></pre>
 </section>
 <section>
-<h2>Suggested Lesson Site Structure</h2>
+<h2 id="suggested-lesson-site-structure">Suggested Lesson Site Structure</h2>
 <pre><code>src/content/docs/
   index.mdx
   getting-started.md
@@ -334,7 +342,7 @@ npm run dev</code></pre>
 <p>This structure is good for beginner programming tutorials, software lessons, and course-style websites.</p>
 </section>
 <section>
-<h2>Suggested Worldbuilding Site Structure</h2>
+<h2 id="suggested-worldbuilding-site-structure">Suggested Worldbuilding Site Structure</h2>
 <pre><code>src/content/docs/
   index.mdx
   world/
@@ -356,7 +364,7 @@ npm run dev</code></pre>
 <p>This structure turns Starlight into a reference archive. It is not a database, but it is very useful for published worldbuilding documentation.</p>
 </section>
 <section>
-<h2>Practice Exercise</h2>
+<h2 id="practice-exercise">Practice Exercise</h2>
 <p>Create a small Starlight site with the following pages:</p>
 <ul>
 <li><code>getting-started.md</code></li>
@@ -370,7 +378,7 @@ npm run preview</code></pre>
 <p>If the preview works, your site is ready to deploy.</p>
 </section>
 <section>
-<h2>Cheat Sheet</h2>
+<h2 id="cheat-sheet">Cheat Sheet</h2>
 <pre><code>Create a new Starlight site:
 npm create astro@latest my-starlight-site -- --template starlight
 
@@ -396,7 +404,7 @@ Deploy output folder:
 dist</code></pre>
 </section>
 <section>
-<h2>Final Summary</h2>
+<h2 id="final-summary">Final Summary</h2>
 <p>Astro and Starlight are excellent when your site is mostly structured written content. Astro provides the framework. Starlight provides the documentation layout. Markdown provides the content format.</p>
 <p>The basic workflow is:</p>
 <pre><code>Create project
@@ -408,7 +416,7 @@ Deploy dist folder</code></pre>
 <p>Once you understand that workflow, you can use Astro and Starlight for tutorials, guides, manuals, worldbuilding references, and other organized content sites.</p>
 </section>
 <section>
-<h2>Sources and Further Reading</h2>
+<h2 id="sources-and-further-reading">Sources and Further Reading</h2>
 <ul>
 <li><a href="https://astro.build/">Astro official website</a></li>
 <li><a href="https://docs.astro.build/en/install-and-setup/">Astro install and setup guide</a></li>
@@ -417,6 +425,10 @@ Deploy dist folder</code></pre>
 <li><a href="https://starlight.astro.build/manual-setup/">Starlight manual setup guide</a></li>
 </ul>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_full_site_setup_tutorial.html">Full Site Setup →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Starlight Homepage and Landing Page Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Starlight Homepage and Landing Page Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Starlight Homepage and Landing Page Tutorial</h1>
 <p>A practical guide to designing a useful homepage for an Astro Starlight tutorial site, documentation site, lesson library, or world bible.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Project Structure</a></li><li aria-current="page">Homepages &amp; Landing Pages</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-building">What You Are Building</a></li><li><a class="toc-link" href="#why-the-homepage-matters">Why the Homepage Matters</a></li><li><a class="toc-link" href="#where-the-homepage-lives">Where the Homepage Lives</a></li><li><a class="toc-link" href="#basic-starlight-homepage">Basic Starlight Homepage</a></li><li><a class="toc-link" href="#use-the-splash-template">Use the Splash Template</a></li><li><a class="toc-link" href="#add-a-hero-section">Add a Hero Section</a></li><li><a class="toc-link" href="#add-hero-action-buttons">Add Hero Action Buttons</a></li><li><a class="toc-link" href="#add-a-hero-image">Add a Hero Image</a></li><li><a class="toc-link" href="#full-homepage-frontmatter-example">Full Homepage Frontmatter Example</a></li><li><a class="toc-link" href="#homepage-content-after-the-hero">Homepage Content After the Hero</a></li><li><a class="toc-link" href="#create-homepage-cards-with-markdown">Create Homepage Cards with Markdown</a></li><li><a class="toc-link" href="#create-a-card-grid-in-markdown">Create a Card Grid in Markdown</a></li><li><a class="toc-link" href="#add-css-for-homepage-cards">Add CSS for Homepage Cards</a></li><li><a class="toc-link" href="#homepage-layout-for-a-tutorial-site">Homepage Layout for a Tutorial Site</a></li><li><a class="toc-link" href="#homepage-layout-for-a-world-bible-site">Homepage Layout for a World Bible Site</a></li><li><a class="toc-link" href="#homepage-layout-for-a-software-documentation-site">Homepage Layout for a Software Documentation Site</a></li><li><a class="toc-link" href="#complete-homepage-example">Complete Homepage Example</a></li><li><a class="toc-link" href="#add-a-banner">Add a Banner</a></li><li><a class="toc-link" href="#disable-or-adjust-the-table-of-contents">Disable or Adjust the Table of Contents</a></li><li><a class="toc-link" href="#homepage-links-and-sidebar-strategy">Homepage Links and Sidebar Strategy</a></li><li><a class="toc-link" href="#good-homepage-writing">Good Homepage Writing</a></li><li><a class="toc-link" href="#homepage-accessibility-checklist">Homepage Accessibility Checklist</a></li><li><a class="toc-link" href="#homepage-seo-and-metadata">Homepage SEO and Metadata</a></li><li><a class="toc-link" href="#testing-the-homepage">Testing the Homepage</a></li><li><a class="toc-link" href="#build-and-preview">Build and Preview</a></li><li><a class="toc-link" href="#common-problems-and-fixes">Common Problems and Fixes</a></li><li><a class="toc-link" href="#homepage-design-patterns">Homepage Design Patterns</a></li><li><a class="toc-link" href="#mini-project-build-the-homepage">Mini Project: Build the Homepage</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li><li><a class="toc-link" href="#what-to-learn-next">What to Learn Next</a></li></ol></nav></details>
 <section>
-<h2>What You Are Building</h2>
+<h2 id="what-you-are-building">What You Are Building</h2>
 <p>In this tutorial, you will create a strong homepage for a Starlight site. The homepage will help readers understand what the site is, where to start, and which major sections they can explore.</p>
 <p>You will learn how to use:</p>
 <ul>
@@ -36,7 +44,7 @@
 </ul>
 </section>
 <section>
-<h2>Why the Homepage Matters</h2>
+<h2 id="why-the-homepage-matters">Why the Homepage Matters</h2>
 <p>A documentation or tutorial site can quickly become large. A good homepage acts like a lobby in a large building. It does not contain every room, but it shows people where the important hallways are.</p>
 <pre><code>Homepage
   ↓
@@ -58,7 +66,7 @@ Reference / Troubleshooting</code></pre>
 </ul>
 </section>
 <section>
-<h2>Where the Homepage Lives</h2>
+<h2 id="where-the-homepage-lives">Where the Homepage Lives</h2>
 <p>In a normal Starlight project, the homepage is usually:</p>
 <pre><code>src/content/docs/index.md</code></pre>
 <p>This file becomes the root page of your documentation site.</p>
@@ -67,7 +75,7 @@ Reference / Troubleshooting</code></pre>
 <p>If your Starlight docs are mounted under another route, the exact URL may differ, but <code>index.md</code> is still the main landing page for that folder.</p>
 </section>
 <section>
-<h2>Basic Starlight Homepage</h2>
+<h2 id="basic-starlight-homepage">Basic Starlight Homepage</h2>
 <p>A simple Starlight homepage can be just a Markdown page:</p>
 <pre><code>---
 title: "Astro Starlight Tutorial Site"
@@ -86,7 +94,7 @@ Welcome to the tutorial site.
 <p>This works, but it still looks like a normal documentation page. For a more polished landing page, use the splash template.</p>
 </section>
 <section>
-<h2>Use the Splash Template</h2>
+<h2 id="use-the-splash-template">Use the Splash Template</h2>
 <p>Starlight pages use the normal documentation layout by default. A landing page usually works better with:</p>
 <pre><code>template: splash</code></pre>
 <p>The splash template gives the page a wider layout without the normal documentation sidebars. It is designed for landing pages and homepages.</p>
@@ -98,7 +106,7 @@ template: splash
 <p>Use <code>template: splash</code> when a page is more like a front door than a reference article.</p>
 </section>
 <section>
-<h2>Add a Hero Section</h2>
+<h2 id="add-a-hero-section">Add a Hero Section</h2>
 <p>The hero section is the large introduction area at the top of the page. It usually includes a title, tagline, and action buttons.</p>
 <pre><code>---
 title: "Astro Starlight Tutorial Site"
@@ -111,7 +119,7 @@ hero:
 <p>The hero should be short and clear. Do not try to explain the whole project in the hero text.</p>
 </section>
 <section>
-<h2>Add Hero Action Buttons</h2>
+<h2 id="add-hero-action-buttons">Add Hero Action Buttons</h2>
 <p>Hero actions are buttons that point readers to important next steps.</p>
 <pre><code>---
 title: "Astro Starlight Tutorial Site"
@@ -135,7 +143,7 @@ hero:
 <p>The first action should be the most important. For most tutorial sites, that is <strong>Start Learning</strong> or <strong>Getting Started</strong>.</p>
 </section>
 <section>
-<h2>Add a Hero Image</h2>
+<h2 id="add-a-hero-image">Add a Hero Image</h2>
 <p>You can add a hero image from your project. For example, place a logo or illustration in:</p>
 <pre><code>src/assets/site-logo.png</code></pre>
 <p>Then reference it in frontmatter:</p>
@@ -152,7 +160,7 @@ hero:
 <p>Always include useful <code>alt</code> text. Alt text should describe the image, not simply say “image.”</p>
 </section>
 <section>
-<h2>Full Homepage Frontmatter Example</h2>
+<h2 id="full-homepage-frontmatter-example">Full Homepage Frontmatter Example</h2>
 <p>Here is a complete starting point:</p>
 <pre><code>---
 title: "Astro Starlight Tutorial Site"
@@ -175,7 +183,7 @@ hero:
 ---</code></pre>
 </section>
 <section>
-<h2>Homepage Content After the Hero</h2>
+<h2 id="homepage-content-after-the-hero">Homepage Content After the Hero</h2>
 <p>After the frontmatter, you can write normal Markdown content.</p>
 <pre><code>## What This Site Teaches
 
@@ -192,7 +200,7 @@ Choose a path based on your goal:
 <p>The hero introduces the site. The body of the homepage organizes the reader's choices.</p>
 </section>
 <section>
-<h2>Create Homepage Cards with Markdown</h2>
+<h2 id="create-homepage-cards-with-markdown">Create Homepage Cards with Markdown</h2>
 <p>The simplest homepage cards can be normal Markdown sections.</p>
 <pre><code>## Learning Paths
 
@@ -216,7 +224,7 @@ Learn content collections, schemas, overrides, and deployment.
 <p>This is easy to maintain, but it may not look like a card grid. For a card-like layout, use HTML or an MDX component.</p>
 </section>
 <section>
-<h2>Create a Card Grid in Markdown</h2>
+<h2 id="create-a-card-grid-in-markdown">Create a Card Grid in Markdown</h2>
 <p>Markdown pages can include simple HTML when needed.</p>
 <pre><code>&lt;div class="home-card-grid"&gt;
 
@@ -242,7 +250,7 @@ Learn content collections, schemas, overrides, and deployment.
 <p>This gives you a reusable visual structure without creating a component yet.</p>
 </section>
 <section>
-<h2>Add CSS for Homepage Cards</h2>
+<h2 id="add-css-for-homepage-cards">Add CSS for Homepage Cards</h2>
 <p>Create or edit:</p>
 <pre><code>src/styles/custom.css</code></pre>
 <p>Add:</p>
@@ -281,7 +289,7 @@ export default defineConfig({
 });</code></pre>
 </section>
 <section>
-<h2>Homepage Layout for a Tutorial Site</h2>
+<h2 id="homepage-layout-for-a-tutorial-site">Homepage Layout for a Tutorial Site</h2>
 <p>A tutorial-site homepage should guide learners by skill level or goal.</p>
 <pre><code>Hero
   Site title
@@ -311,7 +319,7 @@ Reference
   Glossary</code></pre>
 </section>
 <section>
-<h2>Homepage Layout for a World Bible Site</h2>
+<h2 id="homepage-layout-for-a-world-bible-site">Homepage Layout for a World Bible Site</h2>
 <p>A world bible homepage should guide readers by setting category.</p>
 <pre><code>Hero
   World title
@@ -340,7 +348,7 @@ Featured Entries
 <p>The same Starlight splash-page tools work for both tutorials and worldbuilding.</p>
 </section>
 <section>
-<h2>Homepage Layout for a Software Documentation Site</h2>
+<h2 id="homepage-layout-for-a-software-documentation-site">Homepage Layout for a Software Documentation Site</h2>
 <pre><code>Hero
   Product name
   What the tool does
@@ -364,7 +372,7 @@ Community / Links
   Support</code></pre>
 </section>
 <section>
-<h2>Complete Homepage Example</h2>
+<h2 id="complete-homepage-example">Complete Homepage Example</h2>
 <p>Create or replace:</p>
 <pre><code>src/content/docs/index.md</code></pre>
 <p>Use this complete example:</p>
@@ -428,7 +436,7 @@ This site teaches how to create, organize, customize, and deploy Astro Starlight
 New readers should begin with [Getting Started](/getting-started/).</code></pre>
 </section>
 <section>
-<h2>Add a Banner</h2>
+<h2 id="add-a-banner">Add a Banner</h2>
 <p>Starlight pages can include a banner in frontmatter. This is useful for announcements, version notes, or important guidance.</p>
 <pre><code>---
 title: "Astro Starlight Tutorial Site"
@@ -440,7 +448,7 @@ banner:
 <p>Use banners sparingly. If every page has an announcement, readers stop noticing them.</p>
 </section>
 <section>
-<h2>Disable or Adjust the Table of Contents</h2>
+<h2 id="disable-or-adjust-the-table-of-contents">Disable or Adjust the Table of Contents</h2>
 <p>Landing pages often do not need a table of contents. On a splash page, the layout is already simplified, but you can also adjust frontmatter if needed.</p>
 <pre><code>---
 title: "Astro Starlight Tutorial Site"
@@ -450,7 +458,7 @@ tableOfContents: false
 <p>For long landing pages, a table of contents can still be useful. For short homepages, disabling it may feel cleaner.</p>
 </section>
 <section>
-<h2>Homepage Links and Sidebar Strategy</h2>
+<h2 id="homepage-links-and-sidebar-strategy">Homepage Links and Sidebar Strategy</h2>
 <p>The homepage and sidebar have different jobs.</p>
 <table>
 <thead>
@@ -477,7 +485,7 @@ tableOfContents: false
 <p>Do not make the homepage repeat the entire sidebar. Highlight the most important choices instead.</p>
 </section>
 <section>
-<h2>Good Homepage Writing</h2>
+<h2 id="good-homepage-writing">Good Homepage Writing</h2>
 <p>A good homepage uses direct language.</p>
 <table>
 <thead>
@@ -503,7 +511,7 @@ tableOfContents: false
 </table>
 </section>
 <section>
-<h2>Homepage Accessibility Checklist</h2>
+<h2 id="homepage-accessibility-checklist">Homepage Accessibility Checklist</h2>
 <ul>
 <li>Use one clear page title.</li>
 <li>Use headings in logical order.</li>
@@ -516,7 +524,7 @@ tableOfContents: false
 </ul>
 </section>
 <section>
-<h2>Homepage SEO and Metadata</h2>
+<h2 id="homepage-seo-and-metadata">Homepage SEO and Metadata</h2>
 <p>The homepage should have a clear title and description.</p>
 <pre><code>---
 title: "Astro Starlight Tutorial Site"
@@ -525,7 +533,7 @@ description: "Learn Astro, Starlight, Markdown, MDX, content collections, custom
 <p>The description should explain the site in one sentence. This helps search, previews, and reader understanding.</p>
 </section>
 <section>
-<h2>Testing the Homepage</h2>
+<h2 id="testing-the-homepage">Testing the Homepage</h2>
 <p>Run the development server:</p>
 <pre><code>npm run dev</code></pre>
 <p>Check:</p>
@@ -539,14 +547,14 @@ description: "Learn Astro, Starlight, Markdown, MDX, content collections, custom
 </ul>
 </section>
 <section>
-<h2>Build and Preview</h2>
+<h2 id="build-and-preview">Build and Preview</h2>
 <p>After editing the homepage, run:</p>
 <pre><code>npm run build
 npm run preview</code></pre>
 <p>Use the preview command to check the built version, not just the development version. This helps catch path and asset problems before deployment.</p>
 </section>
 <section>
-<h2>Common Problems and Fixes</h2>
+<h2 id="common-problems-and-fixes">Common Problems and Fixes</h2>
 <h3>Problem: The homepage still looks like a normal docs page</h3>
 <p>Make sure the frontmatter includes:</p>
 <pre><code>template: splash</code></pre>
@@ -561,7 +569,7 @@ npm run preview</code></pre>
 <p>Move extra details to section landing pages. The homepage should guide, not contain everything.</p>
 </section>
 <section>
-<h2>Homepage Design Patterns</h2>
+<h2 id="homepage-design-patterns">Homepage Design Patterns</h2>
 <h3>Beginner Tutorial Site</h3>
 <pre><code>Hero
 Start Here
@@ -584,7 +592,7 @@ API Reference
 Troubleshooting</code></pre>
 </section>
 <section>
-<h2>Mini Project: Build the Homepage</h2>
+<h2 id="mini-project-build-the-homepage">Mini Project: Build the Homepage</h2>
 <ol>
 <li>Open <code>src/content/docs/index.md</code>.</li>
 <li>Add <code>template: splash</code>.</li>
@@ -599,7 +607,7 @@ Troubleshooting</code></pre>
 </ol>
 </section>
 <section>
-<h2>Cheat Sheet</h2>
+<h2 id="cheat-sheet">Cheat Sheet</h2>
 <table>
 <thead>
 <tr>
@@ -640,7 +648,7 @@ Troubleshooting</code></pre>
 </table>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Use the homepage to guide.
 Use the sidebar to navigate.
 Use search to find.
@@ -649,7 +657,7 @@ Use the splash template for landing pages.
 Use normal doc pages for tutorials and references.</code></pre>
 </section>
 <section>
-<h2>What to Learn Next</h2>
+<h2 id="what-to-learn-next">What to Learn Next</h2>
 <ul>
 <li>Starlight styling and theme customization.</li>
 <li>Asset management for images, maps, and downloads.</li>
@@ -659,6 +667,10 @@ Use normal doc pages for tutorials and references.</code></pre>
 <li>Building a world bible homepage.</li>
 </ul>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="starlight_project_structure_sidebar_navigation_tutorial.html">← Project Structure &amp; Navigation</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="starlight_search_metadata_tutorial.html">Search &amp; Metadata →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

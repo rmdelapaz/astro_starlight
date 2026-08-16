@@ -6,29 +6,37 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Starlight Tutorial Library</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Learn Astro and Starlight through practical, project-focused tutorials." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
-<header>
+</div>
+</nav>
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li aria-current="page">Home</li></ol></nav><main class="home-content" id="main-content"><header>
 <h1>Astro Starlight Tutorial Library</h1>
 <p>A grouped HTML tutorial collection for learning Astro, Starlight, Markdown, MDX, content collections, world bible sites, lesson libraries, deployment, accessibility, plugins, and troubleshooting.</p>
 </header>
-<main>
-<section>
-<h2>Recommended Path</h2>
+<section class="intro-card">
+<h2 id="recommended-path">Recommended Path</h2>
 <p>Start with the basic Astro/Starlight tutorial, then move through writing tools, project structure, content architecture, customization, capstone projects, and deployment.</p>
 </section>
-<section>
-<h2>Start Here</h2>
+<section class="module-section" id="course-library">
+<h2 id="start-here">Start Here</h2>
 <article>
 <h3><a href="./astro_starlight_basic_html_tutorial.html">Astro + Starlight Basic Tutorial</a></h3>
 <p>Beginner setup and first Starlight project.</p>
@@ -42,8 +50,8 @@
 <p>More complete implementation patterns.</p>
 </article>
 </section>
-<section>
-<h2>Core Writing Tools</h2>
+<section class="module-section">
+<h2 id="core-writing-tools">Core Writing Tools</h2>
 <article>
 <h3><a href="./yaml_tutorial_guide.html">YAML Tutorial Guide</a></h3>
 <p>Frontmatter and structured metadata basics.</p>
@@ -53,8 +61,8 @@
 <p>Writing content and using component-powered MDX.</p>
 </article>
 </section>
-<section>
-<h2>Project Structure and Navigation</h2>
+<section class="module-section">
+<h2 id="project-structure-and-navigation">Project Structure and Navigation</h2>
 <article>
 <h3><a href="./starlight_project_structure_sidebar_navigation_tutorial.html">Starlight Project Structure and Sidebar Navigation</a></h3>
 <p>Folders, docs pages, sidebars, and navigation strategy.</p>
@@ -68,8 +76,8 @@
 <p>Improve search, titles, descriptions, and previews.</p>
 </article>
 </section>
-<section>
-<h2>Components and Customization</h2>
+<section class="module-section">
+<h2 id="components-and-customization">Components and Customization</h2>
 <article>
 <h3><a href="./starlight_custom_components_markdown_mdx_tutorial.html">Custom Components in Markdown/MDX</a></h3>
 <p>Reusable components inside content pages.</p>
@@ -87,8 +95,8 @@
 <p>Plugin strategy, evaluation, and safe usage.</p>
 </article>
 </section>
-<section>
-<h2>Content Architecture</h2>
+<section class="module-section">
+<h2 id="content-architecture">Content Architecture</h2>
 <article>
 <h3><a href="./astro_content_collections_schemas_tutorial.html">Astro Content Collections and Schemas</a></h3>
 <p>Typed frontmatter, collections, and Zod schemas.</p>
@@ -102,8 +110,8 @@
 <p>Generate pages and indexes from collections.</p>
 </article>
 </section>
-<section>
-<h2>Assets, Diagrams, and Special Features</h2>
+<section class="module-section">
+<h2 id="assets-diagrams-and-special-features">Assets, Diagrams, and Special Features</h2>
 <article>
 <h3><a href="./astro_starlight_asset_management_tutorial.html">Asset Management</a></h3>
 <p>Images, maps, diagrams, downloads, and paths.</p>
@@ -121,8 +129,8 @@
 <p>Language folders, translated navigation, and multilingual planning.</p>
 </article>
 </section>
-<section>
-<h2>Capstone Projects</h2>
+<section class="module-section">
+<h2 id="capstone-projects">Capstone Projects</h2>
 <article>
 <h3><a href="./starlight_lesson_library_site_tutorial.html">Lesson Library Site Capstone</a></h3>
 <p>Build a full Starlight lesson library.</p>
@@ -140,8 +148,8 @@
 <p>Character stats, schemas, cards, and indexes.</p>
 </article>
 </section>
-<section>
-<h2>Deployment and Troubleshooting</h2>
+<section class="module-section">
+<h2 id="deployment-and-troubleshooting">Deployment and Troubleshooting</h2>
 <article>
 <h3><a href="./vercel_basic_how_to_tutorial.html">Vercel Basic How-To</a></h3>
 <p>Deployment foundation before Astro-specific hosting.</p>
@@ -155,6 +163,10 @@
 <p>Fix install, build, MDX, schema, asset, and deploy errors.</p>
 </article>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+</main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

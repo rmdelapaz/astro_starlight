@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Custom Components in Markdown and MDX for Astro Starlight</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Custom Components in Markdown and MDX for Astro Starlight — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Custom Components in Markdown and MDX for Astro Starlight</h1>
 <p>A practical guide to building reusable Astro components and using them inside Starlight documentation pages, lessons, world bible entries, character sheets, and reference pages.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Components &amp; Customization</a></li><li aria-current="page">Custom MDX Components</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#what-is-a-component">What Is a Component?</a></li><li><a class="toc-link" href="#markdown-vs-mdx-for-components">Markdown vs MDX for Components</a></li><li><a class="toc-link" href="#where-components-go">Where Components Go</a></li><li><a class="toc-link" href="#your-first-component-infobox">Your First Component: InfoBox</a></li><li><a class="toc-link" href="#use-the-component-in-mdx">Use the Component in MDX</a></li><li><a class="toc-link" href="#understanding-import-paths">Understanding Import Paths</a></li><li><a class="toc-link" href="#props-passing-data-into-components">Props: Passing Data into Components</a></li><li><a class="toc-link" href="#slots-passing-content-into-components">Slots: Passing Content into Components</a></li><li><a class="toc-link" href="#add-custom-css">Add Custom CSS</a></li><li><a class="toc-link" href="#component-example-lessonobjectives">Component Example: LessonObjectives</a></li><li><a class="toc-link" href="#title">{title}</a></li><li><a class="toc-link" href="#component-example-characterstats">Component Example: CharacterStats</a></li><li><a class="toc-link" href="#component-example-worldbibleentry">Component Example: WorldBibleEntry</a></li><li><a class="toc-link" href="#component-example-factioncard">Component Example: FactionCard</a></li><li><a class="toc-link" href="#name">{name}</a></li><li><a class="toc-link" href="#component-example-relatedlinks">Component Example: RelatedLinks</a></li><li><a class="toc-link" href="#related-pages">Related Pages</a></li><li><a class="toc-link" href="#using-frontmatter-with-components">Using Frontmatter with Components</a></li><li><a class="toc-link" href="#starlight-built-in-components">Starlight Built-In Components</a></li><li><a class="toc-link" href="#using-tabs-in-mdx">Using Tabs in MDX</a></li><li><a class="toc-link" href="#using-steps-in-mdx">Using Steps in MDX</a></li><li><a class="toc-link" href="#client-side-interactive-components">Client-Side Interactive Components</a></li><li><a class="toc-link" href="#component-design-guidelines">Component Design Guidelines</a></li><li><a class="toc-link" href="#common-mistake-trying-to-use-components-in-plain-markdown">Common Mistake: Trying to Use Components in Plain Markdown</a></li><li><a class="toc-link" href="#common-mistake-broken-import-paths">Common Mistake: Broken Import Paths</a></li><li><a class="toc-link" href="#common-mistake-forgetting-curly-braces-for-javascript-values">Common Mistake: Forgetting Curly Braces for JavaScript Values</a></li><li><a class="toc-link" href="#common-mistake-too-many-components">Common Mistake: Too Many Components</a></li><li><a class="toc-link" href="#mini-project-build-a-lesson-page-with-components">Mini Project: Build a Lesson Page with Components</a></li><li><a class="toc-link" href="#mini-project-build-a-character-sheet-page">Mini Project: Build a Character Sheet Page</a></li><li><a class="toc-link" href="#best-components-for-lesson-sites">Best Components for Lesson Sites</a></li><li><a class="toc-link" href="#best-components-for-world-bible-sites">Best Components for World Bible Sites</a></li><li><a class="toc-link" href="#best-practice-start-small">Best Practice: Start Small</a></li><li><a class="toc-link" href="#troubleshooting-checklist">Troubleshooting Checklist</a></li><li><a class="toc-link" href="#cheat-sheet">Cheat Sheet</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li><li><a class="toc-link" href="#what-to-learn-next">What to Learn Next</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial teaches how custom components work in an Astro Starlight site, especially when writing content in Markdown and MDX.</p>
 <p>You will learn:</p>
 <ul>
@@ -38,7 +46,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <p>Markdown is excellent for writing simple content. MDX is useful when your content needs reusable visual pieces.</p>
 <pre><code>Markdown page
   ↓
@@ -53,7 +61,7 @@ Markdown content + imported Astro components</code></pre>
 <p>Think of Markdown as a clean notebook. Think of MDX as a notebook where you can insert reusable widgets, cards, panels, diagrams, and layout blocks.</p>
 </section>
 <section>
-<h2>What Is a Component?</h2>
+<h2 id="what-is-a-component">What Is a Component?</h2>
 <p>A component is a reusable piece of a webpage. Instead of rewriting the same HTML over and over, you create one component and reuse it many times.</p>
 <p>For example, instead of manually writing a styled note box on every page, you can create one <code>InfoBox</code> component.</p>
 <pre><code>&lt;InfoBox title="Remember"&gt;
@@ -62,7 +70,7 @@ Markdown is for writing. MDX is for writing plus components.
 <p>The component controls the structure and styling. The MDX page supplies the content.</p>
 </section>
 <section>
-<h2>Markdown vs MDX for Components</h2>
+<h2 id="markdown-vs-mdx-for-components">Markdown vs MDX for Components</h2>
 <table>
 <thead>
 <tr>
@@ -99,7 +107,7 @@ If the page needs components, use .mdx.
 If you are building the component itself, use .astro.</code></pre>
 </section>
 <section>
-<h2>Where Components Go</h2>
+<h2 id="where-components-go">Where Components Go</h2>
 <p>Reusable components usually live in:</p>
 <pre><code>src/components/</code></pre>
 <p>Example structure:</p>
@@ -119,7 +127,7 @@ If you are building the component itself, use .astro.</code></pre>
 <p>The component lives in <code>src/components/</code>. The MDX page imports and uses it.</p>
 </section>
 <section>
-<h2>Your First Component: InfoBox</h2>
+<h2 id="your-first-component-infobox">Your First Component: InfoBox</h2>
 <p>Create this file:</p>
 <pre><code>src/components/InfoBox.astro</code></pre>
 <p>Add this code:</p>
@@ -140,7 +148,7 @@ const { title = "Note" } = Astro.props;
 </ul>
 </section>
 <section>
-<h2>Use the Component in MDX</h2>
+<h2 id="use-the-component-in-mdx">Use the Component in MDX</h2>
 <p>Create an MDX page:</p>
 <pre><code>src/content/docs/lessons/custom-components.mdx</code></pre>
 <p>Add this content:</p>
@@ -159,7 +167,7 @@ Components help you reuse the same layout or visual pattern across many pages.
 <p>The import path may change depending on where your MDX file is located. Count the folders carefully.</p>
 </section>
 <section>
-<h2>Understanding Import Paths</h2>
+<h2 id="understanding-import-paths">Understanding Import Paths</h2>
 <p>An import path tells the MDX file where to find the component.</p>
 <pre><code>import InfoBox from "../../../components/InfoBox.astro";</code></pre>
 <p>If your MDX file is here:</p>
@@ -176,7 +184,7 @@ Components help you reuse the same layout or visual pattern across many pages.
 <pre><code>../../../components/InfoBox.astro</code></pre>
 </section>
 <section>
-<h2>Props: Passing Data into Components</h2>
+<h2 id="props-passing-data-into-components">Props: Passing Data into Components</h2>
 <p>Props are values passed into a component. In this example, <code>title</code> is a prop:</p>
 <pre><code>&lt;InfoBox title="Important"&gt;
 This is important content.
@@ -188,7 +196,7 @@ const { title = "Note" } = Astro.props;
 <p>The default value <code>"Note"</code> is used if no title is provided.</p>
 </section>
 <section>
-<h2>Slots: Passing Content into Components</h2>
+<h2 id="slots-passing-content-into-components">Slots: Passing Content into Components</h2>
 <p>A slot is a placeholder for nested content.</p>
 <pre><code>&lt;InfoBox title="Tip"&gt;
 This text goes into the slot.
@@ -203,7 +211,7 @@ This text goes into the slot.
 <p>Slots are useful for callout boxes, cards, lesson objectives, warnings, summaries, and reusable page sections.</p>
 </section>
 <section>
-<h2>Add Custom CSS</h2>
+<h2 id="add-custom-css">Add Custom CSS</h2>
 <p>Create a custom CSS file:</p>
 <pre><code>src/styles/custom.css</code></pre>
 <p>Add example styles:</p>
@@ -232,7 +240,7 @@ export default defineConfig({
 });</code></pre>
 </section>
 <section>
-<h2>Component Example: LessonObjectives</h2>
+<h2 id="component-example-lessonobjectives">Component Example: LessonObjectives</h2>
 <p>A lesson site often needs the same opening section again and again. Create this file:</p>
 <pre><code>src/components/LessonObjectives.astro</code></pre>
 <p>Add:</p>
@@ -241,7 +249,7 @@ const { title = "What You Will Learn", objectives = [] } = Astro.props;
 ---
 
 <section class="lesson-objectives">
-  <h2>{title}</h2>
+  <h2 id="title">{title}</h2>
   <ul>
     {objectives.map((objective) =&gt; <li>{objective}</li>)}
   </ul>
@@ -265,7 +273,7 @@ import LessonObjectives from "../../../components/LessonObjectives.astro";
 /&gt;</code></pre>
 </section>
 <section>
-<h2>Component Example: CharacterStats</h2>
+<h2 id="component-example-characterstats">Component Example: CharacterStats</h2>
 <p>For a world bible or RPG-style character page, a reusable stat block is very useful.</p>
 <p>Create:</p>
 <pre><code>src/components/CharacterStats.astro</code></pre>
@@ -322,7 +330,7 @@ import CharacterStats from "../../../components/CharacterStats.astro";
 This character uses a reusable stat block.</code></pre>
 </section>
 <section>
-<h2>Component Example: WorldBibleEntry</h2>
+<h2 id="component-example-worldbibleentry">Component Example: WorldBibleEntry</h2>
 <p>A world bible page often needs quick metadata at the top.</p>
 <p>Create:</p>
 <pre><code>src/components/WorldBibleEntry.astro</code></pre>
@@ -365,7 +373,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 This page describes the location.</code></pre>
 </section>
 <section>
-<h2>Component Example: FactionCard</h2>
+<h2 id="component-example-factioncard">Component Example: FactionCard</h2>
 <p>Faction cards are useful when summarizing groups, houses, corporations, teams, or governments.</p>
 <p>Create:</p>
 <pre><code>src/components/FactionCard.astro</code></pre>
@@ -380,7 +388,7 @@ const {
 ---
 
 <article class="faction-card">
-  <h2>{name}</h2>
+  <h2 id="name">{name}</h2>
   <p><strong>Type:</strong> {type}</p>
   <p><strong>Region:</strong> {region}</p>
   <p>{summary}</p>
@@ -396,7 +404,7 @@ const {
 /&gt;</code></pre>
 </section>
 <section>
-<h2>Component Example: RelatedLinks</h2>
+<h2 id="component-example-relatedlinks">Component Example: RelatedLinks</h2>
 <p>A reusable related-links component helps readers move between connected pages.</p>
 <p>Create:</p>
 <pre><code>src/components/RelatedLinks.astro</code></pre>
@@ -406,7 +414,7 @@ const { links = [] } = Astro.props;
 ---
 
 <nav aria-label="Related pages" class="related-links">
-  <h2>Related Pages</h2>
+  <h2 id="related-pages">Related Pages</h2>
   <ul>
     {links.map((link) =&gt; (
       <li><a href="{link.href}">{link.label}</a></li>
@@ -425,7 +433,7 @@ const { links = [] } = Astro.props;
 /&gt;</code></pre>
 </section>
 <section>
-<h2>Using Frontmatter with Components</h2>
+<h2 id="using-frontmatter-with-components">Using Frontmatter with Components</h2>
 <p>In MDX, you can use frontmatter values inside the page. This is helpful when you do not want to type the same data twice.</p>
 <pre><code>---
 title: "Veritas Miraculo"
@@ -447,7 +455,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 <p>This keeps page metadata and visible page content connected.</p>
 </section>
 <section>
-<h2>Starlight Built-In Components</h2>
+<h2 id="starlight-built-in-components">Starlight Built-In Components</h2>
 <p>Starlight also provides built-in components that can be used in MDX and Markdoc pages. These are useful for documentation features such as cards, tabs, icons, and steps.</p>
 <p>Example pattern:</p>
 <pre><code>import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -463,7 +471,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 <p>Use built-in components when they already solve the problem. Create custom components when your project needs its own repeated pattern.</p>
 </section>
 <section>
-<h2>Using Tabs in MDX</h2>
+<h2 id="using-tabs-in-mdx">Using Tabs in MDX</h2>
 <p>Tabs are useful for comparing code, alternate versions, or different views of the same information.</p>
 <pre><code>import { Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -478,7 +486,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 <p>Tabs are especially helpful for lesson pages that compare commands, code styles, or project structures.</p>
 </section>
 <section>
-<h2>Using Steps in MDX</h2>
+<h2 id="using-steps-in-mdx">Using Steps in MDX</h2>
 <p>Steps are useful for procedural tutorials.</p>
 <pre><code>import { Steps } from '@astrojs/starlight/components';
 
@@ -491,7 +499,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 <p>This is a good pattern for installation guides, deployment tutorials, and coding walkthroughs.</p>
 </section>
 <section>
-<h2>Client-Side Interactive Components</h2>
+<h2 id="client-side-interactive-components">Client-Side Interactive Components</h2>
 <p>Astro components render mostly as HTML by default. If you import a React, Vue, Svelte, or other UI framework component that needs browser-side interactivity, you may need a client directive.</p>
 <pre><code>import Counter from "../../../components/Counter.jsx";
 
@@ -505,7 +513,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 <p>For most static callouts, cards, stat blocks, and reference panels, you do not need client-side JavaScript.</p>
 </section>
 <section>
-<h2>Component Design Guidelines</h2>
+<h2 id="component-design-guidelines">Component Design Guidelines</h2>
 <p>Good components are reusable, focused, and easy to understand.</p>
 <table>
 <thead>
@@ -539,7 +547,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 </table>
 </section>
 <section>
-<h2>Common Mistake: Trying to Use Components in Plain Markdown</h2>
+<h2 id="common-mistake-trying-to-use-components-in-plain-markdown">Common Mistake: Trying to Use Components in Plain Markdown</h2>
 <p>Plain <code>.md</code> files are best for Markdown. If you want to import and use components, use <code>.mdx</code>.</p>
 <pre><code>Good:
 src/content/docs/example.mdx
@@ -552,7 +560,7 @@ This works in MDX.
 <p>Do not expect this same pattern to work in a normal <code>.md</code> file.</p>
 </section>
 <section>
-<h2>Common Mistake: Broken Import Paths</h2>
+<h2 id="common-mistake-broken-import-paths">Common Mistake: Broken Import Paths</h2>
 <p>If the page fails to build and says it cannot find the component, check the import path.</p>
 <pre><code>Problem:
 import InfoBox from "../components/InfoBox.astro";
@@ -562,7 +570,7 @@ import InfoBox from "../../../components/InfoBox.astro";</code></pre>
 <p>The correct path depends on where the MDX file is located.</p>
 </section>
 <section>
-<h2>Common Mistake: Forgetting Curly Braces for JavaScript Values</h2>
+<h2 id="common-mistake-forgetting-curly-braces-for-javascript-values">Common Mistake: Forgetting Curly Braces for JavaScript Values</h2>
 <p>Strings can use quotes. Numbers, arrays, objects, and variables usually need curly braces.</p>
 <pre><code>String prop:
 &lt;InfoBox title="Remember" /&gt;
@@ -577,7 +585,7 @@ Object array prop:
 &lt;RelatedLinks links={[{ label: "Home", href: "/" }]} /&gt;</code></pre>
 </section>
 <section>
-<h2>Common Mistake: Too Many Components</h2>
+<h2 id="common-mistake-too-many-components">Common Mistake: Too Many Components</h2>
 <p>Components are helpful, but too many components can make content harder to edit. Use regular Markdown whenever possible.</p>
 <pre><code>Use Markdown for:
 - headings
@@ -597,7 +605,7 @@ Use components for:
 - interactive examples</code></pre>
 </section>
 <section>
-<h2>Mini Project: Build a Lesson Page with Components</h2>
+<h2 id="mini-project-build-a-lesson-page-with-components">Mini Project: Build a Lesson Page with Components</h2>
 <p>Create these files:</p>
 <pre><code>src/components/LessonObjectives.astro
 src/components/InfoBox.astro
@@ -630,7 +638,7 @@ A component lets one design pattern appear consistently across many pages.
 Create your own reusable component.</code></pre>
 </section>
 <section>
-<h2>Mini Project: Build a Character Sheet Page</h2>
+<h2 id="mini-project-build-a-character-sheet-page">Mini Project: Build a Character Sheet Page</h2>
 <p>Create:</p>
 <pre><code>src/components/CharacterStats.astro
 src/components/WorldBibleEntry.astro
@@ -673,7 +681,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 ## Story Arc</code></pre>
 </section>
 <section>
-<h2>Best Components for Lesson Sites</h2>
+<h2 id="best-components-for-lesson-sites">Best Components for Lesson Sites</h2>
 <ul>
 <li><code>LessonObjectives</code>: what the learner will learn.</li>
 <li><code>Prerequisites</code>: what they should know first.</li>
@@ -685,7 +693,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 </ul>
 </section>
 <section>
-<h2>Best Components for World Bible Sites</h2>
+<h2 id="best-components-for-world-bible-sites">Best Components for World Bible Sites</h2>
 <ul>
 <li><code>CharacterStats</code>: RPG-style character attributes.</li>
 <li><code>WorldBibleEntry</code>: metadata panel.</li>
@@ -697,7 +705,7 @@ import WorldBibleEntry from "../../../components/WorldBibleEntry.astro";
 </ul>
 </section>
 <section>
-<h2>Best Practice: Start Small</h2>
+<h2 id="best-practice-start-small">Best Practice: Start Small</h2>
 <p>Do not start by building twenty components. Start with three:</p>
 <pre><code>InfoBox
 LessonObjectives
@@ -706,7 +714,7 @@ RelatedLinks</code></pre>
 <p>A component is worth creating when you have copied the same structure three or more times.</p>
 </section>
 <section>
-<h2>Troubleshooting Checklist</h2>
+<h2 id="troubleshooting-checklist">Troubleshooting Checklist</h2>
 <table>
 <thead>
 <tr>
@@ -745,7 +753,7 @@ RelatedLinks</code></pre>
 </table>
 </section>
 <section>
-<h2>Cheat Sheet</h2>
+<h2 id="cheat-sheet">Cheat Sheet</h2>
 <table>
 <thead>
 <tr>
@@ -794,7 +802,7 @@ RelatedLinks</code></pre>
 </table>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Use Markdown for ordinary writing.
 Use MDX when the page needs components.
 Use Astro components for reusable UI patterns.
@@ -803,7 +811,7 @@ Use slots for longer nested content.
 Use client directives only when browser interactivity is needed.</code></pre>
 </section>
 <section>
-<h2>What to Learn Next</h2>
+<h2 id="what-to-learn-next">What to Learn Next</h2>
 <ul>
 <li>Astro content collections and schemas</li>
 <li>Starlight built-in components</li>
@@ -814,6 +822,10 @@ Use client directives only when browser interactivity is needed.</code></pre>
 <li>Mermaid diagrams inside Starlight pages</li>
 </ul>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="starlight_search_metadata_tutorial.html">← Search &amp; Metadata</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="starlight_customizing_overriding_components_tutorial.html">Overriding Starlight Components →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>

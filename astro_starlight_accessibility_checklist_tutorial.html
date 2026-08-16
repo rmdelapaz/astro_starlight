@@ -5,25 +5,33 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Astro Starlight Accessibility Checklist Tutorial</title>
-<link href="/styles/main.css" rel="stylesheet"/>
 <link href="/favicon.png" rel="icon"/>
-<link href="styles/styles.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/nav.js"></script><meta content="1" name="scaffold-version"/></head>
-<body><header class="site-header" data-scaffold="header">
-<div class="site-header__inner">
-<a class="site-header__title" href="index.html">Astro &amp; Starlight Course</a>
-<nav class="site-header__nav">
-<a class="site-header__hub-link" href="https://rays-home.netlify.app">Ray's House of Fun</a>
-<button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle" type="button">🌙</button>
-</nav>
+<meta content="Astro Starlight Accessibility Checklist Tutorial — Astro and Starlight course tutorial." name="description"/><link href="styles/main.css" rel="stylesheet"/><script defer="" src="js/course.js"></script></head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation" class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><span aria-hidden="true">✦</span> Astro &amp; Starlight</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="index.html">Course Home</a>
+<a href="index.html#course-library">Course Library</a>
+<span aria-hidden="true" class="nav-divider"></span>
+<a href="https://rays-home.netlify.app/">Ray's House of Fun</a>
+<a href="https://rays-home.netlify.app/contact">Contact</a>
+<button aria-label="Switch color theme" class="theme-toggle" id="theme-toggle" title="Switch color theme">🌙</button>
 </div>
-</header>
+</div>
+</nav>
+
+
 <header>
 <h1>Astro Starlight Accessibility Checklist Tutorial</h1>
 <p>A practical checklist for making Astro Starlight tutorials, documentation, world bible pages, diagrams, and downloads easier for everyone to use.</p>
 </header>
-<main>
+<nav aria-label="Breadcrumb" class="breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#course-library">Assets &amp; Features</a></li><li aria-current="page">Accessibility Checklist</li></ol></nav><main class="lesson-content" id="main-content"><details class="toc-card" open=""><summary><span aria-hidden="true">☷</span> On this page <span aria-hidden="true" class="toc-chevron">⌄</span></summary><nav aria-label="Table of contents"><ol><li><a class="toc-link" href="#what-you-are-learning">What You Are Learning</a></li><li><a class="toc-link" href="#the-big-picture">The Big Picture</a></li><li><a class="toc-link" href="#heading-order">Heading Order</a></li><li><a class="toc-link" href="#alt-text-for-images">Alt Text for Images</a></li><li><a class="toc-link" href="#link-text">Link Text</a></li><li><a class="toc-link" href="#color-and-contrast">Color and Contrast</a></li><li><a class="toc-link" href="#code-blocks-and-tables">Code Blocks and Tables</a></li><li><a class="toc-link" href="#keyboard-navigation">Keyboard Navigation</a></li><li><a class="toc-link" href="#custom-components">Custom Components</a></li><li><a class="toc-link" href="#diagrams-and-downloads">Diagrams and Downloads</a></li><li><a class="toc-link" href="#accessibility-checklist">Accessibility Checklist</a></li><li><a class="toc-link" href="#simple-rule-of-thumb">Simple Rule of Thumb</a></li></ol></nav></details>
 <section>
-<h2>What You Are Learning</h2>
+<h2 id="what-you-are-learning">What You Are Learning</h2>
 <p>This tutorial explains accessibility basics for Starlight sites. Accessibility means making pages usable for people with different devices, abilities, browsers, input methods, and reading needs.</p>
 <ul>
 <li>Headings and page structure.</li>
@@ -35,7 +43,7 @@
 </ul>
 </section>
 <section>
-<h2>The Big Picture</h2>
+<h2 id="the-big-picture">The Big Picture</h2>
 <pre><code>Clear structure
   + readable text
   + useful alt text
@@ -44,7 +52,7 @@
   = more usable documentation</code></pre>
 </section>
 <section>
-<h2>Heading Order</h2>
+<h2 id="heading-order">Heading Order</h2>
 <pre><code>Good:
 # Page Title
 ## Major Section
@@ -57,7 +65,7 @@ Avoid:
 ## Major Section</code></pre>
 </section>
 <section>
-<h2>Alt Text for Images</h2>
+<h2 id="alt-text-for-images">Alt Text for Images</h2>
 <pre><code>Good:
 ![Vercel settings screen showing build command npm run build and output directory dist](/images/vercel-settings.png)
 
@@ -66,7 +74,7 @@ Weak:
 <p>For diagrams, summarize what the diagram shows.</p>
 </section>
 <section>
-<h2>Link Text</h2>
+<h2 id="link-text">Link Text</h2>
 <table><thead><tr><th>Weak</th><th>Better</th></tr></thead><tbody>
 <tr><td>Click here</td><td>Read the deployment workflow tutorial</td></tr>
 <tr><td>More</td><td>View the Markdown and MDX guide</td></tr>
@@ -74,7 +82,7 @@ Weak:
 </tbody></table>
 </section>
 <section>
-<h2>Color and Contrast</h2>
+<h2 id="color-and-contrast">Color and Contrast</h2>
 <pre><code>Check:
 - Body text contrast
 - Code block contrast
@@ -85,7 +93,7 @@ Weak:
 <p>Do not rely on color alone. Make sure text is readable in light and dark mode.</p>
 </section>
 <section>
-<h2>Code Blocks and Tables</h2>
+<h2 id="code-blocks-and-tables">Code Blocks and Tables</h2>
 <p>Code blocks should be explained before and after when they are part of a lesson. Tables should be used for real tabular data, not for layout.</p>
 <pre><code>Good table uses:
 - Command reference
@@ -94,7 +102,7 @@ Weak:
 - Metadata summary</code></pre>
 </section>
 <section>
-<h2>Keyboard Navigation</h2>
+<h2 id="keyboard-navigation">Keyboard Navigation</h2>
 <pre><code>Check:
 - Can you tab through links?
 - Is the focus visible?
@@ -102,7 +110,7 @@ Weak:
 - Are links actual links?</code></pre>
 </section>
 <section>
-<h2>Custom Components</h2>
+<h2 id="custom-components">Custom Components</h2>
 <pre><code>Use:
 &lt;button&gt; for actions
 &lt;a&gt; for links
@@ -111,12 +119,12 @@ Weak:
 &lt;nav&gt; for navigation</code></pre>
 </section>
 <section>
-<h2>Diagrams and Downloads</h2>
+<h2 id="diagrams-and-downloads">Diagrams and Downloads</h2>
 <p>Diagrams should not be the only place where important information appears. Add a written summary below each diagram. When linking a download, tell the reader what kind of file it is.</p>
 <pre><code>[Download the printable character sheet PDF](/downloads/character-sheet.pdf)</code></pre>
 </section>
 <section>
-<h2>Accessibility Checklist</h2>
+<h2 id="accessibility-checklist">Accessibility Checklist</h2>
 <pre><code>[ ] Page has one clear title
 [ ] Headings follow a logical order
 [ ] Images have meaningful alt text
@@ -129,7 +137,7 @@ Weak:
 [ ] Important information is not color-only</code></pre>
 </section>
 <section>
-<h2>Simple Rule of Thumb</h2>
+<h2 id="simple-rule-of-thumb">Simple Rule of Thumb</h2>
 <pre><code>Structure helps everyone.
 Clear headings help everyone.
 Readable links help everyone.
@@ -137,6 +145,10 @@ Good contrast helps everyone.
 Text summaries help everyone.
 Accessibility is good teaching.</code></pre>
 </section>
-<nav class="page-nav" data-scaffold="page-nav" id="page-nav"></nav></main>
-</body>
+<nav aria-label="Lesson navigation" class="lesson-nav"><a class="prev-lesson" href="astro_starlight_mermaid_diagrams_tutorial.html">← Mermaid Diagrams</a><a class="home-link" href="index.html#course-library">Course Library</a><a class="next-lesson" href="astro_starlight_i18n_multilingual_tutorial.html">Internationalization →</a></nav></main>
+<footer class="site-footer">
+<p><strong>Astro &amp; Starlight Course</strong> · Learn by building.</p>
+<div class="footer-links"><a href="index.html">Course Home</a><a href="https://rays-home.netlify.app/">Ray's House of Fun</a><a href="https://rays-home.netlify.app/contact">Contact</a><button id="print-button" type="button">Print Page</button></div>
+<p><small>© 2026 Ray de la Paz</small></p>
+</footer></body>
 </html>
